@@ -5,11 +5,13 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -127,4 +129,26 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 //    ––––––––––––––––––––––––––––––｜點擊空白處隱藏鍵盤｜––––––––––––––––––––––––––––––
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+//        int id = item.getItemId();
+//        if(id == R.id.bggear){
+//            Intent intent = new Intent(getActivity(),
+//                    setupFragment.class);
+//            startActivity(intent);
+//        }
+//
+//        return true;
+
+        switch (item.getItemId()) {
+            case R.id.bggear:
+//                Intent intent = new Intent(getActivity(),
+//                        setupFragment.class);
+                Navigation.findNavController(this, R.id.fragment).navigate(R.id.action_shop_infoFragment_to_setupFragment);
+//                startActivity(intent);
+                break;
+        }
+        return true;
+    }
 }

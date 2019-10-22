@@ -5,6 +5,7 @@
     android:id="@+id/navigation_graph"
     app:startDestination="@id/mainFragment">
 
+    <!-- chat -->
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.example.boardgame.chat.mainFragment"
@@ -49,4 +50,76 @@
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
+
+
+
+    <!-- shop -->
+    <fragment
+        android:id="@+id/shop_signup"
+        android:name="com.example.boardgame.shop.Shop_signup"
+        android:label="shop_signup"
+        tools:layout="@layout/fragment_shop_signup">
+        <action
+            android:id="@+id/action_shop_signup_to_shop_signuptwo"
+            app:destination="@id/shop_signuptwo" />
+    </fragment>
+    <fragment
+        android:id="@+id/shop_signuptwo"
+        android:name="com.example.boardgame.shop.Shop_signuptwo"
+        android:label="fragment_shop_signuptwo"
+        tools:layout="@layout/fragment_shop_signuptwo" >
+        <action
+            android:id="@+id/action_shop_signuptwo_to_shop_signupthree"
+            app:destination="@id/shop_signupthree" />
+    </fragment>
+    <fragment
+        android:id="@+id/shop_signupthree"
+        android:name="com.example.boardgame.shop.Shop_signupthree"
+        android:label="fragment_shop_signupthree"
+        tools:layout="@layout/fragment_shop_signupthree" >
+        <action
+            android:id="@+id/action_shop_signupthree_to_shop_infoFragment"
+            app:destination="@id/shop_infoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/shop_infoFragment"
+        android:name="com.example.boardgame.shop.shop_infoFragment"
+        android:label="fragment_shop_info"
+        tools:layout="@layout/fragment_shop_info" >
+        <action
+            android:id="@+id/action_shop_infoFragment_to_setupFragment"
+            app:destination="@id/setupFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/setupFragment"
+        android:name="com.example.boardgame.shop.setupFragment"
+        android:label="fragment_setup"
+        tools:layout="@layout/fragment_setup" >
+        <action
+            android:id="@+id/action_setupFragment_to_editinfoFragment"
+            app:destination="@id/editinfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editinfoFragment"
+        android:name="com.example.boardgame.shop.editinfoFragment"
+        android:label="fragment_editinfo"
+        tools:layout="@layout/fragment_editinfo" >
+        <action
+            android:id="@+id/action_editinfoFragment_to_pictureFragment"
+            app:destination="@id/pictureFragment" />
+        <action
+            android:id="@+id/action_editinfoFragment_to_gameinfoFragment"
+            app:destination="@id/gameinfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/pictureFragment"
+        android:name="com.example.boardgame.shop.PictureFragment"
+        android:label="fragment_picture"
+        tools:layout="@layout/fragment_picture" />
+    <fragment
+        android:id="@+id/gameinfoFragment"
+        android:name="com.example.boardgame.shop.GameinfoFragment"
+        android:label="fragment_gameinfo"
+        tools:layout="@layout/fragment_gameinfo" />
+
 </navigation>

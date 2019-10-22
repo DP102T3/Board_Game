@@ -1,18 +1,21 @@
-package com.example.boardgame.chat;
+package com.example.boardgame.shop;
 
 import android.os.AsyncTask;
 import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class CommonTask extends AsyncTask<String, Integer, String> {
-    private final static String TAG = "TAG_CommonTask";
+public class CommonTask extends AsyncTask<Void, Void, String> {
+
+    private  final  String TAG = "TAG_CommonTask";
     private String url, outStr;
+
 
     public CommonTask(String url, String outStr) {
         this.url = url;
@@ -20,11 +23,10 @@ public class CommonTask extends AsyncTask<String, Integer, String> {
     }
 
     @Override
-    protected String doInBackground(String... params) {
+    protected String doInBackground(Void... voids)  {
         return getRemoteData();
     }
-
-    private String getRemoteData() {
+    private String getRemoteData(){
         HttpURLConnection connection = null;
         StringBuilder inStr = new StringBuilder();
         try {
@@ -35,32 +37,32 @@ public class CommonTask extends AsyncTask<String, Integer, String> {
             connection.setUseCaches(false);
             connection.setRequestMethod("POST");
             connection.setRequestProperty("charset", "UTF-8");
-
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(connection.getOutputStream()));
             bw.write(outStr);
-            Log.d(TAG, "output: " + outStr);
+            Log.d(TAG, "output" + outStr);
             bw.close();
 
             int responseCode = connection.getResponseCode();
-            if (responseCode == 200) {
+            if(responseCode == 200) {
+                Log.d(TAG, "response code: " + responseCode);
                 BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                 String line;
-                while ((line = br.readLine()) != null) {
+                while ((line = br.readLine()) != null){
                     inStr.append(line);
                 }
-                Log.d(TAG, "response code: " + responseCode);
-            } else {
+            }else {
                 Log.d(TAG, "response code: " + responseCode);
             }
-        } catch (Exception e) {
+
+        } catch (IOException e) {
             Log.e(TAG, e.toString());
-        } finally {
-            if (connection != null) {
+        }finally {
+            if(connection != null) {
                 connection.disconnect();
             }
         }
-        Log.d(TAG, "input: " + inStr);
-
+        Log.d(TAG, "input " + inStr);
         return inStr.toString();
+
     }
 }
