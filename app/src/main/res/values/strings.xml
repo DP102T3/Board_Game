@@ -1,6 +1,17 @@
 <resources>
-    <string name="app_name">Board Game 揪桌遊</string>
+    <string name="app_name">DevBG</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="tx_btSend">Send</string>
+    <string name="textMessageEmpty">Message is empty !</string>
+    <string name="txFriendChat">Friend Chat</string>
+    <string name="txGroupChat">Group Chat</string>
+    <string name="txFriendsList">Friends List</string>
+    <string name="txGroupsList">Groups List</string>
+    <string name="txNoJoinedGroups">You haven\'t joined any group.</string>
+    <string name="txNoFriends">You have no friend.</string>
+    <string name="tx_NoNetwork">No Network !</string>
+    <string name="txNoChatMsg">No any msg</string>
+    <string name="txMessageInput">Enter message here</string>
 </resources>
