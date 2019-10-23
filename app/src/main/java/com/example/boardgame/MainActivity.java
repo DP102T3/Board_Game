@@ -20,6 +20,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.boardgame.notification.Websocket.NetWorkService;
+import com.example.boardgame.shop.Shop;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -33,6 +34,11 @@ public class MainActivity extends AppCompatActivity {
 
     private int width;
     int height;
+
+
+    //   從infoFragment打包shop到editinfo
+    public static Shop shop = new Shop();
+
 
     private ConnectivityManager.NetworkCallback networkCallback;
     private ConnectivityManager connectivityManager;

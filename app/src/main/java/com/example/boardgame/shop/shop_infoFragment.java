@@ -31,13 +31,13 @@ public class shop_infoFragment extends Fragment {
     private static final String TAG = "TAG_shop_infoFragment";
     private Activity activity;
     private Gson gson;
-    private TextView shopId, shopTel, shopAddress , shopIntro, shopCharge, shopOpen;
+    private TextView shopId, shopTel, shopAddress, shopIntro, shopCharge, shopOpen, shopClose;
     private ConstraintLayout infoConstrainLayout;
     private ImageView shopFristpic;
     private CommonTask shopGetTask;
     private Shop shop;
     private Shop shopDB;
-
+    int Id;
 
 
     @Override
@@ -59,9 +59,6 @@ public class shop_infoFragment extends Fragment {
     }
 
 
-
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -81,34 +78,46 @@ public class shop_infoFragment extends Fragment {
         shopAddress = view.findViewById(R.id.shop_address);
         shopIntro = view.findViewById(R.id.shop_intro);
         shopOpen = view.findViewById(R.id.shop_open);
+        shopClose = view.findViewById(id.shop_close);
         shopFristpic = view.findViewById(id.shop_fristpic);
         infoConstrainLayout = view.findViewById(R.id.infoConstrainLayout);
         shopCharge = view.findViewById(R.id.shop_charge);
 
+        Bundle bundle1 = getArguments();
+        Shop shop = (Shop)bundle1.getSerializable("shop");
+        Id = shop.getShopId();
+        Log.d("我要看b1",String.valueOf(Id));
+        MainActivity.shop.setShopId(Id);
+
+        Bundle bundles = new Bundle();
+        bundles.putSerializable("shop", shop);
 
 //=======================================取得shop物件裡面的東西===========================================================
 
         showShop(getShop());
 
     }
-//======================================跟資料庫連結取資料的資訊=============================================================
+
+    //======================================跟資料庫連結取資料的資訊=============================================================
     private Shop getShop() {
+        int id = MainActivity.shop.getShopId();
+
         if (Common.networkConnected(activity)) {
-            String url = Common.URI + "SignupServlet";
+            String url = Common.URL + "SignupServlet";
             JsonObject jsonObject = new JsonObject();
             jsonObject.addProperty("action", "get");
+            jsonObject.addProperty("shop_id", Id);
 
-
-
-            Bundle bundle = getArguments();
+//            Bundle bundle = getArguments();
 //============================================解鎖bundle================================================================
-            if (bundle != null) {
-
-                //解鎖 getSerializable
-                shop = (Shop) bundle.getSerializable("shop");
-                //取得edName
-                int text = shop.getShopId();
-                shopId.setText(String.valueOf(text));
+//            if (bundle != null) {
+//
+//                //解鎖 getSerializable
+//                shop = (Shop) bundle.getSerializable("shop");
+//                //取得edName
+//                Id = shop.getShopId();
+//                shopId.setText(String.valueOf(Id));
+//                MainActivity.shop.setShopId(Id);
 //                int Tel = shop.getShopTel();
 //                shopTel.setText(Tel);
 //                String Address = shop.getShopAddress();
@@ -133,42 +142,39 @@ public class shop_infoFragment extends Fragment {
             } else {
                 Common.showToast(activity, "doesn't work");
             }
-        }
+//        }
+        MainActivity.shop = shopDB;
+//        Log.e("123木頭人", MainActivity.shop.getShopAddress());
         return shopDB;
     }
-//========================================利用showShop 取出shopDB裡面的東西===============================================
+
+    //========================================利用showShop 取出shopDB裡面的東西===============================================
     private void showShop(Shop shopDB) {
 //        if (shops == null || shops.isEmpty()) {
-//            AlarmCommon.showToast(activity,R.string.textNoShopsFound);
+//            Common.showToast(activity,R.string.textNoShopsFound);
 //
 //        }else{
 //======================================shops是集合 用for each 解開 抓值==================================================
 //        int id = shop.getShopId();
-        String address = shop.getShopAddress();
-        int tel = shop.getShopTel();
-        String intro = shop.getShopIntro();
-        int open = shop.getShopOpen();
-        int charge = shop.getShopCharge();
-        double fristpic = shop.getShopFristpic();
+        String address = shopDB.getShopAddress() != "" ? shopDB.getShopAddress() : "";
+        int tel = shopDB.getShopTel() != 0 ? shopDB.getShopTel() : 0;
+        String intro = shopDB.getShopIntro() != "" ? shopDB.getShopIntro() : "";
+        int open = shopDB.getShopOpen() != 0 ? shopDB.getShopOpen() : 0;
+        int close = shopDB.getShopClose() != 0 ? shopDB.getShopClose() : 0;
+        int charge = shopDB.getShopCharge() != 0 ? shopDB.getShopCharge() : 0 ;
+
 
 //             秀出值
-//             shopId.setText(String.valueOf(id));
+             shopId.setText(String.valueOf(Id));
 //             System.out.println("id : " + id );
 
         shopAddress.setText(address);
         shopTel.setText(String.valueOf(tel));
-        shopIntro.setText(String.valueOf(intro));
+        shopIntro.setText(intro);
         shopOpen.setText(String.valueOf(open));
+        shopClose.setText(String.valueOf(close));
         shopCharge.setText(String.valueOf(charge));
-        shopFristpic.setTag(String.valueOf(fristpic));
 
-        }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        // 隱藏 TabBar
-        com.example.boardgame.MainActivity.changeBarsStatus(MainActivity.ONLY_BOTTOM);
     }
 }
 

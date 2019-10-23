@@ -3,6 +3,7 @@ package com.example.boardgame.shop;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +15,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
-import com.example.boardgame.MainActivity;
 import com.example.boardgame.R;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -75,7 +75,7 @@ public class Shop_signuptwo extends Fragment {
             //取得edName
             int text = shop.getShopId();
             ShopId.setText(String.valueOf(text));
-
+            Log.d("testshopId2", String.valueOf(text));
         }
 
 
@@ -86,6 +86,10 @@ public class Shop_signuptwo extends Fragment {
 
                 boolean invalid = false;
                 Bundle bundle = new Bundle();
+
+                // 測試用
+                shopPassword.setText("1");
+                shopcfPassword.setText("1");
 
                 String password = shopPassword.getText().toString().trim();
                 String cfpassword = shopcfPassword.getText().toString().trim();
@@ -124,7 +128,7 @@ public class Shop_signuptwo extends Fragment {
 //                String fileName = preferences.getString("shopId", DEFAULT_FILE_NAME);
 //                ShopId.setText(fileName);
 //
-//                AlarmCommon.showToast(activity, "textPreferencesload");
+//                Common.showToast(activity, "textPreferencesload");
 //            }
 
 
@@ -147,12 +151,6 @@ public class Shop_signuptwo extends Fragment {
 //==================================================取偏好設定===============================================================================
 
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        // 隱藏 TabBar 及 BottomBar
-        com.example.boardgame.MainActivity.changeBarsStatus(MainActivity.NEITHER_TAB_AND_BOTTOM);
-    }
 }
 
 

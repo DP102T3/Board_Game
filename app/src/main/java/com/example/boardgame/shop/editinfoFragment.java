@@ -37,11 +37,13 @@ public class editinfoFragment extends Fragment {
     private Shop shopDB;
     private Shop shop;
     private Gson gson;
+    int Id;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activity = getActivity();
+        gson = new Gson();
     }
 
     @Override
@@ -59,7 +61,7 @@ public class editinfoFragment extends Fragment {
 
         shopId = view.findViewById(R.id.shop_id);
         shopPassword = view.findViewById(R.id.shop_password);
-        shopName = view.findViewById(R.id.shop_Name);
+        shopName = view.findViewById(R.id.shop_name);
         shopTel = view.findViewById(R.id.shop_tel);
         shopAddress = view.findViewById(R.id.shop_address);
         shopCharge = view.findViewById(R.id.shop_charge);
@@ -69,6 +71,8 @@ public class editinfoFragment extends Fragment {
         shopFristpic = view.findViewById(R.id.bt_fpic);
         btedGame = view.findViewById(R.id.btedgame);
         btSave = view.findViewById(R.id.btSave);
+
+
 
 
 //===================================按頭像按鈕跳轉到拍照頁面====================================================================================================
@@ -115,15 +119,21 @@ public class editinfoFragment extends Fragment {
 
 //===================================連接資料庫====================================================================================================
     private Shop getShop() {
+        int id = MainActivity.shop.getShopId();
+
         if (Common.networkConnected(activity)) {
-            String url = Common.URI + "SignupServlet";
+            String url = Common.URL + "SignupServlet";
             JsonObject jsonObject = new JsonObject();
-            jsonObject.addProperty("action", "get");
+            jsonObject.addProperty("action", "editget");
+            jsonObject.addProperty("shop_id", id);
+
+
             String outStr = jsonObject.toString();
             shopGetTask = new CommonTask(url, outStr);
 
             try {
                 String jsonIn = shopGetTask.execute().get();
+                Log.e("yyyy", jsonIn);
                 shopDB = gson.fromJson(jsonIn, Shop.class);
             } catch (Exception e) {
                 Log.e(TAG, e.toString());
@@ -131,23 +141,28 @@ public class editinfoFragment extends Fragment {
         } else {
             Common.showToast(activity, "doesn't work");
         }
+//        MainActivity.shop = shopDB;
+        Log.d("我要看",String.valueOf(shopDB.getShopId()));
         return shopDB;
+
     }
 
 //===================================取資料庫的資料====================================================================================================
 
     private void showShop(Shop shopDB) {
-        int id = shop.getShopId();
-        String password = shop.getShopPassword();
-        String shopname = shop.getShopName();
-        int tel = shop.getShopTel();
-        String address = shop.getShopAddress();
-        int charge = shop.getShopCharge();
-        int open = shop.getShopOpen();
-        String owner = shop.getShopOwner();
-        String intro = shop.getShopIntro();
 
-        shopId.setText(id);
+//        int id = shopDB.getShopId() != 0  ? shopDB.getShopId() :  0;
+        int id =shopDB.getShopId() != 0 ? shopDB.getShopId() : 0;
+        String password = shopDB.getShopPassword() != "" ? shopDB.getShopPassword() : "";
+        String shopname = shopDB.getShopName() != "" ? shopDB.getShopName() : "";
+        int tel = shopDB.getShopTel() != 0 ? shopDB.getShopTel() :  0;
+        String address = shopDB.getShopAddress() != "" ? shopDB.getShopAddress() : "";
+        int charge = shopDB.getShopCharge()!= 0 ? shopDB.getShopCharge() :  0;
+        int open = shopDB.getShopOpen() != 0 ? shopDB.getShopOpen() : 0;
+        String owner = shopDB.getShopOwner();
+        String intro = shopDB.getShopIntro();
+
+        shopId.setText(String.valueOf(id==0?"":id));
         shopPassword.setText(password);
         shopName.setText(shopname);
         shopAddress.setText(address);
@@ -158,10 +173,6 @@ public class editinfoFragment extends Fragment {
         shopOwner.setTag(String.valueOf(owner));
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        // 隱藏 TabBar 及 BottomBar
-        com.example.boardgame.MainActivity.changeBarsStatus(MainActivity.NEITHER_TAB_AND_BOTTOM);
-    }
+
+
 }

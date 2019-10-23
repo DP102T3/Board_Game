@@ -128,20 +128,6 @@
                     app:layout_constraintStart_toStartOf="@+id/shop_intro"
                     app:layout_constraintTop_toBottomOf="@+id/shop_intro" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerView2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="16dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                </androidx.recyclerview.widget.RecyclerView>
-
                 <TextView
                     android:id="@+id/shop_charge"
                     android:layout_width="212dp"
@@ -173,33 +159,56 @@
                     app:layout_constraintTop_toBottomOf="@+id/shop_address" />
 
                 <TextView
-                    android:id="@+id/shop_open"
-                    android:layout_width="212dp"
-                    android:layout_height="46dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="14dp"
-                    app:layout_constraintEnd_toEndOf="@+id/shop_tel"
-                    app:layout_constraintStart_toEndOf="@+id/textView14"
-                    app:layout_constraintTop_toBottomOf="@+id/shop_tel" />
-
-                <TextView
                     android:id="@+id/shop_intro"
                     android:layout_width="212dp"
                     android:layout_height="46dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="14dp"
-                    app:layout_constraintEnd_toEndOf="@+id/shop_open"
+                    app:layout_constraintEnd_toEndOf="@+id/shop_close"
                     app:layout_constraintStart_toEndOf="@+id/textView15"
-                    app:layout_constraintTop_toBottomOf="@+id/shop_open" />
+                    app:layout_constraintTop_toBottomOf="@+id/shop_close" />
 
                 <TextView
                     android:id="@+id/shop_id"
                     android:layout_width="212dp"
                     android:layout_height="46dp"
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="256dp"
+                    android:layout_marginTop="250dp"
                     app:layout_constraintStart_toEndOf="@+id/textView10"
                     app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                </androidx.recyclerview.widget.RecyclerView>
+
+                <TextView
+                    android:id="@+id/shop_open"
+                    android:layout_width="100dp"
+                    android:layout_height="46dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="14dp"
+                    app:layout_constraintStart_toEndOf="@+id/textView14"
+                    app:layout_constraintTop_toBottomOf="@+id/shop_tel" />
+
+                <TextView
+                    android:id="@+id/shop_close"
+                    android:layout_width="100dp"
+                    android:layout_height="46dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="14dp"
+                    app:layout_constraintEnd_toEndOf="@+id/shop_tel"
+                    app:layout_constraintStart_toEndOf="@+id/shop_open"
+                    app:layout_constraintTop_toBottomOf="@+id/shop_tel" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>

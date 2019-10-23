@@ -11,7 +11,7 @@ public class Common {
 
     public static Bitmap bitmap;
 
-    public final static String URI = "http://10.0.2.2:8080/BoardGame/";
+    public final static String URL = "http://10.0.2.2:8080/BoardGame/";
 
 
     public static boolean networkConnected(Activity activity) {
