@@ -19,7 +19,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.example.boardgame.MainActivity;
 import com.example.boardgame.R;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -105,7 +104,7 @@ public class GameinfoFragment extends Fragment {
     private List<Shop> getShops() {
         List<Shop> shopGDB = null;
         if (Common.networkConnected(activity)) {
-            String url = Common.URI + "SignupServlet";
+            String url = Common.URL + "SignupServlet";
             JsonObject jsonObject = new JsonObject();
             jsonObject.addProperty("action", "getAllGame");
             String jsonOut = jsonObject.toString();
@@ -184,19 +183,12 @@ public class GameinfoFragment extends Fragment {
         @Override
         public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
             final Shop shop = shopGDB.get(position);
-            String url = Common.URI + "ShopServlet";
+            String url = Common.URL + "ShopServlet";
             int id = shop.getShopId();
 
 
         }
 
 
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        // 隱藏 TabBar 及 BottomBar
-        com.example.boardgame.MainActivity.changeBarsStatus(MainActivity.NEITHER_TAB_AND_BOTTOM);
     }
 }

@@ -16,12 +16,11 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
-import com.example.boardgame.MainActivity;
 import com.example.boardgame.R;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
-import static com.example.boardgame.chat.Common.showToast;
+import static com.example.boardgame.shop.Common.showToast;
 
 
 public class Shop_signupthree extends Fragment {
@@ -35,6 +34,7 @@ public class Shop_signupthree extends Fragment {
     private TextView tvResult;
 //    private Shop shop;
     private Gson gson;
+    static Shop shop;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -88,7 +88,13 @@ public class Shop_signupthree extends Fragment {
 
                 Bundle bundle = getArguments();
 
-                Shop shop=(Shop)bundle.getSerializable("shop");
+                shop=(Shop)bundle.getSerializable("shop");
+
+                int shopId = shop.getShopId();
+                Log.d("testshopId3", String.valueOf(shopId));
+
+                Bundle bundles = new Bundle();
+                bundles.putSerializable("shop", shop);
 
                 shop.setShopName(name);
                 shop.setShopTel(Integer.valueOf(tel));
@@ -132,7 +138,7 @@ public class Shop_signupthree extends Fragment {
                 }
 
                 if (Common.networkConnected(activity)) {
-                    String url = Common.URI + "SignupServlet";
+                    String url = Common.URL + "SignupServlet";
                     JsonObject jsonObject = new JsonObject();
                     jsonObject.addProperty("action", "insert");
                     jsonObject.addProperty("shop", new Gson().toJson(shop));
@@ -151,11 +157,11 @@ public class Shop_signupthree extends Fragment {
                         result = jsonObjectBack.get("result").getAsBoolean();
 
 
-                        if (result == true) {
+                        if (result != true) {
                             showToast(activity, "新增失敗，請重新輸入");
                         } else {
                             Navigation.findNavController(view)
-                                    .navigate(R.id.action_shop_signupthree_to_shop_infoFragment, bundle);
+                                    .navigate(R.id.action_shop_signupthree_to_shop_infoFragment, bundles);
                         }
 
                     } catch (Exception e) {
@@ -177,8 +183,8 @@ public class Shop_signupthree extends Fragment {
 //                    //解鎖 getSerializable
 //                    shop = (Shop) bundle.getSerializable("shop");
 //                    //取得edName
-//                    int text = shop.getShopId();
-//                    shipId.setText(String.valueOf(text));
+//                    int Id = shop.getShopId();
+//                    shipId.setText(String.valueOf(Id));
 
 //==================================================儲存偏好設定===============================================================================
 //
@@ -186,7 +192,7 @@ public class Shop_signupthree extends Fragment {
 //                    preferences.edit()
 //                            .putInt("shopId", Integer.parseInt(shopId))
 //                            .apply();
-//                    AlarmCommon.showToast(activity, "textPreferencesSaved");
+//                    Common.showToast(activity, "textPreferencesSaved");
 
 
 
@@ -195,13 +201,6 @@ public class Shop_signupthree extends Fragment {
         });
 
 
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        // 隱藏 TabBar 及 BottomBar
-        com.example.boardgame.MainActivity.changeBarsStatus(MainActivity.NEITHER_TAB_AND_BOTTOM);
     }
 }
 

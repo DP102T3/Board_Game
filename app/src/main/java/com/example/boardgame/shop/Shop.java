@@ -6,8 +6,51 @@ public class Shop implements Serializable {
 
     private String shopPassword, shopName, shopAddress, shopMail, shopOwner, shopIntro ,gameName;
 
-    private int shopId, shopTel, shopOpen, shopCharge;
-    private double shopFristpic;
+    private int shopId, shopTel, shopOpen, shopClose, shopCharge;
+    private boolean shopPic1,shopPic2;;
+
+
+    public int getShopClose() {
+        return shopClose;
+    }
+
+    public void setShopClose(int shopClose) {
+        this.shopClose = shopClose;
+    }
+
+    public Shop(String shopPassword, String shopName, String shopAddress, String shopMail, String shopOwner, String shopIntro, String gameName, int shopId, int shopTel, int shopOpen, int shopClose, int shopCharge, boolean shopPic1, boolean  shopPic2) {
+        this.shopPassword = shopPassword;
+        this.shopName = shopName;
+        this.shopAddress = shopAddress;
+        this.shopMail = shopMail;
+        this.shopOwner = shopOwner;
+        this.shopIntro = shopIntro;
+        this.gameName = gameName;
+        this.shopId = shopId;
+        this.shopTel = shopTel;
+        this.shopOpen = shopOpen;
+        this.shopClose = shopClose;
+        this.shopCharge = shopCharge;
+        this.shopPic1 = shopPic1;
+        this.shopPic2 = shopPic2;
+    }
+
+
+
+    public Shop(String shopAddress, int shopId, int shopTel, int shopCharge, boolean shopPic1, boolean shopPic2) {
+        this.shopAddress = shopAddress;
+        this.shopId = shopId;
+        this.shopTel = shopTel;
+        this.shopCharge = shopCharge;
+        this.shopPic1 = shopPic1;
+        this.shopPic2 = shopPic2;
+    }
+
+    public void setShopPic2(boolean shopPic2) {
+        this.shopPic2 = shopPic2;
+    }
+
+
 
     public Shop() {
     }
@@ -98,16 +141,16 @@ public class Shop implements Serializable {
         this.shopOwner = shopOwner;
     }
 
-    public double getShopFristpic() {
-        return shopFristpic;
+    public boolean getShopPic1() {
+        return shopPic1;
     }
 
-    public void setShopFristpic(double shopFristpic) {
-        this.shopFristpic = shopFristpic;
+    public void setShopPic1( boolean shopPic1) {
+        this.shopPic1 = shopPic1;
     }
 
-    public Shop(double shopFristpic) {
-        this.shopFristpic = shopFristpic;
+    public Shop(boolean shopPic1) {
+        this.shopPic1 = shopPic1;
     }
 
     public String getShopIntro() {
@@ -135,5 +178,10 @@ public class Shop implements Serializable {
     public String getGameName() { return gameName; }
 
     public void setGameName(String gameName) { this.gameName = gameName; }
+
+    public boolean getShopPic2() {
+        return shopPic2;
+    }
+
 
 }

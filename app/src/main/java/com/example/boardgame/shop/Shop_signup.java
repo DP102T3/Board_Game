@@ -3,6 +3,7 @@ package com.example.boardgame.shop;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +15,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
-import com.example.boardgame.MainActivity;
 import com.example.boardgame.R;
 
 
@@ -72,7 +72,7 @@ public class Shop_signup extends Fragment {
 
                 Shop shop = new Shop();
                 shop.setShopId(Integer.valueOf(id));
-
+                Log.d("testshopId", String.valueOf(shopId));
                 bundle.putSerializable("shop",shop);
 
                 Navigation.findNavController(view).navigate(R.id.action_shop_signup_to_shop_signuptwo,bundle);
@@ -84,10 +84,4 @@ public class Shop_signup extends Fragment {
         });
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        // 隱藏 TabBar 及 BottomBar
-        com.example.boardgame.MainActivity.changeBarsStatus(MainActivity.NEITHER_TAB_AND_BOTTOM);
-    }
 }

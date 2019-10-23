@@ -26,7 +26,6 @@ import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
-import com.example.boardgame.MainActivity;
 import com.example.boardgame.R;
 
 import java.io.ByteArrayOutputStream;
@@ -34,7 +33,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 
 import static android.app.Activity.RESULT_OK;
-import static com.example.boardgame.chat.Common.bitmap;
+import static com.example.boardgame.shop.Common.bitmap;
 
 
 public class PictureFragment extends Fragment {
@@ -71,6 +70,7 @@ public class PictureFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 //====================================================返回前一頁=================================================================================
+
 
 
 //====================================================拍照片====================================================================================
@@ -183,7 +183,7 @@ public class PictureFragment extends Fragment {
         }
     }
 
-    //========================================================剪裁圖片的大小=======================================================================
+//========================================================剪裁圖片的大小=======================================================================
     private void crop(Uri sourceImageUri) {
         File file = activity.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         file = new File(file, "picture_cropped.jpg");
@@ -216,19 +216,12 @@ public class PictureFragment extends Fragment {
                     Toast.LENGTH_SHORT).show();
         }
     }
-
     @Override
     public void onStart() {
         super.onStart();
-
-        // 隱藏 TabBar 及 BottomBar
-        com.example.boardgame.MainActivity.changeBarsStatus(MainActivity.NEITHER_TAB_AND_BOTTOM);
-
-
         askExternalStoragePermission();
     }
-
-    //=================================================詢問user是否同意相簿使用======================================================================
+//=================================================詢問user是否同意相簿使用======================================================================
     private void askExternalStoragePermission() {
         String[] permissions = {
 //===============================================存取外部儲存體的permissions=====================================================================
