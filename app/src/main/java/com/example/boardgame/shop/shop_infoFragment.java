@@ -139,7 +139,7 @@ public class shop_infoFragment extends Fragment {
 //========================================利用showShop 取出shopDB裡面的東西===============================================
     private void showShop(Shop shopDB) {
 //        if (shops == null || shops.isEmpty()) {
-//            Common.showToast(activity,R.string.textNoShopsFound);
+//            AlarmCommon.showToast(activity,R.string.textNoShopsFound);
 //
 //        }else{
 //======================================shops是集合 用for each 解開 抓值==================================================

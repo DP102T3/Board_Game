@@ -1,4 +1,4 @@
-package com.example.boardgame.notification.Websocket;
+package com.example.boardgame.Notification.Websocket;
 
 
 import android.app.Notification;

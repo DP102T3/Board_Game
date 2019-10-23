@@ -1,4 +1,4 @@
-package com.example.boardgame.notification.Websocket;
+package com.example.boardgame.Notification.Websocket;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -23,7 +23,7 @@ import androidx.core.app.NotificationCompat;
 import com.example.boardgame.MainActivity;
 import com.example.boardgame.R;
 import com.example.boardgame.notification.Common;
-import com.example.boardgame.notification.PlayerNotificationList.Notification;
+import com.example.boardgame.Notification.PlayerNotificationList.Notification;
 import com.example.boardgame.notification.Task.CommonTask;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -59,25 +59,25 @@ public class NetWorkService extends Service {
         connectivityManager.registerNetworkCallback(request, networkCallback);
 
         //開啟邀請好友通知service(websocket)
-        Intent inviteFriendIntent = new Intent(this, InviteFriendService.class);
+        Intent inviteFriendIntent = new Intent(this,InviteFriendService.class);
         this.startService(inviteFriendIntent);
         //開啟好友加入通知service(websocket)
-        Intent addFriendIntent = new Intent(this, AddFriendService.class);
+        Intent addFriendIntent = new Intent(this,AddFriendService.class);
         this.startService(addFriendIntent);
         //開啟檢舉玩家通知service(websocket)
-        Intent reportPlayerIntent = new Intent(this, ReportPlayerService.class);
+        Intent reportPlayerIntent = new Intent(this,ReportPlayerService.class);
         this.startService(reportPlayerIntent);
         //開啟檢舉店家通知service(websocket)
-        Intent reportShopIntent = new Intent(this, ReportShopService.class);
+        Intent reportShopIntent = new Intent(this,ReportShopService.class);
         this.startService(reportShopIntent);
         //開啟檢舉團通知service(websocket)
-        Intent groupcheckIntent = new Intent(this, GroupCheckService.class);
+        Intent groupcheckIntent = new Intent(this,GroupCheckService.class);
         this.startService(groupcheckIntent);
-        //開啟檢舉團通知service(websocket)
-        Intent reportGroupIntent = new Intent(this, ReportGroupService.class);
+        /* 開啟檢舉團通知service(websocket) */
+        Intent reportGroupIntent = new Intent(this,ReportGroupService.class);
         this.startService(reportGroupIntent);
         //開起廣告通知service(websocket)
-        Intent adIntent = new Intent(this, AdvertisementService.class);
+        Intent adIntent = new Intent(this,AdvertisementService.class);
         this.startService(adIntent);
     }
 

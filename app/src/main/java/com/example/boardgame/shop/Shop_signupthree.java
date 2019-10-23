@@ -186,7 +186,7 @@ public class Shop_signupthree extends Fragment {
 //                    preferences.edit()
 //                            .putInt("shopId", Integer.parseInt(shopId))
 //                            .apply();
-//                    Common.showToast(activity, "textPreferencesSaved");
+//                    AlarmCommon.showToast(activity, "textPreferencesSaved");
 
 
 

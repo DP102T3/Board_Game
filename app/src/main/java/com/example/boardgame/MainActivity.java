@@ -29,10 +29,10 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
+import com.example.boardgame.Notification.Websocket.NetWorkService;
 import com.example.boardgame.notification.CommonShop;
 import com.example.boardgame.notification.CommonTask;
 import com.example.boardgame.notification.ShopNotification;
-import com.example.boardgame.notification.Websocket.NetWorkService;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;

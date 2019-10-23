@@ -17,7 +17,7 @@ import static android.content.Context.MODE_PRIVATE;
 
 // 存放 通用方法 的類別
 public class Common {
-    private static final String TAG = "Common";
+    private static final String TAG = "AlarmCommon";
 
     public static Bitmap bitmap;
 

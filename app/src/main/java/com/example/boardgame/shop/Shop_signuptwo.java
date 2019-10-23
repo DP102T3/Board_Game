@@ -124,7 +124,7 @@ public class Shop_signuptwo extends Fragment {
 //                String fileName = preferences.getString("shopId", DEFAULT_FILE_NAME);
 //                ShopId.setText(fileName);
 //
-//                Common.showToast(activity, "textPreferencesload");
+//                AlarmCommon.showToast(activity, "textPreferencesload");
 //            }
 
 
