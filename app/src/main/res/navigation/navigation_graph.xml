@@ -140,4 +140,9 @@
         android:name="com.example.boardgame.notification.ShopNotificationListFragment"
         android:label="fragment_shop_notification_list"
         tools:layout="@layout/fragment_shop_notification_list" />
+    <fragment
+        android:id="@+id/systemNotificationFragment"
+        android:name="com.example.boardgame.notification.SystemNotification.SystemNotificationFragment"
+        android:label="fragment_system_notification"
+        tools:layout="@layout/fragment_system_notification" />
 </navigation>
