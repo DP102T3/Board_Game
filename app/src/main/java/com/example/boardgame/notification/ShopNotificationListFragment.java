@@ -52,7 +52,7 @@ public class ShopNotificationListFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        shop_id=CommonShop.loadPlayer_id(activity);
+        shop_id=CommonShop.loadShop_id(activity);
         shopId = String.valueOf(shop_id);
 
         swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);

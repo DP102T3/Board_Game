@@ -28,7 +28,7 @@ public class CommonShop {
         preferences.edit().putInt("shop_id", shop_id).apply();
     }
 
-    public static int loadPlayer_id(Context context) {
+    public static int loadShop_id(Context context) {
         SharedPreferences preferences =
                 context.getSharedPreferences("user", MODE_PRIVATE);
         int shop_id = preferences.getInt("shop_id", 0);

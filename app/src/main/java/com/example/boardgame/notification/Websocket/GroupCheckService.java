@@ -15,9 +15,9 @@ import android.util.Log;
 
 import androidx.core.app.NotificationCompat;
 
-import com.example.boardgame.notification.Common;
 import com.example.boardgame.MainActivity;
 import com.example.boardgame.R;
+import com.example.boardgame.notification.CommonShop;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
@@ -132,7 +132,7 @@ public class GroupCheckService extends Service {
     public void connectServer() {
         URI uri = null;
         try {
-            uri = new URI(SERVER_URI + Common.loadPlayer_id(context));
+            uri = new URI(SERVER_URI + CommonShop.loadShop_id(context));
         } catch (URISyntaxException e) {
             Log.e(TAG, e.toString());
         }

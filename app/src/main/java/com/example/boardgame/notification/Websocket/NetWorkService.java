@@ -56,7 +56,7 @@ public class NetWorkService extends Service {
         context = getApplicationContext();
 
         player_id = Common.loadPlayer_id(context);
-        shop_id = CommonShop.loadPlayer_id(context);
+        shop_id = CommonShop.loadShop_id(context);
 
         acquireWakeLock();
 
