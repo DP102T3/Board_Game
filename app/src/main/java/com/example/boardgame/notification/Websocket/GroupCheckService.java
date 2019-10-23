@@ -161,8 +161,6 @@ public class GroupCheckService extends Service {
         PowerManager powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
         if (powerManager != null && wakeLock == null) {
             wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "ServiceDemo:MyWakeLock");
-            // 提供timeout時間以避免事情做完了還佔用著wakelock，一般設10分鐘
-            wakeLock.acquire(10 * 60 * 1000);
             Log.d(TAG, "acquireWakeLock");
         }
     }
