@@ -73,7 +73,7 @@ public class SystemService extends Service {
 
         @Override
         public void onMessage(String message) {
-            Log.e("systemOnMessage: ", message);
+            Log.d("systemOnMessage: ", message);
             SystemNotification nosJson = gson.fromJson(message, SystemNotification.class);
             title = nosJson.getBnote_title();
             Log.e("title",title);

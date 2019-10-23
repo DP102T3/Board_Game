@@ -73,7 +73,7 @@ public class ReportShopService extends Service {
 
         @Override
         public void onMessage(String message) {
-            Log.d(TAG, "onMessage: " + message);
+            Log.d(TAG, "ReportShopOnMessage: " + message);
             JsonObject nosJson = gson.fromJson(message, JsonObject.class);
             title = nosJson.get("title").getAsString();
             content = nosJson.get("content").getAsString();

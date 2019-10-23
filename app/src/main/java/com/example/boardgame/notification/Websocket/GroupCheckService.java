@@ -72,7 +72,7 @@ public class GroupCheckService extends Service {
 
         @Override
         public void onMessage(String message) {
-            Log.d(TAG, "onMessage: " + message);
+            Log.d(TAG, "GroupCheckOnMessage: " + message);
             JsonObject nosJson = gson.fromJson(message, JsonObject.class);
             title = nosJson.get("title").getAsString();
             content = nosJson.get("content").getAsString();

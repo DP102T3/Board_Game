@@ -77,7 +77,7 @@ public class InviteFriendService extends Service {
 
         @Override
         public void onMessage(String message) {
-            Log.d(TAG, "onMessage: " + message);
+            Log.d(TAG, "InviteFriendOnMessage: " + message);
             JsonObject nosJson = gson.fromJson(message, JsonObject.class);
             title = nosJson.get("title").getAsString();
             content = nosJson.get("content").getAsString();

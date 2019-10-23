@@ -12,7 +12,7 @@
         android:id="@+id/btSetAlarm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="152dp"
+        android:layout_marginTop="120dp"
         android:background="#B50000"
         android:text="設定時間並送出"
         android:textColor="#FFFFFF"
