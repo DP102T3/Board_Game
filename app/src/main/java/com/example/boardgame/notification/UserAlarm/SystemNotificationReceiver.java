@@ -19,7 +19,7 @@ import static android.content.Context.NOTIFICATION_SERVICE;
 
 public class SystemNotificationReceiver extends BroadcastReceiver {
     private static final String NOTIFICATION_CHANNEL_ID = "meeting";
-    private static final int NOTIFICATION_ID = 201;
+    private static final int NOTIFICATION_ID = 10;
 
     @Override
     public void onReceive(Context context, Intent intent) {

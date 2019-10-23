@@ -37,7 +37,7 @@ public class SystemCommon {
             return null;
         }
 
-        final int REQ_ALARM = 101;
+        final int REQ_ALARM = 10;
         // 建立的Intent需指定廣播接收器以攔截AlarmManager發出的廣播
         Intent intentMeeting = new Intent(context, SystemNotificationReceiver.class);
         Bundle bundle = new Bundle();
