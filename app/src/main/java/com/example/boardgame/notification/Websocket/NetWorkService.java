@@ -1,4 +1,4 @@
-package com.example.boardgame.Notification.Websocket;
+package com.example.boardgame.notification.Websocket;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -21,11 +21,11 @@ import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 
 import com.example.boardgame.MainActivity;
-import com.example.boardgame.Notification.Common;
-import com.example.boardgame.Notification.ShopNotification;
+import com.example.boardgame.notification.Common;
+import com.example.boardgame.notification.ShopNotification;
 import com.example.boardgame.R;
 
-import com.example.boardgame.Notification.PlayerNotificationList.Notification;
+import com.example.boardgame.notification.PlayerNotificationList.Notification;
 import com.example.boardgame.notification.Task.CommonTask;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -115,18 +115,21 @@ public class NetWorkService extends Service {
             Log.e("networkTest", "onAvailable");
             if(player_id!=null) {
                 List<Notification> notifications = getNotification();
-                for (Notification nos : notifications) {
-                    title = nos.getPnote_title();
-                    content = nos.getPnote_info();
-                    sendNotification();
-                    Log.e("MainActivity-title&content:", title + "," + content);
+                if(notifications!=null) {
+                    for (Notification nos : notifications) {
+                        title = nos.getPnote_title();
+                        content = nos.getPnote_info();
+                        sendNotification();
+                        Log.e("MainActivity-title&content:", title + "," + content);
+                    }
+                    updateNosState();
+                }else{
+                    Log.d(TAG, " notifications is null");
                 }
-                updateNosState();
             }else{
                 List<ShopNotification> notifications = getNotifications();
-
                 if(notifications != null) {
-                    for (com.example.boardgame.Notification.ShopNotification nos : notifications) {
+                    for (com.example.boardgame.notification.ShopNotification nos : notifications) {
                         title = nos.getSnote_title();
                         content = nos.getSnote_info();
                         sendNotification();
@@ -220,7 +223,7 @@ public class NetWorkService extends Service {
     private List<ShopNotification> getNotifications() {
         List<ShopNotification> notifications = null;
         if (Common.networkConnected(this)) {
-            String url = com.example.boardgame.Notification.CommonShop.URL_SERVER + "ShopServlet";
+            String url = com.example.boardgame.notification.CommonShop.URL_SERVER + "ShopServlet";
             JsonObject jsonObject = new JsonObject();
             jsonObject.addProperty("action", "getUnnotifiedNos");
             jsonObject.addProperty("shop_id",shop_id );
@@ -235,7 +238,7 @@ public class NetWorkService extends Service {
                 Log.e(TAG, e.toString());
             }
         } else {
-            com.example.boardgame.Notification.CommonShop.showToast(this, R.string.textNoNetwork);
+            com.example.boardgame.notification.CommonShop.showToast(this, R.string.textNoNetwork);
         }
         return notifications;
     }
@@ -244,7 +247,7 @@ public class NetWorkService extends Service {
     private void updateNosStates() {
         int count = 0;
         if (Common.networkConnected(this)) {
-            String url = com.example.boardgame.Notification.CommonShop.URL_SERVER + "ShopServlet";
+            String url = com.example.boardgame.notification.CommonShop.URL_SERVER + "ShopServlet";
             JsonObject jsonObject = new JsonObject();
             jsonObject.addProperty("action", "updateNosState");
             jsonObject.addProperty("shop_id",shop_id);

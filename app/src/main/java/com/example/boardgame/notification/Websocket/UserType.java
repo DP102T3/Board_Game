@@ -1,4 +1,4 @@
-package com.example.boardgame.Notification.Websocket;
+package com.example.boardgame.notification.Websocket;
 
 public class UserType {
     String type,userId;

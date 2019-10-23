@@ -1,4 +1,4 @@
-package com.example.boardgame.Notification.Websocket.GroupSussesAlarm;
+package com.example.boardgame.notification.Websocket.GroupSussesAlarm;
 
 import android.app.Activity;
 import android.app.AlarmManager;

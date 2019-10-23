@@ -1,4 +1,4 @@
-package com.example.boardgame.Notification.Websocket;
+package com.example.boardgame.notification.Websocket;
 
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -16,7 +16,7 @@ import android.util.Log;
 import androidx.core.app.NotificationCompat;
 
 import com.example.boardgame.MainActivity;
-import com.example.boardgame.Notification.Common;
+import com.example.boardgame.notification.Common;
 import com.example.boardgame.R;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;

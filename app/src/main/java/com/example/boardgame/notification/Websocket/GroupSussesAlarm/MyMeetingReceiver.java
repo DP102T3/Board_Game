@@ -1,4 +1,4 @@
-package com.example.boardgame.Notification.Websocket.GroupSussesAlarm;
+package com.example.boardgame.notification.Websocket.GroupSussesAlarm;
 
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -14,7 +14,7 @@ import android.util.Log;
 import androidx.core.app.NotificationCompat;
 
 import com.example.boardgame.MainActivity;
-import com.example.boardgame.Notification.Common;
+import com.example.boardgame.notification.Common;
 import com.example.boardgame.R;
 import com.google.gson.JsonObject;
 

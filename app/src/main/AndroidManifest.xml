@@ -41,14 +41,14 @@
                 android:resource="@xml/provider_paths" />
         </provider>
 
-        <service android:name=".Notification.Websocket.InviteFriendService" />
-        <service android:name=".Notification.Websocket.ReportGroupService" />
-        <service android:name=".Notification.Websocket.GroupCheckService" />
-        <service android:name=".Notification.Websocket.AddFriendService" />
-        <service android:name=".Notification.Websocket.ReportPlayerService" />
-        <service android:name=".Notification.Websocket.ReportShopService" />
-        <service android:name=".Notification.Websocket.AdvertisementService" />
-        <service android:name=".Notification.Websocket.NetWorkService" />
+        <service android:name=".notification.Websocket.InviteFriendService" />
+        <service android:name=".notification.Websocket.ReportGroupService" />
+        <service android:name=".notification.Websocket.GroupCheckService" />
+        <service android:name=".notification.Websocket.AddFriendService" />
+        <service android:name=".notification.Websocket.ReportPlayerService" />
+        <service android:name=".notification.Websocket.ReportShopService" />
+        <service android:name=".notification.Websocket.AdvertisementService" />
+        <service android:name=".notification.Websocket.NetWorkService" />
     </application>
 
 </manifest>

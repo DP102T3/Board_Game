@@ -1,4 +1,4 @@
-package com.example.boardgame.Notification.Websocket.GroupSussesAlarm;
+package com.example.boardgame.notification.Websocket.GroupSussesAlarm;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -9,8 +9,8 @@ import android.util.Log;
 import java.util.Date;
 
 import static android.content.Context.MODE_PRIVATE;
-import static com.example.boardgame.Notification.Websocket.GroupSussesAlarm.AlarmCommon.KEY_ALARM_TIME;
-import static com.example.boardgame.Notification.Websocket.GroupSussesAlarm.AlarmCommon.PREFERENCES_NAME;
+import static com.example.boardgame.notification.Websocket.GroupSussesAlarm.AlarmCommon.KEY_ALARM_TIME;
+import static com.example.boardgame.notification.Websocket.GroupSussesAlarm.AlarmCommon.PREFERENCES_NAME;
 
 public class MyBootReceiver extends BroadcastReceiver {
     private static final String TAG = "TAG_MyBootReceiver";

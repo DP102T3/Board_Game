@@ -1,4 +1,4 @@
-package com.example.boardgame.Notification;
+package com.example.boardgame.notification;
 
 
 import android.app.Activity;
@@ -13,13 +13,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.boardgame.Notification.Websocket.AddFriendService;
-import com.example.boardgame.Notification.Websocket.AdvertisementService;
-import com.example.boardgame.Notification.Websocket.GroupCheckService;
-import com.example.boardgame.Notification.Websocket.InviteFriendService;
-import com.example.boardgame.Notification.Websocket.ReportGroupService;
-import com.example.boardgame.Notification.Websocket.ReportPlayerService;
-import com.example.boardgame.Notification.Websocket.ReportShopService;
+import com.example.boardgame.notification.Websocket.AddFriendService;
+import com.example.boardgame.notification.Websocket.AdvertisementService;
+import com.example.boardgame.notification.Websocket.GroupCheckService;
+import com.example.boardgame.notification.Websocket.InviteFriendService;
+import com.example.boardgame.notification.Websocket.ReportGroupService;
+import com.example.boardgame.notification.Websocket.ReportPlayerService;
+import com.example.boardgame.notification.Websocket.ReportShopService;
 import com.example.boardgame.R;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
