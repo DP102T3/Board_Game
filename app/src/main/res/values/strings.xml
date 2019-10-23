@@ -31,4 +31,21 @@
     <string name="textNoImageCropAppFound">no image crop app found</string>
     <string name="textNoNetwork">no network connection available</string>
     <string name="textNoShopGameFound">no spots found</string>
+
+    <!-- notification -->
+    <string name="textNoUsersFound">沒有新通知</string>
+    <string name="textFail">讀取失敗</string>
+    <string name="textInsertFail">新增失敗</string>
+    <string name="textInsertSuccess">新增成功</string>
+    <string name="textSetAlarm">Set Alarm</string>
+    <string name="textCancelAlarm">Cancel Alarm</string>
+    <string name="textAlarmCancelled">Alarm cancelled</string>
+    <string name="tvInputTip">請輸入通知內容：</string>
+    <string name="edInputNotification" />
+    <string name="btInsert">新增系統推播</string>
+    <string name="btDelet">刪除系統推播</string>
+    <string name="btUpdate">修改系統推播</string>
+    <string name="btlist">查看系統推播</string>
+    <string name="textNoNotificationsFound">沒有任何系統通知紀錄</string>
+    <string name="textNoInput">請輸入系統通知內容</string>
 </resources>

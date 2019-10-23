@@ -1,6 +1,7 @@
 package com.example.boardgame;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.util.DisplayMetrics;
@@ -17,6 +18,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
+import com.example.boardgame.notification.Websocket.NetWorkService;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -47,10 +49,15 @@ public class MainActivity extends AppCompatActivity {
         NavController bottomNavController = Navigation.findNavController(this, R.id.fragment);
         NavigationUI.setupWithNavController(bottomNavigationView, bottomNavController);
 
+
         DisplayMetrics metric = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metric);
         width = metric.widthPixels;
         height = metric.heightPixels;
+
+        //開啟網路偵測服務及Websocket服務(notification)
+        Intent networkIntent = new Intent(this, NetWorkService.class);
+        this.startService(networkIntent);
     }
 
     // 變更 TabBar 或 BottomBar 的狀態

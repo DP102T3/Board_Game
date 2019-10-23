@@ -121,5 +121,16 @@
         android:name="com.example.boardgame.shop.GameinfoFragment"
         android:label="fragment_gameinfo"
         tools:layout="@layout/fragment_gameinfo" />
+    <fragment
+        android:id="@+id/notificationFragment"
+        android:name="com.example.boardgame.notification.PlayerNotificationList.PlayerNotificationListFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_notification" />
+
+    <fragment
+        android:id="@+id/testFragment"
+        android:name="com.example.boardgame.notification.testFragment"
+        android:label="fragment_test"
+        tools:layout="@layout/fragment_test" />
 
 </navigation>

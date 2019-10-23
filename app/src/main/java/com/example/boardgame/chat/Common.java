@@ -4,6 +4,7 @@ package com.example.boardgame.chat;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.Log;
@@ -17,6 +18,8 @@ import static android.content.Context.MODE_PRIVATE;
 // 存放 通用方法 的類別
 public class Common {
     private static final String TAG = "Common";
+
+    public static Bitmap bitmap;
 
     // 連線 Servlet 所需的 URI ，以取得玩家的參團列表
     public static String SERVLET_URI = "http://10.0.2.2:8080/DevBG//ChatServlet";
