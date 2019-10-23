@@ -1,4 +1,4 @@
-package com.example.boardgame.notification.Websocket.GroupSussesAlarm;
+package com.example.boardgame.notification.AdEndNotification;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -9,10 +9,10 @@ import android.util.Log;
 import java.util.Date;
 
 import static android.content.Context.MODE_PRIVATE;
-import static com.example.boardgame.notification.Websocket.GroupSussesAlarm.AlarmCommon.KEY_ALARM_TIME;
-import static com.example.boardgame.notification.Websocket.GroupSussesAlarm.AlarmCommon.PREFERENCES_NAME;
+import static com.example.boardgame.notification.AdEndNotification.AdCommon.KEY_ALARM_TIME;
+import static com.example.boardgame.notification.AdEndNotification.AdCommon.PREFERENCES_NAME;
 
-public class MyBootReceiver extends BroadcastReceiver {
+public class AdBootReceiver extends BroadcastReceiver {
     private static final String TAG = "TAG_MyBootReceiver";
 
     @Override
@@ -31,13 +31,13 @@ public class MyBootReceiver extends BroadcastReceiver {
         }
 
         // 取出alarm時間
-        String alarmStr = "Alarm time in preferences: " + AlarmCommon.getFormatTime(alarmTime);
+        String alarmStr = "Alarm time in preferences: " + AdCommon.getFormatTime(alarmTime);
         Log.d(TAG, alarmStr);
 
         long now = new Date().getTime();
         // 如果alarm沒有逾期就重設一次；逾期就從偏好設檔內移除設定時間
         if (alarmTime >= now) {
-            AlarmCommon.setAlarm(context, alarmTime, false);
+            AdCommon.setAlarm(context, alarmTime, false);
         } else {
             preferences.edit().remove(KEY_ALARM_TIME).apply();
         }

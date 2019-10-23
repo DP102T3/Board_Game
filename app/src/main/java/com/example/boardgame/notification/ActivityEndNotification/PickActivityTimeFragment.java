@@ -1,4 +1,4 @@
-package com.example.boardgame.notification.Websocket.GroupSussesAlarm;
+package com.example.boardgame.notification.ActivityEndNotification;
 
 import android.app.Activity;
 import android.app.AlarmManager;
@@ -88,8 +88,8 @@ public class PickActivityTimeFragment extends Fragment implements
         this.minute = minute;
         long alarmTime = getTimeFromPicker();
         // 日期時間都挑選完畢後可以設定alarm時間
-        pendingIntent = AlarmCommon.setAlarm(activity, alarmTime, true);
-        String text = "Alarm scheduled at: " + AlarmCommon.getFormatTime(alarmTime);
+        pendingIntent = ActivityEndCommon.setAlarm(activity, alarmTime, true);
+        String text = "Alarm scheduled at: " + ActivityEndCommon.getFormatTime(alarmTime);
         tvMessage.setText(text);
     }
 

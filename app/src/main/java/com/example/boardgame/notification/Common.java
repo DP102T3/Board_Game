@@ -11,7 +11,7 @@ import static android.content.Context.MODE_PRIVATE;
 
 
 public class Common {
-    private static final String TAG ="Common";
+    private static final String TAG ="AdCommon";
     public static String URL_SERVER = "http://10.0.2.2:8080/BoardGame_Web/";
 
     public static boolean networkConnected(Context context) {

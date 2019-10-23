@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Common.savePlayer_id(this, "B");
+        Common.savePlayer_id(this, "A");
         CommonShop.saveShop_id(this,1);
 
         // 設置 TabBar

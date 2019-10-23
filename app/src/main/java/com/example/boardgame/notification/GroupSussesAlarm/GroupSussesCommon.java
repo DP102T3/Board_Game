@@ -1,4 +1,4 @@
-package com.example.boardgame.notification.Websocket.GroupSussesAlarm;
+package com.example.boardgame.notification.GroupSussesAlarm;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -12,7 +12,7 @@ import java.util.Date;
 
 import static android.content.Context.MODE_PRIVATE;
 
-public class AlarmCommon {
+public class GroupSussesCommon {
     private static final String TAG = "TAG_Common";
     public static final String PREFERENCES_NAME = "preferences";
     public static final String KEY_ALARM_TIME = "alarmTime";
