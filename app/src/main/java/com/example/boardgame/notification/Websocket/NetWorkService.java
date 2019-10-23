@@ -123,7 +123,7 @@ public class NetWorkService extends Service {
             Log.e("networkTest", "onAvailable");
 
             List<Notification> notifications = getPlayerNotification();
-            if(player_id!=null) {
+            if (player_id != null) {
                 if (notifications != null) {
                     for (Notification nos : notifications) {
                         title = nos.getPnote_title();
@@ -132,23 +132,23 @@ public class NetWorkService extends Service {
                         Log.e("MainActivity-title&content:", title + "," + content);
                     }
                     updatePlayerNosState();
-                } else {
-                    Log.d(TAG, "登入者非玩家");
                 }
-                if (shop_id != 0) {
-                    List<ShopNotification> shopnotifications = getShopNotifications();
-                    if (shopnotifications != null) {
-                        for (ShopNotification nos : shopnotifications) {
-                            title = nos.getSnote_title();
-                            content = nos.getSnote_info();
-                            sendNotification();
-                            Log.e("MainActivity-title&content:", title + "," + content);
-                        }
-                        updateShopNosStates();
+            } else {
+                Log.d(TAG, "登入者非玩家");
+            }
+            if (shop_id != 0) {
+                List<ShopNotification> shopnotifications = getShopNotifications();
+                if (shopnotifications != null) {
+                    for (ShopNotification nos : shopnotifications) {
+                        title = nos.getSnote_title();
+                        content = nos.getSnote_info();
+                        sendNotification();
+                        Log.e("MainActivity-title&content:", title + "," + content);
                     }
-                }else {
-                    Log.d(TAG, "登入者非店家");
+                    updateShopNosStates();
                 }
+            } else {
+                Log.d(TAG, "登入者非店家");
             }
         }
 
