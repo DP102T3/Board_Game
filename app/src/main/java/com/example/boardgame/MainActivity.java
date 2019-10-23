@@ -50,20 +50,12 @@ public class MainActivity extends AppCompatActivity {
     //   從infoFragment打包shop到editinfo
     public static Shop shop = new Shop();
 
-
-    private ConnectivityManager.NetworkCallback networkCallback;
-    private ConnectivityManager connectivityManager;
-    public static int shop_id=1;
-    private static final String NOTIFICATION_CHANNEL_ID = "notification";
-    private static int NOTIFICATION_ID = 1;
-    public static String title, content;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Common.savePlayer_id(this, "A");
+        Common.savePlayer_id(this, "B");
         CommonShop.saveShop_id(this,1);
 
         // 設置 TabBar
