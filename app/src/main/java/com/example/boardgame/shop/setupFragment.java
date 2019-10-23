@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import com.example.boardgame.MainActivity;
 import com.example.boardgame.R;
 
 
@@ -57,4 +58,10 @@ public class setupFragment extends Fragment {
 
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        // 隱藏 TabBar
+        MainActivity.changeBarsStatus(MainActivity.ONLY_BOTTOM);
+    }
 }

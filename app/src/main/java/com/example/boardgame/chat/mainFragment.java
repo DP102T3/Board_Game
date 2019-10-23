@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import com.example.boardgame.MainActivity;
 import com.example.boardgame.R;
 
 import static com.example.boardgame.chat.Common.savePlayerId;
@@ -67,5 +68,12 @@ public class mainFragment extends Fragment {
                         .navigate(R.id.action_mainFragment_to_listFriendsFragment);
             }
         });
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        // 隱藏 TabBar
+        MainActivity.changeBarsStatus(MainActivity.ONLY_BOTTOM);
     }
 }

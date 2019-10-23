@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -255,6 +256,7 @@ public class ChatFragment extends Fragment {
 
         public class MyViewHolder extends RecyclerView.ViewHolder {
             TextView tvSender;
+            ImageView ivPortrait;
             TextView tvMsg_recieved;
             TextView tvMsg_send;
             ConstraintLayout layoutRecieved;
@@ -265,6 +267,7 @@ public class ChatFragment extends Fragment {
             public MyViewHolder(@NonNull View itemView) {
                 super(itemView);
                 // 關聯 itemView 的 變數 及 UI元件
+                ivPortrait = itemView.findViewById(R.id.ivPortrait);
                 tvSender = itemView.findViewById(R.id.tvSender);
                 tvMsg_recieved = itemView.findViewById(R.id.tvMsg_recieved);
                 tvMsg_send = itemView.findViewById(R.id.tvMsg_playerSend);
@@ -297,6 +300,7 @@ public class ChatFragment extends Fragment {
 
             if (type == TYPE_RECEIVED) {
                 holder.tvSender.setText(playerName);
+                holder.ivPortrait.setImageResource(R.drawable.portrait_default);
                 holder.tvMsg_recieved.setText(content);
                 holder.tvMsg_send.setVisibility(View.GONE);
                 holder.layoutSend.setVisibility(View.GONE);
@@ -304,6 +308,7 @@ public class ChatFragment extends Fragment {
             } else if (type == TYPE_PLAYER_SEND) {
                 holder.tvMsg_send.setText(content);
                 holder.tvMsg_recieved.setVisibility(View.GONE);
+                holder.ivPortrait.setVisibility(View.GONE);
                 holder.layoutRecieved.setVisibility(View.GONE);
                 holder.cvRecieved.setVisibility(View.GONE);
             }

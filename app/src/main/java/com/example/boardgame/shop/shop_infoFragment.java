@@ -176,6 +176,13 @@ public class shop_infoFragment extends Fragment {
         shopCharge.setText(String.valueOf(charge));
 
     }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        // 隱藏 TabBar
+        MainActivity.changeBarsStatus(MainActivity.ONLY_BOTTOM);
+    }
 }
 
 

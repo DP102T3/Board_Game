@@ -15,6 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import com.example.boardgame.MainActivity;
 import com.example.boardgame.R;
 
 
@@ -36,7 +37,6 @@ public class Shop_signup extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        activity.setTitle("註冊");
         return inflater.inflate(R.layout.fragment_shop_signup, container, false);
 
     }
@@ -44,6 +44,7 @@ public class Shop_signup extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        activity.setTitle("註冊");
         shopId = view.findViewById(R.id.shop_id);
         btcf = view.findViewById(R.id.btcf);
         Bundle bundle = getArguments();
@@ -84,4 +85,10 @@ public class Shop_signup extends Fragment {
         });
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        // 隱藏 TabBar 及 BottomBar
+        MainActivity.changeBarsStatus(MainActivity.NEITHER_TAB_AND_BOTTOM);
+    }
 }

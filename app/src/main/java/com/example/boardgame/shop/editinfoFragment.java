@@ -173,6 +173,12 @@ public class editinfoFragment extends Fragment {
         shopOwner.setTag(String.valueOf(owner));
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
 
+        // 隱藏 TabBar 及 BottomBar
+        MainActivity.changeBarsStatus(MainActivity.NEITHER_TAB_AND_BOTTOM);
+    }
 
 }
