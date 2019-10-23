@@ -53,7 +53,7 @@ public class SystemCommon {
                 pendingIntent);
 
         String text = "Alarm scheduled at: " + getFormatTime(time);
-        Log.d(TAG, text);
+        Log.e(TAG, text);
         return pendingIntent;
     }
 
