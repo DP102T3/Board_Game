@@ -27,6 +27,7 @@ import com.example.boardgame.R;
 
 import com.example.boardgame.notification.PlayerNotificationList.Notification;
 import com.example.boardgame.notification.Task.CommonTask;
+import com.example.boardgame.notification.UserAlarm.SystemService;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
@@ -83,6 +84,9 @@ public class NetWorkService extends Service {
         //開起廣告通知service(websocket)
         Intent adIntent = new Intent(this,AdvertisementService.class);
         this.startService(adIntent);
+        //開啟系統推播service(websocket)
+        Intent systemIntent = new Intent(this, SystemService.class);
+        this.startService(systemIntent);
     }
 
     @Nullable
@@ -267,31 +271,7 @@ public class NetWorkService extends Service {
         }
     }
 
-    //取得shop因未連線而沒收到的所有通知
-    private List<Notification> getSystemNotifications() {
-        List<Notification> notifications = null;
-        if (Common.networkConnected(this)) {
-            String url = com.example.boardgame.notification.CommonShop.URL_SERVER + "ShopServlet";
-            JsonObject jsonObject = new JsonObject();
-            jsonObject.addProperty("action", "getUnnotifiedNos");
-            jsonObject.addProperty("shop_id",shop_id );
-            String jsonOut = jsonObject.toString();
-            com.example.boardgame.notification.CommonTask getNosTask = new com.example.boardgame.notification.CommonTask(url, jsonOut);
-            try {
-                String jsonIn = getNosTask.execute().get();
-                Type listType = new TypeToken<List<ShopNotification>>() {
-                }.getType();
-                notifications = new Gson().fromJson(jsonIn, listType);
-            } catch (Exception e) {
-                Log.e(TAG, e.toString());
-            }
-        } else {
-            com.example.boardgame.notification.CommonShop.showToast(this, R.string.textNoNetwork);
-        }
-        return notifications;
-    }
-
-    //client發送通知器
+    //發送通知
     private void sendNotification() {
         NotificationManager notificationManager =
                 (NotificationManager) this.getSystemService(NOTIFICATION_SERVICE);
