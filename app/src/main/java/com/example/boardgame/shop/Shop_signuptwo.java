@@ -15,6 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import com.example.boardgame.MainActivity;
 import com.example.boardgame.R;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -136,8 +137,14 @@ public class Shop_signuptwo extends Fragment {
 
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        // 隱藏 TabBar 及 BottomBar
+        MainActivity.changeBarsStatus(MainActivity.NEITHER_TAB_AND_BOTTOM);
+    }
 
-//==================================================儲存偏好設定===============================================================================
+    //==================================================儲存偏好設定===============================================================================
 
     private void savePreferences() {
 
