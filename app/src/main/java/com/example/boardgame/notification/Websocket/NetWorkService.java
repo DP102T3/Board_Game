@@ -21,8 +21,10 @@ import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 
 import com.example.boardgame.MainActivity;
+import com.example.boardgame.Notification.Common;
+import com.example.boardgame.Notification.ShopNotification;
 import com.example.boardgame.R;
-import com.example.boardgame.notification.Common;
+
 import com.example.boardgame.Notification.PlayerNotificationList.Notification;
 import com.example.boardgame.notification.Task.CommonTask;
 import com.google.gson.Gson;
@@ -31,6 +33,8 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.List;
+
+import static com.example.boardgame.MainActivity.shop_id;
 
 public class NetWorkService extends Service {
     public Context context;
@@ -109,14 +113,31 @@ public class NetWorkService extends Service {
         public void onAvailable(Network network) {//當客戶連線時將未上線而沒收到的通知發給客戶
             super.onAvailable(network);
             Log.e("networkTest", "onAvailable");
-            List<Notification> notifications = getNotifications();
-            for (Notification nos : notifications) {
-                title = nos.getPnote_title();
-                content = nos.getPnote_info();
-                sendNotification();
-                Log.e("MainActivity-title&content:", title + "," + content);
+            if(player_id!=null) {
+                List<Notification> notifications = getNotification();
+                for (Notification nos : notifications) {
+                    title = nos.getPnote_title();
+                    content = nos.getPnote_info();
+                    sendNotification();
+                    Log.e("MainActivity-title&content:", title + "," + content);
+                }
+                updateNosState();
+            }else{
+                List<ShopNotification> notifications = getNotifications();
+
+                if(notifications != null) {
+                    for (com.example.boardgame.Notification.ShopNotification nos : notifications) {
+                        title = nos.getSnote_title();
+                        content = nos.getSnote_info();
+                        sendNotification();
+                        Log.e("MainActivity-title&content:", title + "," + content);
+                    }
+                    updateNosState();
+                }else{
+                    Log.d(TAG, "User offline");
+                }
+                updateNosStates();
             }
-            updateNosState();
         }
 
         @Override
@@ -146,8 +167,8 @@ public class NetWorkService extends Service {
         }
     }
 
-    //取得user因未連線而沒收到的所有通知
-    private List<Notification> getNotifications() {
+    //取得player因未連線而沒收到的所有通知
+    private List<Notification> getNotification() {
         List<Notification> notifications = null;
         if (Common.networkConnected(this)) {
             String url = Common.URL_SERVER + "BoardGameServlet";
@@ -181,6 +202,55 @@ public class NetWorkService extends Service {
 
             try {
                 String result = new CommonTask(url, jsonObject.toString()).execute().get();
+                count = Integer.valueOf(result);
+            } catch (Exception e) {
+                Log.e(TAG, e.toString());
+            }
+            if (count == 0) {
+                Log.e("MainActivity-updateNosState：", "更新通知狀態失敗/無資料更新");
+            } else {
+                Log.e("MainActivity-updateNosState：", "更新通知狀態成功");
+            }
+        } else {
+            Log.e("MainActivity-updateNosState：", "連線server失敗");
+        }
+    }
+
+    //取得shop因未連線而沒收到的所有通知
+    private List<ShopNotification> getNotifications() {
+        List<ShopNotification> notifications = null;
+        if (Common.networkConnected(this)) {
+            String url = com.example.boardgame.Notification.CommonShop.URL_SERVER + "ShopServlet";
+            JsonObject jsonObject = new JsonObject();
+            jsonObject.addProperty("action", "getUnnotifiedNos");
+            jsonObject.addProperty("shop_id",shop_id );
+            String jsonOut = jsonObject.toString();
+            com.example.boardgame.notification.CommonTask getNosTask = new com.example.boardgame.notification.CommonTask(url, jsonOut);
+            try {
+                String jsonIn = getNosTask.execute().get();
+                Type listType = new TypeToken<List<ShopNotification>>() {
+                }.getType();
+                notifications = new Gson().fromJson(jsonIn, listType);
+            } catch (Exception e) {
+                Log.e(TAG, e.toString());
+            }
+        } else {
+            com.example.boardgame.Notification.CommonShop.showToast(this, R.string.textNoNetwork);
+        }
+        return notifications;
+    }
+
+    //將DB中notification_shop的snote_state通知狀態由0(未通知)改為1(已通知)
+    private void updateNosStates() {
+        int count = 0;
+        if (Common.networkConnected(this)) {
+            String url = com.example.boardgame.Notification.CommonShop.URL_SERVER + "ShopServlet";
+            JsonObject jsonObject = new JsonObject();
+            jsonObject.addProperty("action", "updateNosState");
+            jsonObject.addProperty("shop_id",shop_id);
+
+            try {
+                String result = new com.example.boardgame.notification.CommonTask(url, jsonObject.toString()).execute().get();
                 count = Integer.valueOf(result);
             } catch (Exception e) {
                 Log.e(TAG, e.toString());

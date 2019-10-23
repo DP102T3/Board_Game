@@ -1,4 +1,4 @@
-package com.example.boardgame.notification;
+package com.example.boardgame.Notification;
 
 import java.io.Serializable;
 
