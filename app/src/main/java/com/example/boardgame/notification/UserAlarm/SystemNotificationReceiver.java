@@ -12,9 +12,8 @@ import android.os.Build;
 import android.os.Bundle;
 
 import androidx.core.app.NotificationCompat;
-
-import idv.ron.alarmmanagerdemo.MainActivity;
-import idv.ron.alarmmanagerdemo.R;
+import com.example.boardgame.MainActivity;
+import com.example.boardgame.R;
 
 import static android.content.Context.NOTIFICATION_SERVICE;
 
