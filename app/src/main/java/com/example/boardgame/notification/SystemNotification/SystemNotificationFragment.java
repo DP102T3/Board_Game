@@ -3,6 +3,7 @@ package com.example.boardgame.notification.SystemNotification;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,6 +21,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.boardgame.R;
+import com.example.boardgame.notification.Common;
+import com.example.boardgame.notification.Websocket.NetWorkService;
 import com.google.gson.Gson;
 
 import org.java_websocket.client.WebSocketClient;
@@ -38,6 +41,7 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
 public class SystemNotificationFragment extends Fragment implements
         DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
     private Activity activity;
+    private static final String TAG = "SystemNotificationFragment";
     public String types;
     private long alarmTime;
     private int year, month, day, hour, minute;
@@ -58,7 +62,6 @@ public class SystemNotificationFragment extends Fragment implements
         if (activity == null) {
             return;
         }
-        Common.savePlayer_id(activity, "A");
         connectServer();
     }
 
@@ -85,7 +88,7 @@ public class SystemNotificationFragment extends Fragment implements
         spTarget.setAdapter(adapter);
         //預設選項為店家
         spTarget.setSelection(0,true);
-        //這邊types預設為店家 如果客服以預設值直接送出才有值讓149行switch判斷
+        //這邊types預設為店家 如果客服以預設值直接送出才有值switch判斷
         types ="店家";
 
         spTarget.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -190,7 +193,7 @@ public class SystemNotificationFragment extends Fragment implements
 
         @Override
         public void onMessage(String message) {
-            Log.d(TAG, "onMessage: " + message);
+            Log.d("SystemSelfOnMessage: ", message);
         }
 
         @Override

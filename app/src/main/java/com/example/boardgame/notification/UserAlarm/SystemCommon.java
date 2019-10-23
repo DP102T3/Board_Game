@@ -62,20 +62,6 @@ public class SystemCommon {
         return format.format(new Date(time));
     }
 
-    public static void savePlayer_id(Context context, String player_id) {
-        SharedPreferences preferences =
-                context.getSharedPreferences("user", MODE_PRIVATE);
-        preferences.edit().putString("player_id", player_id).apply();
-    }
-
-    public static String loadPlayer_id(Context context) {
-        SharedPreferences preferences =
-                context.getSharedPreferences("user", MODE_PRIVATE);
-        String player_id = preferences.getString("player_id", "");
-        Log.d(TAG, "player_id = " + player_id);
-        return player_id;
-    }
-
     public Context getContext() {
         return context;
     }

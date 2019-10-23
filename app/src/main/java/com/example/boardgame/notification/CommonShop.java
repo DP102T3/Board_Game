@@ -12,7 +12,7 @@ import static android.content.Context.MODE_PRIVATE;
 
 
 public class CommonShop {
-    private static final String TAG ="AlarmCommon";
+    private static final String TAG ="CommonShop";
     public static String URL_SERVER = "http://10.0.2.2:8080/BoardGame_Web/";
 
     public static boolean networkConnected(Activity activity) {
@@ -32,7 +32,7 @@ public class CommonShop {
         SharedPreferences preferences =
                 context.getSharedPreferences("user", MODE_PRIVATE);
         int shop_id = preferences.getInt("shop_id", 0);
-        Log.d(TAG, "player_id = " + shop_id);
+        Log.d(TAG, "shop_id = " + shop_id);
         return shop_id;
     }
 

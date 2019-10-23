@@ -72,7 +72,7 @@ public class AddFriendService extends Service {
 
         @Override
         public void onMessage(String message) {
-            Log.d(TAG, "AddFriendOnMessage: " + message);
+            Log.d("AddFriendOnMessage: ",   message);
             JsonObject nosJson = gson.fromJson(message, JsonObject.class);
             title = nosJson.get("title").getAsString();
             content = nosJson.get("content").getAsString();

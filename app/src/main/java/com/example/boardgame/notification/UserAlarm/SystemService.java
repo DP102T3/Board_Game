@@ -11,6 +11,7 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 
+import com.example.boardgame.notification.Common;
 import com.google.gson.Gson;
 
 import org.java_websocket.client.WebSocketClient;
@@ -28,8 +29,8 @@ public class SystemService extends Service {
     private AlarmManager alarmManager;
     private PendingIntent pendingIntent;
     private PowerManager.WakeLock wakeLock;
-    private final String TAG = "WebSocketClient";
-    public static InviteFriendWebSocketClient inviteFriendWebSocketClient;
+    private final String TAG = "SystemService";
+    public static SystemReceivWebSocketClient systemReceivWebSocketClient;
     private Gson gson;
     public static String SERVER_URI =
             "ws://10.0.2.2:8080/BoardGame_Web/SystemNotificationServer/";
@@ -55,8 +56,8 @@ public class SystemService extends Service {
     }
 
 
-    public class InviteFriendWebSocketClient extends WebSocketClient {
-        InviteFriendWebSocketClient(URI serverURI) {
+    public class SystemReceivWebSocketClient extends WebSocketClient {
+        SystemReceivWebSocketClient(URI serverURI) {
             // Draft_17是連接協議，就是標準的RFC 6455（JSR256）
             super(serverURI, new Draft_17());
             gson = new Gson();
@@ -104,21 +105,21 @@ public class SystemService extends Service {
     public void connectServer() {
         URI uri = null;
         try {
-            uri = new URI(SERVER_URI + SystemCommon.loadPlayer_id(context));
+            uri = new URI(SERVER_URI + Common.loadPlayer_id(context));
         } catch (URISyntaxException e) {
             Log.e(TAG, e.toString());
         }
-        if (inviteFriendWebSocketClient == null) {
-            inviteFriendWebSocketClient = new InviteFriendWebSocketClient(uri);
-            inviteFriendWebSocketClient.connect();
+        if (systemReceivWebSocketClient == null) {
+            systemReceivWebSocketClient = new SystemReceivWebSocketClient(uri);
+            systemReceivWebSocketClient.connect();
         }
     }
 
     // 中斷WebSocket連線
     public void disconnectServer() {
-        if (inviteFriendWebSocketClient != null) {
-            inviteFriendWebSocketClient.close();
-            inviteFriendWebSocketClient = null;
+        if (systemReceivWebSocketClient != null) {
+            systemReceivWebSocketClient.close();
+            systemReceivWebSocketClient = null;
         }
     }
 
@@ -133,8 +134,6 @@ public class SystemService extends Service {
         PowerManager powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
         if (powerManager != null && wakeLock == null) {
             wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "ServiceDemo:MyWakeLock");
-            // 提供timeout時間以避免事情做完了還佔用著wakelock，一般設10分鐘
-            //wakeLock.acquire(10 * 60 * 1000);
             Log.d(TAG, "acquireWakeLock");
         }
     }

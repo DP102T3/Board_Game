@@ -79,7 +79,7 @@ public class ReportPlayerService extends Service {
 
         @Override
         public void onMessage(String message) {
-            Log.d(TAG, "ReportPlayerOnMessage: " + message);
+            Log.d("ReportPlayerOnMessage: " ,  message);
             JsonObject nosJson = gson.fromJson(message, JsonObject.class);
             title = nosJson.get("title").getAsString();
             content = nosJson.get("content").getAsString();

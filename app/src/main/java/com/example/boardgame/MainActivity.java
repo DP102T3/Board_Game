@@ -2,6 +2,7 @@ package com.example.boardgame;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -19,7 +20,17 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
+import com.example.boardgame.notification.Common;
+import com.example.boardgame.notification.CommonShop;
+import com.example.boardgame.notification.UserAlarm.SystemService;
+import com.example.boardgame.notification.Websocket.AddFriendService;
+import com.example.boardgame.notification.Websocket.AdvertisementService;
+import com.example.boardgame.notification.Websocket.GroupCheckService;
+import com.example.boardgame.notification.Websocket.InviteFriendService;
 import com.example.boardgame.notification.Websocket.NetWorkService;
+import com.example.boardgame.notification.Websocket.ReportGroupService;
+import com.example.boardgame.notification.Websocket.ReportPlayerService;
+import com.example.boardgame.notification.Websocket.ReportShopService;
 import com.example.boardgame.shop.Shop;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -51,6 +62,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Common.savePlayer_id(this, "A");
+        CommonShop.saveShop_id(this,1);
 
         // 設置 TabBar
         tabNavigationView = findViewById(R.id.tabNavigation);

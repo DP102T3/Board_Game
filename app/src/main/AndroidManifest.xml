@@ -55,6 +55,7 @@
         <service android:name=".notification.Websocket.ReportShopService" />
         <service android:name=".notification.Websocket.AdvertisementService" />
         <service android:name=".notification.Websocket.NetWorkService" />
+        <service android:name=".notification.UserAlarm.SystemService" />
     </application>
 
 </manifest>
