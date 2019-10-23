@@ -9,8 +9,9 @@ import android.util.Log;
 import java.util.Date;
 
 import static android.content.Context.MODE_PRIVATE;
-import static com.example.boardgame.notification.GroupSussesAlarm.AlarmCommon.KEY_ALARM_TIME;
-import static com.example.boardgame.notification.GroupSussesAlarm.AlarmCommon.PREFERENCES_NAME;
+import static com.example.boardgame.notification.GroupSussesAlarm.GroupSussesCommon.KEY_ALARM_TIME;
+import static com.example.boardgame.notification.GroupSussesAlarm.GroupSussesCommon.PREFERENCES_NAME;
+
 
 public class GroupSussesBootReceiver extends BroadcastReceiver {
     private static final String TAG = "TAG_MyBootReceiver";
@@ -31,13 +32,13 @@ public class GroupSussesBootReceiver extends BroadcastReceiver {
         }
 
         // 取出alarm時間
-        String alarmStr = "Alarm time in preferences: " + AlarmCommon.getFormatTime(alarmTime);
+        String alarmStr = "Alarm time in preferences: " + GroupSussesCommon.getFormatTime(alarmTime);
         Log.d(TAG, alarmStr);
 
         long now = new Date().getTime();
         // 如果alarm沒有逾期就重設一次；逾期就從偏好設檔內移除設定時間
         if (alarmTime >= now) {
-            AlarmCommon.setAlarm(context, alarmTime, false);
+            GroupSussesCommon.setAlarm(context, alarmTime, false);
         } else {
             preferences.edit().remove(KEY_ALARM_TIME).apply();
         }

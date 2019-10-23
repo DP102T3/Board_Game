@@ -32,7 +32,7 @@ public class GroupSussesCommon {
 
         final int REQ_ALARM = 1;
         // 建立的Intent需指定廣播接收器以攔截AlarmManager發出的廣播
-        Intent intentMeeting = new Intent(context, MyMeetingReceiver.class);
+        Intent intentMeeting = new Intent(context, GroupSussesReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context,
                 REQ_ALARM, intentMeeting, PendingIntent.FLAG_CANCEL_CURRENT);
         // 設定單次準時alarm，而且裝置在低電源、休眠時仍可執行
