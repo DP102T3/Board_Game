@@ -19,6 +19,7 @@ import com.example.boardgame.MainActivity;
 import com.example.boardgame.R;
 
 import static android.content.Context.MODE_PRIVATE;
+import static com.example.boardgame.MainActivity.SHOP;
 
 public class Shop_signuptwo extends Fragment {
 

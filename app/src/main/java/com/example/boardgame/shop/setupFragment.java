@@ -16,6 +16,8 @@ import androidx.navigation.Navigation;
 import com.example.boardgame.MainActivity;
 import com.example.boardgame.R;
 
+import static com.example.boardgame.MainActivity.SHOP;
+
 
 public class setupFragment extends Fragment {
 

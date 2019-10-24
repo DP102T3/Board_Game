@@ -30,6 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+
 public class GameinfoFragment extends Fragment {
 
     private static final String TAG = "TAG_GameinfoFragment";

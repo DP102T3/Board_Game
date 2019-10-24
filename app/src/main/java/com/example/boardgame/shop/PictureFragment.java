@@ -34,6 +34,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 
 import static android.app.Activity.RESULT_OK;
+import static com.example.boardgame.MainActivity.SHOP;
 import static com.example.boardgame.shop.Common.bitmap;
 
 

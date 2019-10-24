@@ -21,6 +21,7 @@ import com.example.boardgame.R;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
+import static com.example.boardgame.MainActivity.SHOP;
 import static com.example.boardgame.shop.Common.showToast;
 
 
