@@ -135,7 +135,14 @@
         android:id="@+id/testFragment"
         android:name="com.example.boardgame.notification.testFragment"
         android:label="fragment_test"
-        tools:layout="@layout/fragment_test" />
+        tools:layout="@layout/fragment_test" >
+        <action
+            android:id="@+id/action_testFragment_to_playerNosListFragment"
+            app:destination="@id/playerNosListFragment" />
+        <action
+            android:id="@+id/action_testFragment_to_shopNotificationListFragment"
+            app:destination="@id/shopNotificationListFragment" />
+    </fragment>
     <fragment
         android:id="@+id/shopNotificationListFragment"
         android:name="com.example.boardgame.notification.ShopNotificationListFragment"
