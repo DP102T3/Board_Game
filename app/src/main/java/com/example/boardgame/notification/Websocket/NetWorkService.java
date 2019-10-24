@@ -110,6 +110,7 @@ public class NetWorkService extends Service {
         PowerManager powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
         if (powerManager != null && wakeLock == null) {
             wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "ServiceDemo:MyWakeLock");
+            wakeLock.acquire(10 * 60 * 1000);
             Log.d(TAG, "acquireWakeLock");
         }
     }
