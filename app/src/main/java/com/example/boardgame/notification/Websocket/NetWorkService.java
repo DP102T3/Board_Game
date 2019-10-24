@@ -102,8 +102,8 @@ public class NetWorkService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        releaseWakeLock();
         connectivityManager.unregisterNetworkCallback(networkCallback);
-
     }
 
     private void acquireWakeLock() {
@@ -111,6 +111,15 @@ public class NetWorkService extends Service {
         if (powerManager != null && wakeLock == null) {
             wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "ServiceDemo:MyWakeLock");
             Log.d(TAG, "acquireWakeLock");
+        }
+    }
+
+    // 釋放wake lock
+    private void releaseWakeLock() {
+        if (wakeLock != null) {
+            wakeLock.release();
+            wakeLock = null;
+            Log.d(TAG, "releaseWakeLock");
         }
     }
 
