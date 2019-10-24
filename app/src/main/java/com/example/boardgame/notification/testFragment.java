@@ -46,6 +46,7 @@ public class testFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onStart() {
         super.onStart();
+
         // 隱藏 TabBar 及 BottomBar
         MainActivity.changeBarsStatus(MainActivity.NEITHER_TAB_AND_BOTTOM);
     }

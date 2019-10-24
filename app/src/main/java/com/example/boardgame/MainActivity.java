@@ -2,8 +2,6 @@ package com.example.boardgame;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.util.DisplayMetrics;
@@ -22,15 +20,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.boardgame.notification.Common;
 import com.example.boardgame.notification.CommonShop;
-import com.example.boardgame.notification.UserAlarm.SystemService;
-import com.example.boardgame.notification.Websocket.AddFriendService;
-import com.example.boardgame.notification.Websocket.AdvertisementService;
-import com.example.boardgame.notification.Websocket.GroupCheckService;
-import com.example.boardgame.notification.Websocket.InviteFriendService;
 import com.example.boardgame.notification.Websocket.NetWorkService;
-import com.example.boardgame.notification.Websocket.ReportGroupService;
-import com.example.boardgame.notification.Websocket.ReportPlayerService;
-import com.example.boardgame.notification.Websocket.ReportShopService;
 import com.example.boardgame.shop.Shop;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -39,13 +29,26 @@ public class MainActivity extends AppCompatActivity {
     public static final int ONLY_BOTTOM = 0;
     public static final int BOTH_TAB_AND_BOTTOM = 1;
     public static final int NEITHER_TAB_AND_BOTTOM = 2;
+    // TabBar紀錄的頁面
+    public static  int onTabMenu = 0;
+    // BottomBar紀錄的身份
+    public static  int onBottomId = 0;
+    // 目前登入身份
+    public static  int loginId = 0;
+    public static  int PLAYER = 91;
+    public static  int SHOP = 92;
+    public static  int ADMIN = 93;
+
+    public static  int CHAT_LIST = 1;
+
+
 
     private static BottomNavigationView tabNavigationView;
     private static BottomNavigationView bottomNavigationView;
     public static  int TAB_CHAT = R.menu.tab_menu_chat;
     public static  int TAB_FRIEND = R.menu.tab_menu_friend;
     public static  int BOTTOM_PLAYER = R.menu.bottom_menu_player;
-    public static  int BOTTOM_SHOP = 22;
+    public static  int BOTTOM_SHOP = R.menu.bottom_menu_shop;
 
 
     private int width;
@@ -167,8 +170,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
     // 變更 TabBar 或 BottomBar 的狀態
+    /*使用方式：
+    * 執行MainActivity.changeBarsStatus(參數：ONLY_BOTTOM、BOTH_TAB_AND_BOTTOM 或 NEITHER_TAB_AND_BOTTOM 其一)
+    * 參考下列註解說明
+    * */
     public static void changeBarsStatus(int barsStatus) {
         switch (barsStatus) {
             case ONLY_BOTTOM:   // 只有 BottomVar
@@ -186,19 +192,29 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public static void clearMenu() {
-        tabNavigationView.getMenu().clear();
-        bottomNavigationView.getMenu().clear();
-    }
 
-        // 設置 TabBar
+    // 設置 TabBar
+    /*使用方式：
+    * 呼叫setTabBar(參數：指定要替換的menu)
+    * */
     public static void setTabBar(int tabMenu){
+        if (onTabMenu == tabNavigationView.getMenu().hashCode()){return;}
+
         tabNavigationView.getMenu().clear();
         tabNavigationView.inflateMenu(tabMenu);
+
+        onTabMenu = tabNavigationView.getMenu().hashCode();
     }
     // 設置 BottomBar
+    /*使用方式：
+     * 呼叫setTabBar(參數：指定要替換的menu)
+     * */
     public static void setBottomBar(int bottomMenu){
+        if (onBottomId == loginId){return;}
+
         bottomNavigationView.getMenu().clear();
         bottomNavigationView.inflateMenu(bottomMenu);
+
+        onBottomId = loginId;
     }
 }

@@ -61,6 +61,7 @@ public class setupFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+
         // 隱藏 TabBar
         MainActivity.changeBarsStatus(MainActivity.ONLY_BOTTOM);
     }

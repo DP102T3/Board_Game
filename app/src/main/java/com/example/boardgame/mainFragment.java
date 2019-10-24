@@ -12,9 +12,10 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
-import com.example.boardgame.MainActivity;
-import com.example.boardgame.R;
-
+import static com.example.boardgame.MainActivity.ADMIN;
+import static com.example.boardgame.MainActivity.PLAYER;
+import static com.example.boardgame.MainActivity.SHOP;
+import static com.example.boardgame.MainActivity.loginId;
 import static com.example.boardgame.chat.Common.savePlayerId;
 
 
@@ -38,30 +39,34 @@ public class mainFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // ChatGroup
+        // 玩家
         view.findViewById(R.id.btUserNameRyan).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // 紀錄登入身份
+                loginId = PLAYER;
                 // ＊測試：將假的 玩家id 存入 偏好設定
                 savePlayerId(activity,"chengchi1223");
                 Navigation.findNavController(v)
                         .navigate(R.id.action_mainFragment_to_listFriendsFragment);
             }
         });
-
         view.findViewById(R.id.btUserNameMay).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // 紀錄登入身份
+                loginId = PLAYER;
                 // ＊測試：將假的 玩家id 存入 偏好設定
                 savePlayerId(activity,"gerfarn0523");
                 Navigation.findNavController(v)
                         .navigate(R.id.action_mainFragment_to_listFriendsFragment);
             }
         });
-
         view.findViewById(R.id.btUserNameJerry).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // 紀錄登入身份
+                loginId = PLAYER;
                 // ＊測試：將假的 玩家id 存入 偏好設定
                 savePlayerId(activity,"jerry1124");
                 Navigation.findNavController(v)
@@ -69,17 +74,21 @@ public class mainFragment extends Fragment {
             }
         });
 
-        // ＊測試：店家註冊
+        // ＊測試：店家
         view.findViewById(R.id.btShopId).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // 紀錄登入身份
+                loginId = SHOP;
                 Navigation.findNavController(v).navigate(R.id.action_mainFragment_to_shop_signup);
             }
         });
 
+        // ＊測試：後台管理員
         view.findViewById(R.id.btNotification).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                loginId = ADMIN;
                 Navigation.findNavController(v).navigate(R.id.action_mainFragment_to_testFragment);
             }
         });
