@@ -22,6 +22,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.boardgame.R;
 import com.example.boardgame.notification.Common;
+import com.example.boardgame.notification.CommonShop;
 import com.example.boardgame.notification.Websocket.NetWorkService;
 import com.google.gson.Gson;
 
@@ -53,6 +54,8 @@ public class SystemNotificationFragment extends Fragment implements
     private Gson gson;
     public static String SERVER_URI =
             "ws://10.0.2.2:8080/BoardGame_Web/SystemNotificationServer/";
+    private static String player_id;
+    private static int shop_id;
 
 
     @Override
@@ -62,6 +65,8 @@ public class SystemNotificationFragment extends Fragment implements
         if (activity == null) {
             return;
         }
+        player_id = Common.loadPlayer_id(activity);
+        shop_id = CommonShop.loadShop_id(activity);
         connectServer();
     }
 
@@ -214,7 +219,11 @@ public class SystemNotificationFragment extends Fragment implements
     private void connectServer() {
         URI uri = null;
         try {
-            uri = new URI(SERVER_URI + Common.loadPlayer_id(activity));
+            if(!player_id.isEmpty()){
+                uri = new URI(SERVER_URI + player_id);
+            }else {
+                uri = new URI(SERVER_URI + shop_id);
+            }
         } catch (URISyntaxException e) {
             Log.e(TAG, e.toString());
         }
