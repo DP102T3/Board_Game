@@ -179,6 +179,7 @@ public class shop_infoFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+
         // 隱藏 TabBar
         MainActivity.changeBarsStatus(MainActivity.ONLY_BOTTOM);
         // 置換 BottomBar 的 menu

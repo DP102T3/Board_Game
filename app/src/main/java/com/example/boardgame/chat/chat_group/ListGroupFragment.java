@@ -42,8 +42,6 @@ public class ListGroupFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activity = getActivity();
-        // 顯示 TabBar 及 BottomBar
-        MainActivity.changeBarsStatus(MainActivity.BOTH_TAB_AND_BOTTOM);
     }
 
     @Override
