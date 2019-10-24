@@ -193,10 +193,19 @@ public class MainActivity extends AppCompatActivity {
 
         // 設置 TabBar
     public static void setTabBar(int tabMenu){
+//        tabNavigationView.getMenu().clear();
         tabNavigationView.inflateMenu(tabMenu);
     }
     // 設置 BottomBar
     public static void setBottomBar(int bottomMenu){
+//        bottomNavigationView.getMenu().clear();
         bottomNavigationView.inflateMenu(bottomMenu);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        tabNavigationView.getMenu().clear();
+        bottomNavigationView.getMenu().clear();
     }
 }
