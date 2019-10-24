@@ -142,6 +142,9 @@
         <action
             android:id="@+id/action_testFragment_to_shopNotificationListFragment"
             app:destination="@id/shopNotificationListFragment" />
+        <action
+            android:id="@+id/action_testFragment_to_systemNotificationFragment"
+            app:destination="@id/systemNotificationFragment" />
     </fragment>
     <fragment
         android:id="@+id/shopNotificationListFragment"

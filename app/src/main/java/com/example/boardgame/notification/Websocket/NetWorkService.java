@@ -47,8 +47,10 @@ public class NetWorkService extends Service {
     private static final String NOTIFICATION_CHANNEL_ID = "notification";
     private static int NOTIFICATION_ID = 1;
     public static String GROUP_KEY = "group_key";
-    private static String title, content, player_id;
+    private static String title, content;
+    private static String player_id;
     private static int shop_id;
+
 
     @Override
     public void onCreate() {
@@ -109,7 +111,7 @@ public class NetWorkService extends Service {
     private void acquireWakeLock() {
         PowerManager powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
         if (powerManager != null && wakeLock == null) {
-            wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "ServiceDemo:MyWakeLock");
+            wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "NetWork:MyWakeLock");
             wakeLock.acquire(10 * 60 * 1000);
             Log.d(TAG, "acquireWakeLock");
         }

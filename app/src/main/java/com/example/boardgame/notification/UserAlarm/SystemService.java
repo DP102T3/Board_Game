@@ -12,6 +12,7 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 
 import com.example.boardgame.notification.Common;
+import com.example.boardgame.notification.CommonShop;
 import com.google.gson.Gson;
 
 import org.java_websocket.client.WebSocketClient;
@@ -34,12 +35,16 @@ public class SystemService extends Service {
     private Gson gson;
     public static String SERVER_URI =
             "ws://10.0.2.2:8080/BoardGame_Web/SystemNotificationServer/";
+    private static String player_id;
+    private static int shop_id;
 
     @Override
     public void onCreate() {
         super.onCreate();
 
         context = getApplicationContext();
+        player_id = Common.loadPlayer_id(context);
+        shop_id = CommonShop.loadShop_id(context);
 
         connectServer();
 
@@ -105,7 +110,11 @@ public class SystemService extends Service {
     public void connectServer() {
         URI uri = null;
         try {
-            uri = new URI(SERVER_URI + Common.loadPlayer_id(context));
+            if(!player_id.isEmpty()){
+                uri = new URI(SERVER_URI + player_id);
+            }else {
+                uri = new URI(SERVER_URI + shop_id);
+            }
         } catch (URISyntaxException e) {
             Log.e(TAG, e.toString());
         }

@@ -33,7 +33,8 @@ import com.example.boardgame.notification.Websocket.ReportPlayerService;
 import com.example.boardgame.notification.Websocket.ReportShopService;
 import com.example.boardgame.shop.Shop;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
+//chengchi1223
+//gerfarn0523
 public class MainActivity extends AppCompatActivity {
     public static final String TAG = "TAG_MainActivity";
     public static final int ONLY_BOTTOM = 0;
@@ -60,8 +61,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Common.savePlayer_id(this, "A");
-        CommonShop.saveShop_id(this,1);
+        Common.savePlayer_id(this, "chengchi1223");
+        CommonShop.saveShop_id(this,123456);
 
         // 設置 TabBar
         tabNavigationView = findViewById(R.id.tabNavigation);

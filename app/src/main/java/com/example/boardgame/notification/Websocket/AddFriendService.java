@@ -18,6 +18,7 @@ import androidx.core.app.NotificationCompat;
 import com.example.boardgame.MainActivity;
 import com.example.boardgame.notification.Common;
 import com.example.boardgame.R;
+import com.example.boardgame.notification.CommonShop;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
@@ -28,6 +29,7 @@ import org.java_websocket.handshake.ServerHandshake;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Locale;
+
 
 public class AddFriendService extends Service {
     private Context context;
@@ -40,11 +42,15 @@ public class AddFriendService extends Service {
     private Gson gson;
     public static String SERVER_URI =
             "ws://10.0.2.2:8080/BoardGame_Web/AddFriendNosServer/";
+    private static String player_id;
+    private static int shop_id;
 
     @Override
     public void onCreate() {
         super.onCreate();
         context = getApplicationContext();
+        player_id = Common.loadPlayer_id(context);
+        shop_id = CommonShop.loadShop_id(context);
         connectServer();
         acquireWakeLock();
     }
@@ -132,7 +138,11 @@ public class AddFriendService extends Service {
     public void connectServer() {
         URI uri = null;
         try {
-            uri = new URI(SERVER_URI + Common.loadPlayer_id(context));
+            if(!player_id.isEmpty()){
+            uri = new URI(SERVER_URI + player_id);
+            }else {
+                uri = new URI(SERVER_URI + shop_id);
+            }
         } catch (URISyntaxException e) {
             Log.e(TAG, e.toString());
         }
