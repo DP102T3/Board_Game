@@ -2,6 +2,7 @@ package com.example.boardgame.notification;
 
 
 import android.app.Activity;
+import android.app.Notification;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import com.example.boardgame.MainActivity;
 import com.example.boardgame.notification.Websocket.AddFriendService;
@@ -28,7 +30,7 @@ import com.google.gson.JsonObject;
 public class testFragment extends Fragment implements View.OnClickListener {
     public Button inviteFriendButton,addFriendButton,reportPlayerButton,reportShopButton,
             inviteGroupButton,groupCheckButton,refuseGroupButton,reportGroupButton,adButton,
-            refuseAdButton;
+            refuseAdButton,playerNosList,shopNosList;
     private Activity activity;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -64,6 +66,8 @@ public class testFragment extends Fragment implements View.OnClickListener {
         reportGroupButton=view.findViewById(R.id.reportGroupButton);
         adButton=view.findViewById(R.id.adButton);
         refuseAdButton=view.findViewById(R.id.refuseAdButton);
+        playerNosList=view.findViewById(R.id.playerNosList);
+        shopNosList=view.findViewById(R.id.shopNosList);
 
 
         inviteFriendButton.setOnClickListener(this);
@@ -76,6 +80,8 @@ public class testFragment extends Fragment implements View.OnClickListener {
         reportGroupButton.setOnClickListener(this);
         adButton.setOnClickListener(this);
         refuseAdButton.setOnClickListener(this);
+        playerNosList.setOnClickListener(this);
+        shopNosList.setOnClickListener(this);
     }
 
     public void onClick(View view) {
@@ -174,6 +180,10 @@ public class testFragment extends Fragment implements View.OnClickListener {
                 Log.e("refuseAdButtonOnclickJson送出值：", refuseAdJson);
                 AdvertisementService.advertisementWebSocketClient.send(refuseAdJson);
                 break;
+            case R.id.playerNosList:
+                Navigation.findNavController(view).navigate(R.id.playerNosListFragment);
+            case R.id.shopNosList:
+                Navigation.findNavController(view).navigate(R.id.shopNotificationListFragment);
         }
     }
 }
