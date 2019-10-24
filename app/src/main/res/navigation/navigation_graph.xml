@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_graph"
-    app:startDestination="@id/shopNotificationListFragment">
+    app:startDestination="@id/mainFragment">
 
     <!-- chat -->
     <fragment
@@ -126,11 +126,6 @@
 
     <!-- notification -->
     <fragment
-        android:id="@+id/notificationFragment"
-        android:name="com.example.boardgame.notification.PlayerNotificationList.PlayerNotificationListFragment"
-        android:label="fragment_main"
-        tools:layout="@layout/fragment_notification" />
-    <fragment
         android:id="@+id/testFragment"
         android:name="com.example.boardgame.notification.testFragment"
         android:label="fragment_test"
@@ -145,4 +140,9 @@
         android:name="com.example.boardgame.notification.SystemNotification.SystemNotificationFragment"
         android:label="fragment_system_notification"
         tools:layout="@layout/fragment_system_notification" />
+    <fragment
+        android:id="@+id/playerNosListFragment"
+        android:name="com.example.boardgame.notification.PlayerNotificationList.PlayerNosListFragment"
+        android:label="fragment_player_nos_list"
+        tools:layout="@layout/fragment_player_nos_list" />
 </navigation>
