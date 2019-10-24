@@ -16,6 +16,7 @@
         android:title="Friends"
         android:icon="@drawable/ic_friends"/>
     <item
+        android:id="@+id/testFragment"
         android:title="Profile"
         android:icon="@drawable/ic_profile"/>
 </menu>

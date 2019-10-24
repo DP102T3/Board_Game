@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.boardgame.MainActivity;
 import com.example.boardgame.notification.Websocket.AddFriendService;
 import com.example.boardgame.notification.Websocket.AdvertisementService;
 import com.example.boardgame.notification.Websocket.GroupCheckService;
@@ -40,6 +41,13 @@ public class testFragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_test, container, false);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        // 隱藏 TabBar 及 BottomBar
+        MainActivity.changeBarsStatus(MainActivity.NEITHER_TAB_AND_BOTTOM);
     }
 
     @Override

@@ -8,7 +8,7 @@
     <!-- chat -->
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.example.boardgame.chat.mainFragment"
+        android:name="com.example.boardgame.mainFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main" >
         <action

@@ -1,4 +1,4 @@
-package com.example.boardgame.chat;
+package com.example.boardgame;
 
 
 import android.app.Activity;
@@ -73,7 +73,7 @@ public class mainFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        // 隱藏 TabBar
-        MainActivity.changeBarsStatus(MainActivity.ONLY_BOTTOM);
+        // 隱藏 TabBar 及 BottomBar
+        MainActivity.changeBarsStatus(MainActivity.NEITHER_TAB_AND_BOTTOM);
     }
 }
