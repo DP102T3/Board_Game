@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/shop_infoFragment"
+        android:title="店家資訊"
+        android:icon="@drawable/ic_shops"/>
+    <item
+        android:title="揪團資訊"
+        android:icon="@drawable/ic_groups"/>
+    <item
+        android:title="活動"
+        android:icon="@drawable/icon_activity"/>
+    <item
+        android:title="廣告"
+        android:icon="@drawable/icon_ad"/>
+
+</menu>

@@ -42,6 +42,11 @@ public class MainActivity extends AppCompatActivity {
 
     private static BottomNavigationView tabNavigationView;
     private static BottomNavigationView bottomNavigationView;
+    public static  int TAB_CHAT = R.menu.tab_menu_chat;
+    public static  int TAB_FRIEND = R.menu.tab_menu_friend;
+    public static  int BOTTOM_PLAYER = R.menu.bottom_menu_player;
+    public static  int BOTTOM_SHOP = 22;
+
 
     private int width;
     int height;
@@ -78,28 +83,6 @@ public class MainActivity extends AppCompatActivity {
         //開啟網路偵測服務及Websocket服務(notification)
         Intent networkIntent = new Intent(this, NetWorkService.class);
         this.startService(networkIntent);
-    }
-
-
-
-
-
-    // 變更 TabBar 或 BottomBar 的狀態
-    public static void changeBarsStatus(int barsStatus) {
-        switch (barsStatus) {
-            case ONLY_BOTTOM:   // 只有 BottomVar
-                tabNavigationView.setVisibility(View.GONE);
-                bottomNavigationView.setVisibility(View.VISIBLE);
-                break;
-            case BOTH_TAB_AND_BOTTOM:   // 兩個都有
-                tabNavigationView.setVisibility(View.VISIBLE);
-                bottomNavigationView.setVisibility(View.VISIBLE);
-                break;
-            case NEITHER_TAB_AND_BOTTOM:    // 兩個都沒有
-                tabNavigationView.setVisibility(View.GONE);
-                bottomNavigationView.setVisibility(View.GONE);
-                break;
-        }
     }
 
     //    –––––––––––––––––––––––––––––｜點擊空白處隱藏鍵盤｜–––––––––––––––––––––––––––––
@@ -181,5 +164,39 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
         return true;
+    }
+
+
+
+    // 變更 TabBar 或 BottomBar 的狀態
+    public static void changeBarsStatus(int barsStatus) {
+        switch (barsStatus) {
+            case ONLY_BOTTOM:   // 只有 BottomVar
+                tabNavigationView.setVisibility(View.GONE);
+                bottomNavigationView.setVisibility(View.VISIBLE);
+                break;
+            case BOTH_TAB_AND_BOTTOM:   // 兩個都有
+                tabNavigationView.setVisibility(View.VISIBLE);
+                bottomNavigationView.setVisibility(View.VISIBLE);
+                break;
+            case NEITHER_TAB_AND_BOTTOM:    // 兩個都沒有
+                tabNavigationView.setVisibility(View.GONE);
+                bottomNavigationView.setVisibility(View.GONE);
+                break;
+        }
+    }
+
+    public static void clearMenu() {
+        tabNavigationView.getMenu().clear();
+        bottomNavigationView.getMenu().clear();
+    }
+
+        // 設置 TabBar
+    public static void setTabBar(int tabMenu){
+        tabNavigationView.inflateMenu(tabMenu);
+    }
+    // 設置 BottomBar
+    public static void setBottomBar(int bottomMenu){
+        bottomNavigationView.inflateMenu(bottomMenu);
     }
 }

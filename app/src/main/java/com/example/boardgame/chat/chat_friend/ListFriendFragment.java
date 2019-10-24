@@ -58,6 +58,11 @@ public class ListFriendFragment extends Fragment {
         super.onStart();
         // 顯示 TabBar 及 BottomBar
         MainActivity.changeBarsStatus(MainActivity.BOTH_TAB_AND_BOTTOM);
+        // 置換 TabBar 的 menu
+        MainActivity.setTabBar(MainActivity.TAB_CHAT);
+        // 置換 BottomBar 的 menu
+        MainActivity.setBottomBar(MainActivity.BOTTOM_PLAYER);
+
 
         // 取得 偏好設定的 playerId
         playerId = loadPlayerId(activity);

@@ -5,7 +5,6 @@
         android:title="Groups"
         android:icon="@drawable/ic_groups"/>
     <item
-        android:id="@+id/shop_signup"
         android:title="Shops"
         android:icon="@drawable/ic_shops"/>
     <item
@@ -16,7 +15,6 @@
         android:title="Friends"
         android:icon="@drawable/ic_friends"/>
     <item
-        android:id="@+id/testFragment"
         android:title="Profile"
         android:icon="@drawable/ic_profile"/>
 </menu>

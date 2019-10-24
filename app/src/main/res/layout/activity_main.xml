@@ -16,7 +16,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:menu="@menu/tab_menu">
+        app:menu="@menu/tab_menu_chat">
 
     </com.google.android.material.bottomnavigation.BottomNavigationView>
 
@@ -49,5 +49,5 @@
         app:layout_constraintBottom_toBottomOf="@+id/content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/bottom_menu" />
+        app:menu="@menu/bottom_menu_player" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -68,6 +68,21 @@ public class mainFragment extends Fragment {
                         .navigate(R.id.action_mainFragment_to_listFriendsFragment);
             }
         });
+
+        // ＊測試：店家註冊
+        view.findViewById(R.id.btShopId).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(v).navigate(R.id.action_mainFragment_to_shop_signup);
+            }
+        });
+
+        view.findViewById(R.id.btNotification).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(v).navigate(R.id.action_mainFragment_to_testFragment);
+            }
+        });
     }
 
     @Override

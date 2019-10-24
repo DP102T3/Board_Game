@@ -48,7 +48,6 @@ public class shop_infoFragment extends Fragment {
         activity = getActivity();
         gson = new Gson();
 
-
     }
 
     //  跟抓acitionbar
@@ -182,13 +181,13 @@ public class shop_infoFragment extends Fragment {
         super.onStart();
         // 隱藏 TabBar
         MainActivity.changeBarsStatus(MainActivity.ONLY_BOTTOM);
+        // 置換 BottomBar 的 menu
+        MainActivity.setBottomBar(MainActivity.BOTTOM_SHOP);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        setHasOptionsMenu(false);
     }
 }
-
-
-
-
-
-
-
-

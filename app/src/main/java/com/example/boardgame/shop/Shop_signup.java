@@ -36,7 +36,7 @@ public class Shop_signup extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        activity.setTitle("註冊");
+        activity.setTitle("店家註冊");
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_shop_signup, container, false);
     }
