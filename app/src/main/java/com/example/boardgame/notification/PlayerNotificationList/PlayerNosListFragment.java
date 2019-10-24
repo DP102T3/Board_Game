@@ -4,11 +4,6 @@ package com.example.boardgame.notification.PlayerNotificationList;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,10 +12,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.example.boardgame.notification.Common;
-import com.example.boardgame.notification.Task.CommonTask;
-import com.example.boardgame.notification.Task.ImageTask;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
 import com.example.boardgame.R;
+import com.example.boardgame.notification.Common;
+import com.example.boardgame.notification.CommonTask;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
@@ -28,14 +28,14 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.List;
 
-public class PlayerNotificationListFragment extends Fragment {
+public class PlayerNosListFragment extends Fragment {
+
     private String player_id;
-    private static final String TAG = "TAG_MainFragment";
+    private static final String TAG = "PlayerNosListFragment";
     private RecyclerView recyclerView;
     private Activity activity;
     private CommonTask getNosTask;
     private CommonTask userDeleteTask;
-    private ImageTask userImageTask;
     private SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
@@ -48,13 +48,13 @@ public class PlayerNotificationListFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        return inflater.inflate(R.layout.fragment_main, container, false);
+        return inflater.inflate(R.layout.fragment_player_nos_list, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        player_id= Common.loadPlayer_id(activity);
+        player_id = Common.loadPlayer_id(activity);
 
         swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
         recyclerView = view.findViewById(R.id.recyclerView);
@@ -80,7 +80,7 @@ public class PlayerNotificationListFragment extends Fragment {
             String url = Common.URL_SERVER + "BoardGameServlet";
             JsonObject jsonObject = new JsonObject();
             jsonObject.addProperty("action", "getAll");
-            jsonObject.addProperty("player_id",player_id);
+            jsonObject.addProperty("player_id", player_id);
             String jsonOut = jsonObject.toString();
             getNosTask = new CommonTask(url, jsonOut);
             try {
@@ -156,7 +156,7 @@ public class PlayerNotificationListFragment extends Fragment {
             myViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    // 預留
+
                 }
             });
         }
@@ -169,11 +169,6 @@ public class PlayerNotificationListFragment extends Fragment {
         if (getNosTask != null) {
             getNosTask.cancel(true);
             getNosTask = null;
-        }
-
-        if (userImageTask != null) {
-            userImageTask.cancel(true);
-            userImageTask = null;
         }
 
         if (userDeleteTask != null) {

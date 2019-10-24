@@ -132,17 +132,12 @@
 
     <!-- notification -->
     <fragment
-        android:id="@+id/notificationFragment"
-        android:name="com.example.boardgame.notification.PlayerNotificationList.PlayerNotificationListFragment"
-        android:label="fragment_main"
-        tools:layout="@layout/fragment_notification" />
-    <fragment
         android:id="@+id/testFragment"
         android:name="com.example.boardgame.notification.testFragment"
         android:label="fragment_test"
         tools:layout="@layout/fragment_test" />
     <fragment
-        android:id="@+id/shopNotificationListFragment2"
+        android:id="@+id/shopNotificationListFragment"
         android:name="com.example.boardgame.notification.ShopNotificationListFragment"
         android:label="fragment_shop_notification_list"
         tools:layout="@layout/fragment_shop_notification_list" />
@@ -151,4 +146,9 @@
         android:name="com.example.boardgame.notification.SystemNotification.SystemNotificationFragment"
         android:label="fragment_system_notification"
         tools:layout="@layout/fragment_system_notification" />
+    <fragment
+        android:id="@+id/playerNosListFragment"
+        android:name="com.example.boardgame.notification.PlayerNotificationList.PlayerNosListFragment"
+        android:label="fragment_player_nos_list"
+        tools:layout="@layout/fragment_player_nos_list" />
 </navigation>

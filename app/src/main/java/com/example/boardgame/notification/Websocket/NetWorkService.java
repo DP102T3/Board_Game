@@ -23,11 +23,11 @@ import androidx.core.app.NotificationCompat;
 import com.example.boardgame.MainActivity;
 import com.example.boardgame.notification.Common;
 import com.example.boardgame.notification.CommonShop;
+import com.example.boardgame.notification.CommonTask;
 import com.example.boardgame.notification.ShopNotification;
 import com.example.boardgame.R;
 
 import com.example.boardgame.notification.PlayerNotificationList.Notification;
-import com.example.boardgame.notification.Task.CommonTask;
 import com.example.boardgame.notification.UserAlarm.SystemService;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
