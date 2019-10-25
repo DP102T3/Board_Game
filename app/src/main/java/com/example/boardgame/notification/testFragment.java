@@ -128,7 +128,7 @@ public class testFragment extends Fragment implements View.OnClickListener {
                 JsonObject inviteGroupJsonObject = new JsonObject();
                 inviteGroupJsonObject.addProperty("type", "inviteGroup");
                 inviteGroupJsonObject.addProperty("player2_id", "gerfarn0523");
-                inviteGroupJsonObject.addProperty("group_name", "groupNameLabel");
+                inviteGroupJsonObject.addProperty("group_name", "中大桌遊");
                 String inviteGroupIdJson = new Gson().toJson(inviteGroupJsonObject);
                 Log.e("inviteFriendGroupButtonOnclickJson送出值：", inviteGroupIdJson);
                 if(!inviteGroupIdJson.isEmpty()){
@@ -192,10 +192,13 @@ public class testFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.playerNosList:
                 Navigation.findNavController(view).navigate(R.id.playerNosListFragment);
+                break;
             case R.id.shopNosList:
                 Navigation.findNavController(view).navigate(R.id.shopNotificationListFragment);
+                break;
             case R.id.sysbutton:
                 Navigation.findNavController(view).navigate(R.id.systemNotificationFragment);
+                break;
         }
     }
 }

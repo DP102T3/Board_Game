@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Common.savePlayer_id(this, "chengchi1223");
-        CommonShop.saveShop_id(this,123456);
+        //CommonShop.saveShop_id(this,123456);
 
         // 設置 TabBar
         tabNavigationView = findViewById(R.id.tabNavigation);
