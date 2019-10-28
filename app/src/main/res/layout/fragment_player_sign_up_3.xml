@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".player.PlayerSignUp_3">
+
+    <EditText
+        android:id="@+id/etFullName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="@+id/etNickName"
+        app:layout_constraintTop_toTopOf="@+id/tvFullName" />
+
+    <EditText
+        android:id="@+id/etNickName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvNickName" />
+
+    <EditText
+        android:id="@+id/etGender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="@+id/etNickName"
+        app:layout_constraintTop_toTopOf="@+id/tvGender" />
+
+    <EditText
+        android:id="@+id/etBirthday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="@+id/etGender"
+        app:layout_constraintTop_toTopOf="@+id/tvBirthday" />
+
+    <TextView
+        android:id="@+id/tvFullName"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="150dp"
+        android:gravity="center"
+        android:text="@string/tx_tvFullName"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvNickName"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginTop="32dp"
+        android:gravity="center"
+        android:text="@string/tx_tvNickName"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/tvFullName"
+        app:layout_constraintTop_toBottomOf="@+id/tvFullName" />
+
+    <TextView
+        android:id="@+id/tvGender"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginTop="32dp"
+        android:gravity="center"
+        android:text="@string/tx_tvGender"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/tvNickName"
+        app:layout_constraintTop_toBottomOf="@+id/tvNickName" />
+
+    <TextView
+        android:id="@+id/tvBirthday"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginTop="32dp"
+        android:gravity="center"
+        android:text="@string/tx_tvBirthday"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/tvGender"
+        app:layout_constraintTop_toBottomOf="@+id/tvGender" />
+
+    <Button
+        android:id="@+id/btSubmit"
+        android:layout_width="140dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/tx_btSubmit"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etBirthday" />
+</androidx.constraintlayout.widget.ConstraintLayout>

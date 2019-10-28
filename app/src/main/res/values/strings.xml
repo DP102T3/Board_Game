@@ -48,4 +48,23 @@
     <string name="btlist">查看系統推播</string>
     <string name="textNoNotificationsFound">沒有任何系統通知紀錄</string>
     <string name="textNoInput">請輸入系統通知內容</string>
+
+    <!-- player -->
+    <string name="tx_btPlayerSignUp">Player</string>
+    <string name="tx_btShopSignUp">Shop</string>
+    <string name="tx_tvPlayerAccount">Account</string>
+    <string name="tx_tvPassword">Password</string>
+    <string name="tx_tvPasswordConfirm">Confirm</string>
+    <string name="tx_btNext">next</string>
+    <string name="tx_tvFullName">FullName</string>
+    <string name="tx_tvNickName">NickName</string>
+    <string name="tx_tvGender">Gender</string>
+    <string name="tx_tvBirthday">Birthday</string>
+    <string name="tx_btSubmit">Submit</string>
+    <string name="tx_tvSelectIdentity">Select Identity</string>
+    <string name="txEmptyAccount">Account can not be empty</string>
+    <string name="txEmptyPassword">Password can not be empty</string>
+    <string name="txEmptyConfirm">PasswordConfirm can not be empty</string>
+    <string name="txConfirmDifferent">Confirm is different from Password</string>
+    <string name="txCanNotBeEmpty">can not be empty</string>
 </resources>

@@ -89,7 +89,7 @@ public class ListFriendFragment extends Fragment {
                 Log.d(TAG, "Get friends success !");
             }
         }else {
-            Common.showToast(getActivity(), R.string.tx_NoNetwork);
+            Common.showToast(activity, R.string.tx_NoNetwork);
         }
 
         // 設置 RecyclerView

@@ -27,33 +27,31 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 //gerfarn0523
 public class MainActivity extends AppCompatActivity {
     public static final String TAG = "TAG_MainActivity";
+
+    private static BottomNavigationView tabNavigationView;
+    private static BottomNavigationView bottomNavigationView;
     public static final int ONLY_BOTTOM = 0;
     public static final int BOTH_TAB_AND_BOTTOM = 1;
     public static final int NEITHER_TAB_AND_BOTTOM = 2;
-    // TabBar紀錄的頁面
+    // TabBar紀錄的頁面(由 setTabBar()方法 更改)
     public static  int onTabMenu = 0;
-    // BottomBar紀錄的身份
+    // BottomBar紀錄的身份(由 setBottomBar()方法 更改)
     public static  int onBottomId = 0;
-    // 目前登入身份
+    // TabBar 使用的 menu
+    public static  int TAB_CHAT = R.menu.tab_menu_chat;
+    public static  int TAB_FRIEND = R.menu.tab_menu_friend;
+    // BottomBar 使用的 menu
+    public static  int BOTTOM_PLAYER = R.menu.bottom_menu_player;
+    public static  int BOTTOM_SHOP = R.menu.bottom_menu_shop;
+
+    // 目前登入身份（登入身份變更 或 登出 時，寫入程式內）
     public static  int loginId = 0;
     public static  int PLAYER = 91;
     public static  int SHOP = 92;
     public static  int ADMIN = 93;
 
-    public static  int CHAT_LIST = 1;
-
-
-
-    private static BottomNavigationView tabNavigationView;
-    private static BottomNavigationView bottomNavigationView;
-    public static  int TAB_CHAT = R.menu.tab_menu_chat;
-    public static  int TAB_FRIEND = R.menu.tab_menu_friend;
-    public static  int BOTTOM_PLAYER = R.menu.bottom_menu_player;
-    public static  int BOTTOM_SHOP = R.menu.bottom_menu_shop;
-
-
     private int width;
-    int height;
+    private int height;
 
 
     //   從infoFragment打包shop到editinfo
@@ -78,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
         NavController bottomNavController = Navigation.findNavController(this, R.id.fragment);
         NavigationUI.setupWithNavController(bottomNavigationView, bottomNavController);
 
-
+        // 取得螢幕長寬（像素）（用於定義 「點擊空白處隱藏鍵盤」方法 的點擊範圍）
         DisplayMetrics metric = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metric);
         width = metric.widthPixels;

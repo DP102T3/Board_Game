@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.ListFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -27,7 +26,6 @@ import com.google.gson.reflect.TypeToken;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.example.boardgame.MainActivity.CHAT_LIST;
 import static com.example.boardgame.chat.Common.loadPlayerId;
 
 
@@ -96,7 +94,7 @@ public class ListGroupFragment extends Fragment {
                 Log.d(TAG, "Get joinedGroups success !");
             }
         }else {
-            Common.showToast(getActivity(), R.string.tx_NoNetwork);
+            Common.showToast(activity, R.string.tx_NoNetwork);
         }
 
         // 設置 RecyclerView

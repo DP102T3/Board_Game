@@ -39,13 +39,13 @@ public class mainFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // 玩家
+        // ＊測試：玩家
         view.findViewById(R.id.btUserNameRyan).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // 紀錄登入身份
                 loginId = PLAYER;
-                // ＊測試：將假的 玩家id 存入 偏好設定
+                // 將假的 玩家id 存入 偏好設定
                 savePlayerId(activity,"chengchi1223");
                 Navigation.findNavController(v)
                         .navigate(R.id.action_mainFragment_to_listFriendsFragment);
@@ -56,7 +56,7 @@ public class mainFragment extends Fragment {
             public void onClick(View v) {
                 // 紀錄登入身份
                 loginId = PLAYER;
-                // ＊測試：將假的 玩家id 存入 偏好設定
+                // 將假的 玩家id 存入 偏好設定
                 savePlayerId(activity,"gerfarn0523");
                 Navigation.findNavController(v)
                         .navigate(R.id.action_mainFragment_to_listFriendsFragment);
@@ -67,7 +67,7 @@ public class mainFragment extends Fragment {
             public void onClick(View v) {
                 // 紀錄登入身份
                 loginId = PLAYER;
-                // ＊測試：將假的 玩家id 存入 偏好設定
+                // 將假的 玩家id 存入 偏好設定
                 savePlayerId(activity,"jerry1124");
                 Navigation.findNavController(v)
                         .navigate(R.id.action_mainFragment_to_listFriendsFragment);
@@ -90,6 +90,15 @@ public class mainFragment extends Fragment {
             public void onClick(View v) {
                 loginId = ADMIN;
                 Navigation.findNavController(v).navigate(R.id.action_mainFragment_to_testFragment);
+            }
+        });
+
+        // ＊測試：新使用者註冊
+        view.findViewById(R.id.btNewUser).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loginId = 0;
+                Navigation.findNavController(v).navigate(R.id.action_mainFragment_to_signUpSelect);
             }
         });
     }

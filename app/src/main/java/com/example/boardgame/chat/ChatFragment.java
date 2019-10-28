@@ -138,7 +138,7 @@ public class ChatFragment extends Fragment {
                 Log.d(TAG, "Get chatList success !");
             }
         } else {
-            showToast(getActivity(), R.string.tx_NoNetwork);
+            showToast(activity, R.string.tx_NoNetwork);
         }
 
         // 設定 RecyclerView（尚未將值放入）
