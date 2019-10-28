@@ -91,6 +91,7 @@ public class PlayerSignUp_3 extends Fragment {
                     return;
                 } else {
                     JsonObject jsonOut = new JsonObject();
+                    jsonOut.addProperty("action", "playerSignUp");
                     jsonOut.addProperty("account", account);
                     jsonOut.addProperty("password", password);
                     jsonOut.addProperty("fullName", fullName);
