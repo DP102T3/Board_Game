@@ -30,7 +30,7 @@ import com.google.gson.JsonObject;
 public class testFragment extends Fragment implements View.OnClickListener {
     public Button inviteFriendButton,addFriendButton,reportPlayerButton,reportShopButton,
             inviteGroupButton,groupCheckButton,refuseGroupButton,reportGroupButton,adButton,
-            refuseAdButton,playerNosList,shopNosList;
+            refuseAdButton,playerNosList,shopNosList,sysbutton;
     private Activity activity;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -68,6 +68,7 @@ public class testFragment extends Fragment implements View.OnClickListener {
         refuseAdButton=view.findViewById(R.id.refuseAdButton);
         playerNosList=view.findViewById(R.id.playerNosList);
         shopNosList=view.findViewById(R.id.shopNosList);
+        sysbutton=view.findViewById(R.id.sysbutton);
 
 
         inviteFriendButton.setOnClickListener(this);
@@ -82,6 +83,7 @@ public class testFragment extends Fragment implements View.OnClickListener {
         refuseAdButton.setOnClickListener(this);
         playerNosList.setOnClickListener(this);
         shopNosList.setOnClickListener(this);
+        sysbutton.setOnClickListener(this);
     }
 
     public void onClick(View view) {
@@ -90,100 +92,113 @@ public class testFragment extends Fragment implements View.OnClickListener {
             case R.id.inviteFriendButton:  //玩家
                 JsonObject inviteFriendJsonObject = new JsonObject();
                 inviteFriendJsonObject.addProperty("type", "inviteFriend");
-                inviteFriendJsonObject.addProperty("player2_id", "B");
+                inviteFriendJsonObject.addProperty("player2_id", "gerfarn0523");
                 String inviteFriendJson = new Gson().toJson(inviteFriendJsonObject);
                 Log.e("inviteFriendButtonOnclickJson送出值：", inviteFriendJson);
-                InviteFriendService.inviteFriendWebSocketClient.send(inviteFriendJson);
+                if(!inviteFriendJson.isEmpty()){
+                InviteFriendService.inviteFriendWebSocketClient.send(inviteFriendJson);}
                 break;
             case R.id.addFriendButton:  //玩家
                 JsonObject addFriendJsonObject = new JsonObject();
-                addFriendJsonObject.addProperty("receiver", "A");
+                addFriendJsonObject.addProperty("receiver", "chengchi1223");
                 String addFriendJson = new Gson().toJson(addFriendJsonObject);
                 Log.e("addFriendButtonOnclickJson送出值：", addFriendJson);
-                AddFriendService.addFriendnosWebSocketClient.send(addFriendJson);
+                if(!addFriendJson.isEmpty()){
+                AddFriendService.addFriendnosWebSocketClient.send(addFriendJson);}
                 break;
             case R.id.reportPlayerButton:  //後台
                 JsonObject jsonObject = new JsonObject();
-                jsonObject.addProperty("player_id", "A");
-                jsonObject.addProperty("player2_id", "B");
+                jsonObject.addProperty("player_id", "chengchi1223");
+                jsonObject.addProperty("player2_id", "gerfarn0523");
                 String idJson = new Gson().toJson(jsonObject);
                 Log.e("reportPlayerButtonOnclickJson送出值：", idJson);
-                ReportPlayerService.reportWebSocketClient.send(idJson);
+                if(!idJson.isEmpty()){
+                ReportPlayerService.reportWebSocketClient.send(idJson);}
                 break;
             case R.id.reportShopButton:  //後台
-                String shop_id = String.valueOf(1);
                 JsonObject reportShopJsonObject = new JsonObject();
-                reportShopJsonObject.addProperty("player_id", "A");
-                reportShopJsonObject.addProperty("shop_id", shop_id);
+                reportShopJsonObject.addProperty("player_id", "chengchi1223");
+                reportShopJsonObject.addProperty("shop_id", CommonShop.loadShop_id(activity));
                 String shop_idJson = new Gson().toJson(reportShopJsonObject);
                 Log.e("reportShopButtonOnclickJson送出值：", shop_idJson);
-                ReportShopService.reportShopWebSocketClient.send(shop_idJson);
+                if(!shop_idJson.isEmpty()){
+                ReportShopService.reportShopWebSocketClient.send(shop_idJson);}
                 break;
             case R.id.inviteGroupButton: //玩家
                 JsonObject inviteGroupJsonObject = new JsonObject();
                 inviteGroupJsonObject.addProperty("type", "inviteGroup");
-                inviteGroupJsonObject.addProperty("player2_id", "B");
-                inviteGroupJsonObject.addProperty("group_name", "groupNameLabel");
+                inviteGroupJsonObject.addProperty("player2_id", "gerfarn0523");
+                inviteGroupJsonObject.addProperty("group_name", "中大桌遊");
                 String inviteGroupIdJson = new Gson().toJson(inviteGroupJsonObject);
                 Log.e("inviteFriendGroupButtonOnclickJson送出值：", inviteGroupIdJson);
-                InviteFriendService.inviteFriendWebSocketClient.send(inviteGroupIdJson);
+                if(!inviteGroupIdJson.isEmpty()){
+                InviteFriendService.inviteFriendWebSocketClient.send(inviteGroupIdJson);}
                 break;
             case R.id.groupCheckButton: //店家
                 String group_no = String.valueOf(1);
                 JsonObject groupCheckJsonObject = new JsonObject();
                 groupCheckJsonObject.addProperty("group_no", group_no);
-                groupCheckJsonObject.addProperty("group_name", "groupNameLabel");
+                groupCheckJsonObject.addProperty("group_name", "中大桌遊");
                 groupCheckJsonObject.addProperty("type", "agree");
                 String groupCheckIdJson = new Gson().toJson(groupCheckJsonObject);
                 Log.e("groupCheckButtonOnclickJson送出值：", groupCheckIdJson);
-                GroupCheckService.groupCheckNosWebSocketClient.send(groupCheckIdJson);
+                if(!groupCheckIdJson.isEmpty()){
+                GroupCheckService.groupCheckNosWebSocketClient.send(groupCheckIdJson);}
                 break;
             case R.id.refuseGroupButton: //店家
                 String group_no_refuse = String.valueOf(1);
                 JsonObject refuseGroupJsonObject = new JsonObject();
                 refuseGroupJsonObject.addProperty("group_no", group_no_refuse);
-                refuseGroupJsonObject.addProperty("group_name", "GroupNameLabel");
+                refuseGroupJsonObject.addProperty("group_name", "中大桌遊");
                 refuseGroupJsonObject.addProperty("type", "當日訂位人數已滿");
                 String refuseGroupIdJson = new Gson().toJson(refuseGroupJsonObject);
                 Log.e("refuseGroupButtonOnclickJson送出值：", refuseGroupIdJson);
-                GroupCheckService.groupCheckNosWebSocketClient.send(refuseGroupIdJson);
+                if(!refuseGroupIdJson.isEmpty()){
+                GroupCheckService.groupCheckNosWebSocketClient.send(refuseGroupIdJson);}
                 break;
             case R.id.reportGroupButton: //後端
                 String reportGroup_group_no = String.valueOf(1);
                 JsonObject reportGroupJsonObject = new JsonObject();
                 reportGroupJsonObject.addProperty("group_no", reportGroup_group_no);
-                reportGroupJsonObject.addProperty("group_name", "GroupNameLabel");
-                reportGroupJsonObject.addProperty("reporter", "A");
+                reportGroupJsonObject.addProperty("group_name", "中大桌遊");
+                reportGroupJsonObject.addProperty("reporter", "gerfarn0523");
                 String reportGroupIdJson = new Gson().toJson(reportGroupJsonObject);
                 Log.e("reportGroupButtonOnclickJson送出值：", reportGroupIdJson);
-                ReportGroupService.reportGroupNosWebSocketClient.send(reportGroupIdJson);
+                if(!reportGroupIdJson.isEmpty()){
+                ReportGroupService.reportGroupNosWebSocketClient.send(reportGroupIdJson);}
                 break;
             case R.id.adButton: //店家
-                //String ad_no = String.valueOf(1);
                 JsonObject adJsonObject = new JsonObject();
                 adJsonObject.addProperty("ad_no", 1);
                 adJsonObject.addProperty("adTitle", "週年慶");
-                adJsonObject.addProperty("refuseReason", "reason");
+                adJsonObject.addProperty("refuseReason", "內容有不當資訊請修改");
                 adJsonObject.addProperty("type", "agree");
                 String adJson = new Gson().toJson(adJsonObject);
                 Log.e("adButtonOnclickJson送出值：", adJson);
-                AdvertisementService.advertisementWebSocketClient.send(adJson);
+                if(!adJson.isEmpty()){
+                AdvertisementService.advertisementWebSocketClient.send(adJson);}
                 break;
             case R.id.refuseAdButton: //店家
                 //String ad_no = String.valueOf(1);
                 JsonObject refuseAdJsonObject = new JsonObject();
                 refuseAdJsonObject.addProperty("ad_no", 1);
                 refuseAdJsonObject.addProperty("adTitle", "週年慶");
-                refuseAdJsonObject.addProperty("refuseReason", "reason");
+                refuseAdJsonObject.addProperty("refuseReason", "內容有不當資訊請修改");
                 refuseAdJsonObject.addProperty("type", "refuse");
                 String refuseAdJson = new Gson().toJson(refuseAdJsonObject);
                 Log.e("refuseAdButtonOnclickJson送出值：", refuseAdJson);
-                AdvertisementService.advertisementWebSocketClient.send(refuseAdJson);
+                if(!refuseAdJson.isEmpty()){
+                AdvertisementService.advertisementWebSocketClient.send(refuseAdJson);}
                 break;
             case R.id.playerNosList:
                 Navigation.findNavController(view).navigate(R.id.playerNosListFragment);
+                break;
             case R.id.shopNosList:
                 Navigation.findNavController(view).navigate(R.id.shopNotificationListFragment);
+                break;
+            case R.id.sysbutton:
+                Navigation.findNavController(view).navigate(R.id.systemNotificationFragment);
+                break;
         }
     }
 }
