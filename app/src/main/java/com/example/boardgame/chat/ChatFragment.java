@@ -147,7 +147,7 @@ public class ChatFragment extends Fragment {
         // 避免 RecyclerView 頭尾itemView消失 的問題
         rvChat.getRecycledViewPool().setMaxRecycledViews(0, 0);
 
-        // 延遲 100 毫秒，將 RecyclerView 拉到最底
+        // 延遲 50 毫秒，將 RecyclerView 拉到最底
         rvChat.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
             @Override
             public void onLayoutChange(View v, int left, int top, int right,

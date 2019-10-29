@@ -80,6 +80,7 @@ public class ListFriendFragment extends Fragment {
             try {
                 String inStr = new CommonTask(url, jsonOut.toString()).execute().get();
                 friends = new Gson().fromJson(inStr, new TypeToken<List<Friend>>(){}.getType());
+
             }catch (Exception e){
                 Log.e(TAG, e.toString());
             }
