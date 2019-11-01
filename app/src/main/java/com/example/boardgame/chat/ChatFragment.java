@@ -328,6 +328,7 @@ public class ChatFragment extends Fragment {
         registerChatReceiver();
         // 與 Socket 連線
         Common.connectSocket(activity, loadPlayerId(activity));
+        Log.d(TAG, "loadPlayerId(activity) = " + loadPlayerId(activity));
 
         // 每次開啟畫面時，若 ChatGroupAdapter 未有實體，則 建立實體 -> 以 RecyclerView實體 呼叫 setAdapter()方法，以載入新的 msgs集合
         // 反之，則將新的 msgs集合 存入 -> 刷新畫面
