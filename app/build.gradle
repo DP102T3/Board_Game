@@ -35,4 +35,13 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment:2.1.0'
     implementation 'androidx.navigation:navigation-ui:2.1.0'
 
+    //QR Code
+    implementation 'com.journeyapps:zxing-android-embedded:3.4.0'
+    implementation 'com.google.zxing:core:3.3.3'
+
+    implementation 'com.google.android.gms:play-services:8.4.0'
+    implementation 'com.google.android.gms:play-services-vision:18.0.0'
+
+
+
 }

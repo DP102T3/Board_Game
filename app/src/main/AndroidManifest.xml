@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.boardgame">
 
     <!-- 網際網路連線權限 -->
@@ -11,6 +12,11 @@
     <!-- 存系統推播 -->
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA"/>
+
+    <uses-feature android:name="android.hardware.camera" />
 
     <!--android:usesCleartextTraffic="true"     允許未加密連線-->
     <application
@@ -36,6 +42,26 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".friend.ShowScanResultActivity"></activity>
+        <activity
+            android:theme="@style/Theme.AppCompat.Dialog"
+            android:name=".friend.ShowQRActivity"
+            android:launchMode="singleTop"/>
+        <activity android:name=".friend.QRChooseActivity" />
+        <activity android:name=".friend.FrAddActivity" />
+        <activity
+            android:name="com.journeyapps.barcodescanner.CaptureActivity"
+            android:screenOrientation="portrait"
+            tools:replace="android:screenOrientation"
+            android:stateNotNeeded="true"/>
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="com.google.android.gms.wallet.api.enabled"
+            android:value="true" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

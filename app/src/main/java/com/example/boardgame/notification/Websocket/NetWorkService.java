@@ -141,7 +141,7 @@ public class NetWorkService extends Service {
                         title = nos.getPnote_title();
                         content = nos.getPnote_info();
                         sendNotification();
-                        Log.e("MainActivity-title&content:", title + "," + content);
+                        Log.e("FriendMainActivity-title&content:", title + "," + content);
                     }
                     updatePlayerNosState();
                 }
@@ -155,7 +155,7 @@ public class NetWorkService extends Service {
                         title = nos.getSnote_title();
                         content = nos.getSnote_info();
                         sendNotification();
-                        Log.e("MainActivity-title&content:", title + "," + content);
+                        Log.e("FriendMainActivity-title&content:", title + "," + content);
                     }
                     updateShopNosStates();
                 }
@@ -231,12 +231,12 @@ public class NetWorkService extends Service {
                 Log.e(TAG, e.toString());
             }
             if (playerCount == 0) {
-                Log.e("MainActivity-updatePlayerNosState：", "更新通知狀態失敗/無資料更新");
+                Log.e("FriendMainActivity-updatePlayerNosState：", "更新通知狀態失敗/無資料更新");
             } else {
-                Log.e("MainActivity-updatePlayerNosState：", "更新通知狀態成功");
+                Log.e("FriendMainActivity-updatePlayerNosState：", "更新通知狀態成功");
             }
         } else {
-            Log.e("MainActivity-updatePlayerNosState：", "連線server失敗");
+            Log.e("FriendMainActivity-updatePlayerNosState：", "連線server失敗");
         }
     }
 
@@ -279,12 +279,12 @@ public class NetWorkService extends Service {
                 Log.e(TAG, e.toString());
             }
             if (shopCount == 0) {
-                Log.e("MainActivity-updateShopNosState：", "更新通知狀態失敗/無資料更新");
+                Log.e("FriendMainActivity-updateShopNosState：", "更新通知狀態失敗/無資料更新");
             } else {
-                Log.e("MainActivity-updateShopNosState：", "更新通知狀態成功");
+                Log.e("FriendMainActivity-updateShopNosState：", "更新通知狀態成功");
             }
         } else {
-            Log.e("MainActivity-updateShopNosState：", "連線server失敗");
+            Log.e("FriendMainActivity-updateShopNosState：", "連線server失敗");
         }
     }
 

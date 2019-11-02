@@ -67,4 +67,47 @@
     <string name="txEmptyConfirm">PasswordConfirm can not be empty</string>
     <string name="txConfirmDifferent">Confirm is different from Password</string>
     <string name="txCanNotBeEmpty">can not be empty</string>
+
+    <!-- friend -->
+    <string name="btnNow">進行中</string>
+    <string name="btnPast">歷史紀錄</string>
+    <string name="tvAddNew">＋</string>
+    <string name="btnSubmit">送出</string>
+
+    <string name="textAdvertisementDate">廣告日期</string>
+
+    <string name="textNoCameraAppFound">no camera app found</string>
+    <string name="textDirNotCreated">DIRECTORY_PICTURES cannot be created</string>
+
+    <string name="TapPay_AppID">15092</string>
+    <string name="TapPay_AppKey">app_SBbD0FmoHfEaQYnes2najK1tT8jvrlTOBDzh52jN9Dzty9RFDVK3pO76AvHC</string>
+
+    <!-- 帳戶資訊 -->
+    <string name="TapPay_PartnerKey">partner_PjziL2bLKh19QAfaU6qqouhtoBg9OVMs3Z3Godw0CLfGBNfW6gxqRqK6</string>
+
+    <!-- 商家管理 -->
+    <string name="TapPay_MerchantName">TW_TAISHIN</string>
+    <string name="TapPay_MerchantID">testAccount0916_TAISHIN</string>
+    <string name="textCannotUseGPay">Cannot use Google Pay</string>
+    <string name="textCanceled">Canceled by the user.</string>
+
+    <string name="ADtitle">送出廣告結果</string>
+    <string name="ADmessage">廣告送出成功</string>
+    <string name="ADmessageFailed">廣告送出失敗</string>
+    <string name="ADbtn_yes">確定</string>
+
+    <string name="btnFriendAll">好友</string>
+    <string name="btnInvited">被邀請</string>
+    <string name="btnInviting">已邀請</string>
+    <string name="btnDelete">刪除</string>
+    <string name="btnAccept">接受</string>
+    <string name="btnDecline">拒絕</string>
+    <string name="notification">查看通知</string>
+    <string name="fr_add">加入好友</string>
+    <string name="fr_search">Search</string>
+    <string name="btnChat">聊天</string>
+    <string name="btnScanQR">掃描行動條碼</string>
+    <string name="btnShowQR">顯示行動條碼</string>
+    <string name="btnInvite">邀請</string>
+
 </resources>
