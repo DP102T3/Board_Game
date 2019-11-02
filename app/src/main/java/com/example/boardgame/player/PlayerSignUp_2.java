@@ -70,7 +70,7 @@ public class PlayerSignUp_2 extends Fragment {
                         Bundle bundle = new Bundle();
                         bundle.putString("account", account);
                         bundle.putString("account", password);
-                        Navigation.findNavController(btNext).navigate(R.id.action_playerSignUp_2_to_signUp_3, bundle);
+                        Navigation.findNavController(btNext).navigate(R.id.action_shop_signuptwo_to_shop_signupthree, bundle);
                 } else {
                     etConfirm.setError(getString(R.string.txConfirmDifferent));
                 }

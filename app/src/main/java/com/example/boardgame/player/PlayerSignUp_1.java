@@ -27,7 +27,6 @@ import com.google.gson.JsonObject;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.lang.reflect.Array;
 import java.util.Set;
 
 public class PlayerSignUp_1 extends Fragment {
@@ -58,7 +57,7 @@ public class PlayerSignUp_1 extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         spinner = view.findViewById(R.id.spinner);
-        textView24 = view.findViewById(R.id.textView24);// 測試
+        textView24 = view.findViewById(R.id.tvPassword);// 測試
         JsonObject jsonCcode = new JsonObject();
 
         try (BufferedReader br = new BufferedReader(new InputStreamReader(

@@ -14,10 +14,10 @@
         android:layout_marginTop="16dp"
         android:spinnerMode="dialog"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView19" />
+        app:layout_constraintTop_toBottomOf="@+id/tvAccount" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/edAccount"
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginStart="16dp"
@@ -55,11 +55,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView24"
+        app:layout_constraintTop_toBottomOf="@+id/tvPassword"
         tools:text="1234" />
 
     <TextView
-        android:id="@+id/textView19"
+        android:id="@+id/tvAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="150dp"
@@ -78,11 +78,11 @@
         android:text="Get verification code"
         android:textColor="@color/colorAccent"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@+id/editText"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
+        app:layout_constraintEnd_toEndOf="@+id/edAccount"
+        app:layout_constraintTop_toBottomOf="@+id/edAccount" />
 
     <TextView
-        android:id="@+id/textView24"
+        android:id="@+id/tvPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"

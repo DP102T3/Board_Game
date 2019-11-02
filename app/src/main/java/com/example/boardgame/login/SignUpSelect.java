@@ -45,11 +45,11 @@ public class SignUpSelect extends Fragment {
         });
 
         btShop = view.findViewById(R.id.btShop);
-        btShop.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Navigation.findNavController(btShop).navigate(R.id.action_signUpSelect_to_shop_signup);
-            }
-        });
+//        btShop.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Navigation.findNavController(btShop).navigate(R.id.action_signUpSelect_to_shop_signup);
+//            }
+//        });
     }
 }

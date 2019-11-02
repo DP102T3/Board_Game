@@ -14,7 +14,7 @@
         android:inputType="textPersonName"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@+id/etPassword"
-        app:layout_constraintTop_toTopOf="@+id/textView26" />
+        app:layout_constraintTop_toTopOf="@+id/tvForgetPassword" />
 
     <EditText
         android:id="@+id/etPassword"
@@ -39,7 +39,7 @@
         app:layout_constraintTop_toBottomOf="@+id/etPassword" />
 
     <TextView
-        android:id="@+id/textView26"
+        android:id="@+id/tvForgetPassword"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:layout_marginStart="32dp"
@@ -58,8 +58,8 @@
         android:gravity="center"
         android:text="@string/tx_tvPassword"
         android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@+id/textView26"
-        app:layout_constraintTop_toBottomOf="@+id/textView26" />
+        app:layout_constraintStart_toStartOf="@+id/tvForgetPassword"
+        app:layout_constraintTop_toBottomOf="@+id/tvForgetPassword" />
 
     <TextView
         android:id="@+id/textView28"
