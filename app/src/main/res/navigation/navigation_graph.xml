@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_graph"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/mainFragment">
 
     <!-- chat -->
     <fragment
@@ -164,34 +164,10 @@
         android:name="com.example.boardgame.notification.PlayerNotificationList.PlayerNosListFragment"
         android:label="fragment_player_nos_list"
         tools:layout="@layout/fragment_player_nos_list" />
-    <fragment
-        android:id="@+id/loginFragment"
-        android:name="com.example.boardgame.login.LoginFragment"
-        android:label="fragment_login"
-        tools:layout="@layout/fragment_login" >
-        <action
-            android:id="@+id/action_loginFragment_to_mainFragment2"
-            app:destination="@id/mainFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/playerSignUp_1"
-        android:name="com.example.boardgame.player.PlayerSignUp_1"
-        android:label="fragment_player_sign_up_1"
-        tools:layout="@layout/fragment_player_sign_up_1" />
-    <fragment
-        android:id="@+id/playerSignUp_2"
-        android:name="com.example.boardgame.player.PlayerSignUp_2"
-        android:label="fragment_player_sign_up_2"
-        tools:layout="@layout/fragment_player_sign_up_2" >
-        <action
-            android:id="@+id/action_playerSignUp_2_to_playerSignUp_3"
-            app:destination="@id/playerSignUp_3" />
-    </fragment>
-    <fragment
-        android:id="@+id/playerSignUp_3"
-        android:name="com.example.boardgame.player.PlayerSignUp_3"
-        android:label="fragment_player_sign_up_3"
-        tools:layout="@layout/fragment_player_sign_up_3" />
+
+
+
+    <!-- player -->
     <fragment
         android:id="@+id/signUpSelect"
         android:name="com.example.boardgame.login.SignUpSelect"
@@ -200,5 +176,32 @@
         <action
             android:id="@+id/action_signUpSelect_to_playerSignUp_1"
             app:destination="@id/playerSignUp_1" />
+        <action
+            android:id="@+id/action_signUpSelect_to_shop_signup"
+            app:destination="@id/shop_signup" />
     </fragment>
+    <fragment
+        android:id="@+id/playerSignUp_1"
+        android:name="com.example.boardgame.player.PlayerSignUp_1"
+        android:label="fragment_player_sign_up_1"
+        tools:layout="@layout/fragment_player_sign_up_1" >
+        <action
+            android:id="@+id/action_playerSignUp_1_to_playerSignUp_2"
+            app:destination="@id/playerSignUp_2" />
+    </fragment>
+    <fragment
+        android:id="@+id/playerSignUp_2"
+        android:name="com.example.boardgame.player.PlayerSignUp_2"
+        android:label="fragment_player_sign_up_2"
+        tools:layout="@layout/fragment_player_sign_up_2" >
+        <action
+            android:id="@+id/action_playerSignUp_2_to_signUp_3"
+            app:destination="@id/playerSignUp_3" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/playerSignUp_3"
+        android:name="com.example.boardgame.player.PlayerSignUp_3"
+        android:label="fragment_player_sign_up_3"
+        tools:layout="@layout/fragment_player_sign_up_3" />
 </navigation>

@@ -2,33 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ctSignUp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".player.PlayerSignUp_1">
-
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="77dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
-        android:spinnerMode="dialog"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvAccount" />
-
-    <EditText
-        android:id="@+id/edAccount"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="32dp"
-        android:ems="10"
-        android:hint="0987654321"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/spinner"
-        app:layout_constraintTop_toTopOf="@+id/spinner" />
 
     <Button
         android:id="@+id/btSubmit"
@@ -43,6 +20,18 @@
         app:layout_constraintTop_toBottomOf="@+id/etVerificationCode" />
 
     <EditText
+        android:id="@+id/edAccount"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="32dp"
+        android:ems="10"
+        android:hint="987654321"
+        android:inputType="phone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvCCode"
+        app:layout_constraintTop_toTopOf="@+id/spinner" />
+
+    <EditText
         android:id="@+id/etVerificationCode"
         android:layout_width="160dp"
         android:layout_height="80dp"
@@ -55,18 +44,28 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvPassword"
+        app:layout_constraintTop_toBottomOf="@+id/textView19"
         tools:text="1234" />
 
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="77dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:spinnerMode="dialog"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvPhoneNum" />
+
     <TextView
-        android:id="@+id/tvAccount"
+        android:id="@+id/tvPhoneNum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="150dp"
         android:text="Your phone number"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.529"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -82,7 +81,7 @@
         app:layout_constraintTop_toBottomOf="@+id/edAccount" />
 
     <TextView
-        android:id="@+id/tvPassword"
+        android:id="@+id/textView19"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -92,4 +91,14 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvVerificationSend" />
+
+    <TextView
+        android:id="@+id/tvCCode"
+        android:layout_width="50dp"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:text="+886"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/spinner"
+        app:layout_constraintTop_toTopOf="@+id/spinner" />
 </androidx.constraintlayout.widget.ConstraintLayout>

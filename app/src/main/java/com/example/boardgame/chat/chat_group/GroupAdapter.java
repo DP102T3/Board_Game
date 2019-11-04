@@ -49,11 +49,6 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.MyViewHolder
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-//        View itemView = LayoutInflater.from(activity).inflate(R.layout.list_item_view, parent, false);
-//        MyViewHolder vh = new MyViewHolder(itemView);
-//        return vh;
-
-        // 上列三行 等同 下列兩行
         View itemView = LayoutInflater.from(activity).inflate(R.layout.list_item_view, parent, false);
         return new MyViewHolder(itemView);
     }

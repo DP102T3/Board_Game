@@ -1,4 +1,4 @@
-package com.example.boardgame.shop;
+package com.example.boardgame.chat.chat_friend;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -17,10 +17,10 @@ import java.lang.ref.WeakReference;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class GameImageTask extends AsyncTask<Object, Integer, Bitmap> {
-    private final static String TAG = "GameImageTask";
+public class PlayerImageTask extends AsyncTask<Object, Integer, Bitmap> {
+    private final static String TAG = "PlayerImageTask";
     private String url;
-    private int id, imageSize;
+    private int playerId, imageSize;
     /* ImageTask的屬性strong參照到SpotListFragment內的imageView不好，
         會導致SpotListFragment進入背景時imageView被參照而無法被釋放，
         而且imageView會參照到Context，也會導致Activity無法被回收。
@@ -28,39 +28,36 @@ public class GameImageTask extends AsyncTask<Object, Integer, Bitmap> {
     private WeakReference<ImageView> imageViewWeakReference;
 
     // 取單張圖片
-    //取用GameImageUpdateFragment 的Spot
-    public GameImageTask(String url, int id, int imageSize) {
-        this(url, id, imageSize, null);
+    public PlayerImageTask(String url, int playerId) {
+        this(url, playerId, null);
     }
 
-//==========要用ImageTask 就要把ImageView傳過去 取完圖片後使用傳入的ImageView顯示，適用於顯示多張圖片============================
-    public GameImageTask(String url, int id, int imageSize, ImageView imageView) {
+    // 取完圖片後使用傳入的ImageView顯示，適用於顯示多張圖片
+    public PlayerImageTask(String url, int playerId, ImageView imageView) {
         this.url = url;
-        this.id = id;
-        this.imageSize = imageSize;
+        this.playerId = playerId;
         this.imageViewWeakReference = new WeakReference<>(imageView);
     }
-//==================================啟動doInBackground後抓一張圖===========================================================
+
     @Override
     protected Bitmap doInBackground(Object... params) {
         JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("action", "getImage");
-        jsonObject.addProperty("id", id);
-        jsonObject.addProperty("imageSize", imageSize);
-
+        jsonObject.addProperty("action", "getPlayerImage");
+        jsonObject.addProperty("playerId", playerId);
         return getRemoteImage(url, jsonObject.toString());
     }
-//================================抓圖後 自動貼圖 ========================================================================
+
     @Override
-    protected void onPostExecute(Bitmap bitmap) {
+    protected void onPostExecute(Bitmap bitmap) {   // 其中bitmap為doInBackground()的回傳值
         ImageView imageView = imageViewWeakReference.get();
+        // 因imageView為透過WeakReference（弱參照）取得，可能因Garbage Collection而回傳空值，必先檢查是否為空值
         if (isCancelled() || imageView == null) {
             return;
         }
         if (bitmap != null) {
             imageView.setImageBitmap(bitmap);
         } else {
-            imageView.setImageResource(R.drawable.no_image);
+            imageView.setImageResource(R.drawable.portrait_default);
         }
     }
 
