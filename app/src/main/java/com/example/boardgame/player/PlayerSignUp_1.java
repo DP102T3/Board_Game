@@ -27,7 +27,6 @@ import com.google.gson.JsonObject;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.lang.reflect.Array;
 import java.util.Set;
 
 public class PlayerSignUp_1 extends Fragment {
@@ -38,8 +37,8 @@ public class PlayerSignUp_1 extends Fragment {
     private String[] keys;
     private String[] ccodes;
     private String txCCode;
+    private TextView tvCCode;
 
-    private TextView textView24;// 測試
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -57,8 +56,8 @@ public class PlayerSignUp_1 extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        tvCCode = view.findViewById(R.id.tvCCode);
         spinner = view.findViewById(R.id.spinner);
-        textView24 = view.findViewById(R.id.textView24);// 測試
         JsonObject jsonCcode = new JsonObject();
 
         try (BufferedReader br = new BufferedReader(new InputStreamReader(
@@ -86,7 +85,8 @@ public class PlayerSignUp_1 extends Fragment {
         spinner.setSelection(84);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                txCCode = "Country code = " + ccodes[position].split("\\+|\\)")[1];
+                txCCode = ccodes[position].split("\\+|\\)")[1];
+                tvCCode.setText("+" + txCCode);
             }
             public void onNothingSelected(AdapterView<?> parent) {
             }
