@@ -194,7 +194,8 @@ public class MainActivity extends AppCompatActivity {
 
     // 設置 TabBar
     /*使用方式：
-    * 呼叫setTabBar(參數：指定要替換的menu)
+    * 建立 R.menu.tab_menu.XXXXX.xml  (XXXXX 為自訂名稱)
+    * 呼叫setTabBar(參數：指定 menu內 要替換的 xml)
     * */
     public static void setTabBar(int tabMenu){
         if (onTabMenu == tabNavigationView.getMenu().hashCode()){return;}
@@ -206,7 +207,8 @@ public class MainActivity extends AppCompatActivity {
     }
     // 設置 BottomBar
     /*使用方式：
-     * 呼叫setTabBar(參數：指定要替換的menu)
+     * 建立 R.menu.tab_menu.XXXXX.xml  (XXXXX 為自訂名稱)
+     * 呼叫setBottomBar(參數：指定 menu內 要替換的 xml)
      * */
     public static void setBottomBar(int bottomMenu){
         if (onBottomId == loginId){return;}
