@@ -47,30 +47,30 @@ public class PlayerSignUp_2 extends Fragment {
         btNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String account = etAccount.getText().toString().trim();
-                String password = etPassword.getText().toString().trim();
-                String passwordConfirm = etConfirm.getText().toString().trim();
+                String player_id = etAccount.getText().toString().trim();
+                String player_pw = etPassword.getText().toString().trim();
+                String player_pwConfirm = etConfirm.getText().toString().trim();
 
                 Boolean valid = true;
-                if (account.isEmpty()) {
+                if (player_id.isEmpty()) {
                     valid = false;
                     etAccount.setError(getString(R.string.txCanNotBeEmpty));
                 }
-                if (password.isEmpty()) {
+                if (player_pw.isEmpty()) {
                     valid = false;
                     etPassword.setError(getString(R.string.txCanNotBeEmpty));
                 }
-                if (passwordConfirm.isEmpty()) {
+                if (player_pwConfirm.isEmpty()) {
                     valid = false;
                     etConfirm.setError(getString(R.string.txCanNotBeEmpty));
                 }
                 if (!valid) {
                     return;
-                }else if (password.trim().equals(passwordConfirm)) {
+                }else if (player_pw.trim().equals(player_pwConfirm)) {
                         Bundle bundle = new Bundle();
-                        bundle.putString("account", account);
-                        bundle.putString("account", password);
-                        Navigation.findNavController(btNext).navigate(R.id.action_shop_signuptwo_to_shop_signupthree, bundle);
+                        bundle.putString("player_id", player_id);
+                        bundle.putString("player_pw", player_pw);
+                        Navigation.findNavController(btNext).navigate(R.id.action_playerSignUp_2_to_signUp_3, bundle);
                 } else {
                     etConfirm.setError(getString(R.string.txConfirmDifferent));
                 }

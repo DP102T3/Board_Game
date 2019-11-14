@@ -108,21 +108,21 @@ public class PlayerSignUp_1 extends Fragment {
         }
 
         public View getView(int position, View convertView, ViewGroup parent) {
-            LinearLayout ll = new LinearLayout(activity);
-            ll.setOrientation(LinearLayout.HORIZONTAL);
-            ll.setGravity(Gravity.CENTER_VERTICAL);
+            LinearLayout linearLayout = new LinearLayout(activity);
+            linearLayout.setOrientation(LinearLayout.HORIZONTAL);
+            linearLayout.setGravity(Gravity.CENTER_VERTICAL);
             int resourceImage = activity.getResources().getIdentifier("flag_" + keys[position].toLowerCase(), "drawable", activity.getPackageName());
 
             ImageView iv = new ImageView(activity);
             iv.setLayoutParams(new LinearLayout.LayoutParams(75, 75));
             iv.setImageResource(resourceImage);
-            ll.addView(iv);
+            linearLayout.addView(iv);
 
             TextView tv = new TextView(activity);
             tv.setTextSize(18);
             tv.setText(" " + keys[position] + ", " + ccodes[position]);// 設定內容
-            ll.addView(tv);
-            return ll;
+            linearLayout.addView(tv);
+            return linearLayout;
         }
     };
 }

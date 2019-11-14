@@ -67,4 +67,5 @@
     <string name="txEmptyConfirm">PasswordConfirm can not be empty</string>
     <string name="txConfirmDifferent">Confirm is different from Password</string>
     <string name="txCanNotBeEmpty">can not be empty</string>
+    <string name="txSignUpSucessed">Sign Up Sucessed !</string>
 </resources>
