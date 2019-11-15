@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.boardgame.MainActivity;
 import com.example.boardgame.R;
 import com.google.gson.Gson;
 
@@ -25,6 +26,12 @@ import java.util.List;
 public class ShowScanResultActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        MainActivity.changeBarsStatus(MainActivity.NEITHER_TAB_AND_BOTTOM);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -18,6 +18,9 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
+import com.example.boardgame.advertisement_points.PointActivity;
+import com.example.boardgame.friend.Friend;
+import com.example.boardgame.friend.FriendMainActivity;
 import com.example.boardgame.notification.Common;
 import com.example.boardgame.notification.CommonShop;
 import com.example.boardgame.notification.Websocket.NetWorkService;
@@ -85,6 +88,14 @@ public class MainActivity extends AppCompatActivity {
         //開啟網路偵測服務及Websocket服務(notification)
         Intent networkIntent = new Intent(this, NetWorkService.class);
         this.startService(networkIntent);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        Intent intent = new Intent(this, FriendMainActivity.class);
+        startActivity(intent);
     }
 
     //    –––––––––––––––––––––––––––––｜點擊空白處隱藏鍵盤｜–––––––––––––––––––––––––––––

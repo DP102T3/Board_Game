@@ -2,7 +2,10 @@ package com.example.boardgame.friend;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -11,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -121,6 +125,12 @@ public class FrInvitingFragment extends Fragment {
                     }
                 }
             });
+
+            if (friendViewModel.getFrPic() != null) {
+                byte[] image = Base64.decode(friendViewModel.getFrPic(), Base64.DEFAULT);
+                Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
+                holder.ivFriend.setImageBitmap(bitmap);
+            }
         }
 
         @Override
@@ -130,10 +140,13 @@ public class FrInvitingFragment extends Fragment {
     private class MyViewHolder extends RecyclerView.ViewHolder {
         TextView tvName;
         Button btnDelete;
+        ImageView ivFriend;
+
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             tvName = itemView.findViewById(R.id.tvName);
             btnDelete = itemView.findViewById(R.id.btnDelete);
+            ivFriend = itemView.findViewById(R.id.ivFriend);
         }
     }
 

@@ -1,6 +1,5 @@
 package com.example.boardgame.chat.chat_friend;
 
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;

@@ -5,46 +5,42 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".friend.FriendMainActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context="com.example.boardgame.advertisement_points.AdvertisementActivity">
+
 <!--    <LinearLayout-->
 <!--        android:layout_width="match_parent"-->
 <!--        android:layout_height="wrap_content"-->
 <!--        android:orientation="horizontal">-->
 <!--        <Button-->
-<!--            android:id="@+id/btnFriendAll"-->
+<!--            android:id="@+id/btnNow"-->
 <!--            android:onClick="onButtonClick"-->
 <!--            android:layout_width="0dp"-->
-<!--            android:layout_height="48dp"-->
 <!--            android:layout_weight="1"-->
-<!--            android:text="@string/btnFriendAll"-->
-<!--            android:textSize="24sp"/>-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="@string/btnNow"-->
+<!--            android:textAlignment="center"-->
+<!--            android:textSize="24sp" />-->
+
 <!--        <Button-->
-<!--            android:id="@+id/btnInvited"-->
+<!--            android:id="@+id/btnPast"-->
 <!--            android:onClick="onButtonClick"-->
 <!--            android:layout_width="0dp"-->
-<!--            android:layout_height="48dp"-->
+<!--            android:layout_height="match_parent"-->
 <!--            android:layout_weight="1"-->
-<!--            android:text="@string/btnInvited"-->
-<!--            android:textSize="24sp"/>-->
-<!--        <Button-->
-<!--            android:id="@+id/btnInviting"-->
-<!--            android:onClick="onButtonClick"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="48dp"-->
-<!--            android:layout_weight="1"-->
-<!--            android:text="@string/btnInviting"-->
-<!--            android:textSize="24sp"/>-->
+<!--            android:text="@string/btnPast"-->
+<!--            android:textAlignment="center"-->
+<!--            android:textSize="24sp" />-->
 <!--    </LinearLayout>-->
 
     <fragment
         android:id="@+id/fragment"
         android:name="androidx.navigation.fragment.NavHostFragment"
-        android:layout_margin="16dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:defaultNavHost="true"
-        tools:layout="@layout/fragment_fr_all_list"
-        app:navGraph="@navigation/navigation_gragh_friend" />
-
+        app:navGraph="@navigation/navigation_graph_ad"
+        tools:layout="@layout/fragment_ad_now"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
 </LinearLayout>

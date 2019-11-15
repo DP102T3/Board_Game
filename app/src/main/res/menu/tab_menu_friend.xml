@@ -2,15 +2,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/listFriendsFragment"
-        android:title="好友" />
+        android:id="@+id/frAllListFragment"
+        android:title="@string/btnFriendAll" />
 
     <item
-        android:id="@+id/listGroupFragment"
-        android:title="被邀請" />
+        android:id="@+id/frInvitedFragment"
+        android:title="@string/btnInvited" />
 
-<!--    <item-->
-<!--        android:id="@+id/listGroupFragment"-->
-<!--        android:title="已邀請" />-->
+    <item
+        android:id="@+id/frInvitingFragment"
+        android:title="@string/btnInviting" />
 
 </menu>

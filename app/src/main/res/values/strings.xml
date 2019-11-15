@@ -95,6 +95,14 @@
     <string name="ADmessage">廣告送出成功</string>
     <string name="ADmessageFailed">廣告送出失敗</string>
     <string name="ADbtn_yes">確定</string>
+    <string name="tvPurchaseType">購買方案：</string>
+    <string name="tv100">x 100</string>
+    <string name="tv300">x 300</string>
+    <string name="tv500">x 500</string>
+    <string name="tvD300">NT$  300</string>
+    <string name="tvD800">NT$  800</string>
+    <string name="tvD1000">NT$1,000</string>
+    <string name="tvPurchase">購買</string>
 
     <string name="btnFriendAll">好友</string>
     <string name="btnInvited">被邀請</string>

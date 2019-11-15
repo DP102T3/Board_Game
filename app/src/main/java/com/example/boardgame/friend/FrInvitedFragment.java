@@ -2,7 +2,10 @@ package com.example.boardgame.friend;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -11,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -142,6 +146,12 @@ public class FrInvitedFragment extends Fragment {
                     }
                 }
             });
+
+            if (friend.getFrPic() != null) {
+                byte[] image = Base64.decode(friend.getFrPic(), Base64.DEFAULT);
+                Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
+                holder.ivFriend.setImageBitmap(bitmap);
+            }
         }
 
         @Override
@@ -152,6 +162,7 @@ public class FrInvitedFragment extends Fragment {
         TextView tvName;
         Button btnDecline;
         Button btnAccept;
+        ImageView ivFriend;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -159,6 +170,7 @@ public class FrInvitedFragment extends Fragment {
             btnDecline = itemView.findViewById(R.id.btnDecline);
             btnAccept = itemView.findViewById(R.id.btnAccept);
 
+            ivFriend = itemView.findViewById(R.id.ivFriend);
 
         }
     }

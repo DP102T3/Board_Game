@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_graph"
+    app:startDestination="@id/adNowFragment">
+
+    <fragment
+        android:id="@+id/adNewFragment"
+        android:name="com.example.boardgame.advertisement_points.AdNewFragment"
+        android:label="fragment_ad_new"
+        tools:layout="@layout/fragment_ad_new" >
+        <action
+            android:id="@+id/action_adNewFragment_to_adNowFragment"
+            app:destination="@id/adNowFragment" />
+        <action
+            android:id="@+id/action_adNewFragment_to_adPhotoFragment"
+            app:destination="@id/adPhotoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/adHistoryFragment"
+        android:name="com.example.boardgame.advertisement_points.AdHistoryFragment"
+        android:label="fragment_ad_history"
+        tools:layout="@layout/fragment_ad_history" >
+        <action
+            android:id="@+id/action_adHistoryFragment_to_adNowFragment"
+            app:destination="@+id/adNowFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/adNowFragment"
+        android:name="com.example.boardgame.advertisement_points.AdNowFragment"
+        android:label="fragment_ad_now"
+        tools:layout="@layout/fragment_ad_now" >
+        <action
+            android:id="@+id/action_adNowFragment_to_adNewFragment"
+            app:destination="@id/adNewFragment" />
+        <action
+            android:id="@+id/action_adNowFragment_to_adHistoryFragment"
+            app:destination="@id/adHistoryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/adPhotoFragment"
+        android:name="com.example.boardgame.advertisement_points.AdPhotoFragment"
+        android:label="fragment_ad_photo"
+        tools:layout="@layout/fragment_ad_photo" >
+        <action
+            android:id="@+id/action_adPhotoFragment_to_adNewFragment"
+            app:destination="@id/adNewFragment" />
+    </fragment>
+</navigation>

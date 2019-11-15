@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/adNowFragment"
+        android:title="@string/btnNow" />
+
+    <item
+        android:id="@+id/adHistoryFragment"
+        android:title="@string/btnPast" />
+
+</menu>

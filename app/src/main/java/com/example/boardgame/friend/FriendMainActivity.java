@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
 
+import com.example.boardgame.MainActivity;
 import com.example.boardgame.R;
 
 public class FriendMainActivity extends AppCompatActivity {
@@ -19,6 +20,13 @@ public class FriendMainActivity extends AppCompatActivity {
     Activity activity;
     private Fragment fragment;
     private FragmentManager manager;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        MainActivity.setTabBar(R.menu.tab_menu_friend);
+        MainActivity.changeBarsStatus(MainActivity.BOTH_TAB_AND_BOTTOM);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,22 +41,22 @@ public class FriendMainActivity extends AppCompatActivity {
         }
     }
 
-    public void onButtonClick(View view) {
-        FragmentTransaction transaction = manager.beginTransaction();
-        switch (view.getId()){
-            case R.id.btnFriendAll:
-                NavHostFragment.findNavController(fragment).navigate(R.id.frAllListFragment);
-                break;
-
-            case R.id.btnInvited:
-                NavHostFragment.findNavController(fragment).navigate(R.id.frInvitedFragment);
-                break;
-
-            case R.id.btnInviting:
-                NavHostFragment.findNavController(fragment).navigate(R.id.frInvitingFragment);
-                break;
-        }
-        transaction.commit();
-    }
+//    public void onButtonClick(View view) {
+//        FragmentTransaction transaction = manager.beginTransaction();
+//        switch (view.getId()){
+//            case R.id.btnFriendAll:
+//                NavHostFragment.findNavController(fragment).navigate(R.id.frAllListFragment);
+//                break;
+//
+//            case R.id.btnInvited:
+//                NavHostFragment.findNavController(fragment).navigate(R.id.frInvitedFragment);
+//                break;
+//
+//            case R.id.btnInviting:
+//                NavHostFragment.findNavController(fragment).navigate(R.id.frInvitingFragment);
+//                break;
+//        }
+//        transaction.commit();
+//    }
 
 }

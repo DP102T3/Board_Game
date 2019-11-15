@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.example.boardgame.MainActivity;
 import com.example.boardgame.R;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
@@ -19,6 +20,12 @@ import static android.content.ContentValues.TAG;
 public class ShowQRActivity extends AppCompatActivity {
 
     ImageView ivQRCode;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        MainActivity.changeBarsStatus(MainActivity.NEITHER_TAB_AND_BOTTOM);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

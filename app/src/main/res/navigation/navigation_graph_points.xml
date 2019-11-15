@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_graph_points"
+    app:startDestination="@id/pointActivity">
+
+    <activity
+        android:id="@+id/pointActivity"
+        android:name="com.example.lizwhung.PointActivity"
+        android:label="activity_point"
+        tools:layout="@layout/activity_point" />
+</navigation>
