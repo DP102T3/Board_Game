@@ -6,43 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".player.PlayerSignUp_3">
 
-    <EditText
-        android:id="@+id/etFullName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintStart_toStartOf="@+id/etNickName"
-        app:layout_constraintTop_toTopOf="@+id/tvFullName" />
-
-    <EditText
-        android:id="@+id/etNickName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tvNickName" />
-
-    <EditText
-        android:id="@+id/etGender"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintStart_toStartOf="@+id/etNickName"
-        app:layout_constraintTop_toTopOf="@+id/tvGender" />
-
-    <EditText
-        android:id="@+id/etBirthday"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintStart_toStartOf="@+id/etGender"
-        app:layout_constraintTop_toTopOf="@+id/tvBirthday" />
-
     <TextView
         android:id="@+id/tvFullName"
         android:layout_width="wrap_content"
@@ -55,6 +18,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <EditText
+        android:id="@+id/etFullName"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginEnd="32dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="@+id/tvFullName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvFullName" />
+
     <TextView
         android:id="@+id/tvNickName"
         android:layout_width="wrap_content"
@@ -65,6 +39,17 @@
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@+id/tvFullName"
         app:layout_constraintTop_toBottomOf="@+id/tvFullName" />
+
+    <EditText
+        android:id="@+id/etNickName"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="@+id/tvNickName"
+        app:layout_constraintEnd_toEndOf="@+id/etFullName"
+        app:layout_constraintStart_toStartOf="@+id/etFullName"
+        app:layout_constraintTop_toTopOf="@+id/tvNickName" />
 
     <TextView
         android:id="@+id/tvGender"
@@ -77,6 +62,15 @@
         app:layout_constraintStart_toStartOf="@+id/tvNickName"
         app:layout_constraintTop_toBottomOf="@+id/tvNickName" />
 
+    <Spinner
+        android:id="@+id/spGender"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvGender"
+        app:layout_constraintEnd_toEndOf="@+id/etNickName"
+        app:layout_constraintStart_toStartOf="@+id/etNickName"
+        app:layout_constraintTop_toTopOf="@+id/tvGender" />
+
     <TextView
         android:id="@+id/tvBirthday"
         android:layout_width="wrap_content"
@@ -87,6 +81,17 @@
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@+id/tvGender"
         app:layout_constraintTop_toBottomOf="@+id/tvGender" />
+
+    <EditText
+        android:id="@+id/etBirthday"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="@+id/tvBirthday"
+        app:layout_constraintEnd_toEndOf="@+id/spGender"
+        app:layout_constraintStart_toStartOf="@+id/spGender"
+        app:layout_constraintTop_toTopOf="@+id/tvBirthday" />
 
     <Button
         android:id="@+id/btSubmit"
@@ -99,4 +104,5 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etBirthday" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

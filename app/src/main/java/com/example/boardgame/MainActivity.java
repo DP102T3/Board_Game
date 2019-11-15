@@ -171,6 +171,7 @@ public class MainActivity extends AppCompatActivity {
 
     // 變更 TabBar 或 BottomBar 的狀態
     /*使用方式：
+    * 在fragment的onStart內
     * 執行MainActivity.changeBarsStatus(參數：ONLY_BOTTOM、BOTH_TAB_AND_BOTTOM 或 NEITHER_TAB_AND_BOTTOM 其一)
     * 參考下列註解說明
     * */

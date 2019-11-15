@@ -1,4 +1,4 @@
-package com.example.boardgame.chat;
+package com.example.boardgame.player;
 
 import android.os.AsyncTask;
 import android.util.Log;
@@ -11,7 +11,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class CommonTask extends AsyncTask<String, Integer, String> {
-    private final static String TAG = "TAG_ChatCommonTask";
+    private final static String TAG = "TAG_PlayerCommonTask";
     private String url, outStr;
 
     public CommonTask(String url, String outStr) {
