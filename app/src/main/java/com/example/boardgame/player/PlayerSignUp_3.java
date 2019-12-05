@@ -147,7 +147,7 @@ public class PlayerSignUp_3 extends Fragment implements DatePickerDialog.OnDateS
                         }
 
                         if (count > 0) {
-                            showToast(activity, R.string.txSignUpSucessed);
+                            showToast(activity, R.string.txSignUpSuccessed);
                             // 紀錄登入身份
                             loginId = PLAYER;
                             // 將假的 玩家id 存入 偏好設定

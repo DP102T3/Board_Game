@@ -51,7 +51,7 @@ public class AdvertisementActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         manager = getSupportFragmentManager();
-        fragment = manager.findFragmentById(R.id.fragment);
+        fragment = manager.findFragmentById(R.id.fragment_friend);
         activity = this;
     }
 

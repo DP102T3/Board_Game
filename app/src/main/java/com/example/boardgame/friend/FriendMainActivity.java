@@ -33,7 +33,7 @@ public class FriendMainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friend_main);
         manager = getSupportFragmentManager();
-        fragment = manager.findFragmentById(R.id.fragment);
+        fragment = manager.findFragmentById(R.id.fragment_friend);
         activity = this;
         int page = getIntent().getIntExtra("inviting", 1);
         if (page == 3){
