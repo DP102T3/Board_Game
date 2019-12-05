@@ -69,7 +69,6 @@ public class ListGroupFragment extends Fragment {
         // 置換 BottomBar 的 menu
         MainActivity.setBottomBar(MainActivity.BOTTOM_PLAYER);
 
-
         // 取得 偏好設定的 playerId
         playerId = loadPlayerId(activity);
         Log.d(TAG, "playerId = " + playerId);

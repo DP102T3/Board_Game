@@ -224,6 +224,7 @@ public class ChatFragment extends Fragment {
                 rvChat.setAdapter(adapter);
             } else {
                 adapter.setMsgs(msgs);
+                Log.d(TAG, "msgs.size() = " + msgs.size());
                 adapter.notifyDataSetChanged();
             }
 

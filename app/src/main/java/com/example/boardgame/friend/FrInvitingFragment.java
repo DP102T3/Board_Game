@@ -26,6 +26,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.boardgame.MainActivity;
 import com.example.boardgame.R;
 import com.google.gson.Gson;
 
@@ -53,6 +54,17 @@ public class FrInvitingFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         getFriend();
         recyclerView.setAdapter(new FrInvitingAdapter(this, friendViewModelList));
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        // 顯示 TabBar 及 BottomBar
+        MainActivity.changeBarsStatus(MainActivity.BOTH_TAB_AND_BOTTOM);
+        // 置換 TabBar 的 menu
+        MainActivity.setTabBar(MainActivity.TAB_FRIEND);
+        // 置換 BottomBar 的 menu
+        MainActivity.setBottomBar(MainActivity.BOTTOM_PLAYER);
     }
 
     private void getFriend() {

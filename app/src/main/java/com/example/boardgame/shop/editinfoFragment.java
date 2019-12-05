@@ -141,7 +141,6 @@ public class editinfoFragment extends Fragment {
         } else {
             Common.showToast(activity, "doesn't work");
         }
-//        FriendMainActivity.shop = shopDB;
         Log.d("我要看",String.valueOf(shopDB.getShopId()));
         return shopDB;
 

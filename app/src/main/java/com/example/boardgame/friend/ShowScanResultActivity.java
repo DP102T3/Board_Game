@@ -82,9 +82,9 @@ public class ShowScanResultActivity extends AppCompatActivity {
                     try {
                         String result = task.execute().get();
                         Log.i("POST_RESULT", result);
-                        Intent intent = new Intent(getApplicationContext(), FriendMainActivity.class);
-                        intent.putExtra("inviting", 3);
-                        startActivity(intent);
+//                        Intent intent = new Intent(getApplicationContext(), FriendMainActivity.class);
+//                        intent.putExtra("inviting", 3);
+//                        startActivity(intent);
                     } catch (Exception e) {
                         Log.e("Error", e.toString());
                     }

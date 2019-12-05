@@ -46,7 +46,6 @@
 
         <activity android:name=".friend.ShowScanResultActivity"></activity>
         <activity android:name=".advertisement_points.PointActivity"></activity>
-        <activity android:name=".friend.FriendMainActivity"></activity>
         <activity
             android:theme="@style/Theme.AppCompat.Dialog"
             android:name=".friend.ShowQRActivity"

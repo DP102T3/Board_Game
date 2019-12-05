@@ -117,7 +117,6 @@ public class shop_infoFragment extends Fragment {
 //                //取得edName
 //                Id = shop.getShopId();
 //                shopId.setText(String.valueOf(Id));
-//                FriendMainActivity.shop.setShopId(Id);
 //                int Tel = shop.getShopTel();
 //                shopTel.setText(Tel);
 //                String Address = shop.getShopAddress();
@@ -144,7 +143,6 @@ public class shop_infoFragment extends Fragment {
             }
 //        }
         MainActivity.shop = shopDB;
-//        Log.e("123木頭人", FriendMainActivity.shop.getShopAddress());
         return shopDB;
     }
 

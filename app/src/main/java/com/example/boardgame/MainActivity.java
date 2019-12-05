@@ -1,5 +1,6 @@
 package com.example.boardgame;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,11 +19,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
-import com.example.boardgame.advertisement_points.PointActivity;
-import com.example.boardgame.friend.Friend;
-import com.example.boardgame.friend.FriendMainActivity;
 import com.example.boardgame.notification.Common;
-import com.example.boardgame.notification.CommonShop;
 import com.example.boardgame.notification.Websocket.NetWorkService;
 import com.example.boardgame.shop.Shop;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -70,12 +67,16 @@ public class MainActivity extends AppCompatActivity {
 
         // 設置 TabBar
         tabNavigationView = findViewById(R.id.tabNavigation);
+
+
+
         tabNavigationView.setVisibility(View.GONE);
         NavController tabNavController = Navigation.findNavController(this, R.id.fragment);
         NavigationUI.setupWithNavController(tabNavigationView, tabNavController);
 
         // 設置 BottomBar
         bottomNavigationView = findViewById(R.id.bottomNavigation);
+
         NavController bottomNavController = Navigation.findNavController(this, R.id.fragment);
         NavigationUI.setupWithNavController(bottomNavigationView, bottomNavController);
 
@@ -88,14 +89,6 @@ public class MainActivity extends AppCompatActivity {
         //開啟網路偵測服務及Websocket服務(notification)
         Intent networkIntent = new Intent(this, NetWorkService.class);
         this.startService(networkIntent);
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        Intent intent = new Intent(this, FriendMainActivity.class);
-        startActivity(intent);
     }
 
     //    –––––––––––––––––––––––––––––｜點擊空白處隱藏鍵盤｜–––––––––––––––––––––––––––––
@@ -210,12 +203,12 @@ public class MainActivity extends AppCompatActivity {
     * 呼叫setTabBar(參數：指定 menu內 要替換的 xml)
     * */
     public static void setTabBar(int tabMenu){
-        if (onTabMenu == tabNavigationView.getMenu().hashCode()){return;}
-
+        Log.d(TAG, "onTabMenu = " + onTabMenu);
+        if (onTabMenu == tabMenu){return; }
         tabNavigationView.getMenu().clear();
         tabNavigationView.inflateMenu(tabMenu);
 
-        onTabMenu = tabNavigationView.getMenu().hashCode();
+        onTabMenu = tabMenu;
     }
     // 設置 BottomBar
     /*使用方式：
@@ -223,7 +216,7 @@ public class MainActivity extends AppCompatActivity {
      * 呼叫setBottomBar(參數：指定 menu內 要替換的 xml)
      * */
     public static void setBottomBar(int bottomMenu){
-        if (onBottomId == loginId){return;}
+        if (onBottomId == loginId){ return;}
 
         bottomNavigationView.getMenu().clear();
         bottomNavigationView.inflateMenu(bottomMenu);

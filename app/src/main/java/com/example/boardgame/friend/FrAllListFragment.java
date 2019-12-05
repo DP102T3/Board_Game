@@ -25,6 +25,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.boardgame.MainActivity;
 import com.example.boardgame.R;
 import com.google.gson.Gson;
 
@@ -59,6 +60,17 @@ public class FrAllListFragment extends Fragment {
         friends = getFriend();
         friendAllAdapter = new FriendAllAdapter(this, friends);
         recyclerView.setAdapter(friendAllAdapter);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        // 顯示 TabBar 及 BottomBar
+        MainActivity.changeBarsStatus(MainActivity.BOTH_TAB_AND_BOTTOM);
+        // 置換 TabBar 的 menu
+        MainActivity.setTabBar(MainActivity.TAB_FRIEND);
+        // 置換 BottomBar 的 menu
+        MainActivity.setBottomBar(MainActivity.BOTTOM_PLAYER);
     }
 
     private List<Friend> convertJSONstringToFriendList(String json) {

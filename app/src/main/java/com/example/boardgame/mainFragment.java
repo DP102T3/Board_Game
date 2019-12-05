@@ -47,6 +47,8 @@ public class mainFragment extends Fragment {
                 loginId = PLAYER;
                 // 將假的 玩家id 存入 偏好設定
                 savePlayerId(activity,"chengchi1223");
+                // 置換 BottomBar 的 menu
+                MainActivity.setBottomBar(MainActivity.BOTTOM_PLAYER);
                 Navigation.findNavController(v)
                         .navigate(R.id.action_mainFragment_to_listFriendsFragment);
             }
