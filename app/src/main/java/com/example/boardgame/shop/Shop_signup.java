@@ -15,15 +15,12 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
-import com.example.boardgame.MainActivity;
 import com.example.boardgame.R;
-
-import static com.example.boardgame.MainActivity.SHOP;
 
 
 public class Shop_signup extends Fragment {
 
-    private  static  final  String TAG = "TAG_Shop_signup";
+    private  static  final String TAG = "TAG_Shop_signup";
     private Activity activity;
     private EditText shopId;
     private Button btcf;
@@ -38,9 +35,10 @@ public class Shop_signup extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        activity.setTitle("店家註冊");
         // Inflate the layout for this fragment
+        activity.setTitle("註冊");
         return inflater.inflate(R.layout.fragment_shop_signup, container, false);
+
     }
 
     @Override
@@ -86,11 +84,4 @@ public class Shop_signup extends Fragment {
         });
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        // 隱藏 TabBar 及 BottomBar
-        MainActivity.changeBarsStatus(MainActivity.NEITHER_TAB_AND_BOTTOM);
-    }
 }

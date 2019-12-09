@@ -15,11 +15,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
-import com.example.boardgame.MainActivity;
 import com.example.boardgame.R;
 
 import static android.content.Context.MODE_PRIVATE;
-import static com.example.boardgame.MainActivity.SHOP;
 
 public class Shop_signuptwo extends Fragment {
 
@@ -66,7 +64,7 @@ public class Shop_signuptwo extends Fragment {
 // =============================================偏好設定=====================================================================================
 
         //給偏好設定檔名 會自動幫見一個檔案
-        preferences = activity.getSharedPreferences(PREFERENCES_NAME, MODE_PRIVATE);
+            preferences = activity.getSharedPreferences(PREFERENCES_NAME, MODE_PRIVATE);
 
         Bundle bundle = getArguments();
 
@@ -126,27 +124,12 @@ public class Shop_signuptwo extends Fragment {
             }
 
 
-//            private void loadPreferences() {
-//                String fileName = preferences.getString("shopId", DEFAULT_FILE_NAME);
-//                ShopId.setText(fileName);
-//
-//                Common.showToast(activity, "textPreferencesload");
-//            }
-
-
         });
 
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
 
-        // 隱藏 TabBar 及 BottomBar
-        MainActivity.changeBarsStatus(MainActivity.NEITHER_TAB_AND_BOTTOM);
-    }
-
-    //==================================================儲存偏好設定===============================================================================
+//==================================================儲存偏好設定===============================================================================
 
     private void savePreferences() {
 
@@ -154,8 +137,6 @@ public class Shop_signuptwo extends Fragment {
         preferences.edit()
                 .putInt("shopId", Integer.parseInt(shopId))
                 .apply();
-        Common.showToast(activity, "textPreferencesSaved");
-
     }
 //==================================================取偏好設定===============================================================================
 

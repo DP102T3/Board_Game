@@ -1,4 +1,4 @@
-package com.example.boardgame.chat.chat_friend;
+package com.example.boardgame.shop;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -17,10 +17,10 @@ import java.lang.ref.WeakReference;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class PlayerImageTask extends AsyncTask<Object, Integer, Bitmap> {
-    private final static String TAG = "PlayerImageTask";
+public class ShopImageTask extends AsyncTask<Object, Integer, Bitmap> {
+    private final static String TAG = "ImageTask";
     private String url;
-    private int playerId, imageSize;
+    private int shopId, imageSize;
     /* ImageTask的屬性strong參照到SpotListFragment內的imageView不好，
         會導致SpotListFragment進入背景時imageView被參照而無法被釋放，
         而且imageView會參照到Context，也會導致Activity無法被回收。
@@ -28,36 +28,41 @@ public class PlayerImageTask extends AsyncTask<Object, Integer, Bitmap> {
     private WeakReference<ImageView> imageViewWeakReference;
 
     // 取單張圖片
-    public PlayerImageTask(String url, int playerId) {
-        this(url, playerId, null);
+    // 取用 GameImageUpdateFragment 的Spot
+    public ShopImageTask(String url, int ShopNo, int imageSize) {
+        this(url, ShopNo, imageSize, null);
     }
 
-    // 取完圖片後使用傳入的ImageView顯示，適用於顯示多張圖片
-    public PlayerImageTask(String url, int playerId, ImageView imageView) {
+    //==========要用ImageTask 就要把ImageView傳過去 取完圖片後使用傳入的ImageView顯示，適用於顯示多張圖片============================
+    public ShopImageTask(String url, int shopId, int imageSize, ImageView imageView) {
         this.url = url;
-        this.playerId = playerId;
+        this.shopId = shopId;
+        this.imageSize = imageSize;
         this.imageViewWeakReference = new WeakReference<>(imageView);
     }
 
+    //==================================啟動doInBackground後抓一張圖===========================================================
     @Override
     protected Bitmap doInBackground(Object... params) {
         JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("action", "getPlayerImage");
-        jsonObject.addProperty("playerId", playerId);
+        jsonObject.addProperty("action", "getShopImage");
+        jsonObject.addProperty("shopId", shopId);
+        jsonObject.addProperty("imageSize", imageSize);
+
         return getRemoteImage(url, jsonObject.toString());
     }
 
+    //================================抓圖後 自動貼圖 ========================================================================
     @Override
-    protected void onPostExecute(Bitmap bitmap) {   // 其中bitmap為doInBackground()的回傳值
+    protected void onPostExecute(Bitmap bitmap) {
         ImageView imageView = imageViewWeakReference.get();
-        // 因imageView為透過WeakReference（弱參照）取得，可能因Garbage Collection而回傳空值，必先檢查是否為空值
         if (isCancelled() || imageView == null) {
             return;
         }
         if (bitmap != null) {
             imageView.setImageBitmap(bitmap);
         } else {
-            imageView.setImageResource(R.drawable.portrait_default);
+            imageView.setImageResource(R.drawable.no_image);
         }
     }
 
@@ -81,7 +86,7 @@ public class PlayerImageTask extends AsyncTask<Object, Integer, Bitmap> {
                 bitmap = BitmapFactory.decodeStream(
                         new BufferedInputStream(connection.getInputStream()));
             } else {
-                Log.d(TAG, "response code: " + responseCode);
+                Log.e(TAG, "response code: " + responseCode);
             }
         } catch (IOException e) {
             Log.e(TAG, e.toString());

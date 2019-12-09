@@ -6,6 +6,43 @@
     android:layout_height="match_parent"
     tools:context=".login.LoginFragment">
 
+    <Button
+        android:id="@+id/btLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="193dp"
+        android:background="#B50000"
+        android:text="登入"
+        android:textColor="#F7F4F4"
+        app:layout_constraintEnd_toEndOf="@+id/edPassword"
+        app:layout_constraintHorizontal_bias="0.164"
+        app:layout_constraintStart_toStartOf="@+id/ivPassword"
+        app:layout_constraintTop_toBottomOf="@+id/tvPassword" />
+
+    <Button
+        android:id="@+id/btSingUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="184dp"
+        android:background="#B50000"
+        android:text="註冊"
+        android:textColor="#F7F3F3"
+        app:layout_constraintEnd_toEndOf="@+id/edPassword"
+        app:layout_constraintHorizontal_bias="0.761"
+        app:layout_constraintStart_toStartOf="@+id/ivPassword"
+        app:layout_constraintTop_toBottomOf="@+id/edPassword" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70dp"
+        android:text="mainFragment"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <EditText
         android:id="@+id/edAccount"
         android:layout_width="wrap_content"
@@ -31,29 +68,6 @@
         app:layout_constraintStart_toStartOf="@+id/edAccount"
         app:layout_constraintTop_toBottomOf="@+id/edAccount" />
 
-    <TextView
-        android:id="@+id/tvAccount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="224dp"
-        android:layout_marginEnd="26dp"
-        android:text="帳號："
-        app:layout_constraintEnd_toStartOf="@+id/edAccount"
-        app:layout_constraintStart_toEndOf="@+id/ivAccount"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/tvPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="59dp"
-        android:text="密碼："
-        app:layout_constraintEnd_toEndOf="@+id/tvAccount"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/tvAccount"
-        app:layout_constraintTop_toBottomOf="@+id/tvAccount" />
-
     <ImageView
         android:id="@+id/ivAccount"
         android:layout_width="44dp"
@@ -78,6 +92,29 @@
         app:layout_constraintTop_toBottomOf="@+id/ivAccount" />
 
     <TextView
+        android:id="@+id/tvAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="224dp"
+        android:layout_marginEnd="26dp"
+        android:text="帳號："
+        app:layout_constraintEnd_toStartOf="@+id/edAccount"
+        app:layout_constraintStart_toEndOf="@+id/ivAccount"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="59dp"
+        android:text="密碼："
+        app:layout_constraintEnd_toEndOf="@+id/tvAccount"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/tvAccount"
+        app:layout_constraintTop_toBottomOf="@+id/tvAccount" />
+
+    <TextView
         android:id="@+id/tvForgetPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -88,32 +125,6 @@
         app:layout_constraintEnd_toEndOf="@+id/edAccount"
         app:layout_constraintHorizontal_bias="0.289"
         app:layout_constraintStart_toStartOf="@+id/tvAccount"
-        app:layout_constraintTop_toBottomOf="@+id/edPassword" />
-
-    <Button
-        android:id="@+id/btLogin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="193dp"
-        android:background="#B50000"
-        android:text="登入"
-        android:textColor="#F7F4F4"
-        app:layout_constraintEnd_toEndOf="@+id/edPassword"
-        app:layout_constraintHorizontal_bias="0.164"
-        app:layout_constraintStart_toStartOf="@+id/ivPassword"
-        app:layout_constraintTop_toBottomOf="@+id/tvPassword" />
-
-    <Button
-        android:id="@+id/btSingUp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="184dp"
-        android:background="#B50000"
-        android:text="註冊"
-        android:textColor="#F7F3F3"
-        app:layout_constraintEnd_toEndOf="@+id/edPassword"
-        app:layout_constraintHorizontal_bias="0.761"
-        app:layout_constraintStart_toStartOf="@+id/ivPassword"
         app:layout_constraintTop_toBottomOf="@+id/edPassword" />
 
     <TextView

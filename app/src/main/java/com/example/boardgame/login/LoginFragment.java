@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +25,13 @@ import com.example.boardgame.notification.Common;
 import com.example.boardgame.notification.CommonTask;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+
+import static com.example.boardgame.MainActivity.ADMIN;
+import static com.example.boardgame.MainActivity.PLAYER;
+import static com.example.boardgame.MainActivity.SHOP;
+import static com.example.boardgame.MainActivity.loginId;
+import static com.example.boardgame.chat.Common.disConnectSocket;
+import static com.example.boardgame.chat.Common.savePlayerId;
 
 public class LoginFragment extends Fragment {
     private final static String TAG = "LoginFragment";
@@ -42,7 +50,16 @@ public class LoginFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
+        // 初始化登入身份
+        loginId = 0;
+
+        // 清空使用者帳號
+        Common.savePlayer_id(activity, "");
+
+        // 關閉聊天的WebSocket
+        disConnectSocket();
+
         return inflater.inflate(R.layout.fragment_login, container, false);
     }
 
@@ -55,6 +72,8 @@ public class LoginFragment extends Fragment {
         btLogin = view.findViewById(R.id.btLogin);
         btSingUp = view.findViewById(R.id.btSingUp);
 
+
+        // 登入按鈕
         btLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,12 +92,12 @@ public class LoginFragment extends Fragment {
                     return;
                 }
 
+                //判斷使用者類型
                 String type = null;
                 //店家帳號正規表達式判斷
                 String shopPattern = "^[0-9]{8}";
                 //後台帳號判斷
                 boolean status = account.contains("＠boardGame.com");
-                //判斷使用者類型
                 if (account.matches(shopPattern)) {
                     type = "shop";
                 } else if (status) {
@@ -96,18 +115,67 @@ public class LoginFragment extends Fragment {
                     try {
                         String result = new CommonTask(url, jsonObject.toString()).execute().get();
                         if (result.equals("correct")) {
+                            // 儲存目前登入帳號
+                            savePlayerId(activity, account);
+
+                            // 依據不同身份指派相對應的參數值
+                            switch (type) {
+                                case "player":
+                                    // 紀錄登入身份
+                                    loginId = PLAYER;
+                                    // 跳轉到玩家首頁（暫時設定跳轉到聊天頁面）
+                                    Navigation.findNavController(v).navigate(R.id.listFriendsFragment);
+                                    break;
+                                case "shop":
+                                    // 紀錄登入身份
+                                    loginId = SHOP;
+                                    // 跳轉到店家首頁（暫時設定跳轉到聊天頁面）
+                                    Navigation.findNavController(v).navigate(R.id.shop_infoFragment);
+                                    break;
+                                case "administrator":
+                                    // 紀錄登入身份
+                                    loginId = ADMIN;
+                                    break;
+                                default:
+                                    loginId = 0;
+                            }
+
+
+
                             Toast.makeText(activity, "登入成功", Toast.LENGTH_SHORT).show();
+                            // 跳轉到首頁（暫時設定跳轉到聊天頁面）
                             Navigation.findNavController(v)
-                                    .navigate(R.id.mainFragment);
+                                    .navigate(R.id.listFriendsFragment);
+
+
                         } else {
                             Toast.makeText(activity, "帳號或密碼錯誤", Toast.LENGTH_SHORT).show();
+                            type = null;
                         }
                     } catch (Exception e) {
                         Log.e(TAG, e.toString());
                     }
                 } else {
                     Toast.makeText(activity, "未連接伺服器", Toast.LENGTH_SHORT).show();
+                    type = null;
                 }
+            }
+        });
+
+        // 註冊按鈕
+        btSingUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 新使用者註冊
+                Navigation.findNavController(v).navigate(R.id.action_loginFragment_to_signUpSelect);
+            }
+        });
+
+        final Button button = view.findViewById(R.id.button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(button).navigate(R.id.action_loginFragment_to_mainFragment);
             }
         });
     }

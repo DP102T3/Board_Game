@@ -1,11 +1,12 @@
 package com.example.boardgame.shop;
 
-
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -19,7 +20,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.example.boardgame.MainActivity;
 import com.example.boardgame.R;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -29,8 +29,6 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
 public class GameinfoFragment extends Fragment {
 
     private static final String TAG = "TAG_GameinfoFragment";
@@ -38,21 +36,36 @@ public class GameinfoFragment extends Fragment {
     private Activity activity;
     private RecyclerView rvGame;
     private CommonTask GameGetAllTask;
-    private CommonTask spotGetAllTask;
     private GameImageTask gameImageTask;
-    private List<Shop> shopGDB;
+    private List<Game> gameDB;
+    private Gson gson;
+    List<Integer> gameNos;
+
+
+
 
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
         activity = getActivity();
+        gson = new Gson();
+        gameNos =new ArrayList<>();
     }
+
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.addbar, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         return inflater.inflate(R.layout.fragment_gameinfo, container, false);
     }
 
@@ -61,17 +74,19 @@ public class GameinfoFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         SearchView searchView = view.findViewById(R.id.searchView);
         swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
-        rvGame = view.findViewById(R.id.rvGame);
+        rvGame = view.findViewById(R.id.rvShop);
+
 
         rvGame.setLayoutManager(new LinearLayoutManager(activity));
-        shopGDB = getShops();
-        showShopGDB(shopGDB);
-
+        new LinearLayoutManager(getActivity());
+        gameDB = getGames();
+        showGameDB(gameDB);
+//====================================往下滑刷新======================================================
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 swipeRefreshLayout.setRefreshing(true);
-                showShopGDB(shopGDB);
+                showGameDB(gameDB);
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
@@ -81,16 +96,16 @@ public class GameinfoFragment extends Fragment {
             @Override
             public boolean onQueryTextSubmit(String newText) {
                 if (newText.isEmpty()) {
-                    showShopGDB(shopGDB);
+                    showGameDB(gameDB);
                 } else {
-                    List<Shop> searchShopgame = new ArrayList<>();
+                    List<Game> searchShopgame = new ArrayList<>();
                     // 搜尋原始資料內有無包含關鍵字(不區別大小寫)
-                    for (Shop shop : shopGDB) {
-                        if (shop.getGameName().toUpperCase().contains(newText.toUpperCase())) {
-                            searchShopgame.add(shop);
+                    for (Game game : gameDB) {
+                        if (game.getGamName().toUpperCase().contains(newText.toUpperCase())) {
+                            searchShopgame.add(game);
                         }
                     }
-                    showShopGDB(searchShopgame);
+                    showGameDB(searchShopgame);
                 }
                 return true;
             }
@@ -103,8 +118,8 @@ public class GameinfoFragment extends Fragment {
         });
     }
 
-    private List<Shop> getShops() {
-        List<Shop> shopGDB = null;
+    private List<Game> getGames() {
+        List<Game> gameDB = null;
         if (Common.networkConnected(activity)) {
             String url = Common.URL + "SignupServlet";
             JsonObject jsonObject = new JsonObject();
@@ -113,66 +128,72 @@ public class GameinfoFragment extends Fragment {
             GameGetAllTask = new CommonTask(url, jsonOut);
             try {
                 String jsonIn = GameGetAllTask.execute().get();
-                Type listType = new TypeToken<List<Shop>>() {
+                Type listType = new TypeToken<List<Game>>() {
                 }.getType();
-                shopGDB = new Gson().fromJson(jsonIn, listType);
+                gameDB = new Gson().fromJson(jsonIn, listType);
             } catch (Exception e) {
                 Log.e(TAG, e.toString());
             }
         } else {
             Common.showToast(activity, R.string.textNoNetwork);
         }
-        return shopGDB;
+        return gameDB;
     }
 
-    private void showShopGDB(List<Shop> shopGDB) {
-        if (shopGDB == null || shopGDB.isEmpty()) {
+    private void showGameDB(List<Game> gameDB) {
+        if (gameDB == null || gameDB.isEmpty()) {
             Common.showToast(activity, R.string.textNoShopGameFound);
             return;
         }
-        ShopGDBAdapter spotAdapter = (ShopGDBAdapter) rvGame.getAdapter();
-        // 如果spotAdapter不存在就建立新的，否則續用舊有的
-        if (spotAdapter == null) {
-            rvGame.setAdapter(new ShopGDBAdapter(activity, shopGDB));
+//      如果不是空值的話 就會取得Adapter
+        ShopDBAdapter gameAdapter = (ShopDBAdapter) rvGame.getAdapter();
+//      如果spotAdapter不存在就建立新的(第一次一定沒有Adapter)，否則續用舊有的
+        if (gameAdapter == null) {
+            rvGame.setAdapter(new ShopDBAdapter(activity, gameDB));
         } else {
-            spotAdapter.setShopGDB(shopGDB);
+//          有新的資料 setGameDB就會把新的傳進去 叫GameDBAdapter重刷
+            gameAdapter.setGameDB(gameDB);
 //           更新view
-            spotAdapter.notifyDataSetChanged();
+            gameAdapter.notifyDataSetChanged();
         }
     }
 
-    private class ShopGDBAdapter extends RecyclerView.Adapter<ShopGDBAdapter.MyViewHolder> {
+    private class ShopDBAdapter extends RecyclerView.Adapter<ShopDBAdapter.MyViewHolder> {
 
         private LayoutInflater layoutInflater;
-        private List<Shop> shopGDB;
+        private List<Game> gameDB;
         private int imageSize;
 
-        ShopGDBAdapter(Context context, List<Shop> shopGDB) {
+
+        ShopDBAdapter(Context context, List<Game> gameDB) {
             layoutInflater = LayoutInflater.from(context);
-            this.shopGDB = shopGDB;
+            this.gameDB = gameDB;
             /* 螢幕寬度除以4當作將圖的尺寸 */
             imageSize = getResources().getDisplayMetrics().widthPixels / 4;
         }
 
-        void setShopGDB(List<Shop> shopGDB) {
-            this.shopGDB = shopGDB;
+        void setGameDB(List<Game> gameDB) {
+            this.gameDB = gameDB;
         }
 
 
         class MyViewHolder extends RecyclerView.ViewHolder {
-            ImageView imageView;
+            ImageView ivGame, ivChecked;
             TextView tvGame, tvkind;
+
 
             MyViewHolder(View itemView) {
                 super(itemView);
-                imageView = itemView.findViewById(R.id.ivGame);
+                ivGame = itemView.findViewById(R.id.ivGame);
                 tvGame = itemView.findViewById(R.id.tvGame);
                 tvkind = itemView.findViewById(R.id.tvkind);
+                ivChecked = itemView.findViewById(R.id.ivChecked);
+
 
             }
         }
         @Override
-        public int getItemCount(){return shopGDB.size();}
+        public int getItemCount(){return gameDB.size();}
 
 
         @NonNull
@@ -182,11 +203,50 @@ public class GameinfoFragment extends Fragment {
             return new MyViewHolder(itemView);
         }
 
+        //======================================================抓圖=====================================================================
         @Override
-        public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-            final Shop shop = shopGDB.get(position);
-            String url = Common.URL + "ShopServlet";
-            int id = shop.getShopId();
+        public void onBindViewHolder(@NonNull final MyViewHolder myViewHolder , int position) {
+            final Game game = gameDB.get(position);
+            if (gameNos.contains(game.getGameNo())) {
+                myViewHolder.ivChecked.setVisibility(View.VISIBLE);
+            } else {
+                myViewHolder.ivChecked.setVisibility(View.INVISIBLE);
+            }
+
+
+            String url = Common.URL + "SignupServlet";
+            JsonObject jsonObject = new JsonObject();
+            jsonObject.addProperty("action", "getGameImage");
+//                                                      取Game裡面的Gameno
+            jsonObject.addProperty("gameno", game.getGameNo());
+
+            int gameNo = game.getGameNo();
+
+
+
+//==================跟server端 要網址 抓id 跟server端說要(imageSize)圖的大小(用Adapter取得螢幕的寬度)=================================
+            gameImageTask = new GameImageTask(url, gameNo, imageSize, myViewHolder.ivGame);
+            gameImageTask.execute();
+
+
+            myViewHolder.tvGame.setText(String.valueOf(game.getGameNo()));
+            myViewHolder.tvkind.setText(game.getGameType());
+
+//====================================玩家選取遊戲類型========================================================
+            myViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int index = 0;
+                    if ((index = gameNos.indexOf(game.getGameNo())) != -1) {
+                        gameNos.remove(index);
+                        myViewHolder.ivChecked.setVisibility(View.INVISIBLE);
+                    } else {
+                        gameNos.add(game.getGameNo());
+                        myViewHolder.ivChecked.setVisibility(View.VISIBLE);
+                    }
+
+                }
+            });
 
 
         }
@@ -194,10 +254,4 @@ public class GameinfoFragment extends Fragment {
 
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        // 隱藏 TabBar 及 BottomBar
-        MainActivity.changeBarsStatus(MainActivity.NEITHER_TAB_AND_BOTTOM);
-    }
 }

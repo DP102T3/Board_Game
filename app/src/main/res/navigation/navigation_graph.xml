@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_graph"
-    app:startDestination="@id/mainFragment">
+    app:startDestination="@id/loginFragment">
 
     <!-- chat -->
     <fragment
@@ -19,14 +19,11 @@
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         <action
-            android:id="@+id/action_mainFragment_to_shop_signup"
-            app:destination="@id/shop_signup" />
-        <action
             android:id="@+id/action_mainFragment_to_testFragment"
             app:destination="@id/testFragment" />
         <action
-            android:id="@+id/action_mainFragment_to_signUpSelect"
-            app:destination="@id/signUpSelect" />
+            android:id="@+id/action_mainFragment_to_shopListFragment"
+            app:destination="@id/shopListFragment" />
     </fragment>
     <fragment
         android:id="@+id/listGroupFragment"
@@ -65,8 +62,8 @@
     <fragment
         android:id="@+id/shop_signup"
         android:name="com.example.boardgame.shop.Shop_signup"
-        android:label="shop_signup"
-        tools:layout="@layout/fragment_shop_signup">
+        android:label="fragment_report_1"
+        tools:layout="@layout/fragment_shop_signup" >
         <action
             android:id="@+id/action_shop_signup_to_shop_signuptwo"
             app:destination="@id/shop_signuptwo" />
@@ -75,7 +72,7 @@
         android:id="@+id/shop_signuptwo"
         android:name="com.example.boardgame.shop.Shop_signuptwo"
         android:label="fragment_shop_signuptwo"
-        tools:layout="@layout/fragment_shop_signuptwo">
+        tools:layout="@layout/fragment_shop_signuptwo" >
         <action
             android:id="@+id/action_shop_signuptwo_to_shop_signupthree"
             app:destination="@id/shop_signupthree" />
@@ -84,10 +81,10 @@
         android:id="@+id/shop_signupthree"
         android:name="com.example.boardgame.shop.Shop_signupthree"
         android:label="fragment_shop_signupthree"
-        tools:layout="@layout/fragment_shop_signupthree">
+        tools:layout="@layout/fragment_shop_signupthree" >
         <action
             android:id="@+id/action_shop_signupthree_to_shop_infoFragment"
-            app:destination="@id/shop_infoFragment" />
+            app:destination="@+id/shop_infoFragment" />
     </fragment>
     <fragment
         android:id="@+id/shop_infoFragment"
@@ -100,24 +97,27 @@
     </fragment>
     <fragment
         android:id="@+id/setupFragment"
-        android:name="com.example.boardgame.shop.setupFragment"
+        android:name="com.example.boardgame.shop.SetupFragment"
         android:label="fragment_setup"
-        tools:layout="@layout/fragment_setup">
+        tools:layout="@layout/fragment_setup" >
         <action
             android:id="@+id/action_setupFragment_to_editinfoFragment"
             app:destination="@id/editinfoFragment" />
     </fragment>
     <fragment
         android:id="@+id/editinfoFragment"
-        android:name="com.example.boardgame.shop.editinfoFragment"
+        android:name="com.example.boardgame.shop.EditinfoFragment"
         android:label="fragment_editinfo"
-        tools:layout="@layout/fragment_editinfo">
+        tools:layout="@layout/fragment_editinfo" >
         <action
             android:id="@+id/action_editinfoFragment_to_pictureFragment"
             app:destination="@id/pictureFragment" />
         <action
             android:id="@+id/action_editinfoFragment_to_gameinfoFragment"
             app:destination="@id/gameinfoFragment" />
+        <action
+            android:id="@+id/action_editinfoFragment_to_shop_infoFragment"
+            app:destination="@id/shop_infoFragment" />
     </fragment>
     <fragment
         android:id="@+id/pictureFragment"
@@ -128,7 +128,29 @@
         android:id="@+id/gameinfoFragment"
         android:name="com.example.boardgame.shop.GameinfoFragment"
         android:label="fragment_gameinfo"
-        tools:layout="@layout/fragment_gameinfo" />
+        tools:layout="@layout/fragment_gameinfo" >
+        <action
+            android:id="@+id/action_gameinfoFragment_to_editinfoFragment"
+            app:destination="@id/editinfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/storeManagement"
+        android:name="com.example.boardgame.shop.StoreManagement"
+        android:label="fragment_store_management"
+        tools:layout="@layout/fragment_store_management" >
+        <action
+            android:id="@+id/action_storeManagement_to_blackListStore"
+            app:destination="@id/blackListStore" />
+    </fragment>
+    <fragment
+        android:id="@+id/blackListStore"
+        android:name="com.example.boardgame.shop.BlackListStore"
+        android:label="fragment_black_list_store"
+        tools:layout="@layout/fragment_black_list_store" >
+        <action
+            android:id="@+id/action_blackListStore_to_storeManagement"
+            app:destination="@id/storeManagement" />
+    </fragment>
 
 
     <!-- notification -->
@@ -222,4 +244,25 @@
         android:name="com.example.boardgame.friend.FrInvitingFragment"
         android:label="fragment_fr_inviting"
         tools:layout="@layout/fragment_fr_inviting"/>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.boardgame.login.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_signUpSelect"
+            app:destination="@id/signUpSelect" />
+        <action
+            android:id="@+id/action_loginFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/shopListFragment"
+        android:name="com.example.boardgame.shop.ShopListFragment"
+        android:label="fragment_shop_list"
+        tools:layout="@layout/fragment_shop_list" >
+        <action
+            android:id="@+id/action_shopListFragment_to_shop_infoFragment"
+            app:destination="@id/shop_infoFragment" />
+    </fragment>
 </navigation>

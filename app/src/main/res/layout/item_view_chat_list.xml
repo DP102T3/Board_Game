@@ -25,12 +25,12 @@
             android:textColor="#000000"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintStart_toEndOf="@+id/ivPortrait"
             app:layout_constraintTop_toTopOf="parent" />
 
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/imageView"
+            android:id="@+id/ivPortrait"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_marginStart="16dp"

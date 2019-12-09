@@ -1,7 +1,7 @@
 package com.example.boardgame;
 
-import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -14,6 +14,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -27,7 +28,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 //gerfarn0523
 public class MainActivity extends AppCompatActivity {
     public static final String TAG = "TAG_MainActivity";
-
+    // 從infoFragment打包shop到editinfo
+    public static Shop shop = new Shop();
     private static BottomNavigationView tabNavigationView;
     private static BottomNavigationView bottomNavigationView;
     public static final int ONLY_BOTTOM = 0;
@@ -53,17 +55,10 @@ public class MainActivity extends AppCompatActivity {
     private int width;
     private int height;
 
-
-    //   從infoFragment打包shop到editinfo
-    public static Shop shop = new Shop();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        Common.savePlayer_id(this, "chengchi1223");
-        //CommonShop.saveShop_id(this,123456);
 
         // 設置 TabBar
         tabNavigationView = findViewById(R.id.tabNavigation);
@@ -169,7 +164,42 @@ public class MainActivity extends AppCompatActivity {
 //                startActivity(intent);
                 break;
         }
+        switch (item.getItemId()) {
+            case R.id.add:
+                AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
+
+
+                dialog.setMessage("是否確認新增遊戲");
+                dialog.setNegativeButton("否",new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        // TODO Auto-generated method stub
+
+                    }
+
+                });
+                dialog.setPositiveButton("是",new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        // TODO Auto-generated method stub
+
+                        navigationToNext();
+                    }
+
+                });
+
+                dialog.show();
+
+
+
+                break;
+        }
+
         return true;
+    }
+
+    public void navigationToNext(){
+        Navigation.findNavController(this, R.id.fragment).navigate(R.id.action_gameinfoFragment_to_editinfoFragment);
     }
 
 

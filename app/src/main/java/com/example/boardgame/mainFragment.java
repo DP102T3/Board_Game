@@ -76,16 +76,6 @@ public class mainFragment extends Fragment {
             }
         });
 
-        // ＊測試：店家
-        view.findViewById(R.id.btShopId).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // 紀錄登入身份
-                loginId = SHOP;
-                Navigation.findNavController(v).navigate(R.id.action_mainFragment_to_shop_signup);
-            }
-        });
-
         // ＊測試：後台管理員
         view.findViewById(R.id.btNotification).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,14 +85,17 @@ public class mainFragment extends Fragment {
             }
         });
 
-        // ＊測試：新使用者註冊
-        view.findViewById(R.id.btNewUser).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.btShopList).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loginId = 0;
-                Navigation.findNavController(v).navigate(R.id.action_mainFragment_to_signUpSelect);
+                // 紀錄登入身份
+                loginId = PLAYER;
+                // 將假的 玩家id 存入 偏好設定
+                savePlayerId(activity,"chengchi1223");
+                Navigation.findNavController(v).navigate(R.id.action_mainFragment_to_shopListFragment);
             }
         });
+
     }
 
     @Override

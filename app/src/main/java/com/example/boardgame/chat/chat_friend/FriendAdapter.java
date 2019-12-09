@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.example.boardgame.R;
+import com.example.boardgame.chat.Common;
+import com.example.boardgame.chat.ImageTask;
 
 import java.util.List;
 
@@ -23,6 +26,7 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.MyViewHold
     private static final String TAG = "TAG_FriendAdapter";
     private Activity activity;
     private List<Friend> friends;
+    private ImageTask imageTask;
 
     public FriendAdapter(Activity activity, List<Friend> friends) {
         this.activity = activity;
@@ -38,10 +42,12 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.MyViewHold
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
+        ImageView ivPortrait;
         TextView tvFriendNkName;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
+            ivPortrait = itemView.findViewById(R.id.ivPortrait);
             tvFriendNkName = itemView.findViewById(R.id.tvListName);
         }
     }
@@ -49,13 +55,19 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.MyViewHold
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(activity).inflate(R.layout.list_item_view, parent, false);
+        View itemView = LayoutInflater.from(activity).inflate(R.layout.item_view_chat_list, parent, false);
         return new MyViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         final Friend friend = friends.get(position);
+        // 以 playerId 到 Servlet 取圖
+        String url = Common.SERVLET_URI;
+        String imageId = friend.getFriendId();
+        int imageSize = activity.getResources().getDisplayMetrics().widthPixels / 100 * 68;
+        imageTask = new ImageTask(url, imageId, imageSize, holder.ivPortrait);
+        imageTask.execute();
         holder.tvFriendNkName.setText(friend.getFriendNkName());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -13,7 +13,7 @@ import java.net.URL;
 
 public class CommonTask extends AsyncTask<Void, Void, String> {
 
-    private  final  String TAG = "TAG_CommonTask";
+    private  final String TAG = "TAG_CommonTask_shop";
     private String url, outStr;
 
 
@@ -61,7 +61,7 @@ public class CommonTask extends AsyncTask<Void, Void, String> {
                 connection.disconnect();
             }
         }
-        Log.d(TAG, "input " + inStr);
+        Log.d(TAG, "input: " + inStr);
         return inStr.toString();
 
     }

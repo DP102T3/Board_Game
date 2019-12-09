@@ -13,13 +13,10 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
-import com.example.boardgame.MainActivity;
 import com.example.boardgame.R;
 
-import static com.example.boardgame.MainActivity.SHOP;
 
-
-public class setupFragment extends Fragment {
+public class SetupFragment extends Fragment {
 
     private Activity activity;
     private Button btinfo;
@@ -60,11 +57,4 @@ public class setupFragment extends Fragment {
 
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        // 隱藏 TabBar
-        MainActivity.changeBarsStatus(MainActivity.ONLY_BOTTOM);
-    }
 }

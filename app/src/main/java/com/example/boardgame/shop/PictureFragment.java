@@ -26,7 +26,6 @@ import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
-import com.example.boardgame.MainActivity;
 import com.example.boardgame.R;
 
 import java.io.ByteArrayOutputStream;
@@ -34,7 +33,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 
 import static android.app.Activity.RESULT_OK;
-import static com.example.boardgame.MainActivity.SHOP;
 import static com.example.boardgame.shop.Common.bitmap;
 
 
@@ -72,6 +70,7 @@ public class PictureFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 //====================================================返回前一頁=================================================================================
+
 
 
 //====================================================拍照片====================================================================================
@@ -184,7 +183,7 @@ public class PictureFragment extends Fragment {
         }
     }
 
-    //========================================================剪裁圖片的大小=======================================================================
+//========================================================剪裁圖片的大小=======================================================================
     private void crop(Uri sourceImageUri) {
         File file = activity.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         file = new File(file, "picture_cropped.jpg");
@@ -194,7 +193,7 @@ public class PictureFragment extends Fragment {
         // 授權讓截圖程式可以讀取資料
         intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         // 設定圖片來源與類型
-        intent.setDataAndType(sourceImageUri, "portrait_1/*");
+        intent.setDataAndType(sourceImageUri, "image/*");
         // 設定要截圖
         intent.putExtra("crop", "true");
         // 設定截圖框大小，0代表user任意調整大小
@@ -217,17 +216,12 @@ public class PictureFragment extends Fragment {
                     Toast.LENGTH_SHORT).show();
         }
     }
-
     @Override
     public void onStart() {
         super.onStart();
-
         askExternalStoragePermission();
-        // 隱藏 TabBar 及 BottomBar
-        MainActivity.changeBarsStatus(MainActivity.NEITHER_TAB_AND_BOTTOM);
     }
-
-    //=================================================詢問user是否同意相簿使用======================================================================
+//=================================================詢問user是否同意相簿使用======================================================================
     private void askExternalStoragePermission() {
         String[] permissions = {
 //===============================================存取外部儲存體的permissions=====================================================================
@@ -259,5 +253,4 @@ public class PictureFragment extends Fragment {
             }
         }
     }
-
 }

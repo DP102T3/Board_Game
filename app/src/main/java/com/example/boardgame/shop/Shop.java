@@ -4,21 +4,15 @@ import java.io.Serializable;
 
 public class Shop implements Serializable {
 
-    private String shopPassword, shopName, shopAddress, shopMail, shopOwner, shopIntro ,gameName;
+    private String shopPassword, shopName, shopAddress, shopMail, shopOwner, shopIntro ,gameName , timeOpen, timeClose,shopStatus;
+    private double rateTotal;
+    private int shopId, shopTel, shopCharge, rateCount;
+    private byte[] image;
 
-    private int shopId, shopTel, shopOpen, shopClose, shopCharge;
-    private boolean shopPic1,shopPic2;;
 
 
-    public int getShopClose() {
-        return shopClose;
-    }
 
-    public void setShopClose(int shopClose) {
-        this.shopClose = shopClose;
-    }
-
-    public Shop(String shopPassword, String shopName, String shopAddress, String shopMail, String shopOwner, String shopIntro, String gameName, int shopId, int shopTel, int shopOpen, int shopClose, int shopCharge, boolean shopPic1, boolean  shopPic2) {
+    public Shop(String shopPassword, String shopName, String shopAddress, String shopMail, String shopOwner, String shopIntro, String gameName, int shopId, int shopTel, String timeOpen, String timeClose, int shopCharge, byte[] image, double rateTotal, String shopStatus) {
         this.shopPassword = shopPassword;
         this.shopName = shopName;
         this.shopAddress = shopAddress;
@@ -28,27 +22,39 @@ public class Shop implements Serializable {
         this.gameName = gameName;
         this.shopId = shopId;
         this.shopTel = shopTel;
-        this.shopOpen = shopOpen;
-        this.shopClose = shopClose;
+        this.timeOpen = timeOpen;
+        this.timeClose = timeClose;
         this.shopCharge = shopCharge;
-        this.shopPic1 = shopPic1;
-        this.shopPic2 = shopPic2;
+        this.image = image;
+        this.rateTotal = rateTotal;
+        this.shopStatus = shopStatus;
     }
 
 
 
-    public Shop(String shopAddress, int shopId, int shopTel, int shopCharge, boolean shopPic1, boolean shopPic2) {
+    public void setFields(int shopId, String shopAddress, String shopOwner, int shopTel, int shopCharge, String shopOpen, String shopClose, String shopIntro
+                          ) {
+        this.shopId = shopId;
+        this.shopAddress = shopAddress;
+        this.shopOwner = shopOwner;
+        this.shopIntro = shopIntro;
+        this.timeOpen = shopOpen;
+        this.timeClose = shopClose;
+        this.shopTel = shopTel;
+        this.shopCharge = shopCharge;
+
+    }
+
+
+    public Shop(String shopAddress, int shopId, int shopTel, int shopCharge, byte[] image) {
         this.shopAddress = shopAddress;
         this.shopId = shopId;
         this.shopTel = shopTel;
         this.shopCharge = shopCharge;
-        this.shopPic1 = shopPic1;
-        this.shopPic2 = shopPic2;
+        this.image = image;
+
     }
 
-    public void setShopPic2(boolean shopPic2) {
-        this.shopPic2 = shopPic2;
-    }
 
 
 
@@ -61,11 +67,12 @@ public class Shop implements Serializable {
 
 
 
-    public Shop(String shopAddress, String shopIntro, int shopTel, int shopOpen, int shopCharge) {
+    public Shop(String shopAddress, String shopIntro, int shopTel, String timeOpen, String timeClose, int shopCharge) {
         this.shopTel = shopTel;
         this.shopAddress = shopAddress;
         this.shopIntro = shopIntro;
-        this.shopOpen = shopOpen;
+        this.timeOpen = timeOpen;
+        this.timeClose = timeClose;
         this.shopCharge = shopCharge;
     }
 
@@ -82,6 +89,16 @@ public class Shop implements Serializable {
         this.shopId = shopId;
         this.shopPassword = shopPassword;
 
+    }
+
+    public Shop(int shopId, String shopName, String shopAddress, double rateTotal, int rateCount, String shopStatus) {
+        super();
+        this.shopId = shopId;
+        this.shopName = shopName;
+        this.shopAddress = shopAddress;
+        this.rateTotal = rateTotal;
+        this.rateCount = rateCount;
+        this.shopStatus = shopStatus;
     }
 
 
@@ -141,16 +158,16 @@ public class Shop implements Serializable {
         this.shopOwner = shopOwner;
     }
 
-    public boolean getShopPic1() {
-        return shopPic1;
+    public byte[] getPic1() {
+        return image;
     }
 
-    public void setShopPic1( boolean shopPic1) {
-        this.shopPic1 = shopPic1;
+    public void setPic1(byte[] pic1) {
+        this.image = image;
     }
 
-    public Shop(boolean shopPic1) {
-        this.shopPic1 = shopPic1;
+    public Shop(byte[] pic1) {
+        this.image = image;
     }
 
     public String getShopIntro() {
@@ -161,13 +178,18 @@ public class Shop implements Serializable {
         this.shopIntro = shopIntro;
     }
 
-    public int getShopOpen() {
-        return shopOpen;
+    public String getTimeOpen() {
+        return timeOpen;
     }
 
-    public void setShopOpen(int shopOpen) {
-        this.shopOpen = shopOpen;
+    public void setTimeOpen(String timeOpen) {
+        this.timeOpen = timeOpen;
     }
+
+    public String getTimeClose() { return timeClose; }
+
+    public void setTimeClose(String timeClose) { this.timeClose = timeClose; }
+
 
     public int getShopCharge() {
         return shopCharge;
@@ -179,9 +201,24 @@ public class Shop implements Serializable {
 
     public void setGameName(String gameName) { this.gameName = gameName; }
 
-    public boolean getShopPic2() {
-        return shopPic2;
+
+    public double getRateTotal() {
+        return rateTotal;
     }
 
+    public void setRateTotal(double rateTotal) {
+        this.rateTotal = rateTotal;
+    }
 
+    public String getShopStatus() { return shopStatus; }
+
+    public void setShopStatus(String shopStatus) { this.shopStatus = shopStatus; }
+
+    public int getRateCount() {
+        return rateCount;
+    }
+
+    public void setRateCount(int rateCount) {
+        this.rateCount = rateCount;
+    }
 }

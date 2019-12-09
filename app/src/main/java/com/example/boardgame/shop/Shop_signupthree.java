@@ -16,12 +16,10 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
-import com.example.boardgame.MainActivity;
 import com.example.boardgame.R;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
-import static com.example.boardgame.MainActivity.SHOP;
 import static com.example.boardgame.shop.Common.showToast;
 
 
@@ -34,7 +32,7 @@ public class Shop_signupthree extends Fragment {
 //    private SharedPreferences preferences;
     private Button confirm;
     private TextView tvResult;
-//    private Shop shop;
+//    private SharedPreferences preferences;
     private Gson gson;
     static Shop shop;
 
@@ -162,8 +160,10 @@ public class Shop_signupthree extends Fragment {
                         if (result != true) {
                             showToast(activity, "新增失敗，請重新輸入");
                         } else {
-                            Navigation.findNavController(view)
-                                    .navigate(R.id.action_shop_signupthree_to_shop_infoFragment, bundles);
+
+                           Navigation.findNavController(view).navigate(R.id.action_shop_signupthree_to_shop_infoFragment, bundle);
+
+
                         }
 
                     } catch (Exception e) {
@@ -202,16 +202,8 @@ public class Shop_signupthree extends Fragment {
 //            }
         });
 
-
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        // 隱藏 TabBar 及 BottomBar
-        MainActivity.changeBarsStatus(MainActivity.NEITHER_TAB_AND_BOTTOM);
-    }
 }
 
 

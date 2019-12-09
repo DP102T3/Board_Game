@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".shop.editinfoFragment">
+    tools:context=".shop.EditinfoFragment">
 
 
     <ScrollView
@@ -23,12 +23,42 @@
                 android:layout_width="match_parent"
                 android:layout_height="898dp">
 
+                <Button
+                    android:id="@+id/btSave"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="48dp"
+                    android:text="儲存"
+                    app:layout_constraintEnd_toEndOf="@+id/shop_intro"
+                    app:layout_constraintStart_toStartOf="@+id/shop_intro"
+                    app:layout_constraintTop_toBottomOf="@+id/textView25" />
+
+                <Button
+                    android:id="@+id/btedgame"
+                    android:layout_width="73dp"
+                    android:layout_height="54dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="24dp"
+                    android:text="編輯"
+                    app:layout_constraintStart_toEndOf="@+id/textView25"
+                    app:layout_constraintTop_toBottomOf="@+id/shop_intro" />
+
+                <Button
+                    android:id="@+id/btpwChange"
+                    android:layout_width="52dp"
+                    android:layout_height="37dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="250dp"
+                    android:text="更改"
+                    app:layout_constraintStart_toEndOf="@+id/shop_password"
+                    app:layout_constraintTop_toTopOf="parent" />
+
                 <EditText
                     android:id="@+id/shop_tel"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="45dp"
                     android:layout_marginStart="28dp"
-                    android:layout_marginTop="14dp"
+                    android:layout_marginTop="8dp"
                     android:ems="10"
                     android:inputType="textPersonName"
                     app:layout_constraintStart_toEndOf="@+id/textView13"
@@ -59,16 +89,62 @@
                     app:layout_constraintTop_toBottomOf="@+id/shop_address" />
 
                 <EditText
-                    android:id="@+id/shop_Open"
+                    android:id="@+id/shop_Owner"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="14dp"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    app:layout_constraintEnd_toEndOf="@+id/shop_close"
+                    app:layout_constraintStart_toEndOf="@+id/textView20"
+                    app:layout_constraintTop_toBottomOf="@+id/shop_close" />
+
+                <EditText
+                    android:id="@+id/shop_intro"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="14dp"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    app:layout_constraintEnd_toEndOf="@+id/shop_Owner"
+                    app:layout_constraintStart_toEndOf="@+id/textView21"
+                    app:layout_constraintTop_toBottomOf="@+id/shop_Owner" />
+
+                <EditText
+                    android:id="@+id/shop_open"
+                    android:layout_width="100dp"
+                    android:layout_height="46dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="14dp"
                     android:ems="10"
                     android:inputType="textPersonName"
-                    app:layout_constraintEnd_toEndOf="@+id/shop_charge"
                     app:layout_constraintStart_toEndOf="@+id/textView17"
                     app:layout_constraintTop_toBottomOf="@+id/shop_charge" />
+
+                <EditText
+                    android:id="@+id/shop_close"
+                    android:layout_width="100dp"
+                    android:layout_height="46dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="14dp"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    app:layout_constraintEnd_toEndOf="@+id/shop_charge"
+                    app:layout_constraintStart_toEndOf="@+id/shop_open"
+                    app:layout_constraintTop_toBottomOf="@+id/shop_charge" />
+
+                <ImageButton
+                    android:id="@+id/bt_fpic"
+                    android:layout_width="240px"
+                    android:layout_height="240px"
+                    android:layout_marginStart="36dp"
+                    android:layout_marginTop="48dp"
+                    android:background="@drawable/cycle"
+                    android:text="頭像"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/textView18"
@@ -120,6 +196,7 @@
                     app:layout_constraintStart_toStartOf="@+id/textView11"
                     app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
+
                 <TextView
                     android:id="@+id/textView13"
                     android:layout_width="wrap_content"
@@ -170,58 +247,12 @@
                     app:layout_constraintEnd_toEndOf="@+id/textView21"
                     app:layout_constraintTop_toBottomOf="@+id/textView21" />
 
-                <Button
-                    android:id="@+id/btSave"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="48dp"
-                    android:text="儲存"
-                    app:layout_constraintEnd_toEndOf="@+id/shop_intro"
-                    app:layout_constraintStart_toStartOf="@+id/shop_intro"
-                    app:layout_constraintTop_toBottomOf="@+id/textView25" />
-
-                <EditText
-                    android:id="@+id/shop_Owner"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="14dp"
-                    android:ems="10"
-                    android:inputType="textPersonName"
-                    app:layout_constraintEnd_toEndOf="@+id/shop_Open"
-                    app:layout_constraintStart_toEndOf="@+id/textView20"
-                    app:layout_constraintTop_toBottomOf="@+id/shop_Open" />
-
-                <EditText
-                    android:id="@+id/shop_intro"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="14dp"
-                    android:ems="10"
-                    android:inputType="textPersonName"
-                    app:layout_constraintEnd_toEndOf="@+id/shop_Owner"
-                    app:layout_constraintStart_toEndOf="@+id/textView21"
-                    app:layout_constraintTop_toBottomOf="@+id/shop_Owner" />
-
-                <Button
-                    android:id="@+id/btedgame"
-                    android:layout_width="73dp"
-                    android:layout_height="54dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="24dp"
-                    android:text="編輯"
-                    app:layout_constraintStart_toEndOf="@+id/textView25"
-                    app:layout_constraintTop_toBottomOf="@+id/shop_intro" />
-
-
-
                 <TextView
                     android:id="@+id/shop_id"
                     android:layout_width="212dp"
                     android:layout_height="43dp"
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="180dp"
+                    android:layout_marginTop="188dp"
                     app:layout_constraintStart_toEndOf="@+id/textView10"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -251,28 +282,6 @@
                     app:layout_constraintEnd_toEndOf="@+id/shop_intro"
                     app:layout_constraintStart_toStartOf="@+id/shop_intro"
                     app:layout_constraintTop_toBottomOf="@+id/shop_intro" />
-
-                <ImageButton
-                    android:id="@+id/bt_fpic"
-                    android:layout_width="240px"
-                    android:layout_height="240px"
-                    android:layout_marginStart="36dp"
-                    android:layout_marginTop="48dp"
-                    android:background="@drawable/cycle"
-                    android:text="頭像"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <ImageButton
-                    android:id="@+id/bt_sepic"
-                    android:layout_width="240px"
-                    android:layout_height="240px"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="48dp"
-                    android:background="@drawable/cycle"
-                    android:text="頭像"
-                    app:layout_constraintStart_toEndOf="@+id/bt_fpic"
-                    app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>

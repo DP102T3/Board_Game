@@ -25,7 +25,7 @@ public class Common {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
     }
 
-    public static void showToast(Activity context,int messageResId) {
+    public static void showToast(Activity context, int messageResId) {
         Toast.makeText(context, messageResId, Toast.LENGTH_SHORT).show();
     }
 

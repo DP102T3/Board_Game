@@ -9,16 +9,26 @@ public class Msg implements Serializable {
     public static final int TYPE_PLAYER_SEND = 0;
     public static final int TYPE_RECEIVED = 1;
 
+    private String playerId;
     private String playerName;
     private String content;
     private int contentType;
     private int type;
 
-    public Msg(String playerName, String content, int contentType, int type) {
+    public Msg(String playerId, String playerName, String content, int contentType, int type) {
+        this.playerId = playerId;
         this.playerName = playerName;
         this.content = content;
         this.contentType = contentType;
         this.type = type;
+    }
+
+    public String getPlayerId() {
+        return playerId;
+    }
+
+    public void setPlayerId(String playerId) {
+        this.playerId = playerId;
     }
 
     public String getPlayerName() {

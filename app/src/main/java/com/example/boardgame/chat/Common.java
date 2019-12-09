@@ -70,13 +70,13 @@ public class Common {
     // 自定義方法，將呼叫此方法的 playerId 存入偏好設定
     public static void savePlayerId(Context context, String playerId){
         SharedPreferences preferences =
-                context.getSharedPreferences("playerId", MODE_PRIVATE );
+                context.getSharedPreferences("user", MODE_PRIVATE );
         preferences.edit().putString("playerId", playerId).apply();
     }
     // 自定義方法，將 savePlayerId()方法 存入的 playerId 從偏好設定取出
     public static String loadPlayerId(Context context){
         SharedPreferences preferences =
-                context.getSharedPreferences("playerId", MODE_PRIVATE);
+                context.getSharedPreferences("user", MODE_PRIVATE);
         String playerId = preferences.getString("playerId", "");
         return playerId;
     }

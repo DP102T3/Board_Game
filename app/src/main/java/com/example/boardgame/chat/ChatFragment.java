@@ -61,6 +61,8 @@ public class ChatFragment extends Fragment {
     private List<Msg> msgs = new ArrayList<>();
     private RecyclerView rvChat;
     private Gson gson = new Gson();
+    private ImageTask imageTask;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -80,6 +82,68 @@ public class ChatFragment extends Fragment {
         // 取得 偏好設定的 playerId 及 前一頁的 Group資訊
         playerId = loadPlayerId(activity);
 
+        getMsgs();
+
+        // 設定 RecyclerView（尚未將值放入）
+        rvChat = view.findViewById(R.id.rvChat);
+        rvChat.setLayoutManager(new LinearLayoutManager(activity));
+        // 避免 RecyclerView 頭尾itemView消失 的問題
+        rvChat.getRecycledViewPool().setMaxRecycledViews(0, 0);
+
+        // 延遲 50 毫秒，將 RecyclerView 拉到最底
+        rvChat.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+            @Override
+            public void onLayoutChange(View v, int left, int top, int right,
+                                       int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
+                if (bottom < oldBottom) {
+                    rvChat.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            rvChat.scrollToPosition(rvChat.getAdapter().getItemCount() - 1);
+                        }
+                    }, 50);
+                }
+            }
+        });
+
+        etMsg = view.findViewById(R.id.etMsg);
+
+        // 設定 btSend按鈕 監聽器（點擊後將訊息傳送到 Socket）
+        btSend = view.findViewById(R.id.btSend);
+
+        btSend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String message = etMsg.getText().toString();
+                if (message.trim().isEmpty()) {
+                    showToast(activity, R.string.textMessageEmpty);
+                    return;
+                } else {
+                    // 將欲傳送訊息轉成JSON後送出
+                    JsonObject msgJsonOut = new JsonObject();
+                    switch (from) {
+                        case "ListFriends":
+                            msgJsonOut.addProperty("action", "sendChatFriendMsg");
+                            msgJsonOut.addProperty("msg", message);
+                            msgJsonOut.addProperty("playerId", playerId);
+                            msgJsonOut.addProperty("friendId", friendId);
+                            msgJsonOut.addProperty("position", position);
+                            break;
+                        case "ListGroups":
+                            msgJsonOut.addProperty("action", "sendGroupChatMsg");
+                            msgJsonOut.addProperty("msg", message);
+                            msgJsonOut.addProperty("playerId", playerId);
+                            msgJsonOut.addProperty("groupNo", groupNo);
+                    }
+                    chatWebSocketClient.send(msgJsonOut.toString());
+                    Log.d(TAG, "ToSocket output: " + msgJsonOut);
+                }
+                etMsg.setText("");
+            }
+        });
+    }
+
+    private void getMsgs() {
         // 區別 私聊 及 團聊
         from = getArguments().getString("from");
 
@@ -140,64 +204,6 @@ public class ChatFragment extends Fragment {
         } else {
             showToast(activity, R.string.tx_NoNetwork);
         }
-
-        // 設定 RecyclerView（尚未將值放入）
-        rvChat = view.findViewById(R.id.rvChat);
-        rvChat.setLayoutManager(new LinearLayoutManager(activity));
-        // 避免 RecyclerView 頭尾itemView消失 的問題
-        rvChat.getRecycledViewPool().setMaxRecycledViews(0, 0);
-
-        // 延遲 50 毫秒，將 RecyclerView 拉到最底
-        rvChat.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
-            @Override
-            public void onLayoutChange(View v, int left, int top, int right,
-                                       int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
-                if (bottom < oldBottom) {
-                    rvChat.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            rvChat.scrollToPosition(rvChat.getAdapter().getItemCount() - 1);
-                        }
-                    },50);
-                }
-            }
-        });
-
-        etMsg = view.findViewById(R.id.etMsg);
-
-        // 設定 btSend按鈕 監聽器（點擊後將訊息傳送到 Socket）
-        btSend = view.findViewById(R.id.btSend);
-
-        btSend.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String message = etMsg.getText().toString();
-                if (message.trim().isEmpty()) {
-                    showToast(activity, R.string.textMessageEmpty);
-                    return;
-                } else {
-                    // 將欲傳送訊息轉成JSON後送出
-                    JsonObject msgJsonOut = new JsonObject();
-                    switch (from) {
-                        case "ListFriends":
-                            msgJsonOut.addProperty("action", "sendChatFriendMsg");
-                            msgJsonOut.addProperty("msg", message);
-                            msgJsonOut.addProperty("playerId", playerId);
-                            msgJsonOut.addProperty("friendId", friendId);
-                            msgJsonOut.addProperty("position", position);
-                            break;
-                        case "ListGroups":
-                            msgJsonOut.addProperty("action", "sendGroupChatMsg");
-                            msgJsonOut.addProperty("msg", message);
-                            msgJsonOut.addProperty("playerId", playerId);
-                            msgJsonOut.addProperty("groupNo", groupNo);
-                    }
-                    chatWebSocketClient.send(msgJsonOut.toString());
-                    Log.d(TAG, "ToSocket output: " + msgJsonOut);
-                }
-                etMsg.setText("");
-            }
-        });
     }
 
     // 測試用，註冊廣播 WebSocket 的 廣播接收器
@@ -212,9 +218,9 @@ public class ChatFragment extends Fragment {
     private BroadcastReceiver chatReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            String jsonIn = intent.getStringExtra("jsonIn");
-            Msg msg = gson.fromJson(jsonIn, Msg.class);
-            msgs.add(msg);
+//            String jsonIn = intent.getStringExtra("jsonIn");
+//            Msg msg = gson.fromJson(jsonIn, Msg.class);
+            getMsgs();
 
             // 每次開啟畫面時，若 ChatGroupAdapter 未有實體，則 建立實體 -> 以 RecyclerView實體 呼叫 setAdapter()方法，以載入新的 msgs集合
             // 反之，則將新的 msgs集合 存入 -> 刷新畫面
@@ -283,7 +289,7 @@ public class ChatFragment extends Fragment {
         @Override
         public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             // 載入 itemView 的 Layout
-            View itemView = LayoutInflater.from(activity).inflate(R.layout.msg_item_view, parent, false);
+            View itemView = LayoutInflater.from(activity).inflate(R.layout.item_view_msg, parent, false);
             return new MyViewHolder(itemView);
         }
 
@@ -300,7 +306,22 @@ public class ChatFragment extends Fragment {
             int type = msg.getType();
 
             if (type == TYPE_RECEIVED) {
-                holder.tvSender.setText(playerName);
+                // 以 playerId 到 Servlet 取圖
+                String url = Common.SERVLET_URI;
+                String imageId = msg.getPlayerId();
+                int imageSize = getResources().getDisplayMetrics().widthPixels / 100 * 68;
+                try {
+                    imageTask = new ImageTask(url, imageId, imageSize, holder.ivPortrait);
+                    imageTask.execute();
+                } catch (Exception e) {
+                    Log.e(TAG, e.toString());
+                }
+
+                if ("ListGroups".equals(from)) {
+                    holder.tvSender.setText(playerName);
+                } else if ("ListFriends".equals(from)) {
+                    holder.tvSender.setVisibility(View.GONE);
+                }
                 holder.ivPortrait.setImageResource(R.drawable.portrait_default);
                 holder.tvMsg_recieved.setText(content);
                 holder.tvMsg_send.setVisibility(View.GONE);
