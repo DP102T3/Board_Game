@@ -52,8 +52,9 @@
         android:layout_marginEnd="24dp"
         android:ems="10"
         android:inputType="textPersonName"
+        android:text="12345678"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tvAccount"
+        app:layout_constraintStart_toEndOf="@+id/tvPlayerId"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
@@ -63,6 +64,7 @@
         android:layout_marginTop="28dp"
         android:ems="10"
         android:inputType="textPassword"
+        android:text="1"
         app:layout_constraintEnd_toEndOf="@+id/edAccount"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/edAccount"
@@ -76,7 +78,7 @@
         android:layout_marginTop="212dp"
         android:layout_marginEnd="20dp"
         android:src="@drawable/login_account"
-        app:layout_constraintEnd_toStartOf="@+id/tvAccount"
+        app:layout_constraintEnd_toStartOf="@+id/tvPlayerId"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -92,7 +94,7 @@
         app:layout_constraintTop_toBottomOf="@+id/ivAccount" />
 
     <TextView
-        android:id="@+id/tvAccount"
+        android:id="@+id/tvPlayerId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -109,10 +111,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="59dp"
         android:text="密碼："
-        app:layout_constraintEnd_toEndOf="@+id/tvAccount"
+        app:layout_constraintEnd_toEndOf="@+id/tvPlayerId"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/tvAccount"
-        app:layout_constraintTop_toBottomOf="@+id/tvAccount" />
+        app:layout_constraintStart_toStartOf="@+id/tvPlayerId"
+        app:layout_constraintTop_toBottomOf="@+id/tvPlayerId" />
 
     <TextView
         android:id="@+id/tvForgetPassword"
@@ -124,7 +126,7 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/edAccount"
         app:layout_constraintHorizontal_bias="0.289"
-        app:layout_constraintStart_toStartOf="@+id/tvAccount"
+        app:layout_constraintStart_toStartOf="@+id/tvPlayerId"
         app:layout_constraintTop_toBottomOf="@+id/edPassword" />
 
     <TextView

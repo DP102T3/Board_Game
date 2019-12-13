@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/profile1_Fragment"
+        android:title="Item" />
+    <item
+        android:id="@+id/profile2_Fragment"
+        android:title="Item" />
+    <item
+        android:id="@+id/profile3_Fragment"
+        android:title="Item" />
+</menu>

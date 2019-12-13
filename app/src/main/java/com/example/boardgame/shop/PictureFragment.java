@@ -83,22 +83,11 @@ public class PictureFragment extends Fragment {
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 // 指定存檔路徑
                 File file = activity.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-                if (file != null && !file.exists()) {
-                    if (!file.mkdirs()) {
-                        Common.showToast(getActivity(), R.string.textfileNotCreated);
-                        return;
-                    }
-                }
-
 
                 file = new File(file, "picture.jpg");
 //=============================================原圖保存下來 並提供暫時的目錄路徑===================================================================
 
-                contentUri = FileProvider.getUriForFile(
-
-//=============================================getPackageName 看AndroidManifest取得名字是什麼====================================================
-//==================================還要要在AndroidManifest建立說明文件provider 跟Xml建立provider_path============================================
-                        activity, activity.getPackageName() + ".provider", file);
+                contentUri = FileProvider.getUriForFile(activity, activity.getPackageName() + ".provider", file);
 
                 intent.putExtra(MediaStore.EXTRA_OUTPUT, contentUri);
 
@@ -121,11 +110,7 @@ public class PictureFragment extends Fragment {
         choisePic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//===============================================意圖讓使用者挑照片?=====================================================================================
-                Intent intent = new Intent(Intent.ACTION_PICK,
-//===============================================照片來源是圖庫=========================================================================================
-                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-//================================================請求代碼自己key的=====================================================================================
+                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 if (intent.resolveActivity(activity.getPackageManager()) != null) {
                     startActivityForResult(intent, REQ_PICK_PICTURE);
                 } else {
@@ -219,8 +204,9 @@ public class PictureFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        askExternalStoragePermission();
+//        askExternalStoragePermission();
     }
+    /*
 //=================================================詢問user是否同意相簿使用======================================================================
     private void askExternalStoragePermission() {
         String[] permissions = {
@@ -253,4 +239,5 @@ public class PictureFragment extends Fragment {
             }
         }
     }
+    */
 }

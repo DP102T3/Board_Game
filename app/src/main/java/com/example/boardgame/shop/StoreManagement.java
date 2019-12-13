@@ -28,7 +28,6 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class StoreManagement extends Fragment {
     private static final String TAG = "TAG_StoreManagement";
     private Activity activity;
@@ -38,7 +37,6 @@ public class StoreManagement extends Fragment {
     private Gson gson;
     private List<Shop> shopList;
     private Button btBlackList;
-
 
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,18 +57,12 @@ public class StoreManagement extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         rvStore = view.findViewById(R.id.rvStore);
         btBlackList = view.findViewById(R.id.btBlackList);
-
-
-
-
         btBlackList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Navigation.findNavController(view).navigate(R.id.action_storeManagement_to_blackListStore);
-
             }
         });
-
 
         rvStore.setLayoutManager(new LinearLayoutManager(activity));
         new LinearLayoutManager(getActivity());
@@ -78,9 +70,7 @@ public class StoreManagement extends Fragment {
         showShopDB(shopList);
 
 
-
     }
-
 
 
     private List<Shop> getShops() {
@@ -98,8 +88,8 @@ public class StoreManagement extends Fragment {
                 }.getType();
                 shopDB = new Gson().fromJson(jsonIn, listType);
 
-                for(Shop shop : shopDB){
-                    if(shop.getShopStatus().equals("2")){  //如果shopStatus=2的話 把該物件放入shopList
+                for (Shop shop : shopDB) {
+                    if (shop.getShopStatus().equals("2")) {  //如果shopStatus=2的話 把該物件放入shopList
                         shopList.add(shop);
                     }
                 }
@@ -124,93 +114,76 @@ public class StoreManagement extends Fragment {
         if (shopAdapter == null) {
             rvStore.setAdapter(new StoreDBAdapter(activity, shopList));
         } else {
-
             shopAdapter.setShopList(shopList);
-
             shopAdapter.notifyDataSetChanged();
         }
 
     }
 
-
-    public class StoreDBAdapter extends RecyclerView.Adapter<StoreDBAdapter.MyViewHolder>{
-
+    public class StoreDBAdapter extends RecyclerView.Adapter<StoreDBAdapter.MyViewHolder> {
         private List<Shop> shopList;
         private LayoutInflater layoutInflater;
         private int imageSize;
 
-
         StoreDBAdapter(Context context, List<Shop> shopList) {
-        layoutInflater = LayoutInflater.from(context);
-        this.shopList = shopList;
-        /* 螢幕寬度除以4當作將圖的尺寸 */
-        imageSize = getResources().getDisplayMetrics().widthPixels / 4;
-    }
+            layoutInflater = LayoutInflater.from(context);
+            this.shopList = shopList;
+            /* 螢幕寬度除以4當作將圖的尺寸 */
+            imageSize = getResources().getDisplayMetrics().widthPixels / 4;
+        }
 
-        void setShopList(List<Shop> shopList) { this.shopList = shopList;
-    }
+        void setShopList(List<Shop> shopList) {
+            this.shopList = shopList;
+        }
 
-
-         class MyViewHolder extends RecyclerView.ViewHolder {
-            ImageView imageView, ivStar, ivMap, ivShop;
-            TextView shopName, shopAddress, rateTotal;
-
+        class MyViewHolder extends RecyclerView.ViewHolder {
+            ImageView ivStarIcon, ivMap, ivShop;
+            TextView tvShopName, tvShopAddress, tvShopRate;
 
             MyViewHolder(View itemView) {
                 super(itemView);
-                ivStar = itemView.findViewById(R.id.ivStar);
-                ivMap = itemView.findViewById(R.id.ivMap);
-                shopName = itemView.findViewById(R.id.shopName);
-                shopAddress = itemView.findViewById(R.id.shopAdress);
+                ivStarIcon = itemView.findViewById(R.id.ivStarIcon);
+                ivMap = itemView.findViewById(R.id.ivMapIcon);
+                tvShopName = itemView.findViewById(R.id.tvShopName);
+                tvShopAddress = itemView.findViewById(R.id.tvShopAddress);
                 ivShop = itemView.findViewById(R.id.ivShop);
-                rateTotal = itemView.findViewById(R.id.rateTotal);
-
+                tvShopRate = itemView.findViewById(R.id.tvShopRate);
             }
         }
-        @Override
-        public int getItemCount(){return shopList.size();}
 
+        @Override
+        public int getItemCount() {
+            return shopList.size();
+        }
 
         @NonNull
         @Override
         public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = layoutInflater.inflate(R.layout.shop_view_store, parent, false);
-        return new MyViewHolder(itemView);
-    }
+            View itemView = layoutInflater.inflate(R.layout.item_view_shop_list, parent, false);
+            return new MyViewHolder(itemView);
+        }
 
-
-
-//======================================================抓圖=====================================================================
+        //======================================================抓圖=====================================================================
         @Override
-        public void onBindViewHolder(@NonNull MyViewHolder myViewHolder , int position) {
-        final Shop shop = shopList.get(position);
+        public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int position) {
+            final Shop shop = shopList.get(position);
 
+            String url = Common.URL + "SignupServlet";
+            JsonObject jsonObject = new JsonObject();
+            jsonObject.addProperty("action", "getShopImage");
 
-
-        String url = Common.URL + "SignupServlet";
-        JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("action", "getShopImage");
-
-        jsonObject.addProperty("shopId", shop.getShopId());
-
-        int shopId = shop.getShopId();
-
-        Log.e(TAG,"shopId = " + String.valueOf(shop.getShopId()));
+            jsonObject.addProperty("shopId", shop.getShopId());
+            int shopId = shop.getShopId();
+            Log.e(TAG, "shopId = " + String.valueOf(shop.getShopId()));
 
 //==================跟server端 要網址 抓id 跟server端說要(imageSize)圖的大小(用Adapter取得螢幕的寬度)=================================
-        shopImageTask = new ShopImageTask(url, shopId, imageSize, myViewHolder.ivShop);
-        shopImageTask.execute();
+            shopImageTask = new ShopImageTask(url, shopId, imageSize, myViewHolder.ivShop);
+            shopImageTask.execute();
 
-
-        myViewHolder.shopName.setText(shop.getShopName());
-        myViewHolder.shopAddress.setText(shop.getShopAddress());
-        myViewHolder.shopAddress.setText(shop.getShopAddress());
-        myViewHolder.rateTotal.setText(String.valueOf(shop.getRateTotal()));
-
-
-
-    }
-
-
+            myViewHolder.tvShopName.setText(shop.getShopName());
+            myViewHolder.tvShopAddress.setText(shop.getShopAddress());
+            myViewHolder.tvShopAddress.setText(shop.getShopAddress());
+            myViewHolder.tvShopRate.setText(String.valueOf(shop.getRateTotal()));
+        }
     }
 }

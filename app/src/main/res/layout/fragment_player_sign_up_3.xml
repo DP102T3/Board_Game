@@ -52,7 +52,7 @@
         app:layout_constraintTop_toTopOf="@+id/tvNickName" />
 
     <TextView
-        android:id="@+id/tvGender"
+        android:id="@+id/tvPlayerGender"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:layout_marginTop="32dp"
@@ -66,10 +66,10 @@
         android:id="@+id/spGender"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="@+id/tvGender"
+        app:layout_constraintBottom_toBottomOf="@+id/tvPlayerGender"
         app:layout_constraintEnd_toEndOf="@+id/etNickName"
         app:layout_constraintStart_toStartOf="@+id/etNickName"
-        app:layout_constraintTop_toTopOf="@+id/tvGender" />
+        app:layout_constraintTop_toTopOf="@+id/tvPlayerGender" />
 
     <TextView
         android:id="@+id/tvBirthday"
@@ -79,8 +79,8 @@
         android:gravity="center"
         android:text="@string/tx_tvBirthday"
         android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@+id/tvGender"
-        app:layout_constraintTop_toBottomOf="@+id/tvGender" />
+        app:layout_constraintStart_toStartOf="@+id/tvPlayerGender"
+        app:layout_constraintTop_toBottomOf="@+id/tvPlayerGender" />
 
     <EditText
         android:id="@+id/etBirthday"

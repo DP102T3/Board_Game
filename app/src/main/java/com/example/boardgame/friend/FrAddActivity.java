@@ -2,10 +2,6 @@ package com.example.boardgame.friend;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -29,42 +25,49 @@ import android.widget.TextView;
 
 import com.example.boardgame.MainActivity;
 import com.example.boardgame.R;
+import com.example.boardgame.chat.Common;
+import com.google.android.material.tabs.TabLayout;
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.zip.Inflater;
 
 public class FrAddActivity extends AppCompatActivity {
+    private static final String TAG = "TAG_FrAddActivity";
 
     //可搜尋好友ID及選擇掃描QR Code頁面
 
-    private RecyclerView recyclerView;
+    private RecyclerView rvAddFriend;
     private SearchView searchView;
     private SearchView.OnQueryTextListener queryTextListener;
-    List<FriendViewModel> friends;
+    private TextView tvIndicate;
+    List<FriendViewModel> friends = new ArrayList<>();
     FriendSearchAdapter friendSearchAdapter;
 
     @Override
     protected void onStart() {
         super.onStart();
-        MainActivity.changeBarsStatus(MainActivity.NEITHER_TAB_AND_BOTTOM);
+        MainActivity.changeBarsStatus(MainActivity.NEITHER_TAB_NOR_BOTTOM);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fr_add);
-        recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        tvIndicate = findViewById(R.id.tvIndicate);
+        rvAddFriend = findViewById(R.id.rvAddFriend);
+        rvAddFriend.setLayoutManager(new LinearLayoutManager(this));
         friends = new ArrayList<>();
         friendSearchAdapter = new FriendSearchAdapter(this, friends);
-        recyclerView.setAdapter(friendSearchAdapter);
+        rvAddFriend.setAdapter(friendSearchAdapter);
     }
 
     private class FriendSearchAdapter extends RecyclerView.Adapter<MyViewHolder> {
         Context context;
         List<FriendViewModel> friendViewModelList;
+
         public FriendSearchAdapter(FrAddActivity frAddActivity, List<FriendViewModel> friendViewModel) {
             this.context = frAddActivity;
             this.friendViewModelList = friendViewModel;
@@ -94,16 +97,30 @@ public class FrAddActivity extends AppCompatActivity {
             holder.btnInvite.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    String id = friendViewModel.getFrID();
-                    String json = String.format( "{\"player1Id\":\"myself\",\"player2Id\":\"%s\",\"inviteStatus\":1,\"pointCount\":0}", id);
-                    MyTask task = new MyTask(
-                            "http://10.0.2.2:8080/Advertisement_Server/CreateFriend",
-                            json,
-                            null);
-                    try {
-                        String result = task.execute().get();
-                        Log.i("POST_RESULT", result);
+//        ===== 有修改 =====
+                    Gson gson = new Gson();
 
+                    Friend friend = new Friend(Common.loadPlayerId(FrAddActivity.this), friendViewModel.getFrID(), friendViewModel.getPointCount(), 1);
+                    String jsonOut = gson.toJson(friend);
+
+                    MyTask task = new MyTask("http://10.0.2.2:8080/Advertisement_Server/CreateFriend", jsonOut);
+//        ===============
+                    try {
+                        int result = Integer.valueOf(task.execute().get());
+                        if (result != 0) {
+                            Common.showToast(FrAddActivity.this, "已送出邀請");
+                            FriendSearchAdapter adapter = (FriendSearchAdapter) rvAddFriend.getAdapter();
+                            if (adapter != null) {
+                                friends.clear();
+                                adapter.setFriends(friends);
+                                adapter.notifyDataSetChanged();
+                                rvAddFriend.setVisibility(View.GONE);
+                                tvIndicate.setVisibility(View.VISIBLE);
+                            }
+                        } else {
+                            Log.d(TAG, "新增好友失敗，請重新開啟 App");
+                        }
+                        notifyDataSetChanged();
                     } catch (Exception e) {
                         Log.e("Error", e.toString());
                     }
@@ -112,7 +129,9 @@ public class FrAddActivity extends AppCompatActivity {
         }
 
         @Override
-        public int getItemCount() { return friendViewModelList.size(); }
+        public int getItemCount() {
+            return friendViewModelList.size();
+        }
 
     }
 
@@ -140,36 +159,70 @@ public class FrAddActivity extends AppCompatActivity {
         if (searchView != null) {
             searchView.setSearchableInfo(searchManager.getSearchableInfo(this.getComponentName()));
 
+            // 監聽 searchView 文字輸入事件
             queryTextListener = new SearchView.OnQueryTextListener() {
                 @Override
                 public boolean onQueryTextChange(String newText) {
-                    FriendSearchAdapter adapter = (FriendSearchAdapter) recyclerView.getAdapter();
+                    FriendSearchAdapter adapter = (FriendSearchAdapter) rvAddFriend.getAdapter();
                     if (adapter != null) {
-                        // 如果搜尋條件為空字串，就顯示原始資料；否則就顯示搜尋後結果
-                        if (newText.isEmpty()) {
-                            adapter.setFriends(friends);
-                        } else {
-                            List<FriendViewModel> searchFriends = new ArrayList<>();
-                            // 搜尋原始資料內有無包含關鍵字(不區別大小寫)
-                            for (FriendViewModel friend : friends) {
-                                if (friend.getFrNkName().toUpperCase().contains(newText.toUpperCase())
-                                        ||friend.getFrID().toUpperCase().contains(newText.toUpperCase())) {
-                                    searchFriends.add(friend);
-                                }
-                            }
-                            adapter.setFriends(searchFriends);
-                        }
+                        friends.clear();
+                        adapter.setFriends(friends);
                         adapter.notifyDataSetChanged();
+                        rvAddFriend.setVisibility(View.GONE);
+                        tvIndicate.setVisibility(View.VISIBLE);
                     }
-                    return false;
+                    return true;
                 }
+
                 @Override
-                public boolean onQueryTextSubmit(String query) {
-                    Log.i("onQueryTextSubmit", query);
+                public boolean onQueryTextSubmit(String newText) {
+                    FriendSearchAdapter adapter = (FriendSearchAdapter) rvAddFriend.getAdapter();
+                    if (adapter != null) {
+                        friends = searchNew(newText);
+                        adapter.setFriends(friends);
+                        adapter.notifyDataSetChanged();
+                        if (friends.size() != 0) {
+                            rvAddFriend.setVisibility(View.VISIBLE);
+                            tvIndicate.setVisibility(View.GONE);
+                        } else {
+                            rvAddFriend.setVisibility(View.GONE);
+                            tvIndicate.setVisibility(View.VISIBLE);
+                            Common.showToast(FrAddActivity.this, "查無此 ID ，請重新輸入！");
+                        }
+                    }
                     return true;
                 }
             };
             searchView.setOnQueryTextListener(queryTextListener);
+
+            // 監聽 searchView 點擊事件
+            searchView.setOnSearchClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (friends.size() == 0) {
+                        rvAddFriend.setVisibility(View.GONE);
+                        tvIndicate.setVisibility(View.VISIBLE);
+                    } else {
+                        rvAddFriend.setVisibility(View.VISIBLE);
+                        tvIndicate.setVisibility(View.GONE);
+                    }
+                }
+            });
+
+            // 監聽 searchView 關閉事件
+            searchView.setOnCloseListener(new SearchView.OnCloseListener() {
+                @Override
+                public boolean onClose() {
+                    if (friends.size() == 0) {
+                        rvAddFriend.setVisibility(View.GONE);
+                        tvIndicate.setVisibility(View.VISIBLE);
+                    } else {
+                        rvAddFriend.setVisibility(View.VISIBLE);
+                        tvIndicate.setVisibility(View.GONE);
+                    }
+                    return false;
+                }
+            });
         }
         return super.onCreateOptionsMenu(menu);
     }
@@ -180,7 +233,7 @@ public class FrAddActivity extends AppCompatActivity {
 
         Log.i("InF", String.valueOf(id));
 
-        switch (id){
+        switch (id) {
             case R.id.action_search:
                 // Not implemented here
                 return false;
@@ -195,5 +248,34 @@ public class FrAddActivity extends AppCompatActivity {
                 break;
         }
         searchView.setOnQueryTextListener(queryTextListener);
-        return super.onOptionsItemSelected(item);    }
+        return super.onOptionsItemSelected(item);
+    }
+
+    public List<FriendViewModel> searchNew(String searchId) {
+        List<Friend> newPlayers;
+        Friend newPlayer;
+        List<FriendViewModel> friendViewModel = new ArrayList<>();
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("playerId", Common.loadPlayerId(FrAddActivity.this));
+        jsonObject.addProperty("action", "searchNew");
+        jsonObject.addProperty("searchId", searchId);
+        String jsonOut = jsonObject.toString();
+        MyTask task = new MyTask("http://10.0.2.2:8080/Advertisement_Server/GetFriendList", jsonOut);
+
+        try {
+            Gson gson = new Gson();
+            String result = task.execute().get();
+            Log.i("POST_RESULT", result);
+            newPlayers = gson.fromJson(result, new TypeToken<List<Friend>>() {
+            }.getType());
+            newPlayer = newPlayers.get(0);
+            friendViewModel.add(new FriendViewModel(newPlayer.getPlayer2Name(), newPlayer.getPlayer2Pic(), "", newPlayer.getPlayer2Id()));
+            Log.d(TAG, "FriendViewModel = " + gson.toJson(new FriendViewModel(newPlayer.getPlayer2Name(), newPlayer.getPlayer2Pic(), "", newPlayer.getPlayer2Id())));
+
+        } catch (Exception e) {
+            Log.e("Error", e.toString());
+        }
+
+        return friendViewModel;
+    }
 }

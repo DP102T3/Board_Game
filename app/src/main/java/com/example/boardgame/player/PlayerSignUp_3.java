@@ -155,7 +155,6 @@ public class PlayerSignUp_3 extends Fragment implements DatePickerDialog.OnDateS
                             // 跳轉到首頁
 //                            Navigation.findNavController(v).navigate(R.id.從playerSignUp_3到揪團首頁);
                         }
-
                     } else {
                         showToast(activity, R.string.tx_NoNetwork);
                     }

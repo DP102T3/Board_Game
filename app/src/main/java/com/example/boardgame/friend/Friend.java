@@ -13,11 +13,23 @@ public class Friend {
     public Friend(String player1Id, String player2Id, String player2Name, String player2Pic, int inviteStatus, int pointCount, String player2Mood) {
         this.player1Id = player1Id;
         this.player2Id = player2Id;
-        this.setPlayer2Name(player2Name);
-        this.setPlayer2Pic(player2Pic);
+        this.player2Name = player2Name;
+        this.player2Pic = player2Pic;
         this.inviteStatus = inviteStatus;
         this.pointCount = pointCount;
         this.player2Mood = player2Mood;
+    }
+
+    public Friend(String player1Id, String player2Id) {
+        this.player1Id = player1Id;
+        this.player2Id = player2Id;
+    }
+
+    public Friend(String player1Id, String player2Id, int pointCount, int inviteStatus) {
+        this.player1Id = player1Id;
+        this.player2Id = player2Id;
+        this.pointCount = pointCount;
+        this.inviteStatus = inviteStatus;
     }
 
     public String getPlayer1Id() {

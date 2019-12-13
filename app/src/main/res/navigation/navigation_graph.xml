@@ -5,6 +5,8 @@
     android:id="@+id/navigation_graph"
     app:startDestination="@id/loginFragment">
 
+    <include app:graph="@navigation/navigation_graph_ad" />
+
     <!-- chat -->
     <fragment
         android:id="@+id/mainFragment"
@@ -243,7 +245,7 @@
         android:id="@+id/frInvitingFragment"
         android:name="com.example.boardgame.friend.FrInvitingFragment"
         android:label="fragment_fr_inviting"
-        tools:layout="@layout/fragment_fr_inviting"/>
+        tools:layout="@layout/fragment_fr_inviting" />
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.boardgame.login.LoginFragment"
@@ -265,4 +267,19 @@
             android:id="@+id/action_shopListFragment_to_shop_infoFragment"
             app:destination="@id/shop_infoFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/profile1_Fragment"
+        android:name="com.example.boardgame.player.Profile1_Fragment"
+        android:label="fragment_profile1_"
+        tools:layout="@layout/fragment_profile1" />
+    <fragment
+        android:id="@+id/profile2_fragment"
+        android:name="com.example.boardgame.player.Profile2_Fragment"
+        android:label="fragment_profile2_fragment"
+        tools:layout="@layout/fragment_profile2" />
+    <fragment
+        android:id="@+id/profile3_fragment"
+        android:name="com.example.boardgame.player.Profile3_Fragment"
+        android:label="fragment_profile3_fragment"
+        tools:layout="@layout/fragment_profile3" />
 </navigation>

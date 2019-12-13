@@ -12,8 +12,14 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 class MyTask extends AsyncTask<String, Integer, String> {
-    private final static String TAG = "MyTask";
+    private final static String TAG = "TAG_MyTask_friend";
     private String url, outStr, apiKey;
+
+    MyTask(String url, String outStr){
+        this.url = url;
+        this.outStr = outStr;
+        this.apiKey = null;
+    }
 
     MyTask(String url, String outStr, String apiKey) {
         this.url = url;
@@ -53,6 +59,8 @@ class MyTask extends AsyncTask<String, Integer, String> {
 
             int responseCode = connection.getResponseCode();
             if (responseCode == 200) {
+                Log.d(TAG, "response code: " + responseCode);
+
                 BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                 String line;
                 while ((line = br.readLine()) != null) {

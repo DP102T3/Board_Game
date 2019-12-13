@@ -15,7 +15,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,11 +29,13 @@ import static com.example.boardgame.MainActivity.ADMIN;
 import static com.example.boardgame.MainActivity.PLAYER;
 import static com.example.boardgame.MainActivity.SHOP;
 import static com.example.boardgame.MainActivity.loginId;
+import static com.example.boardgame.MainActivity.onBottomId;
+import static com.example.boardgame.MainActivity.onTabMenu;
 import static com.example.boardgame.chat.Common.disConnectSocket;
 import static com.example.boardgame.chat.Common.savePlayerId;
 
 public class LoginFragment extends Fragment {
-    private final static String TAG = "LoginFragment";
+    private final static String TAG = "TAG_LoginFragment";
     private EditText edAccount, edPassword;
     private TextView tvForgetPassword;
     private Button btLogin, btSingUp;
@@ -53,6 +54,8 @@ public class LoginFragment extends Fragment {
 
         // 初始化登入身份
         loginId = 0;
+        onTabMenu = 0;
+        onBottomId = 0;
 
         // 清空使用者帳號
         Common.savePlayer_id(activity, "");
@@ -129,24 +132,20 @@ public class LoginFragment extends Fragment {
                                 case "shop":
                                     // 紀錄登入身份
                                     loginId = SHOP;
-                                    // 跳轉到店家首頁（暫時設定跳轉到聊天頁面）
+                                    // 跳轉到店家首頁
                                     Navigation.findNavController(v).navigate(R.id.shop_infoFragment);
                                     break;
                                 case "administrator":
                                     // 紀錄登入身份
                                     loginId = ADMIN;
+                                    Log.d(TAG, "type = " + type);
+                                    Log.d(TAG, "loginId = " + loginId);
                                     break;
                                 default:
                                     loginId = 0;
                             }
 
-
-
                             Toast.makeText(activity, "登入成功", Toast.LENGTH_SHORT).show();
-                            // 跳轉到首頁（暫時設定跳轉到聊天頁面）
-                            Navigation.findNavController(v)
-                                    .navigate(R.id.listFriendsFragment);
-
 
                         } else {
                             Toast.makeText(activity, "帳號或密碼錯誤", Toast.LENGTH_SHORT).show();
@@ -184,6 +183,6 @@ public class LoginFragment extends Fragment {
     public void onStart() {
         super.onStart();
         // 隱藏 TabBar 及 BottomBar
-        MainActivity.changeBarsStatus(MainActivity.NEITHER_TAB_AND_BOTTOM);
+        MainActivity.changeBarsStatus(MainActivity.NEITHER_TAB_NOR_BOTTOM);
     }
 }

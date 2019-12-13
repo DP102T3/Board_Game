@@ -25,12 +25,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.boardgame.MainActivity;
 import com.example.boardgame.R;
+import com.example.boardgame.chat.Common;
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class FrInvitedFragment extends Fragment {
+    private static final String TAG = "TAG_FrInvitedFragment";
 
     private RecyclerView recyclerView;
 
@@ -63,11 +66,16 @@ public class FrInvitedFragment extends Fragment {
 
     private List<FriendViewModel> getFriend() {
         List<FriendViewModel> friendViewModelList = new ArrayList<>();
-        MyTask task = new MyTask(
-                "http://10.0.2.2:8080/Advertisement_Server/GetInvitedFriend",
-                "{\"player2Id\":\"myself\"}",
-                null
-        );
+
+//        ===== 有修改 =====
+        JsonObject jsonObject = new JsonObject();
+
+        jsonObject.addProperty("playerId", Common.loadPlayerId(getActivity()));
+        jsonObject.addProperty("action", "invited");
+        String jsonOut = jsonObject.toString();
+
+        MyTask task = new MyTask("http://10.0.2.2:8080/Advertisement_Server/GetFriendList", jsonOut);
+//        ===============
         try {
             String result = task.execute().get();
             Log.i("POST_RESULT", result);
@@ -77,7 +85,8 @@ public class FrInvitedFragment extends Fragment {
             for (Friend friend : friends) {
 
                 FriendViewModel friendViewModel = new FriendViewModel(friend.getPlayer2Name(),
-                        friend.getPlayer2Pic(), friend.getPlayer2Mood(), friend.getPlayer1Id());
+                        friend.getPlayer2Pic(), friend.getPlayer2Mood(), friend.getPlayer2Id(), friend.getPointCount());
+
                 if (friend.getInviteStatus() == 1) {
                     friendViewModelList.add(friendViewModel);
                 }
@@ -91,9 +100,7 @@ public class FrInvitedFragment extends Fragment {
 
     private List<Friend> convertJSONstringToFriendList(String json) {
         Gson gson = new Gson();
-
         FriendListResult friendListResult = gson.fromJson(json, FriendListResult.class);
-
         return friendListResult.getResult();
     }
 
@@ -115,26 +122,26 @@ public class FrInvitedFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(@NonNull MyViewHolder holder, final int index) {
-            final FriendViewModel friend = friends.get(index);
-            holder.tvName.setText(friend.getFrNkName());
+            final FriendViewModel friendViewModel = friends.get(index);
+            holder.tvName.setText(friendViewModel.getFrNkName());
             holder.btnAccept.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    MyTask task = new MyTask(
-                            "http://10.0.2.2:8080/Advertisement_Server/CreateFriend",
-                            String.format("{\"player1Id\":\"%s\",\"player2Id\":\"myself\",\"inviteStatus\":2}", friend.getFrID()),
-                            null);
-                    MyTask task2 = new MyTask(
-                            "http://10.0.2.2:8080/Advertisement_Server/CreateFriend",
-                            String.format("{\"player1Id\":\"myself\",\"player2Id\":\"%s\",\"inviteStatus\":2, \"pointCount\":0}", friend.getFrID()),
-                            null);
-                    try {
-                        String result = task.execute().get();
-                        task2.execute();
-                        friends.remove(index);
-                        notifyDataSetChanged();
-                        Log.i("POST_RESULT", result);
+//        ===== 有修改 =====
+                    Gson gson = new Gson();
 
+                    Friend friend = new Friend(friendViewModel.getFrID(), Common.loadPlayerId(getActivity()), friendViewModel.getPointCount(), 1);
+                    String jsonOut = gson.toJson(friend);
+
+                    MyTask task = new MyTask("http://10.0.2.2:8080/Advertisement_Server/CreateFriend", jsonOut);
+//        ===============
+                    try {
+                        int result = Integer.valueOf(task.execute().get());
+                        if (result!=0) {
+                            friends.remove(index);
+                            Log.d(TAG, "result = " + result);
+                        }
+                        notifyDataSetChanged();
                     } catch (Exception e) {
                         Log.e("Error", e.toString());
                     }
@@ -143,31 +150,42 @@ public class FrInvitedFragment extends Fragment {
             holder.btnDecline.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    MyTask task = new MyTask(
-                            "http://10.0.2.2:8080/Advertisement_Server/DeleteFriend",
-                            String.format("{\"player1Id\":\"%s\",\"player2Id\":\"myself\"}", friend.getFrID()),
-                            null);
+//        ===== 有修改 =====
+                    Gson gson = new Gson();
+
+                    Friend friend = new Friend(friendViewModel.getFrID(), Common.loadPlayerId(getActivity()));
+                    String jsonOut = gson.toJson(friend);
+
+                    MyTask task = new MyTask("http://10.0.2.2:8080/Advertisement_Server/DeleteFriend", jsonOut);
+
                     try {
                         String result = task.execute().get();
-                        friends.remove(index);
-                        notifyDataSetChanged();
                         Log.i("POST_RESULT", result);
-
+                        if (!"0".equals(result)) {
+                            friends.remove(index);
+                            notifyDataSetChanged();
+                        }else {
+                            Log.d(TAG, "Delete invitation failed !");
+                        }
                     } catch (Exception e) {
                         Log.e("Error", e.toString());
                     }
+//        ===============
                 }
             });
 
-            if (friend.getFrPic() != null) {
-                byte[] image = Base64.decode(friend.getFrPic(), Base64.DEFAULT);
+            if (friendViewModel.getFrPic() != null) {
+                byte[] image = Base64.decode(friendViewModel.getFrPic(), Base64.DEFAULT);
                 Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
                 holder.ivFriend.setImageBitmap(bitmap);
             }
         }
 
         @Override
-        public int getItemCount() { return friends.size(); }
+        public int getItemCount() {
+            Log.d(TAG, "getItemCount = " + friends.size());
+            return friends.size();
+        }
     }
 
     private class MyViewHolder extends RecyclerView.ViewHolder {
@@ -195,20 +213,4 @@ public class FrInvitedFragment extends Fragment {
         inflater.inflate(R.menu.menu_noteadd, menu);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId();
-
-        switch (id){
-            case R.id.action_fradd:
-                Intent intent = new Intent(getContext(), FrAddActivity.class);
-                startActivity(intent);
-                break;
-
-            case R.id.action_note:
-//            TODO 設定 action
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 }

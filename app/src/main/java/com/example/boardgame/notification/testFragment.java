@@ -2,7 +2,6 @@ package com.example.boardgame.notification;
 
 
 import android.app.Activity;
-import android.app.Notification;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -50,7 +49,7 @@ public class testFragment extends Fragment implements View.OnClickListener {
         super.onStart();
 
         // 隱藏 TabBar 及 BottomBar
-        MainActivity.changeBarsStatus(MainActivity.NEITHER_TAB_AND_BOTTOM);
+        MainActivity.changeBarsStatus(MainActivity.NEITHER_TAB_NOR_BOTTOM);
     }
 
     @Override

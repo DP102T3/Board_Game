@@ -5,12 +5,27 @@ public class FriendViewModel {
     private String frPic;
     private String frMood;
     private String frID;
+    private int pointCount;
 
     public FriendViewModel(String frNkName, String frPic, String frMood, String frID) {
         this.frNkName = frNkName;
         this.frPic = frPic;
         this.frMood = frMood;
         this.frID = frID;
+    }
+
+    public FriendViewModel(String frID, String frNkName, String frPic) {
+        this.frNkName = frNkName;
+        this.frPic = frPic;
+        this.frID = frID;
+    }
+
+    public FriendViewModel(String frNkName, String frPic, String frMood, String frID, int pointCount) {
+        this.frNkName = frNkName;
+        this.frPic = frPic;
+        this.frMood = frMood;
+        this.frID = frID;
+        this.pointCount = pointCount;
     }
 
     public String getFrID() {
@@ -43,5 +58,14 @@ public class FriendViewModel {
 
     public void setFrMood(String frMood) {
         this.frMood = frMood;
+    }
+
+
+    public int getPointCount() {
+        return pointCount;
+    }
+
+    public void setPointCount(int pointCount) {
+        this.pointCount = pointCount;
     }
 }

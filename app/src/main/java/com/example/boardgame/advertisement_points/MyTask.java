@@ -12,7 +12,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 class MyTask extends AsyncTask<String, Integer, String> {
-    private final static String TAG = "MyTask";
+    private final static String TAG = "TAG_MyTask";
     private String url, outStr, apiKey;
 
     MyTask(String url, String outStr, String apiKey) {

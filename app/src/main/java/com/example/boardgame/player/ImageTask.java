@@ -1,4 +1,4 @@
-package com.example.boardgame.shop;
+package com.example.boardgame.player;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -17,42 +17,55 @@ import java.lang.ref.WeakReference;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class ShopImageTask extends AsyncTask<Object, Integer, Bitmap> {
-    private final static String TAG = "TAG_shopImageTask";
-    private String url;
-    private int shopId, imageSize;
-    /* ImageTask的屬性strong參照到SpotListFragment內的imageView不好，
-        會導致SpotListFragment進入背景時imageView被參照而無法被釋放，
-        而且imageView會參照到Context，也會導致Activity無法被回收。
-        改採weak參照就不會阻止imageView被回收 */
+public class ImageTask extends AsyncTask<Object, Integer, Bitmap> {
+    private final static String TAG = "TAG_PlayerImageTask";
+    private String playerId,idType,  url;
+    private int groupNo, imageSize;
     private WeakReference<ImageView> imageViewWeakReference;
 
-    // 取單張圖片
-    // 取用 GameImageUpdateFragment 的Spot
-    public ShopImageTask(String url, int ShopNo, int imageSize) {
-        this(url, ShopNo, imageSize, null);
+    // Player 取單張圖片
+    public ImageTask(String url, String playerId, int imageSize) {
+        this(url, playerId, imageSize, null);
     }
 
-    //==========要用ImageTask 就要把ImageView傳過去 取完圖片後使用傳入的ImageView顯示，適用於顯示多張圖片============================
-    public ShopImageTask(String url, int shopId, int imageSize, ImageView imageView) {
+    // Group 取單張圖片
+    public ImageTask(String url, int groupNo, int imageSize) {
+        this(url, groupNo, imageSize, null);
+    }
+
+    // Player 取多張圖片
+    public ImageTask(String url, String playerId, int imageSize, ImageView imageView) {
         this.url = url;
-        this.shopId = shopId;
+        this.playerId = playerId;
         this.imageSize = imageSize;
         this.imageViewWeakReference = new WeakReference<>(imageView);
+        this.idType = "String";
     }
 
-    //==================================啟動doInBackground後抓一張圖===========================================================
+    // Group 取多張圖片
+    public ImageTask(String url, int groupNo, int imageSize, ImageView imageView) {
+        this.url = url;
+        this.groupNo = groupNo;
+        this.imageSize = imageSize;
+        this.imageViewWeakReference = new WeakReference<>(imageView);
+        this.idType = "int";
+    }
+
     @Override
     protected Bitmap doInBackground(Object... params) {
         JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("action", "getShopImage");
-        jsonObject.addProperty("shopId", shopId);
+        jsonObject.addProperty("action", "getImage");
+        jsonObject.addProperty("playerId", "emptyStr");
         jsonObject.addProperty("imageSize", imageSize);
-
+        jsonObject.addProperty("idType", idType);
+        if(idType.equals("String")) {
+            jsonObject.addProperty("imageId", playerId);
+        }else if(idType.equals("int")) {
+            jsonObject.addProperty("imageId", groupNo);
+        }
         return getRemoteImage(url, jsonObject.toString());
     }
 
-    //================================抓圖後 自動貼圖 ========================================================================
     @Override
     protected void onPostExecute(Bitmap bitmap) {
         ImageView imageView = imageViewWeakReference.get();
@@ -71,9 +84,9 @@ public class ShopImageTask extends AsyncTask<Object, Integer, Bitmap> {
         Bitmap bitmap = null;
         try {
             connection = (HttpURLConnection) new URL(url).openConnection();
-            connection.setDoInput(true); // allow inputs
-            connection.setDoOutput(true); // allow outputs
-            connection.setUseCaches(false); // do not use a cached copy
+            connection.setDoInput(true);
+            connection.setDoOutput(true);
+            connection.setUseCaches(false);
             connection.setRequestMethod("POST");
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(connection.getOutputStream()));
             bw.write(jsonOut);
@@ -98,3 +111,4 @@ public class ShopImageTask extends AsyncTask<Object, Integer, Bitmap> {
         return bitmap;
     }
 }
+

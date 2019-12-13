@@ -30,8 +30,11 @@ import com.example.boardgame.MainActivity;
 import com.example.boardgame.R;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -47,12 +50,11 @@ public class shop_infoFragment extends Fragment {
     private Gson gson = new Gson();
     private TextView tvShopId, shopTel, shopAddress, shopIntro, shopCharge, shopOpen, shopClose;
     private ConstraintLayout infoConstrainLayout;
-    private ImageView shopFristpic;
+    private ImageView shopFirstpic, ivGame;
     private CommonTask shopGetTask;
     private Shop shopDB;
     private Button btMap, btPhoneCall;
 
-    private ImageView shopfristpic;
     int Id;
     private RecyclerView shoppic;
     private SharedPreferences preferences;
@@ -80,8 +82,8 @@ public class shop_infoFragment extends Fragment {
     //  跟抓acitionbar
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        inflater.inflate(R.menu.actionbar, menu);
         super.onCreateOptionsMenu(menu, inflater);
+            inflater.inflate(R.menu.actionbar, menu);
     }
 
 
@@ -108,12 +110,12 @@ public class shop_infoFragment extends Fragment {
         shopIntro = view.findViewById(R.id.shop_intro);
         shopOpen = view.findViewById(R.id.shop_open);
         shopClose = view.findViewById(id.shop_close);
-        shopFristpic = view.findViewById(id.shop_fristpic);
+        shopFirstpic = view.findViewById(id.shopFirstpic);
+        ivGame = view.findViewById(R.id.ivGame);
         infoConstrainLayout = view.findViewById(R.id.infoConstrainLayout);
         shopCharge = view.findViewById(R.id.shop_charge);
         btMap = view.findViewById(R.id.btmap);
         btPhoneCall = view.findViewById(R.id.btphonecall);
-        shopfristpic = view.findViewById(id.shop_fristpic);
 
 
 //==========================================================Map監聽器========================================================
@@ -128,11 +130,10 @@ public class shop_infoFragment extends Fragment {
                     return;
                 }
 //=======================================抓到Address對googlemap server========================================================
-                String uriStr = String.format(Locale.US,
-                        "google.streetview:cbll=%f,%f", //用format去抓經緯度 %是抓值(緯度,經度) f是轉成浮點數 (先給緯度 再給經度)
-//                      getLatitude()抓第一個%f getLongitude()抓第二個%f
-                        address.getLatitude(), address.getLongitude());
-//                intent (給他一個動作 給他動作的內容)
+                // 用format去抓經緯度 %是抓值(緯度,經度) f是轉成浮點數 (先給緯度 再給經度)
+                // getLatitude()抓第一個%f getLongitude()抓第二個%f
+                String uriStr = String.format(Locale.getDefault(), "google.streetview:cbll=%f,%f", address.getLatitude(), address.getLongitude());
+                // intent (給他一個動作 給他動作的內容)
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uriStr)); //顯示(Action_view) uri(是位置、網址 顯示資訊)
                 intent.setPackage("com.google.android.apps.maps"); //指定用哪個app開(手機內建的googlemap id)   intent (給他一個動作 給他動作的內容)
                 startActivity(intent); //開啟手機內建的google map
@@ -142,33 +143,34 @@ public class shop_infoFragment extends Fragment {
         btPhoneCall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //获取输入的电话号码
+                // 獲取輸入的電話號碼
                 String phone = shopTel.getText().toString().trim();
                 Intent myIntentDial = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + phone));
                 startActivity(myIntentDial);
-
             }
         });
-
-
-
 
 //=======================================取得shop物件裡面的東西================================================================
 
         showShop(getShop());
-
-
-
+        getIvGame();
 
     }
 
     @Override
     public void onStart() {
         super.onStart();
-
-
-//      從偏好設定黨取出shopid 連結server並顯示shop資料
-
+        if (MainActivity.loginId == MainActivity.PLAYER) {
+            // 顯示 TabBar 及 BottomBar
+            MainActivity.changeBarsStatus(MainActivity.ONLY_BOTTOM);
+            // 置換 BottomBar 的 menu
+            MainActivity.setBottomBar(MainActivity.BOTTOM_PLAYER);
+        }else if(MainActivity.loginId == MainActivity.SHOP){
+            // 顯示 TabBar 及 BottomBar
+            MainActivity.changeBarsStatus(MainActivity.ONLY_BOTTOM);
+            // 置換 BottomBar 的 menu
+            MainActivity.setBottomBar(MainActivity.BOTTOM_SHOP);
+        }
     }
 
     private Address getAddress(String locationName) {
@@ -191,12 +193,13 @@ public class shop_infoFragment extends Fragment {
 
     //======================================跟資料庫連結取資料的資訊=============================================================
     private Shop getShop() {
+        Log.d(TAG, "getShop()");
 
         if(MainActivity.loginId == MainActivity.SHOP) {
             shopId = Integer.valueOf(com.example.boardgame.chat.Common.loadPlayerId(activity));
         }else if (MainActivity.loginId == MainActivity.PLAYER){
             shopId = bundle.getInt("shopId");
-            shopName = bundle.getString("shopName");
+            shopName = bundle.getString("tvShopName");
         }
 
         if (Common.networkConnected(activity)) {
@@ -228,6 +231,7 @@ public class shop_infoFragment extends Fragment {
 
 //========================================利用showShop 取出shopDB裡面的東西===============================================
     private void showShop(Shop shopDB) {
+        Log.d(TAG, "showShop()");
 
 //======================================秀出圖片============================================================================
 
@@ -237,25 +241,21 @@ public class shop_infoFragment extends Fragment {
         int imageSize = getResources().getDisplayMetrics().widthPixels / 100 * 68;
         Bitmap bitmap = null;
         try {
-            bitmap = new ShopImageTask(url, imageId, imageSize).execute().get();
+            shopImageTask = new ShopImageTask(url, imageId, imageSize, shopFirstpic);
+            shopImageTask.execute();
         } catch (Exception e) {
             Log.e(TAG, e.toString());
-        }
-        if (bitmap != null) {
-            shopFristpic.setImageBitmap(bitmap);
-        } else {
-            shopFristpic.setImageResource(R.drawable.no_image);
         }
 
 
 //======================================shops是集合 用for each 解開 抓值==================================================
-        int id = shopDB.getShopId() != 0 ? shopDB.getShopId() : 0;
-        String address = shopDB.getShopAddress() != "" ? shopDB.getShopAddress() : "";
-        int tel = shopDB.getShopTel() != 0 ? shopDB.getShopTel() : 0;
-        String intro = shopDB.getShopIntro() != "" ? shopDB.getShopIntro() : "";
-        String open = shopDB.getTimeOpen() != "" ? shopDB.getTimeOpen() : "";
-        String close = shopDB.getTimeClose() != "" ? shopDB.getTimeClose() : "";
-        int charge = shopDB.getShopCharge() != 0 ? shopDB.getShopCharge() : 0 ;
+        int id = shopDB.getShopId();
+        String address = shopDB.getShopAddress();
+        int tel = shopDB.getShopTel();
+        String intro = shopDB.getShopIntro();
+        String open = shopDB.getTimeOpen();
+        String close = shopDB.getTimeClose();
+        int charge = shopDB.getShopCharge();
 
 
         tvShopId.setText(String.valueOf(id == 0 ? "" : id));
@@ -274,5 +274,37 @@ public class shop_infoFragment extends Fragment {
         setHasOptionsMenu(false);
     }
 
+    public void getIvGame() {
+        List<Integer> shopGameList = new ArrayList<>();
+        if (Common.networkConnected(activity)) {
+            String url = Common.URL + "SignupServlet";
+            JsonObject jsonObject = new JsonObject();
+            jsonObject.addProperty("action", "getShopGameList");
+            jsonObject.addProperty("shopId", shopId);
+            String jsonOut = jsonObject.toString();
+            CommonTask gameGetAllTask = new CommonTask(url, jsonOut);
+            try {
+                String jsonIn = gameGetAllTask.execute().get();
+                Type listType = new TypeToken<List<Integer>>() {
+                }.getType();
+                shopGameList = new Gson().fromJson(jsonIn, listType);
+            } catch (Exception e) {
+                Log.e(TAG, e.toString());
+            }
+        } else {
+            Common.showToast(activity, R.string.textNoNetwork);
+        }
 
+        String url = Common.URL + "SignupServlet";
+        if(shopGameList.size()>0) {
+            int gameNo = shopGameList.get(0);
+            int imageSize = getResources().getDisplayMetrics().widthPixels / 100 * 68;
+            try {
+                GameImageTask gameImageTask = new GameImageTask(url, gameNo, imageSize, ivGame);
+                gameImageTask.execute();
+            } catch (Exception e) {
+                Log.e(TAG, e.toString());
+            }
+        }
+    }
 }

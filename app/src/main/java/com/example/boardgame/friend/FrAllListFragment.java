@@ -27,7 +27,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.boardgame.MainActivity;
 import com.example.boardgame.R;
+import com.example.boardgame.chat.Common;
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -37,7 +39,7 @@ import java.util.List;
 import java.util.Locale;
 
 public class FrAllListFragment extends Fragment {
-
+    private final static String TAG = "TAG_FrAllListFragment";
     private RecyclerView recyclerView;
     private SearchView searchView;
     private SearchView.OnQueryTextListener queryTextListener;
@@ -82,18 +84,23 @@ public class FrAllListFragment extends Fragment {
     }
 
     private List<FriendViewModel> getFriend() {
-        List<Friend> friends;
         List<FriendViewModel> friendViewModelList = new ArrayList<>();
-        MyTask task = new MyTask(
-                "http://10.0.2.2:8080/Advertisement_Server/GetFriendList",
-                "{\"player1Id\":\"myself\"}",
-                null
-        );
+
+//        ===== 有修改 =====
+        JsonObject jsonObject = new JsonObject();
+
+        jsonObject.addProperty("playerId", Common.loadPlayerId(getActivity()));
+        jsonObject.addProperty("action", "getAll");
+        String jsonOut = jsonObject.toString();
+
+        MyTask task = new MyTask("http://10.0.2.2:8080/Advertisement_Server/GetFriendList", jsonOut);
+//        ===============
+
         try {
             String result = task.execute().get();
             Log.i("POST_RESULT", result);
 
-            friends = convertJSONstringToFriendList(result);
+            List<Friend> friends = convertJSONstringToFriendList(result);
 
             for (Friend friend : friends) {
 

@@ -16,10 +16,13 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import com.example.boardgame.MainActivity;
 import com.example.boardgame.R;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
+import static com.example.boardgame.MainActivity.PLAYER;
+import static com.example.boardgame.chat.Common.savePlayerId;
 import static com.example.boardgame.shop.Common.showToast;
 
 
@@ -160,10 +163,13 @@ public class Shop_signupthree extends Fragment {
                         if (result != true) {
                             showToast(activity, "新增失敗，請重新輸入");
                         } else {
+                            // 紀錄登入身份
+                            MainActivity.loginId = MainActivity.SHOP;
+                            // 將假的 玩家id 存入 偏好設定
+                            savePlayerId(activity,String.valueOf(shop.getShopId()));
 
-                           Navigation.findNavController(view).navigate(R.id.action_shop_signupthree_to_shop_infoFragment, bundle);
-
-
+                            // 跳轉頁面（帶 Bundle 物件）
+                            Navigation.findNavController(view).navigate(R.id.action_shop_signupthree_to_shop_infoFragment, bundle);
                         }
 
                     } catch (Exception e) {

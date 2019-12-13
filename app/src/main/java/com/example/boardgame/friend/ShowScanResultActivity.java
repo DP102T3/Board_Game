@@ -2,12 +2,16 @@ package com.example.boardgame.friend;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,19 +22,23 @@ import android.widget.TextView;
 
 import com.example.boardgame.MainActivity;
 import com.example.boardgame.R;
+import com.example.boardgame.chat.Common;
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ShowScanResultActivity extends AppCompatActivity {
+    private static final String TAG = "TAG_ShowScanResultActivity";
 
     private RecyclerView recyclerView;
 
     @Override
     protected void onStart() {
         super.onStart();
-        MainActivity.changeBarsStatus(MainActivity.NEITHER_TAB_AND_BOTTOM);
+        MainActivity.changeBarsStatus(MainActivity.NEITHER_TAB_NOR_BOTTOM);
     }
 
     @Override
@@ -40,11 +48,10 @@ public class ShowScanResultActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         List<FriendViewModel> friendViewModelList = new ArrayList<>();
-        String jsonQRCode = getIntent().getStringExtra("QRCode");
-        Log.i("QRCode", jsonQRCode);
-        Gson gson = new Gson();
-        FriendViewModel friendViewModel = gson.fromJson(jsonQRCode, FriendViewModel.class);
-        friendViewModelList.add(friendViewModel);
+        String qrCodeStr = getIntent().getStringExtra("QRCode");
+        Log.i("QRCode", qrCodeStr);
+
+        friendViewModelList = searchNew(qrCodeStr);
         recyclerView.setAdapter(new ShowResultAdapter(this, friendViewModelList));
     }
 
@@ -64,27 +71,36 @@ public class ShowScanResultActivity extends AppCompatActivity {
         }
 
         @Override
-        public void onBindViewHolder(@NonNull MyViewHolder holder, int index) {
-            final FriendViewModel fv = friendViewModelList.get(index);
+        public void onBindViewHolder(@NonNull final MyViewHolder holder, int index) {
+            final FriendViewModel friendViewModel = friendViewModelList.get(index);
 
-            Log.i("fv", fv.getFrNkName());
-
-            holder.tvName.setText(fv.getFrNkName());
+            Log.i("friendViewModel", friendViewModel.getFrNkName());
+            holder.tvName.setText(friendViewModel.getFrNkName());
+            if (friendViewModel.getFrPic() != null) {
+                byte[] image = Base64.decode(friendViewModel.getFrPic(), Base64.DEFAULT);
+                Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
+                holder.ivFriend.setImageBitmap(bitmap);
+            }
             holder.btnInvite.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    String id = fv.getFrID();
-                    String json = String.format( "{\"player1Id\":\"myself\",\"player2Id\":\"%s\",\"inviteStatus\":1,\"pointCount\":0}", id);
-                    MyTask task = new MyTask(
-                            "http://10.0.2.2:8080/Advertisement_Server/CreateFriend",
-                            json,
-                            null);
+//        ===== 有修改 =====
+                    Gson gson = new Gson();
+
+                    Friend friend = new Friend(Common.loadPlayerId(ShowScanResultActivity.this), friendViewModel.getFrID(), friendViewModel.getPointCount(), 1);
+                    String jsonOut = gson.toJson(friend);
+
+                    MyTask task = new MyTask("http://10.0.2.2:8080/Advertisement_Server/CreateFriend", jsonOut);
+//        ===============
                     try {
-                        String result = task.execute().get();
-                        Log.i("POST_RESULT", result);
-//                        Intent intent = new Intent(getApplicationContext(), FriendMainActivity.class);
-//                        intent.putExtra("inviting", 3);
-//                        startActivity(intent);
+                        int result = Integer.valueOf(task.execute().get());
+                        if (result != 0) {
+                            Common.showToast(ShowScanResultActivity.this, "已送出邀請");
+                            Navigation.findNavController(holder.btnInvite).popBackStack();
+                        } else {
+                            Log.d(TAG, "新增好友失敗，請重新開啟 App");
+                        }
+                        notifyDataSetChanged();
                     } catch (Exception e) {
                         Log.e("Error", e.toString());
                     }
@@ -108,5 +124,33 @@ public class ShowScanResultActivity extends AppCompatActivity {
                 tvName = itemView.findViewById(R.id.tvName);
                 btnInvite = itemView.findViewById(R.id.btnInvite);
             }
+    }
+
+    public List<FriendViewModel> searchNew(String searchId) {
+        List<Friend> newPlayers;
+        Friend newPlayer;
+        List<FriendViewModel> friendViewModel = new ArrayList<>();
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("playerId", Common.loadPlayerId(ShowScanResultActivity.this));
+        jsonObject.addProperty("action", "searchNew");
+        jsonObject.addProperty("searchId", searchId);
+        String jsonOut = jsonObject.toString();
+        MyTask task = new MyTask("http://10.0.2.2:8080/Advertisement_Server/GetFriendList", jsonOut);
+
+        try {
+            Gson gson = new Gson();
+            String result = task.execute().get();
+            Log.i("POST_RESULT", result);
+            newPlayers = gson.fromJson(result, new TypeToken<List<Friend>>() {
+            }.getType());
+            newPlayer = newPlayers.get(0);
+            friendViewModel.add(new FriendViewModel(newPlayer.getPlayer2Name(), newPlayer.getPlayer2Pic(), "", newPlayer.getPlayer2Id()));
+            Log.d(TAG, "FriendViewModel = " + gson.toJson(new FriendViewModel(newPlayer.getPlayer2Name(), newPlayer.getPlayer2Pic(), "", newPlayer.getPlayer2Id())));
+
+        } catch (Exception e) {
+            Log.e("Error", e.toString());
+        }
+
+        return friendViewModel;
     }
 }

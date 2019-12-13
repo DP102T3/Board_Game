@@ -149,23 +149,18 @@ public class BlackListStore extends Fragment {
             this.shopList = shopList;
         }
 
-
         class MyViewHolder extends RecyclerView.ViewHolder {
-            ImageView ivShop, ivStar, ivMap;
-            TextView shopName, shopAddress, rateTotal;
-
+            ImageView ivShop, ivStarIcon, ivMapIcon;
+            TextView tvShopName, tvShopAddress, tvShopRate;
 
             MyViewHolder(View itemView) {
                 super(itemView);
-                ivStar = itemView.findViewById(R.id.ivStar);
-                ivMap = itemView.findViewById(R.id.ivMap);
-                shopName = itemView.findViewById(R.id.shopName);
-                shopAddress = itemView.findViewById(R.id.shopAdress);
+                ivStarIcon = itemView.findViewById(R.id.ivStarIcon);
+                ivMapIcon = itemView.findViewById(R.id.ivMapIcon);
+                tvShopName = itemView.findViewById(R.id.tvShopName);
+                tvShopAddress = itemView.findViewById(R.id.tvShopAddress);
                 ivShop = itemView.findViewById(R.id.ivShop);
-                rateTotal = itemView.findViewById(R.id.rateTotal);
-
-
-
+                tvShopRate = itemView.findViewById(R.id.tvShopRate);
             }
         }
 
@@ -174,11 +169,10 @@ public class BlackListStore extends Fragment {
             return shopList.size();
         }
 
-
         @NonNull
         @Override
         public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View itemView = layoutInflater.inflate(R.layout.shop_view_store, parent, false);
+            View itemView = layoutInflater.inflate(R.layout.item_view_shop_list, parent, false);
             return new MyViewHolder(itemView);
         }
 //======================================================抓圖=====================================================================
@@ -187,7 +181,6 @@ public class BlackListStore extends Fragment {
         public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int position) {
 
                 final Shop shop = shopList.get(position);
-
 
                 String url = Common.URL + "SignupServlet";
                 JsonObject jsonObject = new JsonObject();
@@ -203,10 +196,9 @@ public class BlackListStore extends Fragment {
                 ShopImageTask.execute();
 
 
-                myViewHolder.shopName.setText(shop.getShopName());
-                myViewHolder.shopAddress.setText(shop.getShopAddress());
-                myViewHolder.shopAddress.setText(shop.getShopAddress());
-                myViewHolder.rateTotal.setText(String.valueOf(shop.getRateTotal()));
+                myViewHolder.tvShopName.setText(shop.getShopName());
+                myViewHolder.tvShopAddress.setText(shop.getShopAddress());
+                myViewHolder.tvShopRate.setText(String.valueOf(shop.getRateTotal()));
 
 
 

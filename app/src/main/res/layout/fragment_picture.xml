@@ -10,8 +10,8 @@
         android:id="@+id/bt_Takepic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="76dp"
-        android:layout_marginTop="86dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="64dp"
         android:background="@drawable/takepic"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -20,30 +20,29 @@
         android:id="@+id/txtakepic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="68dp"
-        android:layout_marginTop="108dp"
+        android:layout_marginStart="72dp"
         android:text="拍攝照片"
+        app:layout_constraintBottom_toBottomOf="@+id/bt_Takepic"
         app:layout_constraintStart_toEndOf="@+id/bt_Takepic"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/bt_Takepic" />
 
     <Button
         android:id="@+id/bt_Choisepic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="76dp"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="72dp"
         android:background="@drawable/choisepic"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/bt_Takepic"
         app:layout_constraintTop_toBottomOf="@+id/bt_Takepic" />
 
     <TextView
         android:id="@+id/textView23"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="68dp"
-        android:layout_marginTop="120dp"
+        android:layout_marginStart="72dp"
         android:text="選擇照片"
+        app:layout_constraintBottom_toBottomOf="@+id/bt_Choisepic"
         app:layout_constraintEnd_toEndOf="@+id/txtakepic"
         app:layout_constraintStart_toEndOf="@+id/bt_Choisepic"
-        app:layout_constraintTop_toBottomOf="@+id/txtakepic" />
+        app:layout_constraintTop_toTopOf="@+id/bt_Choisepic" />
 </androidx.constraintlayout.widget.ConstraintLayout>

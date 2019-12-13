@@ -16,6 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -43,10 +45,20 @@ public class ShopListFragment extends Fragment {
     public RecyclerView rvShopList;
     public List<Shop> shops;
 
+    //  變更acition bar
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.shop_actionbar_forplayer, menu);
+    }
+
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activity = getActivity();
+        // 顯示出上層的optionmenu
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -87,7 +99,7 @@ public class ShopListFragment extends Fragment {
     // 到 Servlet 取得所有 Shop 資料
     private void getShops() {
         // 連線Servlet取得playerId所有Friends資料
-        if(Common.networkConnected(activity)){
+        if (Common.networkConnected(activity)) {
             String url = Common.URL + "SignupServlet";
             JsonObject jsonOut = new JsonObject();
             jsonOut.addProperty("action", "getShopAll");
@@ -95,16 +107,17 @@ public class ShopListFragment extends Fragment {
             shops = new ArrayList<>();
             try {
                 String inStr = new CommonTask(url, jsonOut.toString()).execute().get();
-                shops = new Gson().fromJson(inStr, new TypeToken<List<Shop>>(){}.getType());
-            }catch (Exception e){
+                shops = new Gson().fromJson(inStr, new TypeToken<List<Shop>>() {
+                }.getType());
+            } catch (Exception e) {
                 Log.e(TAG, e.toString());
             }
-            if(shops == null){
+            if (shops == null) {
                 Common.showToast(activity, R.string.txNoShop);
-            }else {
+            } else {
                 Log.d(TAG, "Get shops success !");
             }
-        }else {
+        } else {
             Common.showToast(activity, R.string.tx_NoNetwork);
         }
     }
@@ -113,6 +126,7 @@ public class ShopListFragment extends Fragment {
     private class ShopListAdapter extends RecyclerView.Adapter<ShopListAdapter.MyViewHolder> {
         private Activity activity;
         private List<Shop> shops;
+
         public ShopListAdapter(Activity activity, List<Shop> shops) {
             this.activity = activity;
             this.shops = shops;
@@ -120,7 +134,7 @@ public class ShopListFragment extends Fragment {
 
         @Override
         public int getItemCount() {
-            if(shops == null){
+            if (shops == null) {
                 return 0;
             }
             return shops.size();
@@ -129,6 +143,7 @@ public class ShopListFragment extends Fragment {
         private class MyViewHolder extends RecyclerView.ViewHolder {
             public ImageView ivShop;
             public TextView tvShopName, tvShopRate, tvShopAddress;
+            public ImageView ivStarIcon;
 
             public MyViewHolder(View itemView) {
                 super(itemView);
@@ -136,6 +151,7 @@ public class ShopListFragment extends Fragment {
                 this.tvShopName = itemView.findViewById(R.id.tvShopName);
                 this.tvShopRate = itemView.findViewById(R.id.tvShopRate);
                 this.tvShopAddress = itemView.findViewById(R.id.tvShopAddress);
+                this.ivStarIcon = itemView.findViewById(R.id.ivStarIcon);
             }
         }
 
@@ -151,10 +167,17 @@ public class ShopListFragment extends Fragment {
             final Shop shop = shops.get(position);
             double rateTotal = shop.getRateTotal();
             int rateCount = shop.getRateCount();
-            double rate =  rateTotal/rateCount;
+
+            double rate=0;
+            if(rateCount!=0) {
+                rate = rateTotal / rateCount;
+                holder.tvShopRate.setText(String.format("%.1f", rate));
+            }else {
+                holder.ivStarIcon.setVisibility(View.GONE);
+                holder.tvShopRate.setText("暫無評價");
+            }
 
             holder.tvShopName.setText(shop.getShopName());
-            holder.tvShopRate.setText(String.format("%.1f", rate));
             holder.tvShopAddress.setText(shop.getShopAddress());
 
             // 以 shopId 到 Servlet 取圖
@@ -178,8 +201,8 @@ public class ShopListFragment extends Fragment {
                 public void onClick(View v) {
                     Bundle bundle = new Bundle();
                     bundle.putInt("shopId", shop.getShopId());
-                    bundle.putString("shopName", shop.getShopName());
-                    Log.d(TAG, String.format("shopId = %d, shopName = %s",shop.getShopId(), shop.getShopName()));
+                    bundle.putString("tvShopName", shop.getShopName());
+                    Log.d(TAG, String.format("shopId = %d, tvShopName = %s", shop.getShopId(), shop.getShopName()));
                     // 待加上挑轉次頁 action id
                     Navigation.findNavController(v).navigate(R.id.action_shopListFragment_to_shop_infoFragment, bundle);
                 }

@@ -12,6 +12,7 @@
         android:title="活動"
         android:icon="@drawable/icon_activity"/>
     <item
+        android:id="@+id/navigation_graph_ad"
         android:title="廣告"
         android:icon="@drawable/icon_ad"/>
 

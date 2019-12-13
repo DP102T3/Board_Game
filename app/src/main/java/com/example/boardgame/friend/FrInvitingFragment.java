@@ -28,7 +28,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.boardgame.MainActivity;
 import com.example.boardgame.R;
+import com.example.boardgame.chat.Common;
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
@@ -36,6 +38,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FrInvitingFragment extends Fragment {
+    private static final String TAG = "TAG_FrInvitingFragment";
 
     private RecyclerView recyclerView;
     private List<FriendViewModel> friendViewModelList = new ArrayList<>();
@@ -68,21 +71,25 @@ public class FrInvitingFragment extends Fragment {
     }
 
     private void getFriend() {
-        MyTask task = new MyTask(
-                "http://10.0.2.2:8080/Advertisement_Server/GetFriendList",
-                "{\"player1Id\":\"myself\"}",
-                null
-        );
+        JsonObject jsonObject = new JsonObject();
+//        ===== 有修改 =====
+        jsonObject.addProperty("playerId", Common.loadPlayerId(getActivity()));
+        jsonObject.addProperty("action", "inviting");
+        String jsonOut = jsonObject.toString();
+//        ===============
+        MyTask task = new MyTask("http://10.0.2.2:8080/Advertisement_Server/GetFriendList", jsonOut);
+
         try {
             String result = task.execute().get();
             Log.i("POST_RESULT", result);
 
-            List<Friend>  friends = convertJSONstringToFriendList(result);
+            List<Friend> friends = convertJSONstringToFriendList(result);
 
             for (Friend friend : friends) {
 
                 FriendViewModel friendViewModel = new FriendViewModel(friend.getPlayer2Name(),
                         friend.getPlayer2Pic(), friend.getPlayer2Mood(), friend.getPlayer2Id());
+
                 if (friend.getInviteStatus() == 1) {
                     friendViewModelList.add(friendViewModel);
                 }
@@ -95,6 +102,9 @@ public class FrInvitingFragment extends Fragment {
 
     private List<Friend> convertJSONstringToFriendList(String json) {
         Gson gson = new Gson();
+        if(json==null){
+            return new ArrayList<>();
+        }
         FriendListResult friendListResult = gson.fromJson(json, FriendListResult.class);
         return friendListResult.getResult();
     }
@@ -122,19 +132,27 @@ public class FrInvitingFragment extends Fragment {
             holder.btnDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    MyTask task = new MyTask(
-                            "http://10.0.2.2:8080/Advertisement_Server/DeleteFriend",
-                            String.format("{\"player1Id\":\"myself\",\"player2Id\":\"%s\"}", friendViewModel.getFrID()),
-                            null);
+//        ===== 有修改 =====
+                    Gson gson = new Gson();
+
+                    Friend friend = new Friend(Common.loadPlayerId(getActivity()), friendViewModel.getFrID());
+                    String jsonOut = gson.toJson(friend);
+
+                    MyTask task = new MyTask("http://10.0.2.2:8080/Advertisement_Server/DeleteFriend", jsonOut);
+
                     try {
                         String result = task.execute().get();
-                        friends.remove(index);
-                        notifyDataSetChanged();
                         Log.i("POST_RESULT", result);
-
+                        if (!"0".equals(result)) {
+                            friends.remove(index);
+                            notifyDataSetChanged();
+                        }else {
+                            Log.d(TAG, "Delete invitation failed !");
+                        }
                     } catch (Exception e) {
                         Log.e("Error", e.toString());
                     }
+//        ===============
                 }
             });
 
@@ -146,7 +164,9 @@ public class FrInvitingFragment extends Fragment {
         }
 
         @Override
-        public int getItemCount() { return friends.size(); }
+        public int getItemCount() {
+            return friends.size();
+        }
     }
 
     private class MyViewHolder extends RecyclerView.ViewHolder {
@@ -176,7 +196,7 @@ public class FrInvitingFragment extends Fragment {
 
         Log.i("InF", String.valueOf(id));
 
-        switch (id){
+        switch (id) {
             case R.id.action_fradd:
                 Intent intent = new Intent(getContext(), FrAddActivity.class);
                 startActivity(intent);

@@ -35,15 +35,13 @@ public class GameinfoFragment extends Fragment {
     private SwipeRefreshLayout swipeRefreshLayout;
     private Activity activity;
     private RecyclerView rvGame;
-    private CommonTask GameGetAllTask;
+    private CommonTask gameGetAllTask;
     private GameImageTask gameImageTask;
     private List<Game> gameDB;
     private Gson gson;
-    List<Integer> gameNos;
 
-
-
-
+    public static List<Integer> gameChecked;
+    public static List<Integer> shopGameList;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,7 +49,6 @@ public class GameinfoFragment extends Fragment {
         setHasOptionsMenu(true);
         activity = getActivity();
         gson = new Gson();
-        gameNos =new ArrayList<>();
     }
 
 
@@ -65,7 +62,7 @@ public class GameinfoFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
+        activity.setTitle("請選取欲加入項目");
         return inflater.inflate(R.layout.fragment_gameinfo, container, false);
     }
 
@@ -79,6 +76,11 @@ public class GameinfoFragment extends Fragment {
 
         rvGame.setLayoutManager(new LinearLayoutManager(activity));
         new LinearLayoutManager(getActivity());
+
+        shopGameList = new ArrayList<>();
+        shopGameList = getShopGameList();
+        gameChecked = new ArrayList<>(shopGameList);
+
         gameDB = getGames();
         showGameDB(gameDB);
 //====================================往下滑刷新======================================================
@@ -94,7 +96,12 @@ public class GameinfoFragment extends Fragment {
 //================================搜尋=====================================================================
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-            public boolean onQueryTextSubmit(String newText) {
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
                 if (newText.isEmpty()) {
                     showGameDB(gameDB);
                 } else {
@@ -110,24 +117,18 @@ public class GameinfoFragment extends Fragment {
                 return true;
             }
 
-            @Override
-            public boolean onQueryTextChange(String s) {
-                return false;
-            }
-
         });
     }
 
     private List<Game> getGames() {
-        List<Game> gameDB = null;
         if (Common.networkConnected(activity)) {
             String url = Common.URL + "SignupServlet";
             JsonObject jsonObject = new JsonObject();
             jsonObject.addProperty("action", "getAllGame");
             String jsonOut = jsonObject.toString();
-            GameGetAllTask = new CommonTask(url, jsonOut);
+            gameGetAllTask = new CommonTask(url, jsonOut);
             try {
-                String jsonIn = GameGetAllTask.execute().get();
+                String jsonIn = gameGetAllTask.execute().get();
                 Type listType = new TypeToken<List<Game>>() {
                 }.getType();
                 gameDB = new Gson().fromJson(jsonIn, listType);
@@ -138,6 +139,28 @@ public class GameinfoFragment extends Fragment {
             Common.showToast(activity, R.string.textNoNetwork);
         }
         return gameDB;
+    }
+
+    private List<Integer> getShopGameList() {
+        if (Common.networkConnected(activity)) {
+            String url = Common.URL + "SignupServlet";
+            JsonObject jsonObject = new JsonObject();
+            jsonObject.addProperty("action", "getShopGameList");
+            jsonObject.addProperty("shopId", Integer.valueOf(com.example.boardgame.chat.Common.loadPlayerId(activity)));
+            String jsonOut = jsonObject.toString();
+            gameGetAllTask = new CommonTask(url, jsonOut);
+            try {
+                String jsonIn = gameGetAllTask.execute().get();
+                Type listType = new TypeToken<List<Integer>>() {
+                }.getType();
+                shopGameList = new Gson().fromJson(jsonIn, listType);
+            } catch (Exception e) {
+                Log.e(TAG, e.toString());
+            }
+        } else {
+            Common.showToast(activity, R.string.textNoNetwork);
+        }
+        return shopGameList;
     }
 
     private void showGameDB(List<Game> gameDB) {
@@ -179,21 +202,24 @@ public class GameinfoFragment extends Fragment {
 
         class MyViewHolder extends RecyclerView.ViewHolder {
             ImageView ivGame, ivChecked;
-            TextView tvGame, tvkind;
+            TextView tvGameName, tvGameKind;
 
 
             MyViewHolder(View itemView) {
                 super(itemView);
                 ivGame = itemView.findViewById(R.id.ivGame);
-                tvGame = itemView.findViewById(R.id.tvGame);
-                tvkind = itemView.findViewById(R.id.tvkind);
+                tvGameName = itemView.findViewById(R.id.tvGameName);
+                tvGameKind = itemView.findViewById(R.id.tvGameKind);
                 ivChecked = itemView.findViewById(R.id.ivChecked);
 
 
             }
         }
+
         @Override
-        public int getItemCount(){return gameDB.size();}
+        public int getItemCount() {
+            return gameDB.size();
+        }
 
 
         @NonNull
@@ -205,46 +231,45 @@ public class GameinfoFragment extends Fragment {
 
         //======================================================抓圖=====================================================================
         @Override
-        public void onBindViewHolder(@NonNull final MyViewHolder myViewHolder , int position) {
+        public void onBindViewHolder(@NonNull final MyViewHolder myViewHolder, int position) {
             final Game game = gameDB.get(position);
-            if (gameNos.contains(game.getGameNo())) {
+            if (gameChecked.contains(game.getGameNo())) {
                 myViewHolder.ivChecked.setVisibility(View.VISIBLE);
             } else {
                 myViewHolder.ivChecked.setVisibility(View.INVISIBLE);
             }
 
-
+//==================跟server端 要網址 抓id 跟server端說要(imageSize)圖的大小(用Adapter取得螢幕的寬度)=================================
             String url = Common.URL + "SignupServlet";
             JsonObject jsonObject = new JsonObject();
             jsonObject.addProperty("action", "getGameImage");
-//                                                      取Game裡面的Gameno
             jsonObject.addProperty("gameno", game.getGameNo());
 
             int gameNo = game.getGameNo();
 
-
-
-//==================跟server端 要網址 抓id 跟server端說要(imageSize)圖的大小(用Adapter取得螢幕的寬度)=================================
             gameImageTask = new GameImageTask(url, gameNo, imageSize, myViewHolder.ivGame);
             gameImageTask.execute();
 
-
-            myViewHolder.tvGame.setText(String.valueOf(game.getGameNo()));
-            myViewHolder.tvkind.setText(game.getGameType());
+            myViewHolder.tvGameName.setText(String.valueOf(game.getGamName()));
+            myViewHolder.tvGameKind.setText(game.getGameType());
 
 //====================================玩家選取遊戲類型========================================================
             myViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int index = 0;
-                    if ((index = gameNos.indexOf(game.getGameNo())) != -1) {
-                        gameNos.remove(index);
+                    if ((index = gameChecked.indexOf(game.getGameNo())) != -1) {
+                        gameChecked.remove(index);
+                        Log.d(TAG, "gameChecked remove " + game.getGameNo());
                         myViewHolder.ivChecked.setVisibility(View.INVISIBLE);
                     } else {
-                        gameNos.add(game.getGameNo());
+                        gameChecked.add(game.getGameNo());
+                        Log.d(TAG, "gameChecked add " + game.getGameNo());
                         myViewHolder.ivChecked.setVisibility(View.VISIBLE);
                     }
-
+                    Log.d(TAG, "========== before save game ==========");
+                    Log.d(TAG, "shopGameList = " + new Gson().toJson(shopGameList));
+                    Log.d(TAG, "gameChecked = " + new Gson().toJson(gameChecked));
                 }
             });
 

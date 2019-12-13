@@ -33,14 +33,19 @@ import java.util.List;
 import java.util.Locale;
 
 public class AdNowFragment extends Fragment {
+    private static final String TAG = "TAG_AdNowFragment";
 
     private RecyclerView recyclerView;
 
     @Override
     public void onStart() {
         super.onStart();
+        // 顯示 TabBar 及 BottomBar
         MainActivity.changeBarsStatus(MainActivity.BOTH_TAB_AND_BOTTOM);
-//        MainActivity.setBottomBar(MainActivity.);
+        // 置換 TabBar 的 menu
+        MainActivity.setTabBar(MainActivity.TAB_ADVERTISEMENT);
+        // 置換 BottomBar 的 menu
+        MainActivity.setBottomBar(MainActivity.BOTTOM_SHOP);
 
     }
 
@@ -74,6 +79,8 @@ public class AdNowFragment extends Fragment {
             }
         });
     }
+
+
 
     private List<AdNow> getAdNowList() {
         List<AdNow> adNowList = new ArrayList<>();

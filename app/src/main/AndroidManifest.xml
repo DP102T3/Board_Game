@@ -14,9 +14,6 @@
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.CAMERA"/>
-
-    <uses-feature android:name="android.hardware.camera" />
 
     <!--android:usesCleartextTraffic="true"     允許未加密連線-->
     <application
@@ -51,6 +48,7 @@
             android:name=".friend.ShowQRActivity"
             android:launchMode="singleTop"/>
         <activity android:name=".friend.QRChooseActivity" />
+        <activity android:name=".friend.FrInvitingFragment"/>
         <activity android:name=".friend.FrAddActivity" />
         <activity
             android:name="com.journeyapps.barcodescanner.CaptureActivity"

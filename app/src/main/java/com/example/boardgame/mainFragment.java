@@ -14,7 +14,6 @@ import androidx.navigation.Navigation;
 
 import static com.example.boardgame.MainActivity.ADMIN;
 import static com.example.boardgame.MainActivity.PLAYER;
-import static com.example.boardgame.MainActivity.SHOP;
 import static com.example.boardgame.MainActivity.loginId;
 import static com.example.boardgame.chat.Common.savePlayerId;
 
@@ -102,6 +101,6 @@ public class mainFragment extends Fragment {
     public void onStart() {
         super.onStart();
         // 隱藏 TabBar 及 BottomBar
-        MainActivity.changeBarsStatus(MainActivity.NEITHER_TAB_AND_BOTTOM);
+        MainActivity.changeBarsStatus(MainActivity.NEITHER_TAB_NOR_BOTTOM);
     }
 }

@@ -36,7 +36,7 @@
     <string name="textUpdateFail">update fail</string>
     <string name="textNoShopFound">no shop found</string>
     <string name="textNoShopImageFound">no shop image found</string>
-    <string name="add">add</string>
+    <string name="addGame">add</string>
     <string name="textMessage">是否確認新增遊戲?</string>
     <string name="textYes">是</string>
     <string name="textNo">否</string>
@@ -128,5 +128,6 @@
     <string name="btnInvite">邀請</string>
     <string name="txSignUpSuccessed">Sign Up Successed</string>
     <string name="txNoShop">Can not find any shop information.</string>
+    <string name="txShopGameListUpdateFailed">ShopGameList update failed !</string>
 
 </resources>

@@ -87,10 +87,13 @@ public class PointActivity extends AppCompatActivity {
         );
 
         try {
-//            pointCount = Integer.valueOf(task.execute().get());
             String result = task.execute().get();
-            Log.i(TAG, result);
-            tvPoints.setText(result);
+            if(result != "") {
+                Log.i(TAG, result);
+                tvPoints.setText(result);
+            } else {
+                tvPoints.setText("ERROR");
+            }
         } catch (Exception e) {
             Log.e("Error", e.toString());
         }

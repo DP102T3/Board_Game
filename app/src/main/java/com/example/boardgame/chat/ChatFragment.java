@@ -342,7 +342,7 @@ public class ChatFragment extends Fragment {
         super.onStart();
 
         // 隱藏 TabBar 及 BottomBar
-        MainActivity.changeBarsStatus(MainActivity.NEITHER_TAB_AND_BOTTOM);
+        MainActivity.changeBarsStatus(MainActivity.NEITHER_TAB_NOR_BOTTOM);
 
         // 宣告 broadcastManager實體
         broadcastManager = LocalBroadcastManager.getInstance(activity);

@@ -65,7 +65,7 @@ public class AdNewFragment extends Fragment implements DatePickerDialog.OnDateSe
     @Override
     public void onStart() {
         super.onStart();
-        MainActivity.changeBarsStatus(MainActivity.NEITHER_TAB_AND_BOTTOM);
+        MainActivity.changeBarsStatus(MainActivity.NEITHER_TAB_NOR_BOTTOM);
     }
 
     @Override
