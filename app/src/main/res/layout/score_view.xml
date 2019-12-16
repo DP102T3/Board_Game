@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/btReportPlayer"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:text="檢舉"
+            app:layout_constraintEnd_toEndOf="@+id/rbPlayer"
+            app:layout_constraintTop_toTopOf="@+id/tvPlayerName" />
+
+        <ImageView
+            android:id="@+id/ivPlayer"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/no_image" />
+
+        <RatingBar
+            android:id="@+id/rbPlayer"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            app:layout_constraintBottom_toBottomOf="@+id/ivPlayer"
+            app:layout_constraintStart_toStartOf="@+id/tvPlayerName" />
+
+        <TextView
+            android:id="@+id/tvPlayerName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:text="TextView"
+            android:textSize="30sp"
+            app:layout_constraintStart_toEndOf="@+id/ivPlayer"
+            app:layout_constraintTop_toTopOf="@+id/ivPlayer" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

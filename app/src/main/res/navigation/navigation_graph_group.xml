@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_graph_group"
+    app:startDestination="@id/groupsFragment">
+
+    <fragment
+        android:id="@+id/add_fragment"
+        android:name="com.example.boardgame.group.playerUse.Add_fragment"
+        android:label="fragment_add_fragment"
+        tools:layout="@layout/fragment_add_fragment" >
+        <action
+            android:id="@+id/action_add_fragment_to_pictureFragment"
+            app:destination="@id/pictureFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/pictureFragment"
+        android:name="com.example.boardgame.group.PictureFragment"
+        android:label="fragment_picture"
+        tools:layout="@layout/fragment_picture_group" />
+    <fragment
+        android:id="@+id/groupsFragment"
+        android:name="com.example.boardgame.group.playerUse.GroupsFragment"
+        android:label="fragment_groups"
+        tools:layout="@layout/fragment_groups" >
+        <action
+            android:id="@+id/action_groupsFragment_to_groupDetailFragment"
+            app:destination="@id/groupDetailFragment" />
+        <action
+            android:id="@+id/action_groupsFragment_to_add_fragment"
+            app:destination="@id/add_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/groupDetailFragment"
+        android:name="com.example.boardgame.group.playerUse.GroupDetailFragment"
+        android:label="fragment_group_detail"
+        tools:layout="@layout/fragment_group_detail" >
+        <action
+            android:id="@+id/action_groupDetailFragment_to_sign_in"
+            app:destination="@id/sign_in" />
+        <action
+            android:id="@+id/action_groupDetailFragment_to_scoreFragment"
+            app:destination="@id/scoreFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/groupCheckFragment"
+        android:name="com.example.boardgame.group.ShopUse.groupCheckFragment"
+        android:label="fragment_group_check"
+        tools:layout="@layout/fragment_group_check" >
+        <action
+            android:id="@+id/action_groupCheckFragment_to_group_check_detail_Fragment"
+            app:destination="@id/group_check_detail_Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/group_check_detail_Fragment"
+        android:name="com.example.boardgame.group.ShopUse.group_check_detail_Fragment"
+        android:label="fragment_group_check_detail_"
+        tools:layout="@layout/fragment_group_check_detail_" />
+    <fragment
+        android:id="@+id/sign_in"
+        android:name="com.example.boardgame.group.playerUse.sign_in"
+        android:label="fragment_sign_in"
+        tools:layout="@layout/fragment_sign_in" />
+    <fragment
+        android:id="@+id/group_checked"
+        android:name="com.example.boardgame.group.ShopUse.groupCheckedFragment"
+        android:label="fragment_group_checked"
+        tools:layout="@layout/fragment_group_checked">
+        <action
+            android:id="@+id/action_group_check_to_group_checked_detail"
+            app:destination="@id/group_checked_detail" />
+    </fragment>
+    <fragment
+        android:id="@+id/group_checked_detail"
+        android:name="com.example.boardgame.group.ShopUse.group_checked_detail_Fragment"
+        android:label="fragment_group_checked_detail"
+        tools:layout="@layout/fragment_group_checked_detail" />
+    <fragment
+        android:id="@+id/groups_have_Fragment"
+        android:name="com.example.boardgame.group.ShopUse.groups_have_Fragment"
+        android:label="fragment_groups_have_"
+        tools:layout="@layout/fragment_groups_have_" >
+        <action
+            android:id="@+id/action_groups_have_Fragment_to_group_checked_detail"
+            app:destination="@id/group_checked_detail" />
+    </fragment>
+    <fragment
+        android:id="@+id/scoreFragment"
+        android:name="com.example.boardgame.group.playerUse.ScoreFragment"
+        android:label="fragment_score"
+        tools:layout="@layout/fragment_score" />
+</navigation>

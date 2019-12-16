@@ -15,6 +15,11 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
+    <!-- for MapView -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+
     <!--android:usesCleartextTraffic="true"     允許未加密連線-->
     <application
         android:allowBackup="false"
@@ -25,6 +30,14 @@
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme">
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDVAxq2xWI-G-LeowOsPE6okFwtdQlYuaI" />
 
         <receiver android:name=".notification.UserAlarm.SystemBootReceiver"/>
         <receiver android:name=".notification.UserAlarm.SystemNotificationReceiver">

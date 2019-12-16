@@ -130,4 +130,21 @@
     <string name="txNoShop">Can not find any shop information.</string>
     <string name="txShopGameListUpdateFailed">ShopGameList update failed !</string>
 
+    <!-- 揪團 -->
+    <string name="NotOK">資訊還沒填寫完整喔</string>
+    <string name="textpMpL">人數部分填寫錯誤</string>
+    <string name="textNoAreasFound">找不到資料</string>
+    <string name="textNoGroupsFound">目前沒有任何揪團</string>
+    <string name="timeToEarly">開團日期不能在今天以前</string>
+    <string name="joinTimeToEarly">報名截止日期不能在今天以前</string>
+    <string name="joinTimeError">報名截止日期不能在開團日期以後</string>
+    <string name="joinMaxError">此團報名已滿</string>
+    <string name="joinConditionError">抱歉，您不符合參加條件</string>
+    <string name="textNogroupsCheckFound">沒有未審核的揪團</string>
+    <string name="textNogroupsHaveFound">沒有已成團的揪團</string>
+    <string name="textNogroupsCheckedFound">沒有已審核的揪團</string>
+    <string name="textSignInError">簽到失敗</string>
+    <string name="textSignInSuccess">簽到成功</string>
+    <string name="textNoMember">沒有成員</string>
+
 </resources>

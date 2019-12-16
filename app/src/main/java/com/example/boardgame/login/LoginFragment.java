@@ -85,7 +85,7 @@ public class LoginFragment extends Fragment {
                         // 紀錄登入身份
                         loginId = PLAYER;
                         // 跳轉到玩家首頁（暫時設定跳轉到聊天頁面）
-                        Navigation.findNavController(view).navigate(R.id.listFriendsFragment);
+                        Navigation.findNavController(view).navigate(R.id.navigation_graph_group);
                         break;
                     case "shop":
                         // 紀錄登入身份

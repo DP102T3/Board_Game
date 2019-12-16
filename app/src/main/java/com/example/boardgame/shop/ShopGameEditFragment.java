@@ -269,7 +269,7 @@ public class ShopGameEditFragment extends Fragment {
                         myViewHolder.ivChecked.setVisibility(View.INVISIBLE);
                     } else {
                         gameChecked.add(game.getGameNo());
-                        Log.d(TAG, "gameChecked add " + game.getGameNo());
+                        Log.d(TAG, "gameChecked add_icon " + game.getGameNo());
                         myViewHolder.ivChecked.setVisibility(View.VISIBLE);
                     }
                     Log.d(TAG, "========== before save game ==========");
