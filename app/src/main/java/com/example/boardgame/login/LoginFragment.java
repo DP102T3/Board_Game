@@ -31,7 +31,7 @@ import static com.example.boardgame.MainActivity.SHOP;
 import static com.example.boardgame.MainActivity.loginId;
 import static com.example.boardgame.MainActivity.onBottomId;
 import static com.example.boardgame.MainActivity.onTabMenu;
-import static com.example.boardgame.chat.Common.disConnectSocket;
+import static com.example.boardgame.chat.Common.loadPlayerId;
 import static com.example.boardgame.chat.Common.savePlayerId;
 
 public class LoginFragment extends Fragment {
@@ -51,17 +51,8 @@ public class LoginFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        // 初始化登入身份
-        loginId = 0;
         onTabMenu = 0;
         onBottomId = 0;
-
-        // 清空使用者帳號
-        Common.savePlayer_id(activity, "");
-
-        // 關閉聊天的WebSocket
-        disConnectSocket();
 
         return inflater.inflate(R.layout.fragment_login, container, false);
     }
@@ -69,6 +60,55 @@ public class LoginFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        Log.d(TAG, "onCreateView()");
+        String userId = loadPlayerId(activity);
+        Log.d(TAG, "userId = " + loadPlayerId(activity));
+        try {
+            if (!userId.equals("")) {
+                //判斷使用者類型
+                String type = null;
+                //店家帳號正規表達式判斷
+                String shopPattern = "^[0-9]{8}";
+                //後台帳號判斷
+                boolean status = userId.contains("＠boardGame.com");
+
+                if (userId.matches(shopPattern)) {
+                    type = "shop";
+                } else if (status) {
+                    type = "administrator";
+                } else {
+                    type = "player";
+                }
+
+                switch (type) {
+                    case "player":
+                        // 紀錄登入身份
+                        loginId = PLAYER;
+                        // 跳轉到玩家首頁（暫時設定跳轉到聊天頁面）
+                        Navigation.findNavController(view).navigate(R.id.listFriendsFragment);
+                        break;
+                    case "shop":
+                        // 紀錄登入身份
+                        loginId = SHOP;
+                        // 跳轉到店家首頁
+                        Navigation.findNavController(view).navigate(R.id.shop_infoFragment);
+                        break;
+                    case "administrator":
+                        // 紀錄登入身份
+                        loginId = ADMIN;
+                        Log.d(TAG, "type = " + type);
+                        Log.d(TAG, "loginId = " + loginId);
+                        break;
+                    default:
+                        loginId = 0;
+                }
+
+                Toast.makeText(activity, "登入成功", Toast.LENGTH_SHORT).show();
+            }
+        } catch (Exception e) {
+            Log.e(TAG, e.toString());
+        }
+
         edAccount = view.findViewById(R.id.edAccount);
         edPassword = view.findViewById(R.id.edPassword);
         tvForgetPassword = view.findViewById(R.id.tvForgetPassword);
@@ -182,6 +222,7 @@ public class LoginFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        Log.d(TAG, "onStart()");
         // 隱藏 TabBar 及 BottomBar
         MainActivity.changeBarsStatus(MainActivity.NEITHER_TAB_NOR_BOTTOM);
     }

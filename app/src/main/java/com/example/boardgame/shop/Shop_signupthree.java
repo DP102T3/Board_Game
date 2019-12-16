@@ -96,14 +96,16 @@ public class Shop_signupthree extends Fragment {
                 int shopId = shop.getShopId();
                 Log.d("testshopId3", String.valueOf(shopId));
 
-                Bundle bundles = new Bundle();
-                bundles.putSerializable("shop", shop);
 
                 shop.setShopName(name);
                 shop.setShopTel(Integer.valueOf(tel));
                 shop.setShopAddress(address);
                 shop.setShopMail(mail);
                 shop.setShopOwner(owner);
+
+
+                Bundle bundles = new Bundle();
+                bundles.putSerializable("shop", shop);
 
 
                 boolean invalid = false;
@@ -167,7 +169,6 @@ public class Shop_signupthree extends Fragment {
                             MainActivity.loginId = MainActivity.SHOP;
                             // 將假的 玩家id 存入 偏好設定
                             savePlayerId(activity,String.valueOf(shop.getShopId()));
-
                             // 跳轉頁面（帶 Bundle 物件）
                             Navigation.findNavController(view).navigate(R.id.action_shop_signupthree_to_shop_infoFragment, bundle);
                         }

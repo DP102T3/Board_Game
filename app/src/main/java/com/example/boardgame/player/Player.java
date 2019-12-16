@@ -15,11 +15,12 @@ public class Player {
     private String player_intro;
     private int report_count;
     private int rate_count;
-    private double rate_total;
+    private int rate_total;
     private int player_points;
+    private String player_mood;
 
     // 建構式_所有屬性
-    public Player(String player_id, String player_pw, String player_name, String player_nkname, String player_bday, int player_gender, String player_star, String player_email, String player_area, String fav_bg, String adept_bg, String player_intro, int report_count, int rate_count, double rate_total, int player_points) {
+    public Player(String player_id, String player_pw, String player_name, String player_nkname, String player_bday, int player_gender, String player_star, String player_email, String player_area, String fav_bg, String adept_bg, String player_intro, int report_count, int rate_count, int rate_total, int player_points, String player_mood) {
         this.player_id = player_id;
         this.player_pw = player_pw;
         this.player_name = player_name;
@@ -36,6 +37,7 @@ public class Player {
         this.rate_count = rate_count;
         this.rate_total = rate_total;
         this.player_points = player_points;
+        this.player_mood = player_mood;
     }
 
     // 建構式_註冊
@@ -47,6 +49,21 @@ public class Player {
         this.player_gender = player_gender;
         this.player_bday = player_bday;
     }
+
+    // 建構式＿個人資訊
+    public Player(String player_id, int rate_count, int rate_total, String player_nkname, int player_gender, String player_star, String player_area, String fav_bg, String player_intro, String player_mood) {
+        this.player_id = player_id;
+        this.rate_count = rate_count;
+        this.rate_total = rate_total;
+        this.player_nkname = player_nkname;
+        this.player_gender = player_gender;
+        this.player_star = player_star;
+        this.player_area = player_area;
+        this.fav_bg = fav_bg;
+        this.player_intro = player_intro;
+        this.player_mood = player_mood;
+    }
+
 
     public String getPlayer_id() {
         return player_id;
@@ -160,11 +177,11 @@ public class Player {
         this.rate_count = rate_count;
     }
 
-    public double getRate_total() {
+    public int getRate_total() {
         return rate_total;
     }
 
-    public void setRate_total(double rate_total) {
+    public void setRate_total(int rate_total) {
         this.rate_total = rate_total;
     }
 
@@ -176,4 +193,11 @@ public class Player {
         this.player_points = player_points;
     }
 
+    public String getPlayer_mood() {
+        return player_mood;
+    }
+
+    public void setPlayer_mood(String player_mood) {
+        this.player_mood = player_mood;
+    }
 }

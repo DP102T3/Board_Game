@@ -98,7 +98,6 @@ public class ShopListFragment extends Fragment {
 
     // 到 Servlet 取得所有 Shop 資料
     private void getShops() {
-        // 連線Servlet取得playerId所有Friends資料
         if (Common.networkConnected(activity)) {
             String url = Common.URL + "SignupServlet";
             JsonObject jsonOut = new JsonObject();
@@ -165,7 +164,7 @@ public class ShopListFragment extends Fragment {
         @Override
         public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
             final Shop shop = shops.get(position);
-            double rateTotal = shop.getRateTotal();
+            int rateTotal = shop.getRateTotal();
             int rateCount = shop.getRateCount();
 
             double rate=0;
@@ -173,7 +172,7 @@ public class ShopListFragment extends Fragment {
                 rate = rateTotal / rateCount;
                 holder.tvShopRate.setText(String.format("%.1f", rate));
             }else {
-                holder.ivStarIcon.setVisibility(View.GONE);
+                holder.ivStarIcon.setVisibility(View.INVISIBLE);
                 holder.tvShopRate.setText("暫無評價");
             }
 
@@ -201,7 +200,6 @@ public class ShopListFragment extends Fragment {
                 public void onClick(View v) {
                     Bundle bundle = new Bundle();
                     bundle.putInt("shopId", shop.getShopId());
-                    bundle.putString("tvShopName", shop.getShopName());
                     Log.d(TAG, String.format("shopId = %d, tvShopName = %s", shop.getShopId(), shop.getShopName()));
                     // 待加上挑轉次頁 action id
                     Navigation.findNavController(v).navigate(R.id.action_shopListFragment_to_shop_infoFragment, bundle);

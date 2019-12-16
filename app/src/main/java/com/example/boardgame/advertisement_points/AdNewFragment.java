@@ -225,7 +225,7 @@ public class AdNewFragment extends Fragment implements DatePickerDialog.OnDateSe
 
     private void payRate(){
          adDays = getSeekBarProgress()* 10;
-         int dayRate = 10;
+         int dayRate = 100;
          double discount;
 
          switch (adDays){

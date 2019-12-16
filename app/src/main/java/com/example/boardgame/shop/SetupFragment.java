@@ -14,6 +14,10 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 import com.example.boardgame.R;
+import com.example.boardgame.notification.Common;
+
+import static com.example.boardgame.MainActivity.loginId;
+import static com.example.boardgame.chat.Common.disConnectSocket;
 
 
 public class SetupFragment extends Fragment {
@@ -51,6 +55,19 @@ public class SetupFragment extends Fragment {
 
                 Navigation.findNavController(view).navigate(R.id.action_setupFragment_to_editinfoFragment);
 
+            }
+        });
+
+        view.findViewById(R.id.btSignOut).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 初始化登入身份
+                loginId = 0;
+                // 清空使用者帳號
+                Common.savePlayer_id(activity, "");
+                // 關閉聊天的WebSocket
+                disConnectSocket();
+                Navigation.findNavController(v).navigate(R.id.action_setupFragment_to_loginFragment);
             }
         });
 

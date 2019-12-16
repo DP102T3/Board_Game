@@ -13,6 +13,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -70,6 +71,20 @@ public class FrInvitingFragment extends Fragment {
         MainActivity.setBottomBar(MainActivity.BOTTOM_PLAYER);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        getFriend();
+        FrInvitingAdapter adapter =  (FrInvitingAdapter)recyclerView.getAdapter();
+        if (adapter == null) {
+            adapter = new FrInvitingAdapter(FrInvitingFragment.this, friendViewModelList);
+            recyclerView.setAdapter(adapter);
+        } else {
+            adapter.setFriends(friendViewModelList);
+            adapter.notifyDataSetChanged();
+        }
+    }
+
     private void getFriend() {
         JsonObject jsonObject = new JsonObject();
 //        ===== 有修改 =====
@@ -115,6 +130,10 @@ public class FrInvitingFragment extends Fragment {
 
         public FrInvitingAdapter(FrInvitingFragment frInvitingFragment, List<FriendViewModel> friends) {
             context = frInvitingFragment.getContext();
+            this.friends = friends;
+        }
+
+        public void setFriends(List<FriendViewModel> friends){
             this.friends = friends;
         }
 

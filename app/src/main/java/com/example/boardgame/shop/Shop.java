@@ -4,15 +4,15 @@ import java.io.Serializable;
 
 public class Shop implements Serializable {
 
-    private String shopPassword, shopName, shopAddress, shopMail, shopOwner, shopIntro ,gameName , timeOpen, timeClose,shopStatus;
-    private double rateTotal;
-    private int shopId, shopTel, shopCharge, rateCount;
+    private String shopPassword, shopName, shopAddress, shopMail, shopOwner, shopIntro ,gameName , timeOpen, timeClose,shopStatus, shopCharge;
+    private int rateTotal;
+    private int shopId, shopTel, rateCount;
     private byte[] image;
 
 
 
 
-    public Shop(String shopPassword, String shopName, String shopAddress, String shopMail, String shopOwner, String shopIntro, String gameName, int shopId, int shopTel, String timeOpen, String timeClose, int shopCharge, byte[] image, double rateTotal, String shopStatus) {
+    public Shop(String shopPassword, String shopName, String shopAddress, String shopMail, String shopOwner, String shopIntro, String gameName, int shopId, int shopTel, String timeOpen, String timeClose, String shopCharge, byte[] image, int rateTotal, String shopStatus) {
         this.shopPassword = shopPassword;
         this.shopName = shopName;
         this.shopAddress = shopAddress;
@@ -32,8 +32,7 @@ public class Shop implements Serializable {
 
 
 
-    public void setFields(int shopId, String shopAddress, String shopOwner, int shopTel, int shopCharge, String shopOpen, String shopClose, String shopIntro
-                          ) {
+    public void setFields(int shopId, String shopAddress, String shopOwner, int shopTel, String shopCharge, String shopOpen, String shopClose, String shopIntro) {
         this.shopId = shopId;
         this.shopAddress = shopAddress;
         this.shopOwner = shopOwner;
@@ -46,7 +45,7 @@ public class Shop implements Serializable {
     }
 
 
-    public Shop(String shopAddress, int shopId, int shopTel, int shopCharge, byte[] image) {
+    public Shop(String shopAddress, int shopId, int shopTel, String shopCharge, byte[] image) {
         this.shopAddress = shopAddress;
         this.shopId = shopId;
         this.shopTel = shopTel;
@@ -67,7 +66,7 @@ public class Shop implements Serializable {
 
 
 
-    public Shop(String shopAddress, String shopIntro, int shopTel, String timeOpen, String timeClose, int shopCharge) {
+    public Shop(String shopAddress, String shopIntro, int shopTel, String timeOpen, String timeClose, String shopCharge) {
         this.shopTel = shopTel;
         this.shopAddress = shopAddress;
         this.shopIntro = shopIntro;
@@ -91,7 +90,7 @@ public class Shop implements Serializable {
 
     }
 
-    public Shop(int shopId, String shopName, String shopAddress, double rateTotal, int rateCount, String shopStatus) {
+    public Shop(int shopId, String shopName, String shopAddress, int rateTotal, int rateCount, String shopStatus) {
         super();
         this.shopId = shopId;
         this.shopName = shopName;
@@ -191,22 +190,22 @@ public class Shop implements Serializable {
     public void setTimeClose(String timeClose) { this.timeClose = timeClose; }
 
 
-    public int getShopCharge() {
+    public String getShopCharge() {
         return shopCharge;
     }
 
-    public void setShopCharge(int shopCharge) { this.shopCharge = shopCharge; }
+    public void setShopCharge(String shopCharge) { this.shopCharge = shopCharge; }
 
     public String getGameName() { return gameName; }
 
     public void setGameName(String gameName) { this.gameName = gameName; }
 
 
-    public double getRateTotal() {
+    public int getRateTotal() {
         return rateTotal;
     }
 
-    public void setRateTotal(double rateTotal) {
+    public void setRateTotal(int rateTotal) {
         this.rateTotal = rateTotal;
     }
 

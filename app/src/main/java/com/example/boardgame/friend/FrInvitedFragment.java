@@ -64,6 +64,20 @@ public class FrInvitedFragment extends Fragment {
         MainActivity.setBottomBar(MainActivity.BOTTOM_PLAYER);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        getFriend();
+        FrInvitedAdapter adapter =  (FrInvitedAdapter)recyclerView.getAdapter();
+        if (adapter == null) {
+            adapter = new FrInvitedAdapter(FrInvitedFragment.this, getFriend());
+            recyclerView.setAdapter(adapter);
+        } else {
+            adapter.setFriends(getFriend());
+            adapter.notifyDataSetChanged();
+        }
+    }
+
     private List<FriendViewModel> getFriend() {
         List<FriendViewModel> friendViewModelList = new ArrayList<>();
 
@@ -113,6 +127,10 @@ public class FrInvitedFragment extends Fragment {
             this.friends = friends;
         }
 
+        public void setFriends(List<FriendViewModel> friends){
+            this.friends = friends;
+        }
+
         @NonNull
         @Override
         public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
@@ -130,7 +148,7 @@ public class FrInvitedFragment extends Fragment {
 //        ===== 有修改 =====
                     Gson gson = new Gson();
 
-                    Friend friend = new Friend(friendViewModel.getFrID(), Common.loadPlayerId(getActivity()), friendViewModel.getPointCount(), 1);
+                    Friend friend = new Friend(friendViewModel.getFrID(), Common.loadPlayerId(getActivity()), friendViewModel.getPointCount(), 2);
                     String jsonOut = gson.toJson(friend);
 
                     MyTask task = new MyTask("http://10.0.2.2:8080/Advertisement_Server/CreateFriend", jsonOut);

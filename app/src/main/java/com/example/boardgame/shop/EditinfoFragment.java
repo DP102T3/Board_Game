@@ -187,7 +187,7 @@ public class EditinfoFragment extends Fragment {
                 String address = shopAddress.getText().toString();
 
                 int Tel = Integer.valueOf(shopTel.getText().toString());
-                int Charge = Integer.valueOf(shopCharge.getText().toString());
+                String Charge = shopCharge.getText().toString();
                 String Open = shopOpen.getText().toString();
                 String Close = shopClose.getText().toString();
                 String Owner = shopOwner.getText().toString();
@@ -281,7 +281,7 @@ public class EditinfoFragment extends Fragment {
         String shopname = shopDB.getShopName();
         int tel = shopDB.getShopTel();
         String address = shopDB.getShopAddress();
-        int charge = shopDB.getShopCharge();
+        String charge = shopDB.getShopCharge();
         String open = shopDB.getTimeOpen() != null ? shopDB.getTimeOpen() : "";
         String close = shopDB.getTimeClose() != null ? shopDB.getTimeClose() : "";
         String owner = shopDB.getShopOwner();

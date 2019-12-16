@@ -20,6 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.boardgame.MainActivity;
 import com.example.boardgame.R;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -91,6 +92,13 @@ public class PlayerSignUp_1 extends Fragment {
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        // 隱藏 TabBar 及 BottomBar
+        MainActivity.changeBarsStatus(MainActivity.NEITHER_TAB_NOR_BOTTOM);
     }
 
     private BaseAdapter adapter = new BaseAdapter() {

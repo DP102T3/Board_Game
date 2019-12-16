@@ -18,8 +18,6 @@ public class Common {
     // 連線 Servlet 所需的 URI ，以取得玩家的參團列表
     public static String SERVLET_URI = "http://10.0.2.2:8080/DevBG//PlayerServlet";
 
-
-
     // 確認裝置的網路連線（於 Servlet連線 前呼叫此方法）
     public static boolean networkConnected(Activity activity) {
         ConnectivityManager conManager =
@@ -28,23 +26,19 @@ public class Common {
         return networkInfo != null && networkInfo.isConnected();
     }
 
-
-
     // 自定義方法，將呼叫此方法的 playerId 存入偏好設定
     public static void savePlayerId(Context context, String playerId){
         SharedPreferences preferences =
-                context.getSharedPreferences("playerId", MODE_PRIVATE );
+                context.getSharedPreferences("user", MODE_PRIVATE );
         preferences.edit().putString("playerId", playerId).apply();
     }
     // 自定義方法，將 savePlayerId()方法 存入的 playerId 從偏好設定取出
     public static String loadPlayerId(Context context){
         SharedPreferences preferences =
-                context.getSharedPreferences("playerId", MODE_PRIVATE);
+                context.getSharedPreferences("user", MODE_PRIVATE);
         String playerId = preferences.getString("playerId", "");
         return playerId;
     }
-
-
 
     // Toast訊息 的方法（兩種簽章；使用CharSequence 或 resId）
     public static void showToast(Context context, String message){

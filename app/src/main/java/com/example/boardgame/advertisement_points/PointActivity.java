@@ -247,7 +247,7 @@ public class PointActivity extends AppCompatActivity {
         String postJsonString = String.format(
                 Locale.TAIWAN,
                 "{\"playerId\" : \"%s\", \"bpAmount\":%d, \"bpCount\":%d }",
-                "myself",
+                PointActivity.this,
                 total,
                 buyCount
         );

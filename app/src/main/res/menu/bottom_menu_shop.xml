@@ -8,9 +8,9 @@
     <item
         android:title="揪團資訊"
         android:icon="@drawable/ic_groups"/>
-    <item
-        android:title="活動"
-        android:icon="@drawable/icon_activity"/>
+<!--    <item-->
+<!--        android:title="活動"-->
+<!--        android:icon="@drawable/icon_activity"/>-->
     <item
         android:id="@+id/navigation_graph_ad"
         android:title="廣告"

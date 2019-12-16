@@ -21,6 +21,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.example.boardgame.MainActivity;
 import com.example.boardgame.R;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -168,6 +169,13 @@ public class PlayerSignUp_3 extends Fragment implements DatePickerDialog.OnDateS
         dialog = new DatePickerDialog(activity, PlayerSignUp_3.this, PlayerSignUp_3.year, PlayerSignUp_3.month, PlayerSignUp_3.day);
         // 設定最大日期（限定選擇範圍）
         dialog.getDatePicker().setMaxDate(calendar.getTimeInMillis());
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        // 隱藏 TabBar 及 BottomBar
+        MainActivity.changeBarsStatus(MainActivity.NEITHER_TAB_NOR_BOTTOM);
     }
 
     /* 覆寫OnDateSetListener.onDateSet()以處理日期挑選完成事件。

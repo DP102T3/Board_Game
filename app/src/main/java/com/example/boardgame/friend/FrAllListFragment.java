@@ -22,6 +22,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -49,7 +50,8 @@ public class FrAllListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
+        // 設置標題
+        getActivity().setTitle("Friend");
         return inflater.inflate(R.layout.fragment_fr_all_list, container, false);
     }
 
@@ -140,6 +142,15 @@ public class FrAllListFragment extends Fragment {
         @Override
         public void onBindViewHolder(@NonNull MyViewHolder holder, int index) {
             final FriendViewModel friendViewModel = friendViewModelList.get(index);
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Bundle bundle = new Bundle();
+                    bundle.putString("playerId", friendViewModel.getFrID());
+                    Navigation.findNavController(v).navigate(R.id.action_frAllListFragment_to_profile1_Fragment, bundle);
+                }
+            });
+
             holder.tvName.setText(friendViewModel.getFrNkName());
             holder.tvStatus.setText(friendViewModel.getFrMood());
             if (friendViewModel.getFrPic() != null) {

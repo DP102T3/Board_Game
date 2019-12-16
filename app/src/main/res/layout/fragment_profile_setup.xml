@@ -2,43 +2,41 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".shop.SetupFragment">
+    tools:context=".player.ProfileSetupFragment" >
 
     <Button
-        android:id="@+id/btinfo"
+        android:id="@+id/btPlayerEdit"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="#FFFFFF"
-        android:text="@string/edinfo"
+        android:text="個人資料編輯"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btRetrun"
+        android:id="@+id/btPointRecord"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="#FFFFFF"
-        android:text="回報"
+        android:text="點數紀錄"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btinfo" />
+        app:layout_constraintTop_toBottomOf="@+id/btPlayerEdit" />
 
     <Button
-        android:id="@+id/btSignOut"
+        android:id="@+id/btLogOut"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="#FFFFFF"
-        android:text="@string/signout"
+        android:text="登出"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btRetrun" />
-
+        app:layout_constraintTop_toBottomOf="@+id/btPointRecord" />
 </androidx.constraintlayout.widget.ConstraintLayout>

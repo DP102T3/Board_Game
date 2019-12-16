@@ -96,6 +96,9 @@
         <action
             android:id="@+id/action_shop_infoFragment_to_setupFragment"
             app:destination="@id/setupFragment" />
+        <action
+            android:id="@+id/action_shop_infoFragment_to_shopGameListFragment"
+            app:destination="@id/shopGameListFragment" />
     </fragment>
     <fragment
         android:id="@+id/setupFragment"
@@ -105,6 +108,9 @@
         <action
             android:id="@+id/action_setupFragment_to_editinfoFragment"
             app:destination="@id/editinfoFragment" />
+        <action
+            android:id="@+id/action_setupFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/editinfoFragment"
@@ -128,9 +134,9 @@
         tools:layout="@layout/fragment_picture" />
     <fragment
         android:id="@+id/gameinfoFragment"
-        android:name="com.example.boardgame.shop.GameinfoFragment"
+        android:name="com.example.boardgame.shop.ShopGameEditFragment"
         android:label="fragment_gameinfo"
-        tools:layout="@layout/fragment_gameinfo" >
+        tools:layout="@layout/fragment_shop_game_edit" >
         <action
             android:id="@+id/action_gameinfoFragment_to_editinfoFragment"
             app:destination="@id/editinfoFragment" />
@@ -235,7 +241,11 @@
         android:id="@+id/frAllListFragment"
         android:name="com.example.boardgame.friend.FrAllListFragment"
         android:label="fragment_fr_all_list"
-        tools:layout="@layout/fragment_fr_all_list"/>
+        tools:layout="@layout/fragment_fr_all_list">
+        <action
+            android:id="@+id/action_frAllListFragment_to_profile1_Fragment"
+            app:destination="@id/profile1_Fragment" />
+    </fragment>
     <fragment
         android:id="@+id/frInvitedFragment"
         android:name="com.example.boardgame.friend.FrInvitedFragment"
@@ -271,7 +281,11 @@
         android:id="@+id/profile1_Fragment"
         android:name="com.example.boardgame.player.Profile1_Fragment"
         android:label="fragment_profile1_"
-        tools:layout="@layout/fragment_profile1" />
+        tools:layout="@layout/fragment_profile1" >
+        <action
+            android:id="@+id/action_profile1_Fragment_to_profileSetupFragment"
+            app:destination="@id/profileSetupFragment" />
+    </fragment>
     <fragment
         android:id="@+id/profile2_fragment"
         android:name="com.example.boardgame.player.Profile2_Fragment"
@@ -281,5 +295,32 @@
         android:id="@+id/profile3_fragment"
         android:name="com.example.boardgame.player.Profile3_Fragment"
         android:label="fragment_profile3_fragment"
-        tools:layout="@layout/fragment_profile3" />
+        tools:layout="@layout/fragment_profile3" >
+        <action
+            android:id="@+id/action_profile3_fragment_to_shop_infoFragment"
+            app:destination="@id/shop_infoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileSetupFragment"
+        android:name="com.example.boardgame.player.ProfileSetupFragment"
+        android:label="fragment_profile_setup"
+        tools:layout="@layout/fragment_profile_setup" >
+        <action
+            android:id="@+id/action_profileSetupFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/shopGameListFragment"
+        android:name="com.example.boardgame.shop.ShopGameListFragment"
+        android:label="fragment_shop_game_list"
+        tools:layout="@layout/fragment_shop_game_list" >
+        <action
+            android:id="@+id/action_shopGameListFragment_to_gameDetailFragment"
+            app:destination="@id/gameDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/gameDetailFragment"
+        android:name="com.example.boardgame.shop.GameDetailFragment"
+        android:label="fragment_game_detail"
+        tools:layout="@layout/fragment_game_detail" />
 </navigation>

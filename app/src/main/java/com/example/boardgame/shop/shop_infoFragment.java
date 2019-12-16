@@ -24,7 +24,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.navigation.Navigation;
 
 import com.example.boardgame.MainActivity;
 import com.example.boardgame.R;
@@ -36,7 +36,6 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import static android.content.Context.MODE_PRIVATE;
 import static com.example.boardgame.R.id;
@@ -44,35 +43,29 @@ import static com.example.boardgame.R.layout;
 
 
 public class shop_infoFragment extends Fragment {
-
     private static final String TAG = "TAG_shop_infoFragment";
     private Activity activity;
     private Gson gson = new Gson();
-    private TextView tvShopId, shopTel, shopAddress, shopIntro, shopCharge, shopOpen, shopClose;
+    private TextView tvShopId, shopTel, shopAddress, shopIntro, shopCharge, shopOpen, shopClose, textView26;
     private ConstraintLayout infoConstrainLayout;
     private ImageView shopFirstpic, ivGame;
     private CommonTask shopGetTask;
     private Shop shopDB;
-    private Button btMap, btPhoneCall;
+    private Button btMap, btPhoneCall, btmore;
 
-    int Id;
-    private RecyclerView shoppic;
     private SharedPreferences preferences;
     private final static String PREFERENCES_NAME = "preferences";
-    private final static String DEFAULT_FILE_NAME = "Id";
-    private List<Shop> shopList;
     private ShopImageTask shopImageTask;
     private Bundle bundle;
 
     private int shopId;
     private String shopName;
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (MainActivity.loginId == MainActivity.SHOP){
+        if (MainActivity.loginId == MainActivity.SHOP) {
             // 顯示出上層的optionmenu
             setHasOptionsMenu(true);
         }
@@ -83,18 +76,14 @@ public class shop_infoFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-            inflater.inflate(R.menu.actionbar, menu);
+        inflater.inflate(R.menu.actionbar, menu);
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        activity.setTitle("店家資訊");
-
         return inflater.inflate(layout.fragment_shop_info, container, false);
-
     }
 
     @Override
@@ -116,7 +105,17 @@ public class shop_infoFragment extends Fragment {
         shopCharge = view.findViewById(R.id.shop_charge);
         btMap = view.findViewById(R.id.btmap);
         btPhoneCall = view.findViewById(R.id.btphonecall);
+        textView26 = view.findViewById(R.id.textView26);
 
+        btmore = view.findViewById(id.btmore);
+        btmore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putInt("shopId", shopId);
+                Navigation.findNavController(v).navigate(R.id.action_shop_infoFragment_to_shopGameListFragment, bundle);
+            }
+        });
 
 //==========================================================Map監聽器========================================================
         btMap.setOnClickListener(new View.OnClickListener() {
@@ -124,15 +123,25 @@ public class shop_infoFragment extends Fragment {
             public void onClick(View v) {
                 String locationName = shopAddress.getText().toString().trim();
 
+                Log.d(TAG, "locationName = " + locationName);
+
                 Address address = getAddress(locationName);
                 if (address == null) {
                     Toast.makeText(activity, R.string.shopAddressLocationNotFound, Toast.LENGTH_SHORT).show(); //如果是空值會說找不到
                     return;
                 }
+
+                Log.d(TAG, "address = " + address);
+
 //=======================================抓到Address對googlemap server========================================================
                 // 用format去抓經緯度 %是抓值(緯度,經度) f是轉成浮點數 (先給緯度 再給經度)
                 // getLatitude()抓第一個%f getLongitude()抓第二個%f
-                String uriStr = String.format(Locale.getDefault(), "google.streetview:cbll=%f,%f", address.getLatitude(), address.getLongitude());
+//                String uriStr = String.format(Locale.getDefault(), "google.streetview:cbll=%f,%f", address.getLatitude(), address.getLongitude());
+                String uriStr = String.format("geo:0,0?q=%f,%f(%s)", address.getLatitude(), address.getLongitude(), shopDB.getShopName());
+
+                Log.d(TAG, "Latitude = " + address.getLatitude());
+                Log.d(TAG, "Longitude = " + address.getLongitude());
+
                 // intent (給他一個動作 給他動作的內容)
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uriStr)); //顯示(Action_view) uri(是位置、網址 顯示資訊)
                 intent.setPackage("com.google.android.apps.maps"); //指定用哪個app開(手機內建的googlemap id)   intent (給他一個動作 給他動作的內容)
@@ -154,7 +163,7 @@ public class shop_infoFragment extends Fragment {
 
         showShop(getShop());
         getIvGame();
-
+        activity.setTitle(shopDB.getShopName());
     }
 
     @Override
@@ -165,7 +174,7 @@ public class shop_infoFragment extends Fragment {
             MainActivity.changeBarsStatus(MainActivity.ONLY_BOTTOM);
             // 置換 BottomBar 的 menu
             MainActivity.setBottomBar(MainActivity.BOTTOM_PLAYER);
-        }else if(MainActivity.loginId == MainActivity.SHOP){
+        } else if (MainActivity.loginId == MainActivity.SHOP) {
             // 顯示 TabBar 及 BottomBar
             MainActivity.changeBarsStatus(MainActivity.ONLY_BOTTOM);
             // 置換 BottomBar 的 menu
@@ -195,11 +204,11 @@ public class shop_infoFragment extends Fragment {
     private Shop getShop() {
         Log.d(TAG, "getShop()");
 
-        if(MainActivity.loginId == MainActivity.SHOP) {
+        if (MainActivity.loginId == MainActivity.SHOP) {
             shopId = Integer.valueOf(com.example.boardgame.chat.Common.loadPlayerId(activity));
-        }else if (MainActivity.loginId == MainActivity.PLAYER){
+
+        } else if (MainActivity.loginId == MainActivity.PLAYER) {
             shopId = bundle.getInt("shopId");
-            shopName = bundle.getString("tvShopName");
         }
 
         if (Common.networkConnected(activity)) {
@@ -229,7 +238,7 @@ public class shop_infoFragment extends Fragment {
         return shopDB;
     }
 
-//========================================利用showShop 取出shopDB裡面的東西===============================================
+    //========================================利用showShop 取出shopDB裡面的東西===============================================
     private void showShop(Shop shopDB) {
         Log.d(TAG, "showShop()");
 
@@ -255,17 +264,20 @@ public class shop_infoFragment extends Fragment {
         String intro = shopDB.getShopIntro();
         String open = shopDB.getTimeOpen();
         String close = shopDB.getTimeClose();
-        int charge = shopDB.getShopCharge();
+        String charge = shopDB.getShopCharge();
 
 
         tvShopId.setText(String.valueOf(id == 0 ? "" : id));
         shopAddress.setText(address);
         shopTel.setText(String.valueOf(tel));
         shopIntro.setText(intro);
-        shopOpen.setText(String.valueOf(open));
-        shopClose.setText(String.valueOf(close));
-        shopCharge.setText(String.valueOf(charge));
+        shopOpen.setText(open != null ? String.valueOf(open) : "");
+        shopClose.setText(close != null ? String.valueOf(close) : "");
+        shopCharge.setText(charge);
 
+        if(open==null&&close==null){
+            textView26.setVisibility(View.INVISIBLE);
+        }
     }
 
     @Override
@@ -296,7 +308,7 @@ public class shop_infoFragment extends Fragment {
         }
 
         String url = Common.URL + "SignupServlet";
-        if(shopGameList.size()>0) {
+        if (shopGameList.size() > 0) {
             int gameNo = shopGameList.get(0);
             int imageSize = getResources().getDisplayMetrics().widthPixels / 100 * 68;
             try {

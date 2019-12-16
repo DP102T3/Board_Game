@@ -33,8 +33,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.example.boardgame.shop.Common.showToast;
-import static com.example.boardgame.shop.GameinfoFragment.gameChecked;
-import static com.example.boardgame.shop.GameinfoFragment.shopGameList;
+import static com.example.boardgame.shop.ShopGameEditFragment.gameChecked;
+import static com.example.boardgame.shop.ShopGameEditFragment.shopGameList;
 
 //chengchi1223
 //gerfarn0523
@@ -167,6 +167,10 @@ public class MainActivity extends AppCompatActivity {
 //                        setupFragment.class);
                 Navigation.findNavController(this, R.id.fragment).navigate(R.id.action_shop_infoFragment_to_setupFragment);
 //                startActivity(intent);
+                break;
+
+            case R.id.player_bggear:
+                Navigation.findNavController(this, R.id.fragment).navigate(R.id.action_profile1_Fragment_to_profileSetupFragment);
                 break;
 
             case R.id.addGame:

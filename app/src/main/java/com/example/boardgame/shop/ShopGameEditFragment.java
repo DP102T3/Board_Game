@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.example.boardgame.MainActivity;
 import com.example.boardgame.R;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -29,7 +30,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GameinfoFragment extends Fragment {
+public class ShopGameEditFragment extends Fragment {
 
     private static final String TAG = "TAG_GameinfoFragment";
     private SwipeRefreshLayout swipeRefreshLayout;
@@ -63,7 +64,7 @@ public class GameinfoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         activity.setTitle("請選取欲加入項目");
-        return inflater.inflate(R.layout.fragment_gameinfo, container, false);
+        return inflater.inflate(R.layout.fragment_shop_game_edit, container, false);
     }
 
     @Override
@@ -75,7 +76,6 @@ public class GameinfoFragment extends Fragment {
 
 
         rvGame.setLayoutManager(new LinearLayoutManager(activity));
-        new LinearLayoutManager(getActivity());
 
         shopGameList = new ArrayList<>();
         shopGameList = getShopGameList();
@@ -99,7 +99,6 @@ public class GameinfoFragment extends Fragment {
             public boolean onQueryTextSubmit(String query) {
                 return false;
             }
-
             @Override
             public boolean onQueryTextChange(String newText) {
                 if (newText.isEmpty()) {
@@ -108,7 +107,7 @@ public class GameinfoFragment extends Fragment {
                     List<Game> searchShopgame = new ArrayList<>();
                     // 搜尋原始資料內有無包含關鍵字(不區別大小寫)
                     for (Game game : gameDB) {
-                        if (game.getGamName().toUpperCase().contains(newText.toUpperCase())) {
+                        if (game.getGameName().toUpperCase().contains(newText.toUpperCase())) {
                             searchShopgame.add(game);
                         }
                     }
@@ -116,8 +115,14 @@ public class GameinfoFragment extends Fragment {
                 }
                 return true;
             }
-
         });
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        // 隱藏 TabBar 及 BottomBar
+        MainActivity.changeBarsStatus(MainActivity.NEITHER_TAB_NOR_BOTTOM);
     }
 
     private List<Game> getGames() {
@@ -250,7 +255,7 @@ public class GameinfoFragment extends Fragment {
             gameImageTask = new GameImageTask(url, gameNo, imageSize, myViewHolder.ivGame);
             gameImageTask.execute();
 
-            myViewHolder.tvGameName.setText(String.valueOf(game.getGamName()));
+            myViewHolder.tvGameName.setText(String.valueOf(game.getGameName()));
             myViewHolder.tvGameKind.setText(game.getGameType());
 
 //====================================玩家選取遊戲類型========================================================
