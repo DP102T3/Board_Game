@@ -167,11 +167,11 @@ public class ShopListFragment extends Fragment {
             int rateTotal = shop.getRateTotal();
             int rateCount = shop.getRateCount();
 
-            double rate=0;
-            if(rateCount!=0) {
-                rate = rateTotal / rateCount;
+            double rate = 0;
+            if (rateCount != 0) {
+                rate = (double) rateTotal / (double) rateCount;
                 holder.tvShopRate.setText(String.format("%.1f", rate));
-            }else {
+            } else {
                 holder.ivStarIcon.setVisibility(View.INVISIBLE);
                 holder.tvShopRate.setText("暫無評價");
             }

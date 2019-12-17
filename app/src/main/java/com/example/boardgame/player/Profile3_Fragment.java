@@ -35,14 +35,14 @@ import java.util.List;
 import static com.example.boardgame.chat.Common.showToast;
 
 public class Profile3_Fragment extends Fragment {
-    private static final String TAG = "TAG_Profile1_Fragmen3";
+    private static final String TAG = "TAG_Profile1_Fragment3";
     private Activity activity;
     private String playerId;
     private Gson gson = new Gson();
 
     private RecyclerView rvFavShop;
 
-    private List<FavShop> shops;
+    private List<FavShop> shops = new ArrayList<>();
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -106,6 +106,10 @@ public class Profile3_Fragment extends Fragment {
 
         @Override
         public int getItemCount() {
+            if(shops.size() == 0){
+                com.example.boardgame.player.Common.showToast(activity,"您沒有收藏店家");
+                return 0;
+            }
             return shops.size();
         }
 
@@ -185,6 +189,9 @@ public class Profile3_Fragment extends Fragment {
             showToast(activity, R.string.tx_NoNetwork);
         }
 
+        if (shopsDB==null){
+            shopsDB=new ArrayList<>();
+        }
         return shopsDB;
     }
 }

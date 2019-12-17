@@ -29,6 +29,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import com.example.boardgame.MainActivity;
 import com.example.boardgame.R;
 import com.example.boardgame.group.Common;
 import com.example.boardgame.group.CommonTask;
@@ -513,6 +514,13 @@ public class Add_fragment extends Fragment implements DatePickerDialog.OnDateSet
 
 
 
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        // 隱藏 TabBar 及 BottomBar
+        MainActivity.changeBarsStatus(MainActivity.NEITHER_TAB_NOR_BOTTOM);
     }
 
     public byte[] BitmapToBytes(Bitmap bitmap) {

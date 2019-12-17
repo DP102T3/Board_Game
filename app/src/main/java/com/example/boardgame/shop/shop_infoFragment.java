@@ -23,11 +23,13 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 import com.example.boardgame.MainActivity;
 import com.example.boardgame.R;
+import com.example.boardgame.player.Player;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
@@ -46,12 +48,12 @@ public class shop_infoFragment extends Fragment {
     private static final String TAG = "TAG_shop_infoFragment";
     private Activity activity;
     private Gson gson = new Gson();
-    private TextView tvShopId, shopTel, shopAddress, shopIntro, shopCharge, shopOpen, shopClose, textView26;
+    private TextView textView10, tvFav, tvShopId, shopTel, shopAddress, shopIntro, shopCharge, shopOpen, shopClose, textView26;
     private ConstraintLayout infoConstrainLayout;
     private ImageView shopFirstpic, ivGame;
     private CommonTask shopGetTask;
     private Shop shopDB;
-    private Button btMap, btPhoneCall, btmore;
+    private Button btFav, btMap, btPhoneCall, btmore;
 
     private SharedPreferences preferences;
     private final static String PREFERENCES_NAME = "preferences";
@@ -91,6 +93,24 @@ public class shop_infoFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         bundle = getArguments();
+        textView10 = view.findViewById(R.id.textView10);
+        tvFav = view.findViewById(R.id.tvFav);
+        btFav = view.findViewById(R.id.btFav);
+        btFav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String btFavPic = (String) btFav.getTag();
+                if(btFavPic.equals("heart027")){
+                    btFav.setBackgroundResource(R.drawable.heart026);
+                    btFav.setTag("heart026");
+                    // delete
+                }else {
+                    btFav.setBackgroundResource(R.drawable.heart027);
+                    btFav.setTag("heart027");
+                    // insert
+                }
+            }
+        });
 
         preferences = activity.getSharedPreferences(PREFERENCES_NAME, MODE_PRIVATE);
         tvShopId = view.findViewById(R.id.shop_id);
@@ -169,16 +189,37 @@ public class shop_infoFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        ConstraintSet constraintSet = new ConstraintSet();
         if (MainActivity.loginId == MainActivity.PLAYER) {
             // 顯示 TabBar 及 BottomBar
             MainActivity.changeBarsStatus(MainActivity.ONLY_BOTTOM);
             // 置換 BottomBar 的 menu
             MainActivity.setBottomBar(MainActivity.BOTTOM_PLAYER);
+
+            int result = getFavShop();
+            if(result!=0){
+                // 將btFav改成實心愛心
+                btFav.setBackgroundResource(R.drawable.heart027);
+                btFav.setTag("heart027");
+            }else {
+                // 將btFav改成空心愛心
+                btFav.setBackgroundResource(R.drawable.heart026);
+                btFav.setTag("heart026");
+            }
         } else if (MainActivity.loginId == MainActivity.SHOP) {
             // 顯示 TabBar 及 BottomBar
             MainActivity.changeBarsStatus(MainActivity.ONLY_BOTTOM);
             // 置換 BottomBar 的 menu
             MainActivity.setBottomBar(MainActivity.BOTTOM_SHOP);
+
+            // 移除收藏按鈕
+            tvFav.setVisibility(View.GONE);
+            btFav.setVisibility(View.GONE);
+
+            // 使 ScrollView 的 Constraint 符合沒有 TabBar 和 BottomBar 的畫面
+            constraintSet.clone(infoConstrainLayout);
+            constraintSet.connect(R.id.textView10, ConstraintSet.TOP, R.id.shopFirstpic, ConstraintSet.BOTTOM, 32);
+            constraintSet.applyTo(infoConstrainLayout);
         }
     }
 
@@ -266,13 +307,12 @@ public class shop_infoFragment extends Fragment {
         String close = shopDB.getTimeClose();
         String charge = shopDB.getShopCharge();
 
-
         tvShopId.setText(String.valueOf(id == 0 ? "" : id));
         shopAddress.setText(address);
         shopTel.setText(String.valueOf(tel));
         shopIntro.setText(intro);
-        shopOpen.setText(open != null ? String.valueOf(open) : "");
-        shopClose.setText(close != null ? String.valueOf(close) : "");
+        shopOpen.setText(open != null ? open : "");
+        shopClose.setText(close != null ? close : "");
         shopCharge.setText(charge);
 
         if(open==null&&close==null){
@@ -319,4 +359,47 @@ public class shop_infoFragment extends Fragment {
             }
         }
     }
+
+    private int getFavShop() {
+        int result = 0;
+        if (Common.networkConnected(activity)) {
+            String url = Common.URL + "SignupServlet";
+            JsonObject jsonObject = new JsonObject();
+            jsonObject.addProperty("action", "getFavShop");
+            jsonObject.addProperty("playerId", com.example.boardgame.chat.Common.loadPlayerId(activity));
+            jsonObject.addProperty("shopId", shopId);
+            String jsonOut = jsonObject.toString();
+            CommonTask gameGetAllTask = new CommonTask(url, jsonOut);
+            try {
+                String jsonIn = gameGetAllTask.execute().get();
+                result = Integer.valueOf(jsonIn);
+            } catch (Exception e) {
+                Log.e(TAG, e.toString());
+            }
+        } else {
+            Common.showToast(activity, R.string.textNoNetwork);
+        }
+        return result;
+    }
 }
+
+//    String url = Common.URL + "SignupServlet";
+//    JsonObject jsonObject = new JsonObject();
+//            jsonObject.addProperty("action", "getFavShop");
+//                    jsonObject.addProperty("playerId", com.example.boardgame.chat.Common.loadPlayerId(activity));
+//                    jsonObject.addProperty("shopId", shopId);
+
+//        btFav.setOnClickListener(new View.OnClickListener() {
+//@Override
+//public void onClick(View v) {
+//        String btFavPic = (String) btFav.getTag();
+//        if(btFavPic.equals("heart027")){
+//        btFav.setBackgroundResource(R.drawable.heart026);
+//        btFav.setTag("heart026");
+//        // delete
+//        }else {
+//        btFav.setBackgroundResource(R.drawable.heart027);
+//        btFav.setTag("heart027");
+//        // insert
+//        }
+//        }

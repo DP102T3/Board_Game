@@ -92,6 +92,7 @@ public class ShopGameListFragment extends Fragment {
         // 設置 RecyclerView 和 Adapter
         rvGames = view.findViewById(R.id.rvGames);
         rvGames.setLayoutManager(new LinearLayoutManager(activity));
+        rvGames.getRecycledViewPool().setMaxRecycledViews(0, 0);
     }
 
     @Override
