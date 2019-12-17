@@ -40,7 +40,6 @@
                     android:layout_height="30dp"
                     android:layout_marginStart="8dp"
                     android:background="@drawable/map"
-                    app:layout_constraintBottom_toBottomOf="@+id/shop_address"
                     app:layout_constraintStart_toEndOf="@+id/shop_address"
                     app:layout_constraintTop_toTopOf="@+id/shop_address" />
 
@@ -80,10 +79,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="62dp"
-                    android:layout_marginTop="32dp"
+                    android:layout_marginTop="16dp"
                     android:text="統一編號"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/shopFirstpic" />
+                    app:layout_constraintTop_toBottomOf="@+id/btFav" />
 
                 <TextView
                     android:id="@+id/textView11"
@@ -134,7 +133,7 @@
                 <TextView
                     android:id="@+id/shop_charge"
                     android:layout_width="212dp"
-                    android:layout_height="30dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:gravity="center_vertical"
                     app:layout_constraintBottom_toBottomOf="@+id/textView11"
@@ -145,10 +144,9 @@
                 <TextView
                     android:id="@+id/shop_address"
                     android:layout_width="212dp"
-                    android:layout_height="30dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:gravity="center_vertical"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView12"
                     app:layout_constraintEnd_toEndOf="@+id/shop_charge"
                     app:layout_constraintStart_toEndOf="@+id/textView12"
                     app:layout_constraintTop_toTopOf="@+id/textView12" />
@@ -156,7 +154,7 @@
                 <TextView
                     android:id="@+id/shop_tel"
                     android:layout_width="212dp"
-                    android:layout_height="30dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:gravity="center_vertical"
                     app:layout_constraintBottom_toBottomOf="@+id/textView13"
@@ -167,11 +165,10 @@
                 <TextView
                     android:id="@+id/shop_intro"
                     android:layout_width="0dp"
-                    android:layout_height="30dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="65dp"
                     android:gravity="center_vertical"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView15"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/textView15"
                     app:layout_constraintTop_toTopOf="@+id/textView15" />
@@ -179,7 +176,7 @@
                 <TextView
                     android:id="@+id/shop_id"
                     android:layout_width="212dp"
-                    android:layout_height="30dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:gravity="center_vertical"
                     android:text="3133"
@@ -191,7 +188,7 @@
                 <TextView
                     android:id="@+id/shop_open"
                     android:layout_width="wrap_content"
-                    android:layout_height="30dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:gravity="center_vertical"
                     app:layout_constraintBottom_toBottomOf="@+id/textView14"
@@ -202,7 +199,7 @@
                 <TextView
                     android:id="@+id/shop_close"
                     android:layout_width="wrap_content"
-                    android:layout_height="30dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:gravity="center_vertical"
                     app:layout_constraintBottom_toBottomOf="@+id/textView14"
@@ -233,6 +230,25 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/textView16"
                     app:layout_constraintTop_toBottomOf="@+id/shop_intro" />
+
+                <Button
+                    android:id="@+id/btFav"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/heart026"
+                    app:layout_constraintStart_toStartOf="@+id/shopFirstpic"
+                    app:layout_constraintTop_toBottomOf="@+id/shopFirstpic" />
+
+                <TextView
+                    android:id="@+id/tvFav"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:text="收藏"
+                    app:layout_constraintBottom_toBottomOf="@+id/btFav"
+                    app:layout_constraintEnd_toStartOf="@+id/btFav"
+                    app:layout_constraintTop_toTopOf="@+id/btFav" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
