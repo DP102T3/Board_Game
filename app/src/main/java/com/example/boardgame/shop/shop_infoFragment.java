@@ -29,7 +29,6 @@ import androidx.navigation.Navigation;
 
 import com.example.boardgame.MainActivity;
 import com.example.boardgame.R;
-import com.example.boardgame.player.Player;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
@@ -99,16 +98,41 @@ public class shop_infoFragment extends Fragment {
         btFav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                JsonObject jsonObject = new JsonObject();
                 String btFavPic = (String) btFav.getTag();
-                if(btFavPic.equals("heart027")){
+                if (btFavPic.equals("heart027")) {
                     btFav.setBackgroundResource(R.drawable.heart026);
                     btFav.setTag("heart026");
                     // delete
-                }else {
+                    jsonObject.addProperty("action", "deleteFavShop");
+                } else {
                     btFav.setBackgroundResource(R.drawable.heart027);
                     btFav.setTag("heart027");
                     // insert
+                    jsonObject.addProperty("action", "insertFavShop");
                 }
+                int result=0;
+                if (Common.networkConnected(activity)) {
+                    String url = Common.URL + "SignupServlet";
+                    jsonObject.addProperty("playerId", com.example.boardgame.chat.Common.loadPlayerId(activity));
+                    jsonObject.addProperty("shopId", shopId);
+                    CommonTask gameGetAllTask = new CommonTask(url, jsonObject.toString());
+                    try {
+                        String jsonIn = gameGetAllTask.execute().get();
+                        if("".equals(jsonIn)){
+                            jsonIn ="0";
+                        }
+                        result = Integer.valueOf(jsonIn);
+                        if(result==0){
+                            Common.showToast(activity, "Insert / Delete ERROR !");
+                        }
+                    } catch (Exception e) {
+                        Log.e(TAG, e.toString());
+                    }
+                } else {
+                    Common.showToast(activity, R.string.textNoNetwork);
+                }
+
             }
         });
 
@@ -196,12 +220,12 @@ public class shop_infoFragment extends Fragment {
             // 置換 BottomBar 的 menu
             MainActivity.setBottomBar(MainActivity.BOTTOM_PLAYER);
 
-            int result = getFavShop();
-            if(result!=0){
+            int result = checkFavShop();
+            if (result != 0) {
                 // 將btFav改成實心愛心
                 btFav.setBackgroundResource(R.drawable.heart027);
                 btFav.setTag("heart027");
-            }else {
+            } else {
                 // 將btFav改成空心愛心
                 btFav.setBackgroundResource(R.drawable.heart026);
                 btFav.setTag("heart026");
@@ -315,7 +339,7 @@ public class shop_infoFragment extends Fragment {
         shopClose.setText(close != null ? close : "");
         shopCharge.setText(charge);
 
-        if(open==null&&close==null){
+        if (open == null && close == null) {
             textView26.setVisibility(View.INVISIBLE);
         }
     }
@@ -360,26 +384,30 @@ public class shop_infoFragment extends Fragment {
         }
     }
 
-    private int getFavShop() {
+    private int checkFavShop() {
         int result = 0;
         if (Common.networkConnected(activity)) {
             String url = Common.URL + "SignupServlet";
             JsonObject jsonObject = new JsonObject();
-            jsonObject.addProperty("action", "getFavShop");
+            jsonObject.addProperty("action", "checkFavShop");
             jsonObject.addProperty("playerId", com.example.boardgame.chat.Common.loadPlayerId(activity));
             jsonObject.addProperty("shopId", shopId);
             String jsonOut = jsonObject.toString();
             CommonTask gameGetAllTask = new CommonTask(url, jsonOut);
             try {
                 String jsonIn = gameGetAllTask.execute().get();
+                if("".equals(jsonIn)){
+                    jsonIn ="0";
+                }
                 result = Integer.valueOf(jsonIn);
+                return result;
             } catch (Exception e) {
                 Log.e(TAG, e.toString());
             }
         } else {
             Common.showToast(activity, R.string.textNoNetwork);
         }
-        return result;
+        return 0;
     }
 }
 

@@ -7,7 +7,6 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -76,7 +75,7 @@ public class Profile3_Fragment extends Fragment {
         // 置換 BottomBar 的 menu
         MainActivity.setBottomBar(MainActivity.BOTTOM_PLAYER);
 
-        shops = getFavShops();
+        shops = getFavShop();
         rvFavShop.setAdapter(new FavShopAdapter(activity, shops));
     }
 
@@ -166,10 +165,10 @@ public class Profile3_Fragment extends Fragment {
         }
     }
 
-    private List<FavShop> getFavShops(){
+    private List<FavShop> getFavShop(){
         List<FavShop> shopsDB = new ArrayList<>();
 
-        // 從 Sevlet 取得要顯示的玩家資料
+        // 從 Sevlet 取得要顯示的店家資料
         JsonObject jsonOut = new JsonObject();
         jsonOut.addProperty("action", "getFavShops");
         jsonOut.addProperty("playerId", playerId);
