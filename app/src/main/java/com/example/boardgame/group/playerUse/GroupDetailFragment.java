@@ -2,6 +2,7 @@ package com.example.boardgame.group.playerUse;
 
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,7 +17,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import com.example.boardgame.MainActivity;
 import com.example.boardgame.R;
+import com.example.boardgame.chat.ChatFragment;
 import com.example.boardgame.group.Common;
 import com.example.boardgame.group.CommonTask;
 import com.example.boardgame.group.ImageTask;
@@ -26,7 +29,7 @@ import com.google.gson.JsonObject;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import static com.example.boardgame.group.Common.playerId;
+
 import static com.example.boardgame.group.Common.rate_count;
 import static com.example.boardgame.group.Common.rate_total;
 
@@ -46,6 +49,7 @@ public class GroupDetailFragment extends Fragment {
     double personRate=rate_total/rate_count;
     long groupTime;
     private int shopId;
+    private String playerId;
 
 
     @Override
@@ -68,6 +72,9 @@ public class GroupDetailFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        playerId = Common.loadPlayerId(activity);
+
         tvShopName = view.findViewById(R.id.tvPersonName);
         tvArea2 = view.findViewById(R.id.tvArea2);
         tvArea3 = view.findViewById(R.id.tvArea3);
@@ -137,6 +144,30 @@ public class GroupDetailFragment extends Fragment {
                 }
             }
         });
+
+        btReportOrChat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(btReportOrChat.getText().equals("團聊")){
+                    Bundle bundle = new Bundle();
+                    bundle.putString("from", "ListGroups");
+                    bundle.putInt("groupNo",groupNo);
+                    bundle.putString("groupName", groupName);
+
+                    //@@@@@@@@@@@@@@@@@@@
+                    //@@@@要連到團聊頁面@@@
+                    //@@@@@@@@@@@@@@@@@@@
+
+//                    Navigation.findNavController(view).navigate(R.id., bundle);
+                }
+            }
+        });
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        MainActivity.changeBarsStatus(MainActivity.NEITHER_TAB_NOR_BOTTOM);
     }
 
     public void showGroupDetail(int groupNoIn) {

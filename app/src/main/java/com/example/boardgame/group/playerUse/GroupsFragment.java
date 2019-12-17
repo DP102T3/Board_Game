@@ -41,7 +41,7 @@ public class GroupsFragment extends Fragment {
     private RecyclerView rvGroups;
     private List<Group> groups;
     private List<GroupList> groupLists;
-
+    private String playerId;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -59,6 +59,9 @@ public class GroupsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        playerId = Common.loadPlayerId(activity);
+
         rvGroups=view.findViewById(R.id.rvGroups);
         rvGroups.setLayoutManager(new GridLayoutManager(activity,2));
         swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);

@@ -146,5 +146,6 @@
     <string name="textSignInError">簽到失敗</string>
     <string name="textSignInSuccess">簽到成功</string>
     <string name="textNoMember">沒有成員</string>
+    <string name="textNoImage">請選擇揪團圖片</string>
 
 </resources>
