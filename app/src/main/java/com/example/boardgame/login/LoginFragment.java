@@ -1,7 +1,6 @@
 package com.example.boardgame.login;
 
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.os.Bundle;
 
@@ -10,6 +9,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -63,7 +63,9 @@ public class LoginFragment extends Fragment {
     private class MyTimerTask extends TimerTask {
         @Override
         public void run() {
+            Looper.prepare();
             autoLogin(tempView);
+            Looper.loop();
         }
     }
 
@@ -151,6 +153,7 @@ public class LoginFragment extends Fragment {
                                 case "administrator":
                                     // 紀錄登入身份
                                     loginId = ADMIN;
+                                    Navigation.findNavController(v).navigate(R.id.systemNotificationFragment);
                                     Log.d(TAG, "type = " + type);
                                     Log.d(TAG, "loginId = " + loginId);
                                     break;
@@ -226,6 +229,7 @@ public class LoginFragment extends Fragment {
                     case "administrator":
                         // 紀錄登入身份
                         loginId = ADMIN;
+                        Navigation.findNavController(view).navigate(R.id.systemNotificationFragment);
                         Log.d(TAG, "type = " + type);
                         Log.d(TAG, "loginId = " + loginId);
                         break;

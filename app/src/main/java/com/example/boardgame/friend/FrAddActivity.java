@@ -254,6 +254,7 @@ public class FrAddActivity extends AppCompatActivity {
 
             case R.id.action_note:
                 Navigation.findNavController(tvIndicate).navigate(R.id.shopNotificationListFragment);
+                MainActivity.changeBarsStatus(0);
                 break;
         }
         searchView.setOnQueryTextListener(queryTextListener);

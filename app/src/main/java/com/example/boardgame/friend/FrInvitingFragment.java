@@ -223,6 +223,7 @@ public class FrInvitingFragment extends Fragment {
 
             case R.id.action_note:
                 Navigation.findNavController(recyclerView).navigate(R.id.playerNosListFragment);
+                MainActivity.changeBarsStatus(0);
                 break;
         }
         return super.onOptionsItemSelected(item);

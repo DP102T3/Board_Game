@@ -210,7 +210,7 @@ public class AdvertisementActivity extends AppCompatActivity {
         Log.i("InF", String.valueOf(id));
         switch (id){
             case R.id.action_note:
-                Navigation.findNavController(this,0).navigate(R.id.shopNotificationListFragment);
+                Navigation.findNavController(this,R.id.fragment).navigate(R.id.shopNotificationListFragment);
                 break;
         }
         return super.onOptionsItemSelected(item);
