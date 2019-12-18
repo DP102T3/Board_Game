@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.example.boardgame.MainActivity;
 import com.example.boardgame.R;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -52,6 +53,10 @@ public class ShopNotificationListFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        // 隱藏 TabBar 及 BottomBar
+        MainActivity.changeBarsStatus(MainActivity.NEITHER_TAB_NOR_BOTTOM);
+
         shop_id=CommonShop.loadShop_id(activity);
         shopId = String.valueOf(shop_id);
 

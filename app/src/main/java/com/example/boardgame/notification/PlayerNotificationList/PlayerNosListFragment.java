@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.boardgame.MainActivity;
 import com.example.boardgame.R;
 import com.example.boardgame.notification.Common;
 import com.example.boardgame.notification.CommonTask;
@@ -54,6 +55,10 @@ public class PlayerNosListFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        // 隱藏 TabBar 及 BottomBar
+        MainActivity.changeBarsStatus(MainActivity.NEITHER_TAB_NOR_BOTTOM);
+
         player_id = Common.loadPlayer_id(activity);
 
         swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);

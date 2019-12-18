@@ -11,6 +11,7 @@ import android.os.IBinder;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
@@ -51,6 +52,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.zip.Inflater;
 
 import tech.cherri.tpdirect.api.TPDCardInfo;
 import tech.cherri.tpdirect.api.TPDConsumer;
@@ -133,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
 
         ctBG = findViewById(R.id.ctBG);
         timer.schedule(new MyTimerTask(), 3000);
-        timer.schedule(new EmptyTimerTask(), 4500);
+        timer.schedule(new EmptyTimerTask(), 3500);
 
         // 取得螢幕長寬（像素）（用於定義 「點擊空白處隱藏鍵盤」方法 的點擊範圍）
         DisplayMetrics metric = new DisplayMetrics();
@@ -303,7 +305,7 @@ public class MainActivity extends AppCompatActivity {
                 public void run() {
                     Animation am = new AlphaAnimation(1.0f, 0.0f);
                     //setDuration (long durationMillis) 設定動畫開始到結束的執行時間
-                    am.setDuration(1500);
+                    am.setDuration(500);
                     //setRepeatCount (int repeatCount) 設定重複次數 -1為無限次數 0
                     am.setRepeatCount(0);
                     //將動畫參數設定到圖片並開始執行動畫
