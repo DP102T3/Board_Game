@@ -37,6 +37,7 @@ import tech.cherri.tpdirect.callback.TPDTokenFailureCallback;
 import tech.cherri.tpdirect.callback.TPDTokenSuccessCallback;
 
 import static com.example.boardgame.advertisement_points.Common.CARD_TYPES;
+import static com.example.boardgame.player.Common.loadPlayerId;
 
 public class PointActivity extends AppCompatActivity {
 
@@ -76,14 +77,13 @@ public class PointActivity extends AppCompatActivity {
     private void getAllPoint() {
         String postJsonString = String.format(
                 Locale.TAIWAN,
-                "{\"playerId\" : \"%s\"}",
-                "chengchi1223"
+                "{\"playerId\" : \"%s\"}",loadPlayerId(this)
         );
 
         MyTask task = new MyTask(
-                "http://127.0.0.1:8080/Advertisement_Server/GetAllPoint", // server服務的網址
+                "http://10.0.2.2:8080/Advertisement_Server/GetAllPoint", // server服務的網址
                 postJsonString, // 要傳給Server服務的字串，這邊為要新增的廣告Object
-                "POST"
+                "null"
         );
 
         try {
@@ -246,13 +246,13 @@ public class PointActivity extends AppCompatActivity {
         String postJsonString = String.format(
                 Locale.TAIWAN,
                 "{\"playerId\" : \"%s\", \"bpAmount\":%d, \"bpCount\":%d }",
-                PointActivity.this,
+                loadPlayerId(this),
                 total,
                 buyCount
         );
 
         MyTask task = new MyTask(
-                "http://10.0.2.2:8080/Advertisement_Server/BuyPoint", // server服務的網址
+                "http://10.0.2.2:8080/Advertisement_Server/BuyPoint",// server服務的網址
                 postJsonString, // 要傳給Server服務的字串
                 "POST"
         );
@@ -273,8 +273,7 @@ public class PointActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         if (isSuccessful) {
-//                            TODO!!!!!  跳轉至會員個人頁面
-//                            NavHostFragment.findNavController(fragment).navigate(R.id.adNowFragment);
+                            getAllPoint();
                         }
                     }
                 }).create().show();

@@ -68,15 +68,14 @@ public class AdNowFragment extends Fragment {
                 Navigation.findNavController(v).navigate(R.id.action_adNowFragment_to_adNewFragment);
             }
         });
-//      TODO 整合要刪掉！！！！！！！！！！！！！！！！！！！
-        Button btnToPoints = view.findViewById(R.id.btnToPoints);
-        btnToPoints.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), PointActivity.class);
-                startActivity(intent);
-            }
-        });
+//        Button btnToPoints = view.findViewById(R.id.btnToPoints);
+//        btnToPoints.setOnClickListener(new View.OnClickListener(){
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(getActivity(), PointActivity.class);
+//                startActivity(intent);
+//            }
+//        });
     }
 
 
