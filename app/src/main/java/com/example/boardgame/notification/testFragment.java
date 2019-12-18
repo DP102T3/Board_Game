@@ -93,7 +93,6 @@ public class testFragment extends Fragment implements View.OnClickListener {
                 inviteFriendJsonObject.addProperty("type", "inviteFriend");
                 inviteFriendJsonObject.addProperty("player2_id", "gerfarn0523");
                 String inviteFriendJson = new Gson().toJson(inviteFriendJsonObject);
-                Log.e("inviteFriendButtonOnclickJson送出值：", inviteFriendJson);
                 if(!inviteFriendJson.isEmpty()){
                 InviteFriendService.inviteFriendWebSocketClient.send(inviteFriendJson);}
                 break;
@@ -101,7 +100,6 @@ public class testFragment extends Fragment implements View.OnClickListener {
                 JsonObject addFriendJsonObject = new JsonObject();
                 addFriendJsonObject.addProperty("receiver", "chengchi1223");
                 String addFriendJson = new Gson().toJson(addFriendJsonObject);
-                Log.e("addFriendButtonOnclickJson送出值：", addFriendJson);
                 if(!addFriendJson.isEmpty()){
                 AddFriendService.addFriendnosWebSocketClient.send(addFriendJson);}
                 break;
@@ -110,7 +108,6 @@ public class testFragment extends Fragment implements View.OnClickListener {
                 jsonObject.addProperty("player_id", "chengchi1223");
                 jsonObject.addProperty("player2_id", "gerfarn0523");
                 String idJson = new Gson().toJson(jsonObject);
-                Log.e("reportPlayerButtonOnclickJson送出值：", idJson);
                 if(!idJson.isEmpty()){
                 ReportPlayerService.reportWebSocketClient.send(idJson);}
                 break;
@@ -119,7 +116,6 @@ public class testFragment extends Fragment implements View.OnClickListener {
                 reportShopJsonObject.addProperty("player_id", "chengchi1223");
                 reportShopJsonObject.addProperty("shop_id", CommonShop.loadShop_id(activity));
                 String shop_idJson = new Gson().toJson(reportShopJsonObject);
-                Log.e("reportShopButtonOnclickJson送出值：", shop_idJson);
                 if(!shop_idJson.isEmpty()){
                 ReportShopService.reportShopWebSocketClient.send(shop_idJson);}
                 break;
@@ -129,7 +125,6 @@ public class testFragment extends Fragment implements View.OnClickListener {
                 inviteGroupJsonObject.addProperty("player2_id", "gerfarn0523");
                 inviteGroupJsonObject.addProperty("group_name", "中大桌遊");
                 String inviteGroupIdJson = new Gson().toJson(inviteGroupJsonObject);
-                Log.e("inviteFriendGroupButtonOnclickJson送出值：", inviteGroupIdJson);
                 if(!inviteGroupIdJson.isEmpty()){
                 InviteFriendService.inviteFriendWebSocketClient.send(inviteGroupIdJson);}
                 break;
@@ -140,7 +135,6 @@ public class testFragment extends Fragment implements View.OnClickListener {
                 groupCheckJsonObject.addProperty("group_name", "中大桌遊");
                 groupCheckJsonObject.addProperty("type", "agree");
                 String groupCheckIdJson = new Gson().toJson(groupCheckJsonObject);
-                Log.e("groupCheckButtonOnclickJson送出值：", groupCheckIdJson);
                 if(!groupCheckIdJson.isEmpty()){
                 GroupCheckService.groupCheckNosWebSocketClient.send(groupCheckIdJson);}
                 break;
@@ -151,7 +145,6 @@ public class testFragment extends Fragment implements View.OnClickListener {
                 refuseGroupJsonObject.addProperty("group_name", "中大桌遊");
                 refuseGroupJsonObject.addProperty("type", "當日訂位人數已滿");
                 String refuseGroupIdJson = new Gson().toJson(refuseGroupJsonObject);
-                Log.e("refuseGroupButtonOnclickJson送出值：", refuseGroupIdJson);
                 if(!refuseGroupIdJson.isEmpty()){
                 GroupCheckService.groupCheckNosWebSocketClient.send(refuseGroupIdJson);}
                 break;
@@ -162,7 +155,6 @@ public class testFragment extends Fragment implements View.OnClickListener {
                 reportGroupJsonObject.addProperty("group_name", "中大桌遊");
                 reportGroupJsonObject.addProperty("reporter", "gerfarn0523");
                 String reportGroupIdJson = new Gson().toJson(reportGroupJsonObject);
-                Log.e("reportGroupButtonOnclickJson送出值：", reportGroupIdJson);
                 if(!reportGroupIdJson.isEmpty()){
                 ReportGroupService.reportGroupNosWebSocketClient.send(reportGroupIdJson);}
                 break;
@@ -185,7 +177,6 @@ public class testFragment extends Fragment implements View.OnClickListener {
                 refuseAdJsonObject.addProperty("refuseReason", "內容有不當資訊請修改");
                 refuseAdJsonObject.addProperty("type", "refuse");
                 String refuseAdJson = new Gson().toJson(refuseAdJsonObject);
-                Log.e("refuseAdButtonOnclickJson送出值：", refuseAdJson);
                 if(!refuseAdJson.isEmpty()){
                 AdvertisementService.advertisementWebSocketClient.send(refuseAdJson);}
                 break;

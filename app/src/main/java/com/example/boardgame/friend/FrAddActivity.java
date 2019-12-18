@@ -26,6 +26,7 @@ import android.widget.TextView;
 import com.example.boardgame.MainActivity;
 import com.example.boardgame.R;
 import com.example.boardgame.chat.Common;
+import com.example.boardgame.notification.Websocket.InviteFriendService;
 import com.google.android.material.tabs.TabLayout;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -124,6 +125,13 @@ public class FrAddActivity extends AppCompatActivity {
                     } catch (Exception e) {
                         Log.e("Error", e.toString());
                     }
+
+                    JsonObject inviteFriendJsonObject = new JsonObject();
+                    inviteFriendJsonObject.addProperty("type", "inviteFriend");
+                    inviteFriendJsonObject.addProperty("player2_id", "gerfarn0523");
+                    String inviteFriendJson = new Gson().toJson(inviteFriendJsonObject);
+                    if(!inviteFriendJson.isEmpty()){
+                        InviteFriendService.inviteFriendWebSocketClient.send(inviteFriendJson);}
                 }
             });
         }

@@ -58,7 +58,6 @@ public class ReportPlayerService extends Service {
         connectServer();
         AlarmManager alarmManager =
                 (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        acquireWakeLock();
     }
 
     @Override
@@ -172,24 +171,6 @@ public class ReportPlayerService extends Service {
     public void onDestroy() {
         super.onDestroy();
         disconnectServer();
-        releaseWakeLock();
-    }
-
-    private void acquireWakeLock() {
-        PowerManager powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
-        if (powerManager != null && wakeLock == null) {
-            wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "ServiceDemo:MyWakeLock");
-            Log.d(TAG, "acquireWakeLock");
-        }
-    }
-
-    // 釋放wake lock
-    private void releaseWakeLock() {
-        if (wakeLock != null) {
-            wakeLock.release();
-            wakeLock = null;
-            Log.d(TAG, "releaseWakeLock");
-        }
     }
 }
 

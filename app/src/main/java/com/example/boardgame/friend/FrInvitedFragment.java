@@ -26,6 +26,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.boardgame.MainActivity;
 import com.example.boardgame.R;
 import com.example.boardgame.chat.Common;
+import com.example.boardgame.notification.Websocket.AddFriendService;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
@@ -163,6 +164,12 @@ public class FrInvitedFragment extends Fragment {
                     } catch (Exception e) {
                         Log.e("Error", e.toString());
                     }
+
+                    JsonObject addFriendJsonObject = new JsonObject();
+                    addFriendJsonObject.addProperty("receiver", "chengchi1223");
+                    String addFriendJson = new Gson().toJson(addFriendJsonObject);
+                    if(!addFriendJson.isEmpty()){
+                        AddFriendService.addFriendnosWebSocketClient.send(addFriendJson);}
                 }
             });
             holder.btnDecline.setOnClickListener(new View.OnClickListener() {
