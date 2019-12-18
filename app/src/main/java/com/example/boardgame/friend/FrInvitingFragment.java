@@ -56,7 +56,6 @@ public class FrInvitingFragment extends Fragment {
         setHasOptionsMenu(true);
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        getFriend();
         recyclerView.setAdapter(new FrInvitingAdapter(this, friendViewModelList));
     }
 
