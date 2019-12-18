@@ -32,7 +32,7 @@ import tech.cherri.tpdirect.callback.TPDTokenSuccessCallback;
 import static com.example.boardgame.advertisement_points.Common.CARD_TYPES;
 
 public class AdvertisementActivity extends AppCompatActivity {
-
+    private static final String TAG = "TAG_AdvertisementActivity";
     private Activity activity;
     private FragmentManager manager;
 //    private FragmentTransaction transaction;
@@ -53,6 +53,7 @@ public class AdvertisementActivity extends AppCompatActivity {
         manager = getSupportFragmentManager();
         fragment = manager.findFragmentById(R.id.fragment_friend);
         activity = this;
+        Log.d(TAG, "========== in AdvertisementActivity onCreate ==========");
     }
 
     @Override
@@ -133,7 +134,7 @@ public class AdvertisementActivity extends AppCompatActivity {
         // 組合成後端要的格式
 
         int adBuyDate = AdNewFragment.adDays;
-        String shopId = "123";
+        String shopId = com.example.boardgame.chat.Common.loadPlayerId(activity);
         String adStart = AdNewFragment.startDate();
         int adAmount = (int)(AdNewFragment.total);
         int adState = 0;

@@ -34,8 +34,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-import static com.example.boardgame.group.Common.playerId;
-
 
 public class sign_in extends Fragment {
     private static final String TAG = "TAG_SignInFragment";
@@ -49,6 +47,8 @@ public class sign_in extends Fragment {
     private Button btSignIn;
     private int shopId,groupNo;
     private CommonTask signIgTask;
+
+    private String playerId;
 
     public static final int MY_PERMISSION_ACCESS_COARSE_LOCATION = 11;
 
@@ -79,6 +79,7 @@ public class sign_in extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        playerId = Common.loadPlayerId(activity);
         mapView = view.findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);//mapView一定要onCreat
         btSignIn=view.findViewById(R.id.btSignIn);
@@ -141,17 +142,17 @@ public class sign_in extends Fragment {
                                     shopLocationLongitude, results);
                             double distance=results[0];
                             Log.d(TAG,"distance="+distance);
-                            if(distance<50){//測試用50公尺，最後要改成10公尺
+                            if(distance<500000){//測試用50公尺，最後要改成10公尺
                                 if (Common.networkConnected(activity)) {
                                     String url2 = Common.URL_SERVER + "JoinMemberServlet";
                                     JsonObject jsonObject2 = new JsonObject();
-                                    jsonObject.addProperty("action", "signInInput");
-                                    jsonObject.addProperty("groupNo", groupNo);
-                                    jsonObject.addProperty("playerId", playerId);
+                                    jsonObject2.addProperty("action", "signInInput");
+                                    jsonObject2.addProperty("groupNo", groupNo);
+                                    jsonObject2.addProperty("playerId", playerId);
 
                                     int count = 0;
                                     try {
-                                        String result = new CommonTask(url2, jsonObject.toString()).execute().get();
+                                        String result = new CommonTask(url2, jsonObject2.toString()).execute().get();
                                         count = Integer.valueOf(result);
                                     }catch (Exception e) {
                                         e.printStackTrace();

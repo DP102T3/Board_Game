@@ -46,7 +46,6 @@ public class AdNowFragment extends Fragment {
         MainActivity.setTabBar(MainActivity.TAB_ADVERTISEMENT);
         // 置換 BottomBar 的 menu
         MainActivity.setBottomBar(MainActivity.BOTTOM_SHOP);
-
     }
 
     @Override

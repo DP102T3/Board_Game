@@ -4,6 +4,7 @@ package com.example.boardgame.group.playerUse;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.InputType;
@@ -29,6 +30,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import com.example.boardgame.MainActivity;
 import com.example.boardgame.R;
 import com.example.boardgame.group.Common;
 import com.example.boardgame.group.CommonTask;
@@ -53,8 +55,8 @@ public class Add_fragment extends Fragment implements DatePickerDialog.OnDateSet
     private ImageButton ibGroupPicture;
     private Uri contentUri;
     private Spinner spPeopleLeast,spPeopleMax,spCondition,spGameClass,spAreaLv2,spAreaLv3,spShopName;
-    private String[] peopleLeast={"1","2","3"};
-    private String[] peopleMax={"1","2","3"};
+    private String[] peopleLeast={"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16"};
+    private String[] peopleMax={"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16"};
     private String[] condition={"不限","評分4分以上","評分3分以上","評分2分以上","評分1分以上"};
     private String[] gameGlass={"派對遊戲","策略遊戲","情境遊戲","戰爭遊戲","抽象遊戲","交換卡片遊戲","兒童遊戲","家庭遊戲"};
     private String[] areaslv2;
@@ -62,6 +64,7 @@ public class Add_fragment extends Fragment implements DatePickerDialog.OnDateSet
     private String[] shopName;
     private int j;
     private byte[] image;
+    private String playerIdUse;
 
     private int pL,pM,timeSelect,dateSelect,con;
     private static int year, month, day, hour, minute;
@@ -105,6 +108,7 @@ public class Add_fragment extends Fragment implements DatePickerDialog.OnDateSet
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         final NavController navController = Navigation.findNavController(view);
+        playerIdUse = Common.loadPlayerId(activity);
 
         etGroupName=view.findViewById(R.id.etGroupName);
         spAreaLv2=view.findViewById(R.id.spAreaLv2);
@@ -297,10 +301,7 @@ public class Add_fragment extends Fragment implements DatePickerDialog.OnDateSet
             }
         });
 
-        if(bitmap !=null) {
-            Log.d(TAG,"have");
-            ibGroupPicture.setImageBitmap(bitmap);
-        }
+
 
 
 
@@ -421,22 +422,8 @@ public class Add_fragment extends Fragment implements DatePickerDialog.OnDateSet
 
                 int shopIdSelect=shopList.get(j).getShopId();
                 int peopleJoin=1;
-                String playerId=Common.playerId;
+                String playerId=playerIdUse;
 
-
-
-//                //字串轉Date
-//                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-//                try{
-//                    dateForGroupStartDateTime = sdf.parse(groupStartDateTime);
-//                    dateForGroupStopDateTime=sdf.parse(groupStopDateTime);
-//                    dateForJoinStopDateTime=sdf.parse(joinStopDateTime);
-//                    Log.d(TAG, " dateForGroupStartDateTime = " + dateForGroupStartDateTime);
-//                    Log.d(TAG, " dateForGroupStopDateTime = " + dateForGroupStopDateTime);
-//                    Log.d(TAG, " dateForJoinStopDateTime = " + dateForJoinStopDateTime);
-//                }catch (Exception e){
-//                    Log.e(TAG,  "Date "+e.toString());
-//                }
 
 
 
@@ -483,7 +470,8 @@ public class Add_fragment extends Fragment implements DatePickerDialog.OnDateSet
                     jsonObject.addProperty("group", new Gson().toJson(group));
 
 
-                    if (ibGroupPicture != null) {
+                    if (bitmap != null) {
+                        Log.d(TAG,"bitmap="+bitmap);
                         BitmapToBytes(bitmap);
                         jsonObject.addProperty("imageBase64", Base64.encodeToString(image, Base64.DEFAULT));
                         //////////////////////////待確認
@@ -513,6 +501,25 @@ public class Add_fragment extends Fragment implements DatePickerDialog.OnDateSet
 
 
 
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        MainActivity.changeBarsStatus(MainActivity.NEITHER_TAB_NOR_BOTTOM);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(bitmap !=null) {
+            Log.d(TAG,"have");
+            ibGroupPicture.setImageBitmap(bitmap);
+        }else if(bitmap==null){
+            bitmap = BitmapFactory.decodeResource(activity.getResources(), R.drawable.no_image);
+            ibGroupPicture.setImageBitmap(bitmap);
+            Log.d(TAG,"bitmap=null="+bitmap);
+        }
     }
 
     public byte[] BitmapToBytes(Bitmap bitmap) {

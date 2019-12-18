@@ -10,7 +10,7 @@
         android:id="@+id/btLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="193dp"
+        android:layout_marginTop="80dp"
         android:background="#B50000"
         android:text="登入"
         android:textColor="#F7F4F4"
@@ -23,39 +23,38 @@
         android:id="@+id/btSingUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="184dp"
         android:background="#B50000"
         android:text="註冊"
         android:textColor="#F7F3F3"
         app:layout_constraintEnd_toEndOf="@+id/edPassword"
         app:layout_constraintHorizontal_bias="0.761"
         app:layout_constraintStart_toStartOf="@+id/ivPassword"
-        app:layout_constraintTop_toBottomOf="@+id/edPassword" />
+        app:layout_constraintTop_toTopOf="@+id/btLogin" />
 
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="70dp"
+        android:layout_marginBottom="100dp"
         android:text="mainFragment"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/edAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="212dp"
         android:layout_marginEnd="24dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="12345678"
+        app:layout_constraintBottom_toBottomOf="@+id/tvPlayerId"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tvPlayerId"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/tvPlayerId" />
 
     <EditText
         android:id="@+id/edPassword"
@@ -64,7 +63,6 @@
         android:layout_marginTop="28dp"
         android:ems="10"
         android:inputType="textPassword"
-        android:text="1"
         app:layout_constraintEnd_toEndOf="@+id/edAccount"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/edAccount"
@@ -75,12 +73,12 @@
         android:layout_width="44dp"
         android:layout_height="44dp"
         android:layout_marginStart="37dp"
-        android:layout_marginTop="212dp"
+        android:layout_marginTop="48dp"
         android:layout_marginEnd="20dp"
         android:src="@drawable/login_account"
         app:layout_constraintEnd_toStartOf="@+id/tvPlayerId"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
     <ImageView
         android:id="@+id/ivPassword"
@@ -98,12 +96,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="224dp"
         android:layout_marginEnd="26dp"
         android:text="帳號："
+        app:layout_constraintBottom_toBottomOf="@+id/ivAccount"
         app:layout_constraintEnd_toStartOf="@+id/edAccount"
         app:layout_constraintStart_toEndOf="@+id/ivAccount"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/ivAccount" />
 
     <TextView
         android:id="@+id/tvPassword"
@@ -120,10 +118,11 @@
         android:id="@+id/tvForgetPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="59dp"
+        android:layout_marginTop="16dp"
         android:text="忘記密碼"
         android:textColor="#0C0C0C"
         android:textSize="18sp"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="@+id/edAccount"
         app:layout_constraintHorizontal_bias="0.289"
         app:layout_constraintStart_toStartOf="@+id/tvPlayerId"
@@ -140,4 +139,16 @@
         app:layout_constraintEnd_toEndOf="@+id/edPassword"
         app:layout_constraintStart_toStartOf="@+id/ivPassword"
         app:layout_constraintTop_toBottomOf="@+id/btLogin" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="70dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/bglogo" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

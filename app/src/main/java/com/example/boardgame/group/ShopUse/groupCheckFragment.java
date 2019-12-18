@@ -18,6 +18,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.boardgame.MainActivity;
 import com.example.boardgame.R;
 import com.example.boardgame.group.Common;
 import com.example.boardgame.group.CommonTask;
@@ -32,12 +33,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import static com.example.boardgame.group.Common.shopId;
-
 
 public class groupCheckFragment extends Fragment {
     private static final String TAG = "TAG_GroupCheckFragment";
     private Activity activity;
+
     private CommonTask groupCheckTask;
     private ImageTask groupCheckImageTask;
     private RecyclerView rvGroupCheck;
@@ -66,13 +66,24 @@ public class groupCheckFragment extends Fragment {
         showGroupCheck(groupsCheck);
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        // 顯示 TabBar 及 BottomBar
+        MainActivity.changeBarsStatus(MainActivity.BOTH_TAB_AND_BOTTOM);
+        // 置換 TabBar 的 menu
+        MainActivity.setTabBar(MainActivity.TAB_CHECK_GROUP);
+        // 置換 BottomBar 的 menu
+        MainActivity.setBottomBar(MainActivity.BOTTOM_SHOP);
+    }
+
     private List<Group> getGroupCheck(){
 
         if (Common.networkConnected(activity)) {
             String url = Common.URL_SERVER + "/Group_Servlet";
             JsonObject jsonObject = new JsonObject();
             jsonObject.addProperty("action", "getGroupCheck");
-            jsonObject.addProperty("shopId", shopId);
+            jsonObject.addProperty("shopId", Common.loadPlayerId(activity));
             String jsonOut = jsonObject.toString();
             groupCheckTask= new CommonTask(url, jsonOut);
             try {

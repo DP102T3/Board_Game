@@ -33,9 +33,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.example.boardgame.group.Common.playerId;
-
-
 public class ScoreFragment extends Fragment {
     private static final String TAG = "TAG_ScoreFragment";
     private Activity activity;
@@ -49,6 +46,7 @@ public class ScoreFragment extends Fragment {
     private Button btReport, btInput;
     private int groupNo, shopId;
     private int shopScore;
+    private String playerId;
     Gson gson = new Gson();
     Map<String, Integer> rate = new HashMap<String, Integer>();
 
@@ -70,6 +68,7 @@ public class ScoreFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        playerId = Common.loadPlayerId(activity);
         ivShop = view.findViewById(R.id.ivShop);
         tvShopName = view.findViewById(R.id.tvShopName);
         rbShop = view.findViewById(R.id.rbShop);

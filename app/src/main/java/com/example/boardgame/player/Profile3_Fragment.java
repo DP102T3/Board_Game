@@ -7,7 +7,6 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -15,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -35,14 +36,14 @@ import java.util.List;
 import static com.example.boardgame.chat.Common.showToast;
 
 public class Profile3_Fragment extends Fragment {
-    private static final String TAG = "TAG_Profile1_Fragmen3";
+    private static final String TAG = "TAG_Profile1_Fragment3";
     private Activity activity;
     private String playerId;
     private Gson gson = new Gson();
 
     private RecyclerView rvFavShop;
 
-    private List<FavShop> shops;
+    private List<FavShop> shops = new ArrayList<>();
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -76,7 +77,7 @@ public class Profile3_Fragment extends Fragment {
         // 置換 BottomBar 的 menu
         MainActivity.setBottomBar(MainActivity.BOTTOM_PLAYER);
 
-        shops = getFavShops();
+        shops = getFavShop();
         rvFavShop.setAdapter(new FavShopAdapter(activity, shops));
     }
 
@@ -89,7 +90,7 @@ public class Profile3_Fragment extends Fragment {
             this.shops = shops;
         }
 
-        private class MyViewHolder extends RecyclerView.ViewHolder{
+        private class MyViewHolder extends RecyclerView.ViewHolder {
             public ImageView ivShop;
             public TextView tvShopName, tvShopRate, tvShopAddress;
             public ImageView ivStarIcon;
@@ -106,6 +107,10 @@ public class Profile3_Fragment extends Fragment {
 
         @Override
         public int getItemCount() {
+            if (shops.size() == 0) {
+                com.example.boardgame.player.Common.showToast(activity, "您沒有收藏店家");
+                return 0;
+            }
             return shops.size();
         }
 
@@ -122,11 +127,11 @@ public class Profile3_Fragment extends Fragment {
             int rateTotal = shop.getRateTotal();
             int rateCount = shop.getRateCount();
 
-            double rate=0;
-            if(rateCount!=0) {
+            double rate = 0;
+            if (rateCount != 0) {
                 rate = rateTotal / rateCount;
                 holder.tvShopRate.setText(String.format("%.1f", rate));
-            }else {
+            } else {
                 holder.ivStarIcon.setVisibility(View.INVISIBLE);
                 holder.tvShopRate.setText("暫無評價");
             }
@@ -162,10 +167,10 @@ public class Profile3_Fragment extends Fragment {
         }
     }
 
-    private List<FavShop> getFavShops(){
+    private List<FavShop> getFavShop() {
         List<FavShop> shopsDB = new ArrayList<>();
 
-        // 從 Sevlet 取得要顯示的玩家資料
+        // 從 Sevlet 取得要顯示的店家資料
         JsonObject jsonOut = new JsonObject();
         jsonOut.addProperty("action", "getFavShops");
         jsonOut.addProperty("playerId", playerId);
@@ -175,7 +180,8 @@ public class Profile3_Fragment extends Fragment {
             String jsonIn;
             try {
                 jsonIn = new CommonTask(url, jsonOut.toString()).execute().get();
-                Type listType = new TypeToken<List<FavShop>>(){}.getType();
+                Type listType = new TypeToken<List<FavShop>>() {
+                }.getType();
                 shopsDB = gson.fromJson(jsonIn, listType);
                 Log.d(TAG, jsonIn);
             } catch (Exception e) {
@@ -185,6 +191,9 @@ public class Profile3_Fragment extends Fragment {
             showToast(activity, R.string.tx_NoNetwork);
         }
 
+        if (shopsDB == null) {
+            shopsDB = new ArrayList<>();
+        }
         return shopsDB;
     }
 }

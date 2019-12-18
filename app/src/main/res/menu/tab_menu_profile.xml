@@ -4,9 +4,9 @@
     <item
         android:id="@+id/profile1_Fragment"
         android:title="個人資訊" />
-    <item
-        android:id="@+id/profile2_fragment"
-        android:title="已加入揪團" />
+<!--    <item-->
+<!--        android:id="@+id/profile2_fragment"-->
+<!--        android:title="已加入揪團" />-->
     <item
         android:id="@+id/profile3_fragment"
         android:title="收藏店家" />

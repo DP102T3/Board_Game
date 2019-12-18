@@ -49,7 +49,7 @@ public class mainFragment extends Fragment {
                 // 置換 BottomBar 的 menu
                 MainActivity.setBottomBar(MainActivity.BOTTOM_PLAYER);
                 Navigation.findNavController(v)
-                        .navigate(R.id.action_mainFragment_to_listFriendsFragment);
+                        .navigate(R.id.action_mainFragment_to_groupsFragment);
             }
         });
         view.findViewById(R.id.btUserNameMay).setOnClickListener(new View.OnClickListener() {
@@ -60,7 +60,7 @@ public class mainFragment extends Fragment {
                 // 將假的 玩家id 存入 偏好設定
                 savePlayerId(activity,"gerfarn0523");
                 Navigation.findNavController(v)
-                        .navigate(R.id.action_mainFragment_to_listFriendsFragment);
+                        .navigate(R.id.action_mainFragment_to_groupsFragment);
             }
         });
         view.findViewById(R.id.btUserNameJerry).setOnClickListener(new View.OnClickListener() {
@@ -71,7 +71,7 @@ public class mainFragment extends Fragment {
                 // 將假的 玩家id 存入 偏好設定
                 savePlayerId(activity,"jerry1124");
                 Navigation.findNavController(v)
-                        .navigate(R.id.action_mainFragment_to_listFriendsFragment);
+                        .navigate(R.id.action_mainFragment_to_groupsFragment);
             }
         });
 
@@ -81,17 +81,6 @@ public class mainFragment extends Fragment {
             public void onClick(View v) {
                 loginId = ADMIN;
                 Navigation.findNavController(v).navigate(R.id.action_mainFragment_to_testFragment);
-            }
-        });
-
-        view.findViewById(R.id.btShopList).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // 紀錄登入身份
-                loginId = PLAYER;
-                // 將假的 玩家id 存入 偏好設定
-                savePlayerId(activity,"chengchi1223");
-                Navigation.findNavController(v).navigate(R.id.action_mainFragment_to_shopListFragment);
             }
         });
 
