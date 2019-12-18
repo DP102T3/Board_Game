@@ -89,7 +89,6 @@ public class LoginFragment extends Fragment {
         btLogin = view.findViewById(R.id.btLogin);
         btSingUp = view.findViewById(R.id.btSingUp);
 
-
         // 登入按鈕
         btLogin.setOnClickListener(new View.OnClickListener() {
             @Override

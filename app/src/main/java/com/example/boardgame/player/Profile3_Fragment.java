@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -88,7 +90,7 @@ public class Profile3_Fragment extends Fragment {
             this.shops = shops;
         }
 
-        private class MyViewHolder extends RecyclerView.ViewHolder{
+        private class MyViewHolder extends RecyclerView.ViewHolder {
             public ImageView ivShop;
             public TextView tvShopName, tvShopRate, tvShopAddress;
             public ImageView ivStarIcon;
@@ -105,8 +107,8 @@ public class Profile3_Fragment extends Fragment {
 
         @Override
         public int getItemCount() {
-            if(shops.size() == 0){
-                com.example.boardgame.player.Common.showToast(activity,"您沒有收藏店家");
+            if (shops.size() == 0) {
+                com.example.boardgame.player.Common.showToast(activity, "您沒有收藏店家");
                 return 0;
             }
             return shops.size();
@@ -125,11 +127,11 @@ public class Profile3_Fragment extends Fragment {
             int rateTotal = shop.getRateTotal();
             int rateCount = shop.getRateCount();
 
-            double rate=0;
-            if(rateCount!=0) {
+            double rate = 0;
+            if (rateCount != 0) {
                 rate = rateTotal / rateCount;
                 holder.tvShopRate.setText(String.format("%.1f", rate));
-            }else {
+            } else {
                 holder.ivStarIcon.setVisibility(View.INVISIBLE);
                 holder.tvShopRate.setText("暫無評價");
             }
@@ -165,7 +167,7 @@ public class Profile3_Fragment extends Fragment {
         }
     }
 
-    private List<FavShop> getFavShop(){
+    private List<FavShop> getFavShop() {
         List<FavShop> shopsDB = new ArrayList<>();
 
         // 從 Sevlet 取得要顯示的店家資料
@@ -178,7 +180,8 @@ public class Profile3_Fragment extends Fragment {
             String jsonIn;
             try {
                 jsonIn = new CommonTask(url, jsonOut.toString()).execute().get();
-                Type listType = new TypeToken<List<FavShop>>(){}.getType();
+                Type listType = new TypeToken<List<FavShop>>() {
+                }.getType();
                 shopsDB = gson.fromJson(jsonIn, listType);
                 Log.d(TAG, jsonIn);
             } catch (Exception e) {
@@ -188,8 +191,8 @@ public class Profile3_Fragment extends Fragment {
             showToast(activity, R.string.tx_NoNetwork);
         }
 
-        if (shopsDB==null){
-            shopsDB=new ArrayList<>();
+        if (shopsDB == null) {
+            shopsDB = new ArrayList<>();
         }
         return shopsDB;
     }

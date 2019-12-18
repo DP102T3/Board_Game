@@ -26,6 +26,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
+import com.example.boardgame.advertisement_points.PointActivity;
 import com.example.boardgame.friend.FrAddActivity;
 import com.example.boardgame.notification.Websocket.NetWorkService;
 import com.example.boardgame.shop.Common;
@@ -218,6 +219,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.pointIcon:
+                Intent intent = new Intent(this, PointActivity.class);
+                startActivity(intent);
+                break;
             case R.id.bggear:
 //                Intent intent = new Intent(getActivity(),
 //                        setupFragment.class);
@@ -276,8 +281,8 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
             case R.id.action_fradd:
-                Intent intent = new Intent(this, FrAddActivity.class);
-                startActivity(intent);
+                Intent frAddIntent = new Intent(this, FrAddActivity.class);
+                startActivity(frAddIntent);
                 break;
 
             case R.id.action_note:
