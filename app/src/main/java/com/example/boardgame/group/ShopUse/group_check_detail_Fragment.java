@@ -26,6 +26,7 @@ import com.example.boardgame.group.Common;
 import com.example.boardgame.group.CommonTask;
 import com.example.boardgame.group.ImageTask;
 import com.example.boardgame.group.playerUse.Group;
+import com.example.boardgame.notification.Websocket.GroupCheckService;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
@@ -92,6 +93,17 @@ public class group_check_detail_Fragment extends Fragment {
             @SuppressLint("LongLogTag")
             @Override
             public void onClick(View view) {
+
+                String group_no = String.valueOf(1);
+                JsonObject groupCheckJsonObject = new JsonObject();
+                groupCheckJsonObject.addProperty("group_no", group_no);
+                groupCheckJsonObject.addProperty("group_name", "桌遊團");
+                groupCheckJsonObject.addProperty("type", "agree");
+                String groupCheckIdJson = new Gson().toJson(groupCheckJsonObject);
+                if(!groupCheckIdJson.isEmpty()){
+                    GroupCheckService.groupCheckNosWebSocketClient.send(groupCheckIdJson);}
+
+
                 //接受揪團
                 if (activity != null) {
                     if (Common.networkConnected(activity)) {
@@ -184,7 +196,14 @@ public class group_check_detail_Fragment extends Fragment {
                                     Common.showToast(getActivity(), R.string.textNoNetwork);
                                 }
                             }
-
+                            String group_no_refuse = String.valueOf(1);
+                            JsonObject refuseGroupJsonObject = new JsonObject();
+                            refuseGroupJsonObject.addProperty("group_no", groupNo);
+                            refuseGroupJsonObject.addProperty("group_name", "桌遊團");
+                            refuseGroupJsonObject.addProperty("type", "當日訂位人數已滿");
+                            String refuseGroupIdJson = new Gson().toJson(refuseGroupJsonObject);
+                            if(!refuseGroupIdJson.isEmpty()){
+                                GroupCheckService.groupCheckNosWebSocketClient.send(refuseGroupIdJson);}
                         }
                     });
                 }

@@ -222,7 +222,7 @@ public class FrInvitingFragment extends Fragment {
                 break;
 
             case R.id.action_note:
-//            TODO 設定 action
+                Navigation.findNavController(recyclerView).navigate(R.id.playerNosListFragment);
                 break;
         }
         return super.onOptionsItemSelected(item);

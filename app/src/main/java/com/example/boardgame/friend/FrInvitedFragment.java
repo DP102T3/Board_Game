@@ -166,7 +166,7 @@ public class FrInvitedFragment extends Fragment {
                     }
 
                     JsonObject addFriendJsonObject = new JsonObject();
-                    addFriendJsonObject.addProperty("receiver", "chengchi1223");
+                    addFriendJsonObject.addProperty("receiver", friendViewModel.getFrID());
                     String addFriendJson = new Gson().toJson(addFriendJsonObject);
                     if(!addFriendJson.isEmpty()){
                         AddFriendService.addFriendnosWebSocketClient.send(addFriendJson);}

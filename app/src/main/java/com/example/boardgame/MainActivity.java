@@ -286,6 +286,12 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
             case R.id.action_note:
+                int type = 0;
+                if(type == PLAYER){
+                    Navigation.findNavController(bottomNavigationView).navigate(R.id.playerNosListFragment);
+                }else{
+                    Navigation.findNavController(bottomNavigationView).navigate(R.id.shopNotificationListFragment);
+                }
                 break;
         }
 

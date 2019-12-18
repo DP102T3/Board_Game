@@ -13,6 +13,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.boardgame.MainActivity;
@@ -209,7 +210,7 @@ public class AdvertisementActivity extends AppCompatActivity {
         Log.i("InF", String.valueOf(id));
         switch (id){
             case R.id.action_note:
-//          TODO 設定 action!!!!!!
+                Navigation.findNavController(this,0).navigate(R.id.shopNotificationListFragment);
                 break;
         }
         return super.onOptionsItemSelected(item);

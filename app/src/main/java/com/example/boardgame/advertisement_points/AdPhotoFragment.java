@@ -1,7 +1,9 @@
 package com.example.boardgame.advertisement_points;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -15,6 +17,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
@@ -33,10 +36,42 @@ public class AdPhotoFragment extends Fragment {
     private static final String TAG = "TAG_MainFragment";
     private File file;
     private Activity activity;
-    private ImageButton ibAlbum;
+    private ImageButton ibAlbum, ibCamera;
     private Uri contentUri;
     private View fragmentView;
     public static Uri newUri;
+
+    //    @Override
+//    public void onStart() {
+//        super.onStart();
+//        askExternalStoragePermission();
+//    }
+//
+//    private void askExternalStoragePermission() {
+//        String[] permissions = {
+//                Manifest.permission.READ_EXTERNAL_STORAGE
+//        };
+//
+//        int result = ContextCompat.checkSelfPermission(activity, permissions[0]);
+//        if (result == PackageManager.PERMISSION_DENIED) {
+//            requestPermissions(permissions, REQ_TAKE_PICTURE);
+//        }
+//    }
+//
+//    @Override
+//    public void onRequestPermissionsResult(int requestCode,
+//                                           @androidx.annotation.NonNull String[] permissions,
+//                                           @androidx.annotation.NonNull int[] grantResults) {
+//        if (requestCode == REQ_TAKE_PICTURE) {
+//            // 如果user不同意將資料儲存至外部儲存體的公開檔案，就將儲存按鈕設為disable
+//            if (grantResults[0] == PackageManager.PERMISSION_DENIED) {
+//                ibCamera.setEnabled(false);
+//            } else {
+//                ibCamera.setEnabled(true);
+//            }
+//        }
+//    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -49,7 +84,7 @@ public class AdPhotoFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         fragmentView = view;
-        ImageButton ibCamera = view.findViewById(R.id.ibCamera);
+        ibCamera = view.findViewById(R.id.ibCamera);
         ibAlbum = view.findViewById(R.id.ibAlbum);
 
         ibCamera.setOnClickListener(new View.OnClickListener() {

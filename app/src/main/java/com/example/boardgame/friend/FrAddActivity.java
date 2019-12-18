@@ -2,6 +2,7 @@ package com.example.boardgame.friend;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -128,7 +129,7 @@ public class FrAddActivity extends AppCompatActivity {
 
                     JsonObject inviteFriendJsonObject = new JsonObject();
                     inviteFriendJsonObject.addProperty("type", "inviteFriend");
-                    inviteFriendJsonObject.addProperty("player2_id", "gerfarn0523");
+                    inviteFriendJsonObject.addProperty("player2_id", friendViewModel.getFrID());
                     String inviteFriendJson = new Gson().toJson(inviteFriendJsonObject);
                     if(!inviteFriendJson.isEmpty()){
                         InviteFriendService.inviteFriendWebSocketClient.send(inviteFriendJson);}
@@ -252,7 +253,7 @@ public class FrAddActivity extends AppCompatActivity {
                 break;
 
             case R.id.action_note:
-//          TODO 設定 action!!!!!!!!!!!!!!!!!!!!!!!
+                Navigation.findNavController(tvIndicate).navigate(R.id.shopNotificationListFragment);
                 break;
         }
         searchView.setOnQueryTextListener(queryTextListener);
