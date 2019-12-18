@@ -90,6 +90,12 @@ public class GroupsFragment extends Fragment {
         MainActivity.setBottomBar(MainActivity.BOTTOM_PLAYER);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        MainActivity.actionBar.show();
+    }
+
     private List<GroupList> getGroups() {
         List<GroupList> groups = null;
 

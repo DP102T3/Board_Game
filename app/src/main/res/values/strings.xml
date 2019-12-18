@@ -2,7 +2,6 @@
     <string name="app_name">DevBG</string>
 
     <!-- chat -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="tx_btSend">Send</string>
     <string name="textMessageEmpty">Message is empty !</string>
     <string name="txFriendChat">Friend Chat</string>
@@ -143,7 +142,7 @@
     <string name="textNogroupsCheckFound">沒有未審核的揪團</string>
     <string name="textNogroupsHaveFound">沒有已成團的揪團</string>
     <string name="textNogroupsCheckedFound">沒有已審核的揪團</string>
-    <string name="textSignInError">簽到失敗</string>
+    <string name="textSignInError">與店家距離過遠，簽到失敗</string>
     <string name="textSignInSuccess">簽到成功</string>
     <string name="textNoMember">沒有成員</string>
     <string name="textNoImage">請選擇揪團圖片</string>

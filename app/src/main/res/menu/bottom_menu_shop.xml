@@ -6,6 +6,7 @@
         android:title="店家資訊"
         android:icon="@drawable/ic_shops"/>
     <item
+        android:id="@+id/groupCheckFragment"
         android:title="揪團資訊"
         android:icon="@drawable/ic_groups"/>
 <!--    <item-->

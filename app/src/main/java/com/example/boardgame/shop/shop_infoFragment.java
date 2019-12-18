@@ -67,6 +67,7 @@ public class shop_infoFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         if (MainActivity.loginId == MainActivity.SHOP) {
+            MainActivity.actionBar.show();
             // 顯示出上層的optionmenu
             setHasOptionsMenu(true);
         }
@@ -245,6 +246,12 @@ public class shop_infoFragment extends Fragment {
             constraintSet.connect(R.id.textView10, ConstraintSet.TOP, R.id.shopFirstpic, ConstraintSet.BOTTOM, 32);
             constraintSet.applyTo(infoConstrainLayout);
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        MainActivity.actionBar.show();
     }
 
     private Address getAddress(String locationName) {

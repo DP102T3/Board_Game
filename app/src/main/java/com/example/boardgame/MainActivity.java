@@ -5,17 +5,23 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
@@ -31,6 +37,8 @@ import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import static com.example.boardgame.shop.Common.showToast;
 import static com.example.boardgame.shop.ShopGameEditFragment.gameChecked;
@@ -41,6 +49,10 @@ import static com.example.boardgame.shop.ShopGameEditFragment.shopGameList;
 public class MainActivity extends AppCompatActivity {
     public static final String TAG = "TAG_MainActivity";
     Gson gson = new Gson();
+
+    Timer timer = new Timer(true);
+    ConstraintLayout ctBG;
+
     // 從infoFragment打包shop到editinfo
     public static Shop shop = new Shop();
     private static BottomNavigationView tabNavigationView;
@@ -56,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
     public static int TAB_CHAT = R.menu.tab_menu_chat;
     public static int TAB_FRIEND = R.menu.tab_menu_friend;
     public static int TAB_PROFILE = R.menu.tab_menu_profile;
+    public static int TAB_CHECK_GROUP = R.menu.tab_menu_group_check;
 
     public static int TAB_ADVERTISEMENT = R.menu.tab_menu_advertisement;
     // BottomBar 使用的 menu
@@ -71,11 +84,12 @@ public class MainActivity extends AppCompatActivity {
     private int width;
     private int height;
 
+    public static ActionBar actionBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         // 設置 TabBar
         tabNavigationView = findViewById(R.id.tabNavigation);
 
@@ -86,8 +100,17 @@ public class MainActivity extends AppCompatActivity {
         // 設置 BottomBar
         bottomNavigationView = findViewById(R.id.bottomNavigation);
 
+        bottomNavigationView.setVisibility(View.INVISIBLE);
         NavController bottomNavController = Navigation.findNavController(this, R.id.fragment);
         NavigationUI.setupWithNavController(bottomNavigationView, bottomNavController);
+
+
+        actionBar = getSupportActionBar();
+        actionBar.hide();
+
+        ctBG = findViewById(R.id.ctBG);
+        timer.schedule(new MyTimerTask(), 3000);
+        timer.schedule(new EmptyTimerTask(), 4500);
 
         // 取得螢幕長寬（像素）（用於定義 「點擊空白處隱藏鍵盤」方法 的點擊範圍）
         DisplayMetrics metric = new DisplayMetrics();
@@ -99,6 +122,39 @@ public class MainActivity extends AppCompatActivity {
         Intent networkIntent = new Intent(this, NetWorkService.class);
         this.startService(networkIntent);
     }
+
+    // 實作 TimerTask類別
+    private class MyTimerTask extends TimerTask{
+        @Override
+        public void run() {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Animation am = new AlphaAnimation(1.0f, 0.0f);
+                    //setDuration (long durationMillis) 設定動畫開始到結束的執行時間
+                    am.setDuration(1500);
+                    //setRepeatCount (int repeatCount) 設定重複次數 -1為無限次數 0
+                    am.setRepeatCount(0);
+                    //將動畫參數設定到圖片並開始執行動畫
+                    ctBG.startAnimation(am);
+                }
+            });
+        }
+    }
+
+    // 實作 TimerTask類別 _ 隱藏 ctBG
+    public class EmptyTimerTask extends TimerTask
+    {
+        public void run()
+        {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    ctBG.setVisibility(View.GONE);
+                }
+            });
+        }
+    };
 
     //    –––––––––––––––––––––––––––––｜點擊空白處隱藏鍵盤｜–––––––––––––––––––––––––––––
     // 獲取點擊事件

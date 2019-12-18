@@ -31,7 +31,7 @@ import static android.app.Activity.RESULT_OK;
 import static com.example.boardgame.group.Common.bitmap;
 
 
-public class PictureFragment extends Fragment {
+public class PictureGroupFragment extends Fragment {
     private final static String TAG = "TAG_PictureFragment";
     private FragmentActivity activity;
     private ImageButton ibTakePicture,ibPickPicture;

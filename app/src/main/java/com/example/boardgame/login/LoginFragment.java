@@ -1,6 +1,7 @@
 package com.example.boardgame.login;
 
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.os.Bundle;
 
@@ -25,6 +26,9 @@ import com.example.boardgame.notification.CommonTask;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import static com.example.boardgame.MainActivity.ADMIN;
 import static com.example.boardgame.MainActivity.PLAYER;
 import static com.example.boardgame.MainActivity.SHOP;
@@ -41,11 +45,26 @@ public class LoginFragment extends Fragment {
     private Button btLogin, btSingUp;
     private Activity activity;
     private Gson gson = new Gson();
+    View tempView;
+
+    String userId;
+
+    Timer timer = new Timer(true);
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activity = getActivity();
+        MainActivity.actionBar.hide();
+        timer.schedule(new MyTimerTask(), 3000);
+    }
+
+    // 實作 TimerTask類別
+    private class MyTimerTask extends TimerTask {
+        @Override
+        public void run() {
+            autoLogin(tempView);
+        }
     }
 
     @Override
@@ -61,54 +80,9 @@ public class LoginFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Log.d(TAG, "onCreateView()");
-        String userId = loadPlayerId(activity);
+        userId = loadPlayerId(activity);
         Log.d(TAG, "userId = " + loadPlayerId(activity));
-        try {
-            if (!userId.equals("")) {
-                //判斷使用者類型
-                String type = null;
-                //店家帳號正規表達式判斷
-                String shopPattern = "^[0-9]{8}";
-                //後台帳號判斷
-                boolean status = userId.contains("＠boardGame.com");
-
-                if (userId.matches(shopPattern)) {
-                    type = "shop";
-                } else if (status) {
-                    type = "administrator";
-                } else {
-                    type = "player";
-                }
-
-                switch (type) {
-                    case "player":
-                        // 紀錄登入身份
-                        loginId = PLAYER;
-                        // 跳轉到玩家首頁（暫時設定跳轉到聊天頁面）
-                        Navigation.findNavController(view).navigate(R.id.navigation_graph_group);
-                        break;
-                    case "shop":
-                        // 紀錄登入身份
-                        loginId = SHOP;
-                        // 跳轉到店家首頁
-                        Navigation.findNavController(view).navigate(R.id.shop_infoFragment);
-                        break;
-                    case "administrator":
-                        // 紀錄登入身份
-                        loginId = ADMIN;
-                        Log.d(TAG, "type = " + type);
-                        Log.d(TAG, "loginId = " + loginId);
-                        break;
-                    default:
-                        loginId = 0;
-                }
-
-                Toast.makeText(activity, "登入成功", Toast.LENGTH_SHORT).show();
-            }
-        } catch (Exception e) {
-            Log.e(TAG, e.toString());
-        }
-
+        tempView = view;
         edAccount = view.findViewById(R.id.edAccount);
         edPassword = view.findViewById(R.id.edPassword);
         tvForgetPassword = view.findViewById(R.id.tvForgetPassword);
@@ -217,6 +191,54 @@ public class LoginFragment extends Fragment {
                 Navigation.findNavController(button).navigate(R.id.action_loginFragment_to_mainFragment);
             }
         });
+    }
+
+    private void autoLogin(View view) {
+        try {
+            if (!userId.equals("")) {
+                //判斷使用者類型
+                String type = null;
+                //店家帳號正規表達式判斷
+                String shopPattern = "^[0-9]{8}";
+                //後台帳號判斷
+                boolean status = userId.contains("＠boardgame.com");
+
+                if (userId.matches(shopPattern)) {
+                    type = "shop";
+                } else if (status) {
+                    type = "administrator";
+                } else {
+                    type = "player";
+                }
+
+                switch (type) {
+                    case "player":
+                        // 紀錄登入身份
+                        loginId = PLAYER;
+                        // 跳轉到玩家首頁（暫時設定跳轉到聊天頁面）
+                        Navigation.findNavController(view).navigate(R.id.groupsFragment);
+                        break;
+                    case "shop":
+                        // 紀錄登入身份
+                        loginId = SHOP;
+                        // 跳轉到店家首頁
+                        Navigation.findNavController(view).navigate(R.id.shop_infoFragment);
+                        break;
+                    case "administrator":
+                        // 紀錄登入身份
+                        loginId = ADMIN;
+                        Log.d(TAG, "type = " + type);
+                        Log.d(TAG, "loginId = " + loginId);
+                        break;
+                    default:
+                        loginId = 0;
+                }
+
+                Toast.makeText(activity, "登入成功", Toast.LENGTH_SHORT).show();
+            }
+        } catch (Exception e) {
+            Log.e(TAG, e.toString());
+        }
     }
 
     @Override

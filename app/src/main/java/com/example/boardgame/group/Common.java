@@ -13,11 +13,8 @@ import static android.content.Context.MODE_PRIVATE;
 public class Common {
     public static Bitmap bitmap;
     public static String URL_SERVER = "http://10.0.2.2:8080/BG_May/";
-    //public static String playerId="chengchi1223";
-    public static String playerId="abcd123";
     public static double rate_total=100;
     public static int rate_count=25;
-    public static int shopId=11111;
 
 
 

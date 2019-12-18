@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.boardgame.MainActivity;
 import com.example.boardgame.R;
 import com.example.boardgame.group.Common;
 import com.example.boardgame.group.CommonTask;
@@ -73,6 +74,13 @@ public class group_checked_detail_Fragment extends Fragment {
         ivGroupPicture=view.findViewById(R.id.ivGroupPicture);
 
         showGroupDetail(groupNo);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        // 隱藏 TabBar 及 BottomBar
+        MainActivity.changeBarsStatus(MainActivity.NEITHER_TAB_NOR_BOTTOM);
     }
 
     @SuppressLint("LongLogTag")
