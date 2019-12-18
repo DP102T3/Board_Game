@@ -56,7 +56,6 @@ public class FrInvitingFragment extends Fragment {
         setHasOptionsMenu(true);
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setAdapter(new FrInvitingAdapter(this, friendViewModelList));
     }
 
     @Override
@@ -222,7 +221,6 @@ public class FrInvitingFragment extends Fragment {
 
             case R.id.action_note:
                 Navigation.findNavController(recyclerView).navigate(R.id.playerNosListFragment);
-                MainActivity.changeBarsStatus(0);
                 break;
         }
         return super.onOptionsItemSelected(item);
