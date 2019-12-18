@@ -51,7 +51,6 @@ public class ReportShopService extends Service {
         player_id = Common.loadPlayer_id(context);
         shop_id = CommonShop.loadShop_id(context);
         connectServer();
-        acquireWakeLock();
     }
 
     @Override
@@ -164,24 +163,6 @@ public class ReportShopService extends Service {
     public void onDestroy() {
         super.onDestroy();
         disconnectServer();
-        releaseWakeLock();
-    }
-
-    private void acquireWakeLock() {
-        PowerManager powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
-        if (powerManager != null && wakeLock == null) {
-            wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "ServiceDemo:MyWakeLock");
-            Log.d(TAG, "acquireWakeLock");
-        }
-    }
-
-    // 釋放wake lock
-    private void releaseWakeLock() {
-        if (wakeLock != null) {
-            wakeLock.release();
-            wakeLock = null;
-            Log.d(TAG, "releaseWakeLock");
-        }
     }
 }
 
