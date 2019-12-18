@@ -239,7 +239,7 @@ public class FrAllListFragment extends Fragment {
                 break;
 
             case R.id.action_note:
-                Navigation.findNavController(recyclerView).navigate(R.id.playerNosListFragment);
+//            TODO 設定 action!!!!!!!
                 break;
         }
         searchView.setOnQueryTextListener(queryTextListener);
