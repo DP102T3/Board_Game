@@ -40,7 +40,7 @@ import static com.example.boardgame.advertisement_points.Common.CARD_TYPES;
 
 public class PointActivity extends AppCompatActivity {
 
-    private int pointCount;
+    private int pointCount = 0;
     private TextView tvPoints;
     private Button btn300, btn800, btn1000;
     private static final String TAG = "TAG_PointActivity";
@@ -77,11 +77,11 @@ public class PointActivity extends AppCompatActivity {
         String postJsonString = String.format(
                 Locale.TAIWAN,
                 "{\"playerId\" : \"%s\"}",
-                "myself"
+                "chengchi1223"
         );
 
         MyTask task = new MyTask(
-                "http://10.0.2.2:8080/Advertisement_Server/GetAllPoint", // server服務的網址
+                "http://127.0.0.1:8080/Advertisement_Server/GetAllPoint", // server服務的網址
                 postJsonString, // 要傳給Server服務的字串，這邊為要新增的廣告Object
                 "POST"
         );
@@ -180,7 +180,6 @@ public class PointActivity extends AppCompatActivity {
                         .build(), LOAD_PAYMENT_DATA_REQUEST_CODE);
             }
         });
-
     }
 
     @Override

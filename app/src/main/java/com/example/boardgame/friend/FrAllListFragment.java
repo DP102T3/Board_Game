@@ -23,6 +23,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -240,6 +241,7 @@ public class FrAllListFragment extends Fragment {
 
             case R.id.action_note:
 //            TODO 設定 action!!!!!!!
+//                NavHostFragment.findNavController().navigate(R.id.PlayNosListFragment);
                 break;
         }
         searchView.setOnQueryTextListener(queryTextListener);

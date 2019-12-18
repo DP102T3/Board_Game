@@ -64,10 +64,12 @@ public class AdHistoryFragment extends Fragment {
         // AdNow是 View Object, 用JSon轉換的object(資料)來填入View Object
         List<Advertisement> advertisementList;
 
+        String shopId = com.example.boardgame.chat.Common.loadPlayerId(getActivity());
+
         //1. 使用MyTask跟server接收資料 參考 Network Demo (postJsonToServer)
         MyTask task = new MyTask(
                 "http://10.0.2.2:8080/Advertisement_Server/GetAdvertisement",
-                "{\"shopId\": \"123\"}",
+                String.format("{\"shopId\": \"%s\"}", shopId),
                 null
         );
 
