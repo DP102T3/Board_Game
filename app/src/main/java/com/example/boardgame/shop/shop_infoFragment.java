@@ -417,24 +417,3 @@ public class shop_infoFragment extends Fragment {
         return 0;
     }
 }
-
-//    String url = Common.URL + "SignupServlet";
-//    JsonObject jsonObject = new JsonObject();
-//            jsonObject.addProperty("action", "getFavShop");
-//                    jsonObject.addProperty("playerId", com.example.boardgame.chat.Common.loadPlayerId(activity));
-//                    jsonObject.addProperty("shopId", shopId);
-
-//        btFav.setOnClickListener(new View.OnClickListener() {
-//@Override
-//public void onClick(View v) {
-//        String btFavPic = (String) btFav.getTag();
-//        if(btFavPic.equals("heart027")){
-//        btFav.setBackgroundResource(R.drawable.heart026);
-//        btFav.setTag("heart026");
-//        // delete
-//        }else {
-//        btFav.setBackgroundResource(R.drawable.heart027);
-//        btFav.setTag("heart027");
-//        // insert
-//        }
-//        }

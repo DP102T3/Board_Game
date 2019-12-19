@@ -140,7 +140,7 @@ public class GroupDetailFragment extends Fragment {
                     }
 
                 }else if(btJoin0rInvite.getText().equals("揪好友")){
-
+                            Navigation.findNavController(view).navigate(R.id.action_groupDetailFragment_to_inviteGameFragment);
                 }
             }
         });

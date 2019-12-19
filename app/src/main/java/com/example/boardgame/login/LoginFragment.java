@@ -70,6 +70,12 @@ public class LoginFragment extends Fragment {
     }
 
     @Override
+    public void onStop() {
+        super.onStop();
+        timer.cancel();
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         onTabMenu = 0;
@@ -142,7 +148,7 @@ public class LoginFragment extends Fragment {
                                     // 紀錄登入身份
                                     loginId = PLAYER;
                                     // 跳轉到玩家首頁（暫時設定跳轉到聊天頁面）
-                                    Navigation.findNavController(v).navigate(R.id.listFriendsFragment);
+                                    Navigation.findNavController(v).navigate(R.id.groupsFragment);
                                     break;
                                 case "shop":
                                     // 紀錄登入身份

@@ -62,7 +62,7 @@ public class groupCheckedFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         shopId = Integer.valueOf(Common.loadPlayerId(activity));
-        rvGroupChecked = view.findViewById(R.id.rvGroupsHave);
+        rvGroupChecked = view.findViewById(R.id.rvFriends);
         rvGroupChecked.setLayoutManager(new LinearLayoutManager(activity));
         groupsChecked = getGroupChecked();
         showGroupChecked(groupsChecked);

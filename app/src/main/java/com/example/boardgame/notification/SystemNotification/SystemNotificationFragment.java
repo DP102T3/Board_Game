@@ -105,6 +105,10 @@ public class SystemNotificationFragment extends Fragment implements
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        // 隱藏 TabBar 及 BottomBar
+        MainActivity.changeBarsStatus(MainActivity.NEITHER_TAB_NOR_BOTTOM);
+
         edContent = view.findViewById(R.id.edContent);
         edTitle = view.findViewById(R.id.edTitle);
         spTarget = view.findViewById(R.id.spTarget);

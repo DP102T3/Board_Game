@@ -62,7 +62,7 @@ public class groups_have_Fragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         shopId = Integer.valueOf(Common.loadPlayerId(activity));
-        rvGroupsHave = view.findViewById(R.id.rvGroupsHave);
+        rvGroupsHave = view.findViewById(R.id.rvFriends);
         rvGroupsHave.setLayoutManager(new LinearLayoutManager(activity));
         groupsHave = getGroupsHave();
         showGroupsHave(groupsHave);

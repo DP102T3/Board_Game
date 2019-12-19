@@ -30,7 +30,7 @@ public class ListFriendFragment extends Fragment {
     private static final String TAG = "TAG_List_Friend_Frag";
     Activity activity;
     private String playerId;
-    RecyclerView rvFriends;
+    private RecyclerView rvFriends;
     List<Friend> friends;
 
     @Override
