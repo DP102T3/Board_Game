@@ -263,6 +263,12 @@
         <action
             android:id="@+id/action_loginFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_playerNosListFragment"
+            app:destination="@id/playerNosListFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_shopNotificationListFragment"
+            app:destination="@id/shopNotificationListFragment" />
     </fragment>
     <fragment
         android:id="@+id/shopListFragment"

@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -24,6 +25,7 @@ import com.example.boardgame.chat.Common;
 import com.example.boardgame.chat.CommonTask;
 import com.example.boardgame.chat.ImageTask;
 import com.example.boardgame.chat.chat_friend.Friend;
+import com.example.boardgame.notification.Websocket.InviteFriendService;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
@@ -124,11 +126,13 @@ public class inviteGameFragment extends Fragment {
         public class MyViewHolder extends RecyclerView.ViewHolder {
             ImageView ivPortrait;
             TextView tvFriendNkName;
+            Button btInvite;
 
             public MyViewHolder(@NonNull View itemView) {
                 super(itemView);
                 ivPortrait = itemView.findViewById(R.id.ivPortrait);
                 tvFriendNkName = itemView.findViewById(R.id.tvListName);
+                btInvite = itemView.findViewById(R.id.btInvite);
             }
         }
 
@@ -149,14 +153,16 @@ public class inviteGameFragment extends Fragment {
             imageTask = new ImageTask(url, imageId, imageSize, holder.ivPortrait);
             imageTask.execute();
             holder.tvFriendNkName.setText(friend.getFriendNkName());
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
+            holder.btInvite.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View view) {
-                    Bundle bundle = new Bundle();
-                    bundle.putString("from", "ListFriends");
-                    bundle.putSerializable("friend", friend);
-                    Log.d(TAG, String.format("friendId = %s, friendNkName = %s", friend.getFriendId(), friend.getFriendNkName()));
-                    Navigation.findNavController(view).navigate(R.id.action_listFriendsFragment_to_chatGroupFragment2, bundle);
+                public void onClick(View v) {
+                    JsonObject inviteGroupJsonObject = new JsonObject();
+                    inviteGroupJsonObject.addProperty("type", "inviteGroup");
+                    inviteGroupJsonObject.addProperty("player2_id", friend.getFriendId());
+                    inviteGroupJsonObject.addProperty("group_name", "中大桌遊");
+                    String inviteGroupIdJson = new Gson().toJson(inviteGroupJsonObject);
+                    if(!inviteGroupIdJson.isEmpty()){
+                        InviteFriendService.inviteFriendWebSocketClient.send(inviteGroupIdJson);}
                 }
             });
         }
