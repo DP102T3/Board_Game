@@ -24,6 +24,8 @@ public class QRChooseActivity extends AppCompatActivity {
         btnShow = findViewById(R.id.btnShow);
         btnScan = findViewById(R.id.btnScan);
 
+        this.setTitle("QR-code加好友");
+
         btnShow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

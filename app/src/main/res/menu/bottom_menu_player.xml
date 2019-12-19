@@ -3,22 +3,22 @@
 
     <item
         android:id="@+id/groupsFragment"
-        android:title="Groups"
+        android:title="揪團"
         android:icon="@drawable/ic_groups"/>
     <item
         android:id="@+id/shopListFragment"
-        android:title="Shops"
+        android:title="店家資訊"
         android:icon="@drawable/ic_shops"/>
     <item
         android:id="@+id/listFriendsFragment"
-        android:title="Chat"
+        android:title="聊天"
         android:icon="@drawable/ic_chat"/>
     <item
         android:id="@+id/frAllListFragment"
-        android:title="Friends"
+        android:title="好友"
         android:icon="@drawable/ic_friends"/>
     <item
         android:id="@+id/profile1_Fragment"
-        android:title="Profile"
+        android:title="個人資訊"
         android:icon="@drawable/ic_profile"/>
 </menu>

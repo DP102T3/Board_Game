@@ -55,8 +55,8 @@ public class Add_fragment extends Fragment implements DatePickerDialog.OnDateSet
     private ImageButton ibGroupPicture;
     private Uri contentUri;
     private Spinner spPeopleLeast,spPeopleMax,spCondition,spGameClass,spAreaLv2,spAreaLv3,spShopName;
-    private String[] peopleLeast={"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16"};
-    private String[] peopleMax={"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16"};
+    private String[] peopleLeast={"2","3","4","5","6","7","8","9","10","11","12","13","14","15","16"};
+    private String[] peopleMax={"2","3","4","5","6","7","8","9","10","11","12","13","14","15","16"};
     private String[] condition={"不限","評分4分以上","評分3分以上","評分2分以上","評分1分以上"};
     private String[] gameGlass={"派對遊戲","策略遊戲","情境遊戲","戰爭遊戲","抽象遊戲","交換卡片遊戲","兒童遊戲","家庭遊戲"};
     private String[] areaslv2;
@@ -98,11 +98,6 @@ public class Add_fragment extends Fragment implements DatePickerDialog.OnDateSet
         super.onCreateView(inflater,container,savedInstanceState);
         return inflater.inflate(R.layout.fragment_add_fragment, container, false);
     }
-
-
-
-
-
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -245,7 +240,7 @@ public class Add_fragment extends Fragment implements DatePickerDialog.OnDateSet
                 new TimePickerDialog(
                         getActivity(),
                         Add_fragment.this,
-                        Add_fragment.hour, Add_fragment.minute, false)
+                        Add_fragment.hour, Add_fragment.minute, true)
                         .show();
                 timeSelect=1;
 
@@ -259,7 +254,7 @@ public class Add_fragment extends Fragment implements DatePickerDialog.OnDateSet
                 new TimePickerDialog(
                         getActivity(),
                         Add_fragment.this,
-                        Add_fragment.hour, Add_fragment.minute, false)
+                        Add_fragment.hour, Add_fragment.minute, true)
                         .show();
                 timeSelect=2;
             }
@@ -286,7 +281,7 @@ public class Add_fragment extends Fragment implements DatePickerDialog.OnDateSet
                 new TimePickerDialog(
                         getActivity(),
                         Add_fragment.this,
-                        Add_fragment.hour, Add_fragment.minute, false)
+                        Add_fragment.hour, Add_fragment.minute, true)
                         .show();
                 timeSelect=3;
             }
@@ -489,6 +484,7 @@ public class Add_fragment extends Fragment implements DatePickerDialog.OnDateSet
                         Common.showToast(getActivity(), R.string.textInsertFail);
                     } else {
                         Common.showToast(getActivity(), R.string.textInsertSuccess);
+                        Navigation.findNavController(view).popBackStack();
                     }
                 } else {
                     Common.showToast(getActivity(), R.string.textNoNetwork);
@@ -507,6 +503,7 @@ public class Add_fragment extends Fragment implements DatePickerDialog.OnDateSet
     public void onStart() {
         super.onStart();
         MainActivity.changeBarsStatus(MainActivity.NEITHER_TAB_NOR_BOTTOM);
+        activity.setTitle("建立揪團");
     }
 
     @Override

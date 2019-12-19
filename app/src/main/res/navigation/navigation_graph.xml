@@ -30,14 +30,14 @@
         tools:layout="@layout/fragment_list_group">
         <action
             android:id="@+id/action_groupsFragment_to_chatGroupFragment2"
-            app:destination="@id/chatGroupFragment"
+            app:destination="@id/chatFragment"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
     <fragment
-        android:id="@+id/chatGroupFragment"
+        android:id="@+id/chatFragment"
         android:name="com.example.boardgame.chat.ChatFragment"
         android:label="fragment_chat_group"
         tools:layout="@layout/fragment_chat" />
@@ -48,7 +48,7 @@
         tools:layout="@layout/fragment_list_friends">
         <action
             android:id="@+id/action_listFriendsFragment_to_chatGroupFragment2"
-            app:destination="@id/chatGroupFragment"
+            app:destination="@id/chatFragment"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
@@ -229,7 +229,11 @@
         android:id="@+id/playerSignUp_3"
         android:name="com.example.boardgame.player.PlayerSignUp_3"
         android:label="fragment_player_sign_up_3"
-        tools:layout="@layout/fragment_player_sign_up_3" />
+        tools:layout="@layout/fragment_player_sign_up_3" >
+        <action
+            android:id="@+id/action_playerSignUp_3_to_groupsFragment"
+            app:destination="@id/groupsFragment" />
+    </fragment>
 
     <!-- Friend -->
 

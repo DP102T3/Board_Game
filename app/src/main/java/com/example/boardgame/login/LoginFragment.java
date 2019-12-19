@@ -121,7 +121,9 @@ public class LoginFragment extends Fragment {
                 //店家帳號正規表達式判斷
                 String shopPattern = "^[0-9]{8}";
                 //後台帳號判斷
-                boolean status = account.contains("＠boardGame.com");
+                boolean status = account.contains("boardgame.com");
+                Log.d(TAG, "account = " + account);
+                Log.d(TAG, "status = " + status);
                 if (account.matches(shopPattern)) {
                     type = "shop";
                 } else if (status) {
@@ -208,7 +210,9 @@ public class LoginFragment extends Fragment {
                 //店家帳號正規表達式判斷
                 String shopPattern = "^[0-9]{8}";
                 //後台帳號判斷
-                boolean status = userId.contains("＠boardgame.com");
+                boolean status = userId.contains("boardgame.com");
+                Log.d(TAG, "userId = " + userId);
+                Log.d(TAG, "auto_status = " + status);
 
                 if (userId.matches(shopPattern)) {
                     type = "shop";
@@ -255,5 +259,11 @@ public class LoginFragment extends Fragment {
         Log.d(TAG, "onStart()");
         // 隱藏 TabBar 及 BottomBar
         MainActivity.changeBarsStatus(MainActivity.NEITHER_TAB_NOR_BOTTOM);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        MainActivity.actionBar.hide();
     }
 }

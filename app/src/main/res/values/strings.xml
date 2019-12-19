@@ -2,17 +2,17 @@
     <string name="app_name">DevBG</string>
 
     <!-- chat -->
-    <string name="tx_btSend">Send</string>
-    <string name="textMessageEmpty">Message is empty !</string>
-    <string name="txFriendChat">Friend Chat</string>
-    <string name="txGroupChat">Group Chat</string>
-    <string name="txFriendsList">Friends List</string>
-    <string name="txGroupsList">Groups List</string>
-    <string name="txNoJoinedGroups">You haven\'t joined any group.</string>
-    <string name="txNoFriends">You have no friend.</string>
+    <string name="tx_btSend">發送</string>
+    <string name="textMessageEmpty">訊息不得為空</string>
+    <string name="txFriendChat">私聊</string>
+    <string name="txGroupChat">團聊</string>
+    <string name="txFriendsList">好友列表</string>
+    <string name="txGroupsList">揪團列表</string>
+    <string name="txNoJoinedGroups">您未加入任何揪團</string>
+    <string name="txNoFriends">您尚未加入好友</string>
     <string name="tx_NoNetwork">No Network !</string>
-    <string name="txNoChatMsg">No any msg</string>
-    <string name="txMessageInput">Enter message here</string>
+    <string name="txNoChatMsg">無訊息</string>
+    <string name="txMessageInput">請在此輸入訊息</string>
 
     <!-- shop -->
     <string name="button">確認</string>
@@ -58,23 +58,23 @@
     <string name="textNoInput">請輸入系統通知內容</string>
 
     <!-- player -->
-    <string name="tx_btPlayerSignUp">Player</string>
-    <string name="tx_btShopSignUp">Shop</string>
-    <string name="tx_tvPlayerAccount">Account</string>
-    <string name="tx_tvPassword">Password</string>
-    <string name="tx_tvPasswordConfirm">Confirm</string>
-    <string name="tx_btNext">next</string>
-    <string name="tx_tvFullName">FullName</string>
-    <string name="tx_tvNickName">NickName</string>
-    <string name="tx_tvGender">Gender</string>
-    <string name="tx_tvBirthday">Birthday</string>
-    <string name="tx_btSubmit">Submit</string>
-    <string name="tx_tvSelectIdentity">Select Identity</string>
-    <string name="txEmptyAccount">Account can not be empty</string>
-    <string name="txEmptyPassword">Password can not be empty</string>
-    <string name="txEmptyConfirm">PasswordConfirm can not be empty</string>
-    <string name="txConfirmDifferent">Confirm is different from Password</string>
-    <string name="txCanNotBeEmpty">can not be empty</string>
+    <string name="tx_btPlayerSignUp">玩家</string>
+    <string name="tx_btShopSignUp">店家</string>
+    <string name="tx_tvPlayerAccount">帳號</string>
+    <string name="tx_tvPassword">密碼</string>
+    <string name="tx_tvPasswordConfirm">密碼確認</string>
+    <string name="tx_btNext">下一步</string>
+    <string name="tx_tvFullName">全名</string>
+    <string name="tx_tvNickName">暱稱</string>
+    <string name="tx_tvGender">性別</string>
+    <string name="tx_tvBirthday">生日</string>
+    <string name="tx_btSubmit">送出</string>
+    <string name="tx_tvSelectIdentity">請選擇身份</string>
+    <string name="txEmptyAccount">帳號欄位不得為空</string>
+    <string name="txEmptyPassword">密碼欄位不得為空</string>
+    <string name="txEmptyConfirm">密碼確認欄位不得為空</string>
+    <string name="txConfirmDifferent">密碼與密碼確認不符</string>
+    <string name="txCanNotBeEmpty">不得為空</string>
 
     <!-- friend -->
     <string name="btnNow">進行中</string>

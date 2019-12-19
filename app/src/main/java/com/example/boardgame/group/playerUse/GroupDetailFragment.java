@@ -65,7 +65,6 @@ public class GroupDetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        activity.setTitle(groupName);
         return inflater.inflate(R.layout.fragment_group_detail, container, false);
     }
 
@@ -154,11 +153,7 @@ public class GroupDetailFragment extends Fragment {
                     bundle.putInt("groupNo",groupNo);
                     bundle.putString("groupName", groupName);
 
-                    //@@@@@@@@@@@@@@@@@@@
-                    //@@@@要連到團聊頁面@@@
-                    //@@@@@@@@@@@@@@@@@@@
-
-//                    Navigation.findNavController(view).navigate(R.id., bundle);
+                    Navigation.findNavController(view).navigate(R.id.action_groupsFragment_to_chatGroupFragment2, bundle);
                 }
             }
         });
@@ -167,8 +162,11 @@ public class GroupDetailFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        activity.setTitle(groupName);
         MainActivity.changeBarsStatus(MainActivity.NEITHER_TAB_NOR_BOTTOM);
     }
+
+
 
     public void showGroupDetail(int groupNoIn) {
         if (activity != null) {
@@ -226,11 +224,13 @@ public class GroupDetailFragment extends Fragment {
                         Log.d(TAG, "havePlayerJoin==false");
                         btJoin0rInvite.setText("申請加入");
                         btReportOrChat.setText("檢舉");
+                        btReportOrChat.setVisibility(View.GONE);
                         btSignIn.setVisibility(View.GONE);//直接移除此按鈕
 
                     }else if(havePlayerJoin==true){
                         btJoin0rInvite.setText("揪好友");
                         btReportOrChat.setText("團聊");
+                        btReportOrChat.setVisibility(View.VISIBLE);
                         if(haveSignIn==1){
                             if(haveScore==1){
                                 btSignIn.setText("已評分");

@@ -340,7 +340,7 @@ public class shop_infoFragment extends Fragment {
 
         tvShopId.setText(String.valueOf(id == 0 ? "" : id));
         shopAddress.setText(address);
-        shopTel.setText(String.valueOf(tel));
+        shopTel.setText(tel!=0?"0"+tel:"");
         shopIntro.setText(intro);
         shopOpen.setText(open != null ? open : "");
         shopClose.setText(close != null ? close : "");

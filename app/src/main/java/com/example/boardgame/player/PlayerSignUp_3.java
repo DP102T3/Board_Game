@@ -8,6 +8,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.text.InputType;
 import android.util.Log;
@@ -148,13 +149,15 @@ public class PlayerSignUp_3 extends Fragment implements DatePickerDialog.OnDateS
                         }
 
                         if (count > 0) {
-                            showToast(activity, R.string.txSignUpSuccessed);
+                            showToast(activity, "註冊成功");
                             // 紀錄登入身份
                             loginId = PLAYER;
                             // 將假的 玩家id 存入 偏好設定
                             savePlayerId(activity, player_id);
                             // 跳轉到首頁
-//                            Navigation.findNavController(v).navigate(R.id.從playerSignUp_3到揪團首頁);
+                            Navigation.findNavController(v).navigate(R.id.action_playerSignUp_3_to_groupsFragment);
+                        }else {
+                            showToast(activity, "註冊失敗");
                         }
                     } else {
                         showToast(activity, R.string.tx_NoNetwork);

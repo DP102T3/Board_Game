@@ -64,8 +64,6 @@ public class ShopListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // 設定標題
-        activity.setTitle("ShopList");
         return inflater.inflate(R.layout.fragment_shop_list, container, false);
     }
 
@@ -78,6 +76,8 @@ public class ShopListFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        // 設定標題
+        activity.setTitle("店家列表");
         // 取得 偏好設定的 playerId
         playerId = loadPlayerId(activity);
 

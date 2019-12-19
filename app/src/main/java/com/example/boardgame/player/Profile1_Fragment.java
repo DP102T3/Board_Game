@@ -131,7 +131,7 @@ public class Profile1_Fragment extends Fragment {
                 Log.d(TAG, jsonIn);
                 if (player != null) {
                     if (findPlayerId.equals(playerId)) {
-                        activity.setTitle("Profile");
+                        activity.setTitle("個人資訊");
                     } else {
                         activity.setTitle(player.getPlayer_nkname() != null ? player.getPlayer_nkname() : "");
                     }

@@ -3,10 +3,10 @@
 
     <item
         android:id="@+id/listFriendsFragment"
-        android:title="@string/txFriendsList" />
+        android:title="私聊" />
 
     <item
         android:id="@+id/listGroupFragment"
-        android:title="@string/txGroupsList" />
+        android:title="團聊" />
 
 </menu>

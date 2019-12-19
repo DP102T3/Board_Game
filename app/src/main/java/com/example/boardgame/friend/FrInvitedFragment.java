@@ -50,6 +50,7 @@ public class FrInvitedFragment extends Fragment {
         setHasOptionsMenu(true);
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        getActivity().setTitle("被邀請");
     }
 
     @Override

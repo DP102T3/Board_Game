@@ -53,7 +53,7 @@ public class FrAllListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // 設置標題
-        getActivity().setTitle("Friend");
+        getActivity().setTitle("好友列表");
         return inflater.inflate(R.layout.fragment_fr_all_list, container, false);
     }
 

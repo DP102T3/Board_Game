@@ -9,10 +9,10 @@
         app:showAsAction="ifRoom"
         app:actionViewClass="android.widget.SearchView" />
 
-    <item android:id="@+id/action_note"
-        android:icon="@drawable/notification"
-        app:showAsAction="ifRoom"
-        android:title="@string/notification" />
+<!--    <item android:id="@+id/action_note"-->
+<!--        android:icon="@drawable/notification"-->
+<!--        app:showAsAction="ifRoom"-->
+<!--        android:title="@string/notification" />-->
 
     <item android:id="@+id/action_qrcode"
         android:icon="@drawable/fr_qrcode"

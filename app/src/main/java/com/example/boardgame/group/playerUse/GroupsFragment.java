@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -37,6 +39,7 @@ import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+
 
 
 public class GroupsFragment extends Fragment {
@@ -73,10 +76,19 @@ public class GroupsFragment extends Fragment {
         }
     }
 
+    //  變更acition bar
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_note, menu);
+    }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activity = getActivity();
+        // 顯示出上層的optionmenu
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -129,7 +141,7 @@ public class GroupsFragment extends Fragment {
         MainActivity.changeBarsStatus(MainActivity.ONLY_BOTTOM);
         // 置換 BottomBar 的 menu
         MainActivity.setBottomBar(MainActivity.BOTTOM_PLAYER);
-
+        activity.setTitle("揪團列表");
     }
 
     @Override

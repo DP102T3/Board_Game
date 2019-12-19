@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:background="#FFFFFF"
         android:text="個人資料編輯"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"

@@ -51,6 +51,7 @@ public class FrAddActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+
         MainActivity.changeBarsStatus(MainActivity.NEITHER_TAB_NOR_BOTTOM);
     }
 
@@ -64,6 +65,7 @@ public class FrAddActivity extends AppCompatActivity {
         friends = new ArrayList<>();
         friendSearchAdapter = new FriendSearchAdapter(this, friends);
         rvAddFriend.setAdapter(friendSearchAdapter);
+        this.setTitle("加好友");
     }
 
     private class FriendSearchAdapter extends RecyclerView.Adapter<MyViewHolder> {
@@ -252,10 +254,10 @@ public class FrAddActivity extends AppCompatActivity {
                 startActivity(intent);
                 break;
 
-            case R.id.action_note:
-                Navigation.findNavController(tvIndicate).navigate(R.id.shopNotificationListFragment);
-                MainActivity.changeBarsStatus(0);
-                break;
+//            case R.id.action_note:
+//                Navigation.findNavController(tvIndicate).navigate(R.id.shopNotificationListFragment);
+//                MainActivity.changeBarsStatus(MainActivity.NEITHER_TAB_NOR_BOTTOM);
+//                break;
         }
         searchView.setOnQueryTextListener(queryTextListener);
         return super.onOptionsItemSelected(item);

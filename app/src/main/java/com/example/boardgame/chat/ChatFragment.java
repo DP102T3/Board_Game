@@ -9,6 +9,8 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -36,6 +38,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.example.boardgame.chat.Common.chatWebSocketClient;
+import static com.example.boardgame.chat.Common.disConnectSocket;
 import static com.example.boardgame.chat.Common.loadPlayerId;
 import static com.example.boardgame.chat.Common.showToast;
 import static com.example.boardgame.chat.Msg.TYPE_PLAYER_SEND;
@@ -63,11 +66,19 @@ public class ChatFragment extends Fragment {
     private Gson gson = new Gson();
     private ImageTask imageTask;
 
+    //  變更acition bar
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_note, menu);
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activity = getActivity();
+        // 顯示出上層的optionmenu
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -371,7 +382,7 @@ public class ChatFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        // Fragment頁面切換時解除註冊，但不需要關閉WebSocket，
+        disConnectSocket();
         broadcastManager.unregisterReceiver(chatReceiver);
     }
 }

@@ -53,7 +53,6 @@ public class inviteGameFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        activity.setTitle("揪好友");
         return inflater.inflate(R.layout.fragment_invite_game, container, false);
     }
 
@@ -67,6 +66,8 @@ public class inviteGameFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        activity.setTitle("揪好友");
+
         // 隱藏 TabBar 及 BottomBar
         MainActivity.changeBarsStatus(MainActivity.NEITHER_TAB_NOR_BOTTOM);
 

@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -36,6 +38,21 @@ public class AdNowFragment extends Fragment {
     private static final String TAG = "TAG_AdNowFragment";
 
     private RecyclerView recyclerView;
+
+
+    //  變更acition bar
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_note, menu);
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // 顯示出上層的optionmenu
+        setHasOptionsMenu(true);
+    }
 
     @Override
     public void onStart() {
