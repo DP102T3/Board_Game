@@ -457,10 +457,17 @@ public class MainActivity extends AppCompatActivity {
 
             case R.id.action_note:
                 if(loginId == PLAYER){
+                    changeBarsStatus(0);
                     navigationTo(R.id.playerNosListFragment);
                 }else{
+                    changeBarsStatus(0);
                     navigationTo(R.id.shopNotificationListFragment);
                 }
+                break;
+            case R.id.ad_bggear:
+                MainActivity.loginId = 0;
+                com.example.boardgame.player.Common.savePlayerId(activity,"");
+                Navigation.findNavController(this, R.id.fragment).navigate(R.id.loginFragment);
                 break;
         }
 
@@ -523,6 +530,7 @@ public class MainActivity extends AppCompatActivity {
                 tabNavigationView.setVisibility(View.GONE);
                 bottomNavigationView.setVisibility(View.GONE);
                 break;
+
         }
     }
 

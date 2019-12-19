@@ -7,6 +7,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -19,9 +22,11 @@ import android.widget.TimePicker;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import com.example.boardgame.MainActivity;
 import com.example.boardgame.R;
+import com.example.boardgame.friend.FrAddActivity;
 import com.example.boardgame.notification.Common;
 import com.example.boardgame.notification.CommonShop;
 import com.example.boardgame.notification.Websocket.NetWorkService;
@@ -39,6 +44,7 @@ import java.util.Locale;
 
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
+import static com.example.boardgame.MainActivity.ONLY_BOTTOM;
 
 public class SystemNotificationFragment extends Fragment implements
         DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
@@ -61,7 +67,19 @@ public class SystemNotificationFragment extends Fragment implements
     @Override
     public void onStart() {
         super.onStart();
-        MainActivity.changeBarsStatus(2);
+        MainActivity.changeBarsStatus(3);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        MainActivity.actionBar.show();
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_ad_setting,menu);
     }
 
     @Override
@@ -73,6 +91,7 @@ public class SystemNotificationFragment extends Fragment implements
         }
         player_id = Common.loadPlayer_id(activity);
         shop_id = CommonShop.loadShop_id(activity);
+        setHasOptionsMenu(true);
         connectServer();
     }
 
@@ -252,6 +271,4 @@ public class SystemNotificationFragment extends Fragment implements
         super.onDestroy();
         disconnectServer();
     }
-
-
 }

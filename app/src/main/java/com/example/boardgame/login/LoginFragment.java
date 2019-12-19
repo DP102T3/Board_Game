@@ -96,8 +96,8 @@ public class LoginFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 //取得使用者輸入的帳號密碼
-                String account = edAccount.getText().toString();
-                String password = edPassword.getText().toString();
+                String account = edAccount.getText().toString().trim();
+                String password = edPassword.getText().toString().trim();
                 if (account.length() <= 0 & password.length() <= 0) {
                     edAccount.setError("請輸入帳號");
                     edPassword.setError("請輸入密碼");
@@ -172,7 +172,6 @@ public class LoginFragment extends Fragment {
                     }
                 } else {
                     Toast.makeText(activity, "未連接伺服器", Toast.LENGTH_SHORT).show();
-                    type = null;
                 }
             }
         });

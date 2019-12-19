@@ -2,6 +2,7 @@ package com.example.boardgame.player;
 
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -15,9 +16,11 @@ import android.view.ViewGroup;
 
 import com.example.boardgame.MainActivity;
 import com.example.boardgame.R;
+import com.example.boardgame.notification.Websocket.NetWorkService;
 
 import static com.example.boardgame.MainActivity.loginId;
 import static com.example.boardgame.chat.Common.disConnectSocket;
+import static com.example.boardgame.notification.UserAlarm.SystemService.nosDisconnectServer;
 
 
 public class ProfileSetupFragment extends Fragment {
