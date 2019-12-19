@@ -350,6 +350,9 @@
         <action
             android:id="@+id/action_groupsFragment_to_add_fragment"
             app:destination="@id/add_fragment" />
+        <action
+            android:id="@+id/action_groupsFragment_to_shop_infoFragment"
+            app:destination="@id/shop_infoFragment" />
     </fragment>
     <fragment
         android:id="@+id/groupDetailFragment"

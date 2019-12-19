@@ -20,6 +20,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.boardgame.MainActivity;
 import com.example.boardgame.R;
 import com.example.boardgame.notification.Common;
 import com.example.boardgame.notification.CommonShop;
@@ -57,6 +58,11 @@ public class SystemNotificationFragment extends Fragment implements
     private static String player_id;
     private static int shop_id;
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        MainActivity.changeBarsStatus(2);
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -80,6 +86,10 @@ public class SystemNotificationFragment extends Fragment implements
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        // 隱藏 TabBar 及 BottomBar
+        MainActivity.changeBarsStatus(MainActivity.NEITHER_TAB_NOR_BOTTOM);
+
         edContent = view.findViewById(R.id.edContent);
         edTitle = view.findViewById(R.id.edTitle);
         spTarget = view.findViewById(R.id.spTarget);
@@ -246,4 +256,6 @@ public class SystemNotificationFragment extends Fragment implements
         super.onDestroy();
         disconnectServer();
     }
+
+
 }

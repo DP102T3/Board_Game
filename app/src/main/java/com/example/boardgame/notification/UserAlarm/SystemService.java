@@ -41,7 +41,7 @@ public class SystemService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-
+        acquireWakeLock();
         context = getApplicationContext();
         player_id = Common.loadPlayer_id(context);
         shop_id = CommonShop.loadShop_id(context);
@@ -51,7 +51,6 @@ public class SystemService extends Service {
         alarmManager =
                 (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
 
-        acquireWakeLock();
     }
 
     @Nullable
@@ -125,7 +124,7 @@ public class SystemService extends Service {
     }
 
     // 中斷WebSocket連線
-    public void disconnectServer() {
+    public static void nosDisconnectServer() {
         if (systemReceivWebSocketClient != null) {
             systemReceivWebSocketClient.close();
             systemReceivWebSocketClient = null;
@@ -135,14 +134,17 @@ public class SystemService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        disconnectServer();
+        nosDisconnectServer();
         releaseWakeLock();
-    }
+    };
 
+    // 取得wake lock
     private void acquireWakeLock() {
         PowerManager powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
         if (powerManager != null && wakeLock == null) {
             wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "ServiceDemo:MyWakeLock");
+            // 提供timeout時間以避免事情做完了還佔用著wakelock，一般設10分鐘
+            wakeLock.acquire(10 * 60 * 1000);
             Log.d(TAG, "acquireWakeLock");
         }
     }

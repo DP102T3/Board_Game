@@ -1,7 +1,6 @@
 package com.example.boardgame.login;
 
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.os.Bundle;
 
@@ -10,6 +9,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -63,7 +63,9 @@ public class LoginFragment extends Fragment {
     private class MyTimerTask extends TimerTask {
         @Override
         public void run() {
+            Looper.prepare();
             autoLogin(tempView);
+            Looper.loop();
         }
     }
 
@@ -88,7 +90,6 @@ public class LoginFragment extends Fragment {
         tvForgetPassword = view.findViewById(R.id.tvForgetPassword);
         btLogin = view.findViewById(R.id.btLogin);
         btSingUp = view.findViewById(R.id.btSingUp);
-
 
         // 登入按鈕
         btLogin.setOnClickListener(new View.OnClickListener() {
@@ -141,7 +142,7 @@ public class LoginFragment extends Fragment {
                                     // 紀錄登入身份
                                     loginId = PLAYER;
                                     // 跳轉到玩家首頁（暫時設定跳轉到聊天頁面）
-                                    Navigation.findNavController(v).navigate(R.id.listFriendsFragment);
+                                    Navigation.findNavController(v).navigate(R.id.groupsFragment);
                                     break;
                                 case "shop":
                                     // 紀錄登入身份
@@ -152,6 +153,7 @@ public class LoginFragment extends Fragment {
                                 case "administrator":
                                     // 紀錄登入身份
                                     loginId = ADMIN;
+                                    Navigation.findNavController(v).navigate(R.id.systemNotificationFragment);
                                     Log.d(TAG, "type = " + type);
                                     Log.d(TAG, "loginId = " + loginId);
                                     break;
@@ -227,6 +229,7 @@ public class LoginFragment extends Fragment {
                     case "administrator":
                         // 紀錄登入身份
                         loginId = ADMIN;
+                        Navigation.findNavController(view).navigate(R.id.systemNotificationFragment);
                         Log.d(TAG, "type = " + type);
                         Log.d(TAG, "loginId = " + loginId);
                         break;

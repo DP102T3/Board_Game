@@ -85,7 +85,7 @@ public class BlackListStore extends Fragment {
 //========shopDB是放文字的資訊 為了避免衝突 所以另外創了一個shopList來判斷shopStatus======================================
     private List<Shop> getShops() {
         List<Shop> shopDB = null;
-        List<Shop> shopList = new ArrayList<Shop>();
+        List<Shop> shopList = new ArrayList<>();
         if (Common.networkConnected(activity)) {
             String url = Common.URL + "SignupServlet";
             JsonObject jsonObject = new JsonObject();

@@ -3,6 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/pointIcon"
+        android:icon="@drawable/gambling"
+        android:title="@string/menu"
+        app:showAsAction="ifRoom" />
+    <item
         android:id="@+id/notice"
         android:icon="@drawable/notification"
         android:title="@string/menu"

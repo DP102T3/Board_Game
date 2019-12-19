@@ -39,6 +39,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import static com.example.boardgame.MainActivity.ONLY_BOTTOM;
+
 public class FrAllListFragment extends Fragment {
     private final static String TAG = "TAG_FrAllListFragment";
     private RecyclerView recyclerView;
@@ -239,7 +241,8 @@ public class FrAllListFragment extends Fragment {
                 break;
 
             case R.id.action_note:
-//            TODO 設定 action!!!!!!!
+                Navigation.findNavController(recyclerView).navigate(R.id.playerNosListFragment);
+                MainActivity.changeBarsStatus(ONLY_BOTTOM);
                 break;
         }
         searchView.setOnQueryTextListener(queryTextListener);

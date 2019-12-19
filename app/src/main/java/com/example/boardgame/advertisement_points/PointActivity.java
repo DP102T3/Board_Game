@@ -37,10 +37,11 @@ import tech.cherri.tpdirect.callback.TPDTokenFailureCallback;
 import tech.cherri.tpdirect.callback.TPDTokenSuccessCallback;
 
 import static com.example.boardgame.advertisement_points.Common.CARD_TYPES;
+import static com.example.boardgame.player.Common.loadPlayerId;
 
 public class PointActivity extends AppCompatActivity {
 
-    private int pointCount;
+    private int pointCount = 0;
     private TextView tvPoints;
     private Button btn300, btn800, btn1000;
     private static final String TAG = "TAG_PointActivity";
@@ -76,14 +77,13 @@ public class PointActivity extends AppCompatActivity {
     private void getAllPoint() {
         String postJsonString = String.format(
                 Locale.TAIWAN,
-                "{\"playerId\" : \"%s\"}",
-                "myself"
+                "{\"playerId\" : \"%s\"}",loadPlayerId(this)
         );
 
         MyTask task = new MyTask(
                 "http://10.0.2.2:8080/Advertisement_Server/GetAllPoint", // server服務的網址
                 postJsonString, // 要傳給Server服務的字串，這邊為要新增的廣告Object
-                "POST"
+                "null"
         );
 
         try {
@@ -180,7 +180,6 @@ public class PointActivity extends AppCompatActivity {
                         .build(), LOAD_PAYMENT_DATA_REQUEST_CODE);
             }
         });
-
     }
 
     @Override
@@ -247,13 +246,13 @@ public class PointActivity extends AppCompatActivity {
         String postJsonString = String.format(
                 Locale.TAIWAN,
                 "{\"playerId\" : \"%s\", \"bpAmount\":%d, \"bpCount\":%d }",
-                PointActivity.this,
+                loadPlayerId(this),
                 total,
                 buyCount
         );
 
         MyTask task = new MyTask(
-                "http://10.0.2.2:8080/Advertisement_Server/BuyPoint", // server服務的網址
+                "http://10.0.2.2:8080/Advertisement_Server/BuyPoint",// server服務的網址
                 postJsonString, // 要傳給Server服務的字串
                 "POST"
         );
@@ -274,8 +273,7 @@ public class PointActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         if (isSuccessful) {
-//                            TODO!!!!!  跳轉至會員個人頁面
-//                            NavHostFragment.findNavController(fragment).navigate(R.id.adNowFragment);
+                            getAllPoint();
                         }
                     }
                 }).create().show();
