@@ -90,13 +90,16 @@ public class GroupsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        timer.schedule(new MyTimerTask(), 4000, 4000);
-
         rvAdShow = view.findViewById(R.id.rvAdPic);
         rvAdShow.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.HORIZONTAL));
 
         ads = getAds();
         showAds(ads);
+
+        if (ads!=null&&ads.size() > 1) {
+            timer.schedule(new MyTimerTask(), 4000, 4000);
+        }
+
         /* 不處理捲動事件所以監聽器設為null */
         rvAdShow.setOnFlingListener(null);  //若無此行，執行會出錯
         /* 如果希望一次滑動一頁資料，要加上PagerSnapHelper物件 */
