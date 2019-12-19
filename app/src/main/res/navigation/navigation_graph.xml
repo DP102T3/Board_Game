@@ -286,7 +286,11 @@
         android:id="@+id/profile2_fragment"
         android:name="com.example.boardgame.player.Profile2_Fragment"
         android:label="fragment_profile2_fragment"
-        tools:layout="@layout/fragment_profile2" />
+        tools:layout="@layout/fragment_profile2" >
+        <action
+            android:id="@+id/action_profile2_fragment_to_groupDetailFragment"
+            app:destination="@id/groupDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/profile3_fragment"
         android:name="com.example.boardgame.player.Profile3_Fragment"
@@ -358,6 +362,9 @@
         <action
             android:id="@+id/action_groupDetailFragment_to_scoreFragment"
             app:destination="@id/scoreFragment" />
+        <action
+            android:id="@+id/action_groupDetailFragment_to_inviteGameFragment"
+            app:destination="@id/inviteGameFragment" />
     </fragment>
     <fragment
         android:id="@+id/groupCheckFragment"
@@ -406,4 +413,9 @@
         android:name="com.example.boardgame.group.playerUse.ScoreFragment"
         android:label="fragment_score"
         tools:layout="@layout/fragment_score" />
+    <fragment
+        android:id="@+id/inviteGameFragment"
+        android:name="com.example.boardgame.group.playerUse.inviteGameFragment"
+        android:label="fragment_invite_game"
+        tools:layout="@layout/fragment_invite_game" />
 </navigation>

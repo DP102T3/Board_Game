@@ -60,7 +60,7 @@ public class groupCheckFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        rvGroupCheck=view.findViewById(R.id.rvGroupsHave);
+        rvGroupCheck=view.findViewById(R.id.rvFriends);
         rvGroupCheck.setLayoutManager(new LinearLayoutManager(activity));
         groupsCheck=getGroupCheck();
         showGroupCheck(groupsCheck);
